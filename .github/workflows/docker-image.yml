@@ -30,7 +30,7 @@ jobs:
     - name: 'Deploy to Azure WebApps'
       uses: azure/webapps-deploy@v2
       with:
-        app-name: 'smitenight'
+        app-name: 'smitenightapp'
         images: 'smitenightcontainers.azurecr.io/smitenight:${{ github.sha }}'
     
     - name: 'Azure logout'
