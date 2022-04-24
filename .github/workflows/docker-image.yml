@@ -15,7 +15,7 @@ jobs:
     - name: 'Login via Azure CLI'
       uses: azure/login@v1
       with:
-        creds: ${{ secrets.AZURE_CREDENTIALS }}
+        creds: ${{ secrets.AZURE_SP_CREDENTIALS }}
     
     - name: 'Login on Azure Container Registry'
       uses: azure/docker-login@v1
