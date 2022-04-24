@@ -1,0 +1,16 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net8.0</TargetFramework>
+		<ImplicitUsings>enable</ImplicitUsings>
+		<Nullable>enable</Nullable>
+		<RootNamespace>Smitenight.Application.Core.Business.Contracts</RootNamespace>
+	</PropertyGroup>
+
+	<ItemGroup>
+	  <ProjectReference Include="..\Data.EntityFramework\Data.EntityFramework.csproj" />
+	  <ProjectReference Include="..\Mapper\Mapper.csproj" />
+	  <ProjectReference Include="..\SmiteProvider.HiRez\SmiteProvider.HiRez.csproj" />
+	</ItemGroup>
+
+</Project>
