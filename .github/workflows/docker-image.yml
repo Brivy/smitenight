@@ -1,0 +1,38 @@
+name: Linux Container .NET 6.0 Workflow
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  build-and-deploy:
+    runs-on: ubuntu-latest
+    steps:
+    # checkout the repo
+    - name: 'Checkout GitHub Action' 
+      uses: actions/checkout@main
+    
+    - name: 'Login via Azure CLI'
+      uses: azure/login@v1
+      with:
+        creds: ${{ secrets.AZURE_CREDENTIALS }}
+    
+    - name: 'Login on Azure Container Registry'
+      uses: azure/docker-login@v1
+      with:
+        login-server: smitenightcontainers.azurecr.io
+        username: ${{ secrets.REGISTRY_USERNAME }}
+        password: ${{ secrets.REGISTRY_PASSWORD }}
+    - run: |
+        docker build . -t smitenightcontainers.azurecr.io/smitenight:${{ github.sha }}
+        docker push smitenightcontainers.azurecr.io/smitenight:${{ github.sha }}     
+      
+    - name: 'Deploy to Azure WebApps'
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: 'smitenight'
+        images: 'smitenightcontainers.azurecr.io/smitenight:${{ github.sha }}'
+    
+    - name: 'Azure logout'
+      run: |
+        az logout
