@@ -3,11 +3,17 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32421.90
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Smitenight.Server", "Smitenight.Server\Smitenight.Server.csproj", "{1E26B93F-90E9-4A74-9AB4-5E5C2CBE0E1A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Smitenight.Server", "Smitenight\Smitenight.Server\Smitenight.Server.csproj", "{1E26B93F-90E9-4A74-9AB4-5E5C2CBE0E1A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Smitenight.Client", "Smitenight.Client\Smitenight.Client.csproj", "{6ADA5167-9AC7-41B0-88AE-A05F6571E532}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Smitenight.Client", "Smitenight\Smitenight.Client\Smitenight.Client.csproj", "{6ADA5167-9AC7-41B0-88AE-A05F6571E532}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Smitenight.Shared", "Smitenight.Shared\Smitenight.Shared.csproj", "{AA39DC59-E1AA-4319-BEAC-56AD94C652E4}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Smitenight.Shared", "Smitenight\Smitenight.Shared\Smitenight.Shared.csproj", "{AA39DC59-E1AA-4319-BEAC-56AD94C652E4}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{3EC7ED06-3F77-44BF-A4FC-D11760B0D950}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{F6477A35-75C9-47C7-8CF2-B9D4D81E2A4A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{24F27201-F7B8-4A52-82B5-61D4C21B0257}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -30,6 +36,11 @@ Global
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{1E26B93F-90E9-4A74-9AB4-5E5C2CBE0E1A} = {F6477A35-75C9-47C7-8CF2-B9D4D81E2A4A}
+		{6ADA5167-9AC7-41B0-88AE-A05F6571E532} = {3EC7ED06-3F77-44BF-A4FC-D11760B0D950}
+		{AA39DC59-E1AA-4319-BEAC-56AD94C652E4} = {24F27201-F7B8-4A52-82B5-61D4C21B0257}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3C8D7E88-4284-4074-85EF-6F7EA1429EE4}
