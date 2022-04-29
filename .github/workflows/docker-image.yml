@@ -24,7 +24,7 @@ jobs:
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
     - run: |
-        docker build -t smitenightcontainers.azurecr.io/smitenight:${{ github.sha }} .\Server\Dockerfile .
+        docker build -t smitenightcontainers.azurecr.io/smitenight:${{ github.sha }} -f .\Server\Dockerfile .
         docker push smitenightcontainers.azurecr.io/smitenight:${{ github.sha }}     
       
     - name: 'Deploy to Azure WebApps'
