@@ -7,9 +7,9 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["Server/Smitenight.Server.csproj", "Server/"]
-COPY ["Shared/Smitenight.Shared.csproj", "Shared/"]
-COPY ["Client/Smitenight.Client.csproj", "Client/"]
+COPY ["Smitenight.Server/Smitenight.Server.csproj", "Server/"]
+COPY ["Smitenight.Shared/Smitenight.Shared.csproj", "Shared/"]
+COPY ["Smitenight.Client/Smitenight.Client.csproj", "Client/"]
 RUN dotnet restore "Server/Smitenight.Server.csproj"
 COPY . .
 WORKDIR "/src/Server"
