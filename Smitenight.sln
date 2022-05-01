@@ -7,8 +7,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Smitenight.Server", "Smiten
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Smitenight.Client", "Smitenight\Smitenight.Client\Smitenight.Client.csproj", "{6ADA5167-9AC7-41B0-88AE-A05F6571E532}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Smitenight.Shared", "Smitenight\Smitenight.Shared\Smitenight.Shared.csproj", "{AA39DC59-E1AA-4319-BEAC-56AD94C652E4}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{3EC7ED06-3F77-44BF-A4FC-D11760B0D950}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{24F27201-F7B8-4A52-82B5-61D4C21B0257}"
@@ -31,7 +29,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Smitenight.Abstractions.Inf
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Smitenight.Abstractions.Application", "Smitenight\Smitenight.Abstractions.Application\Smitenight.Abstractions.Application.csproj", "{E51F3E9A-ED37-4E51-93BA-24EC097F8B37}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Smitenight.CompositionRoot", "Smitenight\Smitenight.CompositionRoot\Smitenight.CompositionRoot.csproj", "{4E33A2EE-D5AF-4511-BE18-F977798D0D19}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Smitenight.CompositionRoot", "Smitenight\Smitenight.CompositionRoot\Smitenight.CompositionRoot.csproj", "{4E33A2EE-D5AF-4511-BE18-F977798D0D19}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -47,10 +45,6 @@ Global
 		{6ADA5167-9AC7-41B0-88AE-A05F6571E532}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6ADA5167-9AC7-41B0-88AE-A05F6571E532}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6ADA5167-9AC7-41B0-88AE-A05F6571E532}.Release|Any CPU.Build.0 = Release|Any CPU
-		{AA39DC59-E1AA-4319-BEAC-56AD94C652E4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{AA39DC59-E1AA-4319-BEAC-56AD94C652E4}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{AA39DC59-E1AA-4319-BEAC-56AD94C652E4}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{AA39DC59-E1AA-4319-BEAC-56AD94C652E4}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6BC07B7D-3138-4A1A-ACD4-63CC3C79589F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6BC07B7D-3138-4A1A-ACD4-63CC3C79589F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6BC07B7D-3138-4A1A-ACD4-63CC3C79589F}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -82,7 +76,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{1E26B93F-90E9-4A74-9AB4-5E5C2CBE0E1A} = {3EC7ED06-3F77-44BF-A4FC-D11760B0D950}
 		{6ADA5167-9AC7-41B0-88AE-A05F6571E532} = {3EC7ED06-3F77-44BF-A4FC-D11760B0D950}
-		{AA39DC59-E1AA-4319-BEAC-56AD94C652E4} = {24F27201-F7B8-4A52-82B5-61D4C21B0257}
 		{6BC07B7D-3138-4A1A-ACD4-63CC3C79589F} = {7F2D8975-C5A5-47DE-84C8-DB3A7F634764}
 		{2BE78CCB-4A34-4ACD-9601-FD895BB1CA8E} = {6F508BDC-34B8-410D-B4BC-857DBF833318}
 		{4DFCE1C2-8C92-4F1C-80D0-8FAA54F51F62} = {55811F55-D66F-4378-B8CB-DC63526019C0}

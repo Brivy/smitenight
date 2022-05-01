@@ -15,7 +15,6 @@ COPY ["Smitenight/Smitenight.Domain/Smitenight.Domain.csproj", "Smitenight/Smite
 COPY ["Smitenight/Smitenight.Abstractions.Application/Smitenight.Abstractions.Application.csproj", "Smitenight/Smitenight.Abstractions.Application/"]
 COPY ["Smitenight/Smitenight.Infrastructure.Keyvault/Smitenight.Infrastructure.KeyVault.csproj", "Smitenight/Smitenight.Infrastructure.Keyvault/"]
 COPY ["Smitenight/Smitenight.Client/Smitenight.Client.csproj", "Smitenight/Smitenight.Client/"]
-COPY ["Smitenight/Smitenight.Shared/Smitenight.Shared.csproj", "Smitenight/Smitenight.Shared/"]
 RUN dotnet restore "Smitenight/Smitenight.Server/Smitenight.Server.csproj"
 COPY . .
 WORKDIR "/src/Smitenight/Smitenight.Server"

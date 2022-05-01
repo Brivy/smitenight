@@ -12,7 +12,8 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Smitenight.Shared\Smitenight.Shared.csproj" />
+    <ProjectReference Include="..\Smitenight.CompositionRoot\Smitenight.CompositionRoot.csproj" />
+    <ProjectReference Include="..\Smitenight.Domain\Smitenight.Domain.csproj" />
   </ItemGroup>
 
 </Project>
