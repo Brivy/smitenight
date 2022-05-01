@@ -1,5 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
-using Smitenight.Shared;
+using Smitenight.Domain.Template;
 
 namespace Smitenight.Server.Controllers
 {

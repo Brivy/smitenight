@@ -1,4 +1,4 @@
-namespace Smitenight.Shared
+namespace Smitenight.Domain.Template
 {
     public class WeatherForecast
     {
