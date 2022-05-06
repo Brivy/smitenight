@@ -13,6 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Smitenight.Application\Smitenight.Application.csproj" />
     <ProjectReference Include="..\Smitenight.Infrastructure.Keyvault\Smitenight.Infrastructure.KeyVault.csproj" />
+    <ProjectReference Include="..\Smitenight.Infrastructure.SmiteClient\Smitenight.Infrastructure.SmiteClient.csproj" />
   </ItemGroup>
 
 </Project>
