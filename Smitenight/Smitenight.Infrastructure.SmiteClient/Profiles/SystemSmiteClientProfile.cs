@@ -8,10 +8,10 @@ namespace Smitenight.Infrastructure.SmiteClient.Profiles
     {
         public SystemSmiteClientProfile()
         {
-            CreateMap<CreateSmiteSessionResponse, CreateSmiteSessionResponseModel>()
-                .ForCtorParam(nameof(CreateSmiteSessionResponseModel.SessionId), opt => opt.MapFrom(src => src.session_id))
-                .ForCtorParam(nameof(CreateSmiteSessionResponseModel.RetMsg), opt => opt.MapFrom(src => src.ret_msg))
-                .ForCtorParam(nameof(CreateSmiteSessionResponseModel.Timestamp), opt => opt.MapFrom(src => src.timestamp));
+            CreateMap<CreateSmiteSessionResponseDto, CreateSmiteSessionResponse>();
+            CreateMap<DataUsedResponseDto, DataUsedResponse>();
+            CreateMap<HirezServerStatusResponseDto, HirezServerStatusResponse>();
+            CreateMap<PatchInfoResponseDto, PatchInfoResponse>();
         }
     }
 }

@@ -6,12 +6,21 @@ namespace Smitenight.Abstractions.Infrastructure.SmiteClient;
 
 public interface ISystemSmiteClient
 {
-    Task<SmiteClientResponseModel?> PingHirezAsync(
+    Task<SmiteClientResponse?> PingHirezAsync(
         PingHirezRequest pingHirezRequest, CancellationToken cancellationToken);
 
-    Task<CreateSmiteSessionResponseModel?> CreateSmiteSessionAsync(
+    Task<SmiteClientResponse<CreateSmiteSessionResponse>?> CreateSmiteSessionAsync(
         CreateSmiteSessionRequest createSmiteSessionRequest, CancellationToken cancellationToken);
 
-    Task<SmiteClientResponseModel?> TestSmiteSessionAsync(
+    Task<SmiteClientResponse?> TestSmiteSessionAsync(
         TestSmiteSessionRequest testSmiteSessionRequest, CancellationToken cancellationToken);
+
+    Task<SmiteClientListResponse<DataUsedResponse>?> GetDataUsedAsync(
+        DataUsedRequest dataUsedRequest, CancellationToken cancellationToken);
+
+    Task<SmiteClientListResponse<HirezServerStatusResponse>?> GetHirezServerStatusAsync(
+        HirezServerStatusRequest hirezServerStatusRequest, CancellationToken cancellationToken);
+
+    Task<SmiteClientResponse<PatchInfoResponse>?> GetPatchInfoAsync(
+        PatchInfoRequest patchInfoRequest, CancellationToken cancellationToken);
 }

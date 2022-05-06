@@ -8,7 +8,9 @@ namespace Smitenight.Infrastructure.SmiteClient.Profiles
     {
         public SmiteClientProfile()
         {
-            CreateMap<SmiteClientResponse, SmiteClientResponseModel>();
+            CreateMap<SmiteClientResponseDto, SmiteClientResponse>();
+            CreateMap(typeof(SmiteClientResponseDto<>), typeof(SmiteClientResponse<>));
+            CreateMap(typeof(SmiteClientListResponseDto<>), typeof(SmiteClientListResponse<>));
         }
     }
 }
