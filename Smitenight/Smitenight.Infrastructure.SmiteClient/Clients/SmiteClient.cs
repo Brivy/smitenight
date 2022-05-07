@@ -116,7 +116,7 @@ namespace Smitenight.Infrastructure.SmiteClient.Clients
             }
 
             var baseUrl = $"{smiteUrl}{smiteClientRequest.MethodName}{smiteClientRequest.ResponseType}/";
-            if (smiteClientRequest.DeveloperId.HasValue)
+            if (smiteClientRequest.DeveloperId != 0)
             {
                 baseUrl += $"{smiteClientRequest.DeveloperId}/";
             }

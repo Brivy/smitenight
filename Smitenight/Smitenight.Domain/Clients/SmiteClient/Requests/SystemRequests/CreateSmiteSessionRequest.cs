@@ -1,11 +1,9 @@
 ﻿namespace Smitenight.Domain.Clients.SmiteClient.Requests.SystemRequests
 {
-    public record class CreateSmiteSessionRequest : SmiteClientRequest
-    {
-        public CreateSmiteSessionRequest(int developerId, string methodName, string responseType, string signature, string currentDate)
-            : base(developerId, methodName, responseType, signature, currentDate)
-        {
-
-        }
-    }
+    public record class CreateSmiteSessionRequest(
+        int DeveloperId,
+        string MethodName,
+        string ResponseType,
+        string Signature,
+        string CurrentDate) : SmiteClientRequest(DeveloperId, MethodName, ResponseType, Signature, CurrentDate);
 }
