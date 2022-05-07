@@ -16,6 +16,7 @@ namespace Smitenight.Infrastructure.SmiteClient
                 .Bind(configuration.GetSection(nameof(SmiteClientSettings)));
 
             serviceCollection.AddHttpClient<ISystemSmiteClient, SystemSmiteClient>();
+            serviceCollection.AddHttpClient<IGodSmiteClient, GodSmiteClient>();
         }
     }
 }

@@ -4,7 +4,7 @@ namespace Smitenight.Domain.Clients.SmiteClient.Requests
 {
     public abstract record class SmiteClientRequest
     {
-        public int? DeveloperId { get; }
+        public int DeveloperId { get; }
         public string MethodName { get; }
         public string ResponseType { get; }
         public string? Signature { get; }

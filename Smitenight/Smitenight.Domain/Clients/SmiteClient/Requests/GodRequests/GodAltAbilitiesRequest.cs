@@ -1,6 +1,6 @@
-﻿namespace Smitenight.Domain.Clients.SmiteClient.Requests.SystemRequests
+﻿namespace Smitenight.Domain.Clients.SmiteClient.Requests.GodRequests
 {
-    public record class PatchInfoRequest(
+    public record class GodAltAbilitiesRequest(
         int DeveloperId,
         string MethodName,
         string ResponseType,
