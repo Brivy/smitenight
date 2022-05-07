@@ -88,7 +88,7 @@ namespace Smitenight.Infrastructure.SmiteClient.Clients
             }
         }
 
-        protected string? ConstructUrl(SmiteClientRequest smiteClientRequest, params string[] urlPaths)
+        protected string? ConstructUrl(SmiteClientRequest smiteClientRequest, params object[] urlPaths)
         {
             var baseUrl = ConstructBaseUrl(smiteClientRequest);
             if (string.IsNullOrWhiteSpace(baseUrl))
@@ -99,7 +99,7 @@ namespace Smitenight.Infrastructure.SmiteClient.Clients
             var sb = new StringBuilder(baseUrl);
             foreach (var urlPath in urlPaths)
             {
-                sb.Append($"{urlPath}/");
+                sb.Append($"{urlPath.ToString()}/");
             }
 
             // Remove last slash
