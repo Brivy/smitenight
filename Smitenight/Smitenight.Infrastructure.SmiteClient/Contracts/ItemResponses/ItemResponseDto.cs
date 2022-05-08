@@ -2,7 +2,7 @@
 
 namespace Smitenight.Infrastructure.SmiteClient.Contracts.ItemResponses
 {
-    public record class ItemsResponseDto
+    public record class ItemResponseDto
     (
         [property: JsonPropertyName("ActiveFlag")] string ActiveFlag,
         [property: JsonPropertyName("ChildItemId")] int ChildItemId,

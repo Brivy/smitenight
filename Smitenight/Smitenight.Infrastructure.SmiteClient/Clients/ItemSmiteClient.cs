@@ -30,7 +30,7 @@ namespace Smitenight.Infrastructure.SmiteClient.Clients
             return Mapper.Map<SmiteClientListResponse<GodRecommendedItemsResponse>>(result);
         }
 
-        public async Task<SmiteClientListResponse<ItemsResponse>?> GetItemsAsync(
+        public async Task<SmiteClientListResponse<ItemResponse>?> GetItemsAsync(
             ItemsRequest itemsRequest, CancellationToken cancellationToken)
         {
             var url = ConstructUrl(itemsRequest, (int)itemsRequest.LanguageCode);
@@ -39,8 +39,8 @@ namespace Smitenight.Infrastructure.SmiteClient.Clients
                 return null;
             }
 
-            var result = await GetListAsync<ItemsResponseDto>(url, cancellationToken);
-            return Mapper.Map<SmiteClientListResponse<ItemsResponse>>(result);
+            var result = await GetListAsync<ItemResponseDto>(url, cancellationToken);
+            return Mapper.Map<SmiteClientListResponse<ItemResponse>>(result);
         }
     }
 }

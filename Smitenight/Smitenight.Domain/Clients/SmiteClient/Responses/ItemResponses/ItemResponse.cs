@@ -1,6 +1,6 @@
 ﻿namespace Smitenight.Domain.Clients.SmiteClient.Responses.ItemResponses
 {
-    public record class ItemsResponse
+    public record class ItemResponse
     (
         string ActiveFlag,
         int ChildItemId,
