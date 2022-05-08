@@ -2,7 +2,7 @@
 
 namespace Smitenight.Infrastructure.SmiteClient.Contracts.ItemResponses
 {
-    public record class GodRecommendedItemsResponse
+    public record class GodRecommendedItemsResponseDto
     (
         [property: JsonPropertyName("Category")] string Category,
         [property: JsonPropertyName("Item")] string Item,

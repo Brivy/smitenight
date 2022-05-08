@@ -2,14 +2,14 @@
 
 namespace Smitenight.Infrastructure.SmiteClient.Contracts.ItemResponses
 {
-    public record class ItemsResponse
+    public record class ItemsResponseDto
     (
         [property: JsonPropertyName("ActiveFlag")] string ActiveFlag,
         [property: JsonPropertyName("ChildItemId")] int ChildItemId,
         [property: JsonPropertyName("DeviceName")] string DeviceName,
         [property: JsonPropertyName("Glyph")] string Glyph,
         [property: JsonPropertyName("IconId")] int IconId,
-        [property: JsonPropertyName("ItemDescription")] ItemDescription ItemDescription,
+        [property: JsonPropertyName("ItemDescription")] ItemDescriptionDto ItemDescription,
         [property: JsonPropertyName("ItemId")] int ItemId,
         [property: JsonPropertyName("ItemTier")] int ItemTier,
         [property: JsonPropertyName("Price")] int Price,
@@ -22,14 +22,14 @@ namespace Smitenight.Infrastructure.SmiteClient.Contracts.ItemResponses
         [property: JsonPropertyName("ret_msg")] object RetMsg
     );
 
-    public record class ItemDescription
+    public record class ItemDescriptionDto
     (
         [property: JsonPropertyName("Description")] string Description,
-        [property: JsonPropertyName("Menuitems")] MenuItem[] MenuItems,
+        [property: JsonPropertyName("Menuitems")] MenuItemDto[] MenuItems,
         [property: JsonPropertyName("SecondaryDescription")] object SecondaryDescription
     );
 
-    public record class MenuItem
+    public record class MenuItemDto
     (
         [property: JsonPropertyName("Description")] string Description,
         [property: JsonPropertyName("Value")] string Value
