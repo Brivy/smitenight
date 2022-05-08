@@ -1,0 +1,35 @@
+﻿namespace Smitenight.Domain.Clients.SmiteClient.Responses.ItemResponses
+{
+    public record class ItemResponse
+    (
+        string ActiveFlag,
+        int ChildItemId,
+        string DeviceName,
+        string Glyph,
+        int IconId,
+        ItemDescription ItemDescription,
+        int ItemId,
+        int ItemTier,
+        int Price,
+        string RestrictedRoles,
+        int RootItemId,
+        string ShortDesc,
+        bool StartingItem,
+        string Type,
+        string ItemIconUrl,
+        object RetMsg
+    );
+
+    public record class ItemDescription
+    (
+        string Description,
+        MenuItem[] MenuItems,
+        object SecondaryDescription
+    );
+
+    public record class MenuItem
+    (
+        string Description,
+        string Value
+    );
+}
