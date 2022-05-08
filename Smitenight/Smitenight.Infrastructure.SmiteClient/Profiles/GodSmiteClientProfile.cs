@@ -13,7 +13,7 @@ namespace Smitenight.Infrastructure.SmiteClient.Profiles
             CreateMap<GodResponseDto, GodResponse>();
             CreateMap<GodSkinsResponseDto, GodSkinsResponse>();
 
-            #region Subobjects of GodAltAbilitiesResponse 
+            #region Subobjects of GodResponse
 
             CreateMap<AbilityDetails1Dto, AbilityDetails1>();
             CreateMap<AbilityDetails2Dto, AbilityDetails2>();
