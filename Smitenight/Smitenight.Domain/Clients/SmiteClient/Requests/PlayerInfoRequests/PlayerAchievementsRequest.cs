@@ -7,5 +7,5 @@
         string Signature,
         string SessionId,
         string CurrentDate,
-        string PlayerId) : SmiteClientRequest(DeveloperId, MethodName, ResponseType, Signature, SessionId, CurrentDate);
+        int PlayerId) : SmiteClientRequest(DeveloperId, MethodName, ResponseType, Signature, SessionId, CurrentDate);
 }
