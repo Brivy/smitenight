@@ -18,6 +18,7 @@ namespace Smitenight.Infrastructure.SmiteClient
             serviceCollection.AddHttpClient<ISystemSmiteClient, SystemSmiteClient>();
             serviceCollection.AddHttpClient<IGodSmiteClient, GodSmiteClient>();
             serviceCollection.AddHttpClient<IItemSmiteClient, ItemSmiteClient>();
+            serviceCollection.AddHttpClient<IRetrievePlayerClient, RetrievePlayerClient>();
         }
     }
 }

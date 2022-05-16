@@ -1,6 +1,6 @@
 ﻿namespace Smitenight.Domain.Clients.SmiteClient.Responses.RetrievePlayerResponses
 {
-    public record class PlayerResponseDto
+    public record class PlayerResponse
     (
         int ActivePlayerId,
         string AvatarUrl,
@@ -23,12 +23,12 @@
         int RankStatDuelController,
         int RankStatJoust,
         int RankStatJoustController,
-        RankedConquestDto RankedConquest,
-        RankedConquestControllerDto RankedConquestController,
-        RankedDuelDto RankedDuel,
-        RankedDuelControllerDto RankedDuelController,
-        RankedJoustDto RankedJoust,
-        RankedJoustControllerDto RankedJoustController,
+        RankedConquest RankedConquest,
+        RankedConquestController RankedConquestController,
+        RankedDuel RankedDuel,
+        RankedDuelController RankedDuelController,
+        RankedJoust RankedJoust,
+        RankedJoustController RankedJoustController,
         string Region,
         int TeamId,
         string TeamName,
@@ -43,7 +43,7 @@
         object RetMsg
     );
 
-    public record class RankedConquestDto
+    public record class RankedConquest
     (
         int Leaves,
         int Losses,
@@ -64,7 +64,7 @@
         object RetMsg
     );
 
-    public record class RankedConquestControllerDto
+    public record class RankedConquestController
     (
         int Leaves,
         int Losses,
@@ -85,7 +85,7 @@
         object RetMsg
     );
 
-    public record class RankedDuelDto
+    public record class RankedDuel
     (
         int Leaves,
         int Losses,
@@ -106,7 +106,7 @@
         object RetMsg
     );
 
-    public record class RankedDuelControllerDto
+    public record class RankedDuelController
     (
         int Leaves,
         int Losses,
@@ -127,7 +127,7 @@
         object RetMsg
     );
 
-    public record class RankedJoustDto
+    public record class RankedJoust
     (
         int Leaves,
         int Losses,
@@ -148,7 +148,7 @@
         object RetMsg
     );
 
-    public record class RankedJoustControllerDto
+    public record class RankedJoustController
     (
         int Leaves,
         int Losses,
