@@ -1,6 +1,6 @@
 ﻿namespace Smitenight.Domain.Clients.SmiteClient.Requests.RetrievePlayerRequests
 {
-    public record class PlayerByPortalUserRequest(
+    public record class PlayerIdByGamerTagRequest(
         int DeveloperId,
         string MethodName,
         string ResponseType,
@@ -8,5 +8,5 @@
         string SessionId,
         string CurrentDate,
         string PortalId,
-        string PortalUserId) : SmiteClientRequest(DeveloperId, MethodName, ResponseType, Signature, SessionId, CurrentDate);
+        string GamerTag) : SmiteClientRequest(DeveloperId, MethodName, ResponseType, Signature, SessionId, CurrentDate);
 }
