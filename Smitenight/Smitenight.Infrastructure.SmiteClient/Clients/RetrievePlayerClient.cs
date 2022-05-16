@@ -59,7 +59,7 @@ namespace Smitenight.Infrastructure.SmiteClient.Clients
         public async Task<SmiteClientListResponse<PlayerIdResponse>?> GetPlayerIdByPortalUserAsync(
             PlayerIdByPortalUserRequest playerIdByPortalUserRequest, CancellationToken cancellationToken)
         {
-            var url = ConstructUrl(playerIdByPortalUserRequest, playerIdByPortalUserRequest.PortalId, playerIdByPortalUserRequest.PortalUserId);
+            var url = ConstructUrl(playerIdByPortalUserRequest, (int)playerIdByPortalUserRequest.PortalType, playerIdByPortalUserRequest.PortalUserId);
             if (string.IsNullOrWhiteSpace(url))
             {
                 return null;
@@ -72,7 +72,7 @@ namespace Smitenight.Infrastructure.SmiteClient.Clients
         public async Task<SmiteClientListResponse<PlayerIdResponse>?> GetPlayerIdByGamerTagAsync(
             PlayerIdByGamerTagRequest playerIdByGamerTagRequest, CancellationToken cancellationToken)
         {
-            var url = ConstructUrl(playerIdByGamerTagRequest, playerIdByGamerTagRequest.PortalId, playerIdByGamerTagRequest.GamerTag);
+            var url = ConstructUrl(playerIdByGamerTagRequest, (int)playerIdByGamerTagRequest.PortalType, playerIdByGamerTagRequest.GamerTag);
             if (string.IsNullOrWhiteSpace(url))
             {
                 return null;

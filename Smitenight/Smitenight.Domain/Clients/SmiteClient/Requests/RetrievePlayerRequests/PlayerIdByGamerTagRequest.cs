@@ -1,4 +1,6 @@
-﻿namespace Smitenight.Domain.Clients.SmiteClient.Requests.RetrievePlayerRequests
+﻿using Smitenight.Domain.Enums.SmiteClient;
+
+namespace Smitenight.Domain.Clients.SmiteClient.Requests.RetrievePlayerRequests
 {
     public record class PlayerIdByGamerTagRequest(
         int DeveloperId,
@@ -7,6 +9,6 @@
         string Signature,
         string SessionId,
         string CurrentDate,
-        string PortalId,
+        PortalTypeEnum PortalType,
         string GamerTag) : SmiteClientRequest(DeveloperId, MethodName, ResponseType, Signature, SessionId, CurrentDate);
 }
