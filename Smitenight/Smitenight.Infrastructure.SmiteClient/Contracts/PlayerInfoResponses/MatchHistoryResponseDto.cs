@@ -10,59 +10,59 @@ namespace Smitenight.Infrastructure.SmiteClient.Contracts.PlayerInfoResponses
         [JsonPropertyName("ActiveId2")] 
         public int ActiveId2 { get; init; }
         [JsonPropertyName("Active_1")] 
-        public string Active1 { get; init; }
+        public string? Active1 { get; init; }
         [JsonPropertyName("Active_2")] 
-        public string Active2 { get; init; }
+        public string? Active2 { get; init; }
         [JsonPropertyName("Active_3")] 
-        public object Active3 { get; init; }
+        public string? Active3 { get; init; }
         [JsonPropertyName("Assists")] 
         public int Assists { get; init; }
         [JsonPropertyName("Ban1")] 
-        public string Ban1 { get; init; }
+        public string? Ban1 { get; init; }
         [JsonPropertyName("Ban10")] 
-        public string Ban10 { get; init; }
+        public string? Ban10 { get; init; }
         [JsonPropertyName("Ban10Id")] 
         public int Ban10Id { get; init; }
         [JsonPropertyName("Ban11")] 
-        public string Ban11 { get; init; }
+        public string? Ban11 { get; init; }
         [JsonPropertyName("Ban11Id")] 
         public int Ban11Id { get; init; }
         [JsonPropertyName("Ban12")] 
-        public string Ban12 { get; init; }
+        public string? Ban12 { get; init; }
         [JsonPropertyName("Ban12Id")] 
         public int Ban12Id { get; init; }
         [JsonPropertyName("Ban1Id")] 
         public int Ban1Id { get; init; }
         [JsonPropertyName("Ban2")] 
-        public string Ban2 { get; init; }
+        public string? Ban2 { get; init; }
         [JsonPropertyName("Ban2Id")] 
         public int Ban2Id { get; init; }
         [JsonPropertyName("Ban3")] 
-        public string Ban3 { get; init; }
+        public string? Ban3 { get; init; }
         [JsonPropertyName("Ban3Id")] 
         public int Ban3Id { get; init; }
         [JsonPropertyName("Ban4")] 
-        public string Ban4 { get; init; }
+        public string? Ban4 { get; init; }
         [JsonPropertyName("Ban4Id")] 
         public int Ban4Id { get; init; }
         [JsonPropertyName("Ban5")] 
-        public string Ban5 { get; init; }
+        public string? Ban5 { get; init; }
         [JsonPropertyName("Ban5Id")] 
         public int Ban5Id { get; init; }
         [JsonPropertyName("Ban6")] 
-        public string Ban6 { get; init; }
+        public string? Ban6 { get; init; }
         [JsonPropertyName("Ban6Id")] 
         public int Ban6Id { get; init; }
         [JsonPropertyName("Ban7")] 
-        public string Ban7 { get; init; }
+        public string? Ban7 { get; init; }
         [JsonPropertyName("Ban7Id")] 
         public int Ban7Id { get; init; }
         [JsonPropertyName("Ban8")] 
-        public string Ban8 { get; init; }
+        public string? Ban8 { get; init; }
         [JsonPropertyName("Ban8Id")] 
         public int Ban8Id { get; init; }
         [JsonPropertyName("Ban9")] 
-        public string Ban9 { get; init; }
+        public string? Ban9 { get; init; }
         [JsonPropertyName("Ban9Id")] 
         public int Ban9Id { get; init; }
         [JsonPropertyName("Creeps")] 
@@ -88,9 +88,9 @@ namespace Smitenight.Infrastructure.SmiteClient.Contracts.PlayerInfoResponses
         [JsonPropertyName("Distance_Traveled")] 
         public int DistanceTraveled { get; init; }
         [JsonPropertyName("First_Ban_Side")] 
-        public string FirstBanSide { get; init; }
+        public string? FirstBanSide { get; init; }
         [JsonPropertyName("God")] 
-        public string God { get; init; }
+        public string? God { get; init; }
         [JsonPropertyName("GodId")] 
         public int GodId { get; init; }
         [JsonPropertyName("Gold")] 
@@ -114,17 +114,17 @@ namespace Smitenight.Infrastructure.SmiteClient.Contracts.PlayerInfoResponses
         [JsonPropertyName("ItemId6")] 
         public int ItemId6 { get; init; }
         [JsonPropertyName("Item_1")] 
-        public string Item1 { get; init; }
+        public string? Item1 { get; init; }
         [JsonPropertyName("Item_2")] 
-        public string Item2 { get; init; }
+        public string? Item2 { get; init; }
         [JsonPropertyName("Item_3")] 
-        public string Item3 { get; init; }
+        public string? Item3 { get; init; }
         [JsonPropertyName("Item_4")] 
-        public string Item4 { get; init; }
+        public string? Item4 { get; init; }
         [JsonPropertyName("Item_5")] 
-        public string Item5 { get; init; }
+        public string? Item5 { get; init; }
         [JsonPropertyName("Item_6")] 
-        public string Item6 { get; init; }
+        public string? Item6 { get; init; }
         [JsonPropertyName("Killing_Spree")] 
         public int KillingSpree { get; init; }
         [JsonPropertyName("Kills")] 
@@ -132,13 +132,13 @@ namespace Smitenight.Infrastructure.SmiteClient.Contracts.PlayerInfoResponses
         [JsonPropertyName("Level")] 
         public int Level { get; init; }
         [JsonPropertyName("Map_Game")] 
-        public string MapGame { get; init; }
+        public string? MapGame { get; init; }
         [JsonPropertyName("Match")] 
         public int Match { get; init; }
         [JsonPropertyName("Match_Queue_Id")] 
         public int MatchQueueId { get; init; }
         [JsonPropertyName("Match_Time")] 
-        public string MatchTime { get; init; }
+        public string? MatchTime { get; init; }
         [JsonPropertyName("Minutes")] 
         public int Minutes { get; init; }
         [JsonPropertyName("Multi_kill_Max")] 
@@ -146,13 +146,13 @@ namespace Smitenight.Infrastructure.SmiteClient.Contracts.PlayerInfoResponses
         [JsonPropertyName("Objective_Assists")] 
         public int ObjectiveAssists { get; init; }
         [JsonPropertyName("Queue")] 
-        public string Queue { get; init; }
+        public string? Queue { get; init; }
         [JsonPropertyName("Region")] 
-        public string Region { get; init; }
+        public string? Region { get; init; }
         [JsonPropertyName("Role")] 
-        public string Role { get; init; }
+        public string? Role { get; init; }
         [JsonPropertyName("Skin")] 
-        public string Skin { get; init; }
+        public string? Skin { get; init; }
         [JsonPropertyName("SkinId")] 
         public int SkinId { get; init; }
         [JsonPropertyName("Surrendered")] 
@@ -168,14 +168,14 @@ namespace Smitenight.Infrastructure.SmiteClient.Contracts.PlayerInfoResponses
         [JsonPropertyName("Wards_Placed")] 
         public int WardsPlaced { get; init; }
         [JsonPropertyName("Win_Status")] 
-        public string WinStatus { get; init; }
+        public string? WinStatus { get; init; }
         [JsonPropertyName("Winning_TaskForce")] 
         public int WinningTaskForce { get; init; }
         [JsonPropertyName("playerId")] 
         public int PlayerId { get; init; }
         [JsonPropertyName("playerName")] 
-        public string PlayerName { get; init; }
+        public string? PlayerName { get; init; }
         [JsonPropertyName("ret_msg")]
-        public object RetMsg { get; init; }
+        public object? RetMsg { get; init; }
     }
 }

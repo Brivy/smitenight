@@ -8,5 +8,9 @@ namespace Smitenight.Domain.Clients.SmiteClient.Requests.MatchInfoRequests
         string Signature,
         string SessionId,
         string CurrentDate,
-        int MatchId) : SmiteClientRequest(DeveloperId, MethodNameConstants.MatchPlayerDetailsMethod, ResponseType, Signature, SessionId, CurrentDate);
+        int MatchId) : SmiteClientRequest(DeveloperId, MethodNameConstants.MatchPlayerDetailsMethod, ResponseType, Signature, SessionId, CurrentDate)
+    {
+        public override string GetUrlPath() =>
+            ConstructUrlPath(MatchId);
+    }
 }

@@ -11,5 +11,9 @@ namespace Smitenight.Domain.Clients.SmiteClient.Requests.MatchInfoRequests
         string CurrentDate,
         GameModeQueueIdEnum GameModeQueueId,
         int MatchIdDate,
-        int MatchIdHour) : SmiteClientRequest(DeveloperId, MethodNameConstants.MatchIdsByQueueMethod, ResponseType, Signature, SessionId, CurrentDate);
+        int MatchIdHour) : SmiteClientRequest(DeveloperId, MethodNameConstants.MatchIdsByQueueMethod, ResponseType, Signature, SessionId, CurrentDate)
+    {
+        public override string GetUrlPath() =>
+            ConstructUrlPath((int)GameModeQueueId, MatchIdDate, MatchIdHour);
+    }
 }

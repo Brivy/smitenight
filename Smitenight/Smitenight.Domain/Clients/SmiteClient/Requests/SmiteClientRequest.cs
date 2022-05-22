@@ -1,4 +1,5 @@
-﻿using Smitenight.Domain.Constants;
+﻿using System.Text;
+using Smitenight.Domain.Constants;
 
 namespace Smitenight.Domain.Clients.SmiteClient.Requests
 {
@@ -58,5 +59,66 @@ namespace Smitenight.Domain.Clients.SmiteClient.Requests
             SessionId = sessionId;
             CurrentDate = currentDate;
         }
+
+        /// <summary>
+        /// Returns the url path for the given request
+        /// Calling this without override will return the default url path
+        /// </summary>
+        /// <returns></returns>
+        public virtual string GetUrlPath() =>
+            ConstructUrlPath();
+
+        /// <summary>
+        /// Construct the query string based on given url path parameters
+        /// </summary>
+        /// <param name="urlPaths">A collection of url path parameters</param>
+        /// <returns></returns>
+        protected string ConstructUrlPath(params object[] urlPaths)
+        {
+            var baseUrlPath = ConstructBaseUrlPath();
+            var sb = new StringBuilder(baseUrlPath);
+            foreach (var urlPath in urlPaths)
+            {
+                sb.Append($"{urlPath.ToString()}/");
+            }
+
+            // Remove last slash
+            sb.Length--;
+            return sb.ToString();
+        }
+
+        #region Private functionality
+
+        /// <summary>
+        /// Constructs the base of the url path string needed for each request
+        /// </summary>
+        /// <returns></returns>
+        private string ConstructBaseUrlPath()
+        {
+            var baseUrlPath = $"{MethodName}{ResponseType}/";
+            if (DeveloperId != 0)
+            {
+                baseUrlPath += $"{DeveloperId}/";
+            }
+
+            if (!string.IsNullOrWhiteSpace(Signature))
+            {
+                baseUrlPath += $"{Signature}/";
+            }
+
+            if (!string.IsNullOrWhiteSpace(SessionId))
+            {
+                baseUrlPath += $"{SessionId}/";
+            }
+
+            if (!string.IsNullOrWhiteSpace(CurrentDate))
+            {
+                baseUrlPath += $"{CurrentDate}/";
+            }
+
+            return baseUrlPath;
+        }
+
+        #endregion
     }
 }

@@ -13,7 +13,7 @@ namespace Smitenight.Infrastructure.SmiteClient.Contracts.MatchInfoResponses
         [JsonPropertyName("BanId4")]
         public int BanId4 { get; init; }
         [JsonPropertyName("Entry_Datetime")]
-        public string EntryDatetime { get; init; }
+        public string? EntryDatetime { get; init; }
         [JsonPropertyName("Match")]
         public int Match { get; init; }
         [JsonPropertyName("Match_Time")]
@@ -21,13 +21,13 @@ namespace Smitenight.Infrastructure.SmiteClient.Contracts.MatchInfoResponses
         [JsonPropertyName("Offline_Spectators")]
         public int OfflineSpectators { get; init; }
         [JsonPropertyName("Queue")]
-        public string Queue { get; init; }
+        public string? Queue { get; init; }
         [JsonPropertyName("Realtime_Spectators")]
         public int RealtimeSpectators { get; init; }
         [JsonPropertyName("Recording_Ended")]
-        public string RecordingEnded { get; init; }
+        public string? RecordingEnded { get; init; }
         [JsonPropertyName("Recording_Started")]
-        public string RecordingStarted { get; init; }
+        public string? RecordingStarted { get; init; }
         [JsonPropertyName("Team1_AvgLevel")]
         public int Team1AvgLevel { get; init; }
         [JsonPropertyName("Team1_Gold")]
@@ -47,6 +47,6 @@ namespace Smitenight.Infrastructure.SmiteClient.Contracts.MatchInfoResponses
         [JsonPropertyName("Winning_Team")]
         public int WinningTeam { get; init; }
         [JsonPropertyName("ret_msg")]
-        public object RetMsg { get; init; }
+        public object? RetMsg { get; init; }
     }
 }

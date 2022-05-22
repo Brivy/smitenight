@@ -13,13 +13,13 @@ namespace Smitenight.Infrastructure.SmiteClient.Contracts.MatchInfoResponses
         [JsonPropertyName("GodLevel")]
         public int GodLevel { get; init; }
         [JsonPropertyName("GodName")]
-        public string GodName { get; init; }
+        public string? GodName { get; init; }
         [JsonPropertyName("Mastery_Level")]
         public int MasteryLevel { get; init; }
         [JsonPropertyName("Match")]
         public int Match { get; init; }
         [JsonPropertyName("Queue")]
-        public string Queue { get; init; }
+        public string? Queue { get; init; }
         [JsonPropertyName("Rank_Stat")]
         public int RankStat { get; init; }
         [JsonPropertyName("SkinId")]
@@ -27,17 +27,17 @@ namespace Smitenight.Infrastructure.SmiteClient.Contracts.MatchInfoResponses
         [JsonPropertyName("Tier")]
         public int Tier { get; init; }
         [JsonPropertyName("mapGame")]
-        public string MapGame { get; init; }
+        public string? MapGame { get; init; }
         [JsonPropertyName("playerCreated")]
-        public string PlayerCreated { get; init; }
+        public string? PlayerCreated { get; init; }
         [JsonPropertyName("playerId")]
-        public string PlayerId { get; init; }
+        public string? PlayerId { get; init; }
         [JsonPropertyName("playerName")]
-        public string PlayerName { get; init; }
+        public string? PlayerName { get; init; }
         [JsonPropertyName("playerRegion")]
-        public string PlayerRegion { get; init; }
+        public string? PlayerRegion { get; init; }
         [JsonPropertyName("ret_msg")]
-        public object RetMsg { get; init; }
+        public object? RetMsg { get; init; }
         [JsonPropertyName("taskForce")]
         public int TaskForce { get; init; }
         [JsonPropertyName("tierLosses")]

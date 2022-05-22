@@ -5,10 +5,10 @@ namespace Smitenight.Infrastructure.SmiteClient.Contracts.MatchInfoResponses
     public record class MatchIdsByQueueResponseDto
     {
         [JsonPropertyName("Active_Flag")]
-        public string ActiveFlag { get; init; }
+        public string? ActiveFlag { get; init; }
         [JsonPropertyName("Match")]
-        public string Match { get; init; }
+        public string? Match { get; init; }
         [JsonPropertyName("ret_msg")]
-        public object RetMsg { get; init; }
+        public object? RetMsg { get; init; }
     }
 }
