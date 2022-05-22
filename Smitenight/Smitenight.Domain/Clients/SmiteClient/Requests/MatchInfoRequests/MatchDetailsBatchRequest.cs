@@ -11,6 +11,6 @@ namespace Smitenight.Domain.Clients.SmiteClient.Requests.MatchInfoRequests
         List<int> MatchIds) : SmiteClientRequest(DeveloperId, MethodNameConstants.MatchDetailsBatchMethod, ResponseType, Signature, SessionId, CurrentDate)
     {
         public override string GetUrlPath() =>
-            ConstructUrlPath(MatchIds);
+            ConstructUrlPath(string.Join(',', MatchIds));
     }
 }

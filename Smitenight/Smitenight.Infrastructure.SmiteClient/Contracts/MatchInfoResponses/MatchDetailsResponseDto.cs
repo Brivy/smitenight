@@ -213,11 +213,11 @@ namespace Smitenight.Infrastructure.SmiteClient.Contracts.MatchInfoResponses
         [JsonPropertyName("Rank_Stat_Conquest")]
         public float RankStatConquest { get; init; }
         [JsonPropertyName("Rank_Stat_Duel")]
-        public int RankStatDuel { get; init; }
+        public float RankStatDuel { get; init; }
         [JsonPropertyName("Rank_Stat_Joust")]
-        public int RankStatJoust { get; init; }
+        public float RankStatJoust { get; init; }
         [JsonPropertyName("Reference_Name")]
-        public string? Reference_Name { get; init; }
+        public string? ReferenceName { get; init; }
         [JsonPropertyName("Region")]
         public string? Region { get; init; }
         [JsonPropertyName("Role")]
