@@ -4,13 +4,12 @@ using System.Text;
 using AutoMapper;
 using Microsoft.Extensions.Options;
 using Smitenight.Domain.Clients.SmiteClient.Requests;
-using Smitenight.Domain.Clients.SmiteClient.Responses;
 using Smitenight.Infrastructure.SmiteClient.Contracts;
 using Smitenight.Infrastructure.SmiteClient.Settings;
 
 namespace Smitenight.Infrastructure.SmiteClient.Clients
 {
-    public class SmiteClient
+    public abstract class SmiteClient
     {
         private readonly HttpClient _httpClient;
         private readonly SmiteClientSettings _smiteClientSettings;
@@ -86,6 +85,42 @@ namespace Smitenight.Infrastructure.SmiteClient.Clients
             {
                 return new SmiteClientListResponseDto<TResponseType>(HttpStatusCode.InternalServerError, ex.Message, default);
             }
+        }
+
+        protected async Task<SmiteClientListResponseDto<TResponseType>> GetListAsyncForMatchDetails<TResponseType>(string urlPath, CancellationToken cancellationToken)
+            where TResponseType : class
+        {
+            try
+            {
+                var url = ConstructUrlForMatchDetails(urlPath);
+                var request = new HttpRequestMessage(HttpMethod.Get, url);
+                using var response = await _httpClient.SendAsync(request, cancellationToken);
+
+                try
+                {
+                    var responseBody = await response.Content.ReadFromJsonAsync<List<TResponseType>>(cancellationToken: cancellationToken);
+                    return new SmiteClientListResponseDto<TResponseType>(response.StatusCode, response.ReasonPhrase, responseBody);
+                }
+                catch (Exception)
+                {
+                    return new SmiteClientListResponseDto<TResponseType>(response.StatusCode, response.ReasonPhrase, default);
+                }
+            }
+            catch (Exception ex)
+            {
+                return new SmiteClientListResponseDto<TResponseType>(HttpStatusCode.InternalServerError, ex.Message, default);
+            }
+        }
+
+        private string? ConstructUrlForMatchDetails(string queryString)
+        {
+            var smiteUrl = _smiteClientSettings.Url;
+            if (smiteUrl == null)
+            {
+                throw new NullReferenceException("Smite URL is not defined in the settings");
+            }
+
+            return $"{smiteUrl}{queryString}";
         }
 
         protected string? ConstructUrl(SmiteClientRequest smiteClientRequest, params object[] urlPaths)
