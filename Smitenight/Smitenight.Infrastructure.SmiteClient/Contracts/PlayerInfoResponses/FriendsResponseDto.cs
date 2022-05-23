@@ -3,14 +3,14 @@
 namespace Smitenight.Infrastructure.SmiteClient.Contracts.PlayerInfoResponses
 {
     public record class FriendsResponseDto
-    (
-        [property: JsonPropertyName("account_id")] string AccountId,
-        [property: JsonPropertyName("avatar_url")] string AvatarUrl,
-        [property: JsonPropertyName("friend_flags")] string FriendFlags,
-        [property: JsonPropertyName("name")] string Name,
-        [property: JsonPropertyName("player_id")] string PlayerId,
-        [property: JsonPropertyName("portal_id")] string PortalId,
-        [property: JsonPropertyName("ret_msg")] object RetMsg,
-        [property: JsonPropertyName("status")] string Status
-    );
+    {
+        [JsonPropertyName("account_id")] public string? AccountId { get; set; }
+        [JsonPropertyName("avatar_url")] public string? AvatarUrl { get; set; }
+        [JsonPropertyName("friend_flags")] public string? FriendFlags { get; set; }
+        [JsonPropertyName("name")] public string? Name { get; set; }
+        [JsonPropertyName("player_id")] public string? PlayerId { get; set; }
+        [JsonPropertyName("portal_id")] public string? PortalId { get; set; }
+        [JsonPropertyName("ret_msg")] public string? RetMsg { get; set; }
+        [JsonPropertyName("status")] public string? Status { get; set; }
+    }
 }

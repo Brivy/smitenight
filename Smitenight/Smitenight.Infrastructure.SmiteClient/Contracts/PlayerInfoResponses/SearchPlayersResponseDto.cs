@@ -3,12 +3,12 @@
 namespace Smitenight.Infrastructure.SmiteClient.Contracts.PlayerInfoResponses
 {
     public record class SearchPlayersResponseDto
-    (
-        [property: JsonPropertyName("Name")] string Name,
-        [property: JsonPropertyName("hz_player_name")] string HzPlayerName,
-        [property: JsonPropertyName("player_id")] string PlayerId,
-        [property: JsonPropertyName("portal_id")] string PortalId,
-        [property: JsonPropertyName("privacy_flag")] string PrivacyFlag,
-        [property: JsonPropertyName("ret_msg")] object RetMsg
-    );
+    {
+        [JsonPropertyName("Name")] public string? Name { get; set; }
+        [JsonPropertyName("hz_player_name")] public string? HzPlayerName { get; set; }
+        [JsonPropertyName("player_id")] public string? PlayerId { get; set; }
+        [JsonPropertyName("portal_id")] public string? PortalId { get; set; }
+        [JsonPropertyName("privacy_flag")] public string? PrivacyFlag { get; set; }
+        [JsonPropertyName("ret_msg")] public string? RetMsg { get; set; }
+    }
 }

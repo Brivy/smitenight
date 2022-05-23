@@ -3,20 +3,20 @@
 namespace Smitenight.Infrastructure.SmiteClient.Contracts.PlayerInfoResponses
 {
     public record class QueueStatsResponseDto
-    (
-        [property: JsonPropertyName("Assists")] int Assists,
-        [property: JsonPropertyName("Deaths")] int Deaths,
-        [property: JsonPropertyName("God")] string God,
-        [property: JsonPropertyName("GodId")] int GodId,
-        [property: JsonPropertyName("Gold")] int Gold,
-        [property: JsonPropertyName("Kills")] int Kills,
-        [property: JsonPropertyName("LastPlayed")] string LastPlayed,
-        [property: JsonPropertyName("Losses")] int Losses,
-        [property: JsonPropertyName("Matches")] int Matches,
-        [property: JsonPropertyName("Minutes")] int Minutes,
-        [property: JsonPropertyName("Queue")] string Queue,
-        [property: JsonPropertyName("Wins")] int Wins,
-        [property: JsonPropertyName("player_id")] string PlayerId,
-        [property: JsonPropertyName("ret_msg")] object RetMsg
-    );
+    {
+        [JsonPropertyName("Assists")] public int Assists { get; set; }
+        [JsonPropertyName("Deaths")] public int Deaths { get; set; }
+        [JsonPropertyName("God")] public string? God { get; set; }
+        [JsonPropertyName("GodId")] public int GodId { get; set; }
+        [JsonPropertyName("Gold")] public int Gold { get; set; }
+        [JsonPropertyName("Kills")] public int Kills { get; set; }
+        [JsonPropertyName("LastPlayed")] public string? LastPlayed { get; set; }
+        [JsonPropertyName("Losses")] public int Losses { get; set; }
+        [JsonPropertyName("Matches")] public int Matches { get; set; }
+        [JsonPropertyName("Minutes")] public int Minutes { get; set; }
+        [JsonPropertyName("Queue")] public string? Queue { get; set; }
+        [JsonPropertyName("Wins")] public int Wins { get; set; }
+        [JsonPropertyName("player_id")] public string? PlayerId { get; set; }
+        [JsonPropertyName("ret_msg")] public string? RetMsg { get; set; }
+    }
 }

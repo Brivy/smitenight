@@ -1,13 +1,15 @@
 ﻿using System.Text.Json.Serialization;
 
 namespace Smitenight.Infrastructure.SmiteClient.Contracts.SystemResponses
-{ 
-    public record class HirezServerStatusResponseDto(
-        [property: JsonPropertyName("entry_datetime")] string EntryDatetime,
-        [property: JsonPropertyName("environment")] string Environment,
-        [property: JsonPropertyName("limited_access")] bool LimitedAccess,
-        [property: JsonPropertyName("platform")] string Platform,
-        [property: JsonPropertyName("ret_msg")] object RetMsg,
-        [property: JsonPropertyName("status")] string Status,
-        [property: JsonPropertyName("version")] string Version);
+{
+    public record class HirezServerStatusResponseDto
+    {
+        [JsonPropertyName("entry_datetime")] public string? EntryDatetime { get; set; }
+        [JsonPropertyName("environment")] public string? Environment { get; set; }
+        [JsonPropertyName("limited_access")] public bool LimitedAccess { get; set; }
+        [JsonPropertyName("platform")] public string? Platform { get; set; }
+        [JsonPropertyName("ret_msg")] public string? RetMsg { get; set; }
+        [JsonPropertyName("status")] public string? Status { get; set; }
+        [JsonPropertyName("version")] public string? Version { get; set; }
+    }
 }

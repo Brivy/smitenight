@@ -3,18 +3,18 @@
 namespace Smitenight.Infrastructure.SmiteClient.Contracts.PlayerInfoResponses
 {
     public record class GodRanksResponseDto
-    (
-        [property: JsonPropertyName("Assists")] int Assists,
-        [property: JsonPropertyName("Deaths")] int Deaths,
-        [property: JsonPropertyName("Kills")] int Kills,
-        [property: JsonPropertyName("Losses")] int Losses,
-        [property: JsonPropertyName("MinionKills")] int MinionKills,
-        [property: JsonPropertyName("Rank")] int Rank,
-        [property: JsonPropertyName("Wins")] int Wins,
-        [property: JsonPropertyName("Worshippers")] int Worshippers,
-        [property: JsonPropertyName("god")] string God,
-        [property: JsonPropertyName("god_id")] string GodId,
-        [property: JsonPropertyName("player_id")] string PlayerId,
-        [property: JsonPropertyName("ret_msg")] object RetMsg
-    );
+    {
+        [JsonPropertyName("Assists")] public int Assists { get; set; }
+        [JsonPropertyName("Deaths")] public int Deaths { get; set; }
+        [JsonPropertyName("Kills")] public int Kills { get; set; }
+        [JsonPropertyName("Losses")] public int Losses { get; set; }
+        [JsonPropertyName("MinionKills")] public int MinionKills { get; set; }
+        [JsonPropertyName("Rank")] public int Rank { get; set; }
+        [JsonPropertyName("Wins")] public int Wins { get; set; }
+        [JsonPropertyName("Worshippers")] public int Worshippers { get; set; }
+        [JsonPropertyName("god")] public string? God { get; set; }
+        [JsonPropertyName("god_id")] public string? GodId { get; set; }
+        [JsonPropertyName("player_id")] public string? PlayerId { get; set; }
+        [JsonPropertyName("ret_msg")] public string? RetMsg { get; set; }
+    }
 }
