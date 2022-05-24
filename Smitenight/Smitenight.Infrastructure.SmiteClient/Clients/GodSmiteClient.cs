@@ -18,54 +18,30 @@ namespace Smitenight.Infrastructure.SmiteClient.Clients
         }
 
         public async Task<SmiteClientListResponse<GodResponse>?> GetGodsAsync(
-            GodRequest godRequest, CancellationToken cancellationToken)
+            GodRequest request, CancellationToken cancellationToken)
         {
-            var url = ConstructUrl(godRequest, (int)godRequest.LanguageCode);
-            if (string.IsNullOrWhiteSpace(url))
-            {
-                return null;
-            }
-
-            var result = await GetListAsync<GodResponseDto>(url, cancellationToken);
+            var result = await GetListAsync<GodResponseDto>(request.GetUrlPath(), cancellationToken);
             return Mapper.Map<SmiteClientListResponse<GodResponse>>(result);
         }
 
         public async Task<SmiteClientListResponse<GodLeaderbordResponse>?> GetGodLeaderbordAsync(
-            GodLeaderboardRequest godLeaderboardRequest, CancellationToken cancellationToken)
+            GodLeaderboardRequest request, CancellationToken cancellationToken)
         {
-            var url = ConstructUrl(godLeaderboardRequest, godLeaderboardRequest.GodId, (int)godLeaderboardRequest.GameModeQueueId);
-            if (string.IsNullOrWhiteSpace(url))
-            {
-                return null;
-            }
-
-            var result = await GetListAsync<GodLeaderbordResponseDto>(url, cancellationToken);
+            var result = await GetListAsync<GodLeaderbordResponseDto>(request.GetUrlPath(), cancellationToken);
             return Mapper.Map<SmiteClientListResponse<GodLeaderbordResponse>>(result);
         }
 
         public async Task<SmiteClientListResponse<GodAltAbilitiesResponse>?> GetGodAltAbilitiesAsync(
-            GodAltAbilitiesRequest godAltAbilitiesRequest, CancellationToken cancellationToken)
+            GodAltAbilitiesRequest request, CancellationToken cancellationToken)
         {
-            var url = ConstructUrl(godAltAbilitiesRequest);
-            if (string.IsNullOrWhiteSpace(url))
-            {
-                return null;
-            }
-
-            var result = await GetListAsync<GodAltAbilitiesResponseDto>(url, cancellationToken);
+            var result = await GetListAsync<GodAltAbilitiesResponseDto>(request.GetUrlPath(), cancellationToken);
             return Mapper.Map<SmiteClientListResponse<GodAltAbilitiesResponse>>(result);
         }
 
         public async Task<SmiteClientListResponse<GodSkinsResponse>?> GetGodSkinsAsync(
-            GodSkinsRequest godSkinsRequest, CancellationToken cancellationToken)
+            GodSkinsRequest request, CancellationToken cancellationToken)
         {
-            var url = ConstructUrl(godSkinsRequest, godSkinsRequest.GodId, (int)godSkinsRequest.LanguageCode);
-            if (string.IsNullOrWhiteSpace(url))
-            {
-                return null;
-            }
-
-            var result = await GetListAsync<GodSkinsResponseDto>(url, cancellationToken);
+            var result = await GetListAsync<GodSkinsResponseDto>(request.GetUrlPath(), cancellationToken);
             return Mapper.Map<SmiteClientListResponse<GodSkinsResponse>>(result);
         }
     }

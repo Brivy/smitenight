@@ -18,28 +18,16 @@ namespace Smitenight.Infrastructure.SmiteClient.Clients
         }
 
         public async Task<SmiteClientListResponse<GodRecommendedItemsResponse>?> GetGodRecommendedItemsAsync(
-            GodRecommendedItemsRequest godRecommendedItemsRequest, CancellationToken cancellationToken)
+            GodRecommendedItemsRequest request, CancellationToken cancellationToken)
         {
-            var url = ConstructUrl(godRecommendedItemsRequest, godRecommendedItemsRequest.GodId, (int)godRecommendedItemsRequest.LanguageCode);
-            if (string.IsNullOrWhiteSpace(url))
-            {
-                return null;
-            }
-
-            var result = await GetListAsync<GodRecommendedItemsResponseDto>(url, cancellationToken);
+            var result = await GetListAsync<GodRecommendedItemsResponseDto>(request.GetUrlPath(), cancellationToken);
             return Mapper.Map<SmiteClientListResponse<GodRecommendedItemsResponse>>(result);
         }
 
         public async Task<SmiteClientListResponse<ItemResponse>?> GetItemsAsync(
-            ItemsRequest itemsRequest, CancellationToken cancellationToken)
+            ItemsRequest request, CancellationToken cancellationToken)
         {
-            var url = ConstructUrl(itemsRequest, (int)itemsRequest.LanguageCode);
-            if (string.IsNullOrWhiteSpace(url))
-            {
-                return null;
-            }
-
-            var result = await GetListAsync<ItemResponseDto>(url, cancellationToken);
+            var result = await GetListAsync<ItemResponseDto>(request.GetUrlPath(), cancellationToken);
             return Mapper.Map<SmiteClientListResponse<ItemResponse>>(result);
         }
     }

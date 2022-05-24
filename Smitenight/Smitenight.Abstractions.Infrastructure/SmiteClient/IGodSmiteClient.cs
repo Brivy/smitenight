@@ -7,14 +7,14 @@ namespace Smitenight.Abstractions.Infrastructure.SmiteClient;
 public interface IGodSmiteClient
 {
     Task<SmiteClientListResponse<GodResponse>?> GetGodsAsync(
-        GodRequest godRequest, CancellationToken cancellationToken);
+        GodRequest request, CancellationToken cancellationToken);
 
     Task<SmiteClientListResponse<GodLeaderbordResponse>?> GetGodLeaderbordAsync(
-        GodLeaderboardRequest godLeaderboardRequest, CancellationToken cancellationToken);
+        GodLeaderboardRequest request, CancellationToken cancellationToken);
 
     Task<SmiteClientListResponse<GodAltAbilitiesResponse>?> GetGodAltAbilitiesAsync(
-        GodAltAbilitiesRequest godAltAbilitiesRequest, CancellationToken cancellationToken);
+        GodAltAbilitiesRequest request, CancellationToken cancellationToken);
 
     Task<SmiteClientListResponse<GodSkinsResponse>?> GetGodSkinsAsync(
-        GodSkinsRequest godSkinsRequest, CancellationToken cancellationToken);
+        GodSkinsRequest request, CancellationToken cancellationToken);
 }
