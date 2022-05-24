@@ -7,23 +7,23 @@ namespace Smitenight.Abstractions.Infrastructure.SmiteClient;
 public interface IPlayerInfoClient
 {
     Task<SmiteClientListResponse<FriendsResponse>?> GetFriendsAsync(
-        FriendsRequest friendsRequest, CancellationToken cancellationToken);
+        FriendsRequest request, CancellationToken cancellationToken);
 
     Task<SmiteClientListResponse<GodRanksResponse>?> GetGodRanksAsync(
-        GodRanksRequest godRanksRequest, CancellationToken cancellationToken);
+        GodRanksRequest request, CancellationToken cancellationToken);
 
     Task<SmiteClientResponse<PlayerAchievementsResponse>?> GetPlayerAchievementsAsync(
-        PlayerAchievementsRequest playerAchievementsRequest, CancellationToken cancellationToken);
+        PlayerAchievementsRequest request, CancellationToken cancellationToken);
 
     Task<SmiteClientListResponse<PlayerStatusResponse>?> GetPlayerStatusAsync(
-        PlayerStatusRequest playerStatusRequest, CancellationToken cancellationToken);
+        PlayerStatusRequest request, CancellationToken cancellationToken);
 
     Task<SmiteClientListResponse<MatchHistoryResponse>?> GetMatchHistoryAsync(
-        MatchHistoryRequest matchHistoryRequest, CancellationToken cancellationToken);
+        MatchHistoryRequest request, CancellationToken cancellationToken);
 
     Task<SmiteClientListResponse<QueueStatsResponse>?> GetQueueStatsAsync(
-        QueueStatsRequest queueStatsRequest, CancellationToken cancellationToken);
+        QueueStatsRequest request, CancellationToken cancellationToken);
 
     Task<SmiteClientListResponse<SearchPlayersResponse>?> SearchPlayersAsync(
-        SearchPlayersRequest searchPlayersRequest, CancellationToken cancellationToken);
+        SearchPlayersRequest request, CancellationToken cancellationToken);
 }

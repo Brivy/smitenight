@@ -7,5 +7,9 @@
         string Signature,
         string SessionId,
         string CurrentDate,
-        int PlayerId) : SmiteClientRequest(DeveloperId, MethodName, ResponseType, Signature, SessionId, CurrentDate);
+        int PlayerId) : SmiteClientRequest(DeveloperId, MethodName, ResponseType, Signature, SessionId, CurrentDate)
+    {
+        public override string GetUrlPath() =>
+            ConstructUrlPath(PlayerId);
+    }
 }

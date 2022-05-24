@@ -2,7 +2,9 @@
 
 namespace Smitenight.Infrastructure.SmiteClient.Contracts.SystemResponses
 {
-    public record class PatchInfoResponseDto(
-        [property: JsonPropertyName("ret_msg")] object RetMsg,
-        [property: JsonPropertyName("version_string")] string VersionString);
+    public record class PatchInfoResponseDto
+    {
+        [JsonPropertyName("ret_msg")] public string? RetMsg { get; set; }
+        [JsonPropertyName("version_string")] public string? VersionString { get; set; }
+    }
 }

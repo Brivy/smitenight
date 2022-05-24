@@ -18,67 +18,37 @@ namespace Smitenight.Infrastructure.SmiteClient.Clients
         }
 
         public async Task<SmiteClientListResponse<PlayerResponse>?> GetPlayerAsync(
-            PlayerRequest playerRequest, CancellationToken cancellationToken)
+            PlayerRequest request, CancellationToken cancellationToken)
         {
-            var url = ConstructUrl(playerRequest, playerRequest.PlayerId, (int)playerRequest.PortalType);
-            if (string.IsNullOrWhiteSpace(url))
-            {
-                return null;
-            }
-
-            var result = await GetListAsync<PlayerResponseDto>(url, cancellationToken);
+            var result = await GetListAsync<PlayerResponseDto>(request.GetUrlPath(), cancellationToken);
             return Mapper.Map<SmiteClientListResponse<PlayerResponse>>(result);
         }
 
         public async Task<SmiteClientListResponse<PlayerResponse>?> GetPlayerWithoutPortalAsync(
-            PlayerWithoutPortalRequest playerWithoutPortalRequest, CancellationToken cancellationToken)
+            PlayerWithoutPortalRequest request, CancellationToken cancellationToken)
         {
-            var url = ConstructUrl(playerWithoutPortalRequest, playerWithoutPortalRequest.PlayerName);
-            if (string.IsNullOrWhiteSpace(url))
-            {
-                return null;
-            }
-
-            var result = await GetListAsync<PlayerResponseDto>(url, cancellationToken);
+            var result = await GetListAsync<PlayerResponseDto>(request.GetUrlPath(), cancellationToken);
             return Mapper.Map<SmiteClientListResponse<PlayerResponse>>(result);
         }
 
         public async Task<SmiteClientListResponse<PlayerIdResponse>?> GetPlayerIdByPlayerNameAsync(
-            PlayerIdByPlayerNameRequest playerIdByPlayerNameRequest, CancellationToken cancellationToken)
+            PlayerIdByPlayerNameRequest request, CancellationToken cancellationToken)
         {
-            var url = ConstructUrl(playerIdByPlayerNameRequest, playerIdByPlayerNameRequest.PlayerName);
-            if (string.IsNullOrWhiteSpace(url))
-            {
-                return null;
-            }
-
-            var result = await GetListAsync<PlayerIdResponseDto>(url, cancellationToken);
+            var result = await GetListAsync<PlayerIdResponseDto>(request.GetUrlPath(), cancellationToken);
             return Mapper.Map<SmiteClientListResponse<PlayerIdResponse>>(result);
         }
 
         public async Task<SmiteClientListResponse<PlayerIdResponse>?> GetPlayerIdByPortalUserAsync(
-            PlayerIdByPortalUserRequest playerIdByPortalUserRequest, CancellationToken cancellationToken)
+            PlayerIdByPortalUserRequest request, CancellationToken cancellationToken)
         {
-            var url = ConstructUrl(playerIdByPortalUserRequest, (int)playerIdByPortalUserRequest.PortalType, playerIdByPortalUserRequest.PortalUserId);
-            if (string.IsNullOrWhiteSpace(url))
-            {
-                return null;
-            }
-
-            var result = await GetListAsync<PlayerIdResponseDto>(url, cancellationToken);
+            var result = await GetListAsync<PlayerIdResponseDto>(request.GetUrlPath(), cancellationToken);
             return Mapper.Map<SmiteClientListResponse<PlayerIdResponse>>(result);
         }
 
         public async Task<SmiteClientListResponse<PlayerIdResponse>?> GetPlayerIdByGamerTagAsync(
-            PlayerIdByGamerTagRequest playerIdByGamerTagRequest, CancellationToken cancellationToken)
+            PlayerIdByGamerTagRequest request, CancellationToken cancellationToken)
         {
-            var url = ConstructUrl(playerIdByGamerTagRequest, (int)playerIdByGamerTagRequest.PortalType, playerIdByGamerTagRequest.GamerTag);
-            if (string.IsNullOrWhiteSpace(url))
-            {
-                return null;
-            }
-
-            var result = await GetListAsync<PlayerIdResponseDto>(url, cancellationToken);
+            var result = await GetListAsync<PlayerIdResponseDto>(request.GetUrlPath(), cancellationToken);
             return Mapper.Map<SmiteClientListResponse<PlayerIdResponse>>(result);
         }
     }

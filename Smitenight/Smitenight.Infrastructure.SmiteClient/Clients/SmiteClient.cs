@@ -1,9 +1,7 @@
 ﻿using System.Net;
 using System.Net.Http.Json;
-using System.Text;
 using AutoMapper;
 using Microsoft.Extensions.Options;
-using Smitenight.Domain.Clients.SmiteClient.Requests;
 using Smitenight.Infrastructure.SmiteClient.Contracts;
 using Smitenight.Infrastructure.SmiteClient.Settings;
 
@@ -16,7 +14,7 @@ namespace Smitenight.Infrastructure.SmiteClient.Clients
 
         protected readonly IMapper Mapper;
 
-        public SmiteClient(HttpClient httpClient,
+        protected SmiteClient(HttpClient httpClient,
             IOptions<SmiteClientSettings> smiteClientSettings,
             IMapper mapper)
         {
@@ -25,10 +23,11 @@ namespace Smitenight.Infrastructure.SmiteClient.Clients
             Mapper = mapper;
         }
 
-        protected async Task<SmiteClientResponseDto> GetAsync(string url, CancellationToken cancellationToken)
+        protected async Task<SmiteClientResponseDto> GetAsync(string urlPath, CancellationToken cancellationToken)
         {
             try
             {
+                var url = ConstructUrl(urlPath);
                 var request = new HttpRequestMessage(HttpMethod.Get, url);
                 using var response = await _httpClient.SendAsync(request, cancellationToken);
                 return new SmiteClientResponseDto(response.StatusCode, response.ReasonPhrase);
@@ -39,11 +38,12 @@ namespace Smitenight.Infrastructure.SmiteClient.Clients
             }
         }
 
-        protected async Task<SmiteClientResponseDto<TResponseType>> GetAsync<TResponseType>(string url, CancellationToken cancellationToken)
+        protected async Task<SmiteClientResponseDto<TResponseType>> GetAsync<TResponseType>(string urlPath, CancellationToken cancellationToken)
             where TResponseType : class
         {
             try
             {
+                var url = ConstructUrl(urlPath);
                 var request = new HttpRequestMessage(HttpMethod.Get, url);
                 using var response = await _httpClient.SendAsync(request, cancellationToken);
 
@@ -63,11 +63,12 @@ namespace Smitenight.Infrastructure.SmiteClient.Clients
             }
         }
 
-        protected async Task<SmiteClientListResponseDto<TResponseType>> GetListAsync<TResponseType>(string url, CancellationToken cancellationToken)
+        protected async Task<SmiteClientListResponseDto<TResponseType>> GetListAsync<TResponseType>(string urlPath, CancellationToken cancellationToken)
             where TResponseType : class
         {
             try
             {
+                var url = ConstructUrl(urlPath);
                 var request = new HttpRequestMessage(HttpMethod.Get, url);
                 using var response = await _httpClient.SendAsync(request, cancellationToken);
 
@@ -87,32 +88,7 @@ namespace Smitenight.Infrastructure.SmiteClient.Clients
             }
         }
 
-        protected async Task<SmiteClientListResponseDto<TResponseType>> GetListAsyncForMatchDetails<TResponseType>(string urlPath, CancellationToken cancellationToken)
-            where TResponseType : class
-        {
-            try
-            {
-                var url = ConstructUrlForMatchDetails(urlPath);
-                var request = new HttpRequestMessage(HttpMethod.Get, url);
-                using var response = await _httpClient.SendAsync(request, cancellationToken);
-
-                try
-                {
-                    var responseBody = await response.Content.ReadFromJsonAsync<List<TResponseType>>(cancellationToken: cancellationToken);
-                    return new SmiteClientListResponseDto<TResponseType>(response.StatusCode, response.ReasonPhrase, responseBody);
-                }
-                catch (Exception)
-                {
-                    return new SmiteClientListResponseDto<TResponseType>(response.StatusCode, response.ReasonPhrase, default);
-                }
-            }
-            catch (Exception ex)
-            {
-                return new SmiteClientListResponseDto<TResponseType>(HttpStatusCode.InternalServerError, ex.Message, default);
-            }
-        }
-
-        private string? ConstructUrlForMatchDetails(string queryString)
+        private string? ConstructUrl(string urlPath)
         {
             var smiteUrl = _smiteClientSettings.Url;
             if (smiteUrl == null)
@@ -120,58 +96,7 @@ namespace Smitenight.Infrastructure.SmiteClient.Clients
                 throw new NullReferenceException("Smite URL is not defined in the settings");
             }
 
-            return $"{smiteUrl}{queryString}";
-        }
-
-        protected string? ConstructUrl(SmiteClientRequest smiteClientRequest, params object[] urlPaths)
-        {
-            var baseUrl = ConstructBaseUrl(smiteClientRequest);
-            if (string.IsNullOrWhiteSpace(baseUrl))
-            {
-                return null;
-            }
-
-            var sb = new StringBuilder(baseUrl);
-            foreach (var urlPath in urlPaths)
-            {
-                sb.Append($"{urlPath.ToString()}/");
-            }
-
-            // Remove last slash
-            sb.Length--;
-            return sb.ToString();
-        }
-
-        private string ConstructBaseUrl(SmiteClientRequest smiteClientRequest)
-        {
-            var smiteUrl = _smiteClientSettings.Url;
-            if (smiteUrl == null)
-            {
-                return string.Empty;
-            }
-
-            var baseUrl = $"{smiteUrl}{smiteClientRequest.MethodName}{smiteClientRequest.ResponseType}/";
-            if (smiteClientRequest.DeveloperId != 0)
-            {
-                baseUrl += $"{smiteClientRequest.DeveloperId}/";
-            }
-
-            if (!string.IsNullOrWhiteSpace(smiteClientRequest.Signature))
-            {
-                baseUrl += $"{smiteClientRequest.Signature}/";
-            }
-
-            if (!string.IsNullOrWhiteSpace(smiteClientRequest.SessionId))
-            {
-                baseUrl += $"{smiteClientRequest.SessionId}/";
-            }
-
-            if (!string.IsNullOrWhiteSpace(smiteClientRequest.CurrentDate))
-            {
-                baseUrl += $"{smiteClientRequest.CurrentDate}/";
-            }
-
-            return baseUrl;
+            return $"{smiteUrl}{urlPath}";
         }
     }
 }

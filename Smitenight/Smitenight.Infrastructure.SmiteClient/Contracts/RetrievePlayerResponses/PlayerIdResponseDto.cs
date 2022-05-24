@@ -2,11 +2,12 @@
 
 namespace Smitenight.Infrastructure.SmiteClient.Contracts.RetrievePlayerResponses
 {
-    public record class PlayerIdResponseDto(
-        [property: JsonPropertyName("player_id")] int PlayerId,
-        [property: JsonPropertyName("portal")] string Portal,
-        [property: JsonPropertyName("portal_id")] string PortalId,
-        [property: JsonPropertyName("privacy_flag")] string PrivacyFlag,
-        [property: JsonPropertyName("ret_msg")] object RetMsg
-    );
+    public record class PlayerIdResponseDto
+    {
+        [JsonPropertyName("player_id")] public int PlayerId { get; set; }
+        [JsonPropertyName("portal")] public string? Portal { get; set; }
+        [JsonPropertyName("portal_id")] public string? PortalId { get; set; }
+        [JsonPropertyName("privacy_flag")] public string? PrivacyFlag { get; set; }
+        [JsonPropertyName("ret_msg")] public string? RetMsg { get; set; }
+    }
 }

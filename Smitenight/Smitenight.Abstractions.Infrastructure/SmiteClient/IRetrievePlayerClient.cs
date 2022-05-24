@@ -7,17 +7,17 @@ namespace Smitenight.Abstractions.Infrastructure.SmiteClient;
 public interface IRetrievePlayerClient
 {
     Task<SmiteClientListResponse<PlayerResponse>?> GetPlayerAsync(
-        PlayerRequest playerRequest, CancellationToken cancellationToken);
+        PlayerRequest request, CancellationToken cancellationToken);
 
     Task<SmiteClientListResponse<PlayerResponse>?> GetPlayerWithoutPortalAsync(
-        PlayerWithoutPortalRequest playerWithoutPortalRequest, CancellationToken cancellationToken);
+        PlayerWithoutPortalRequest request, CancellationToken cancellationToken);
 
     Task<SmiteClientListResponse<PlayerIdResponse>?> GetPlayerIdByPlayerNameAsync(
-        PlayerIdByPlayerNameRequest playerIdByPlayerNameRequest, CancellationToken cancellationToken);
+        PlayerIdByPlayerNameRequest request, CancellationToken cancellationToken);
 
     Task<SmiteClientListResponse<PlayerIdResponse>?> GetPlayerIdByPortalUserAsync(
-        PlayerIdByPortalUserRequest playerIdByPortalUserRequest, CancellationToken cancellationToken);
+        PlayerIdByPortalUserRequest request, CancellationToken cancellationToken);
 
     Task<SmiteClientListResponse<PlayerIdResponse>?> GetPlayerIdByGamerTagAsync(
-        PlayerIdByGamerTagRequest playerIdByGamerTagRequest, CancellationToken cancellationToken);
+        PlayerIdByGamerTagRequest request, CancellationToken cancellationToken);
 }

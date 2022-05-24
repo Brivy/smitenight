@@ -18,93 +18,51 @@ namespace Smitenight.Infrastructure.SmiteClient.Clients
         }
 
         public async Task<SmiteClientListResponse<FriendsResponse>?> GetFriendsAsync(
-            FriendsRequest friendsRequest, CancellationToken cancellationToken)
+            FriendsRequest request, CancellationToken cancellationToken)
         {
-            var url = ConstructUrl(friendsRequest, friendsRequest.PlayerId);
-            if (string.IsNullOrWhiteSpace(url))
-            {
-                return null;
-            }
-
-            var result = await GetListAsync<FriendsResponseDto>(url, cancellationToken);
+            var result = await GetListAsync<FriendsResponseDto>(request.GetUrlPath(), cancellationToken);
             return Mapper.Map<SmiteClientListResponse<FriendsResponse>>(result);
         }
 
         public async Task<SmiteClientListResponse<GodRanksResponse>?> GetGodRanksAsync(
-            GodRanksRequest godRanksRequest, CancellationToken cancellationToken)
+            GodRanksRequest request, CancellationToken cancellationToken)
         {
-            var url = ConstructUrl(godRanksRequest, godRanksRequest.PlayerId);
-            if (string.IsNullOrWhiteSpace(url))
-            {
-                return null;
-            }
-
-            var result = await GetListAsync<GodRanksResponseDto>(url, cancellationToken);
+            var result = await GetListAsync<GodRanksResponseDto>(request.GetUrlPath(), cancellationToken);
             return Mapper.Map<SmiteClientListResponse<GodRanksResponse>>(result);
         }
 
         public async Task<SmiteClientResponse<PlayerAchievementsResponse>?> GetPlayerAchievementsAsync(
-            PlayerAchievementsRequest playerAchievementsRequest, CancellationToken cancellationToken)
+            PlayerAchievementsRequest request, CancellationToken cancellationToken)
         {
-            var url = ConstructUrl(playerAchievementsRequest, playerAchievementsRequest.PlayerId);
-            if (string.IsNullOrWhiteSpace(url))
-            {
-                return null;
-            }
-
-            var result = await GetAsync<PlayerAchievementsResponseDto>(url, cancellationToken);
+            var result = await GetAsync<PlayerAchievementsResponseDto>(request.GetUrlPath(), cancellationToken);
             return Mapper.Map<SmiteClientResponse<PlayerAchievementsResponse>>(result);
         }
 
         public async Task<SmiteClientListResponse<PlayerStatusResponse>?> GetPlayerStatusAsync(
-            PlayerStatusRequest playerStatusRequest, CancellationToken cancellationToken)
+            PlayerStatusRequest request, CancellationToken cancellationToken)
         {
-            var url = ConstructUrl(playerStatusRequest, playerStatusRequest.PlayerId);
-            if (string.IsNullOrWhiteSpace(url))
-            {
-                return null;
-            }
-
-            var result = await GetListAsync<PlayerStatusResponseDto>(url, cancellationToken);
+            var result = await GetListAsync<PlayerStatusResponseDto>(request.GetUrlPath(), cancellationToken);
             return Mapper.Map<SmiteClientListResponse<PlayerStatusResponse>>(result);
         }
 
         public async Task<SmiteClientListResponse<MatchHistoryResponse>?> GetMatchHistoryAsync(
-            MatchHistoryRequest matchHistoryRequest, CancellationToken cancellationToken)
+            MatchHistoryRequest request, CancellationToken cancellationToken)
         {
-            var url = ConstructUrl(matchHistoryRequest, matchHistoryRequest.PlayerId);
-            if (string.IsNullOrWhiteSpace(url))
-            {
-                return null;
-            }
-
-            var result = await GetListAsync<MatchHistoryResponseDto>(url, cancellationToken);
+            var result = await GetListAsync<MatchHistoryResponseDto>(request.GetUrlPath(), cancellationToken);
             return Mapper.Map<SmiteClientListResponse<MatchHistoryResponse>>(result);
         }
 
         public async Task<SmiteClientListResponse<QueueStatsResponse>?> GetQueueStatsAsync(
-            QueueStatsRequest queueStatsRequest, CancellationToken cancellationToken)
+            QueueStatsRequest request, CancellationToken cancellationToken)
         {
-            var url = ConstructUrl(queueStatsRequest, queueStatsRequest.PlayerId, (int)queueStatsRequest.GameModeQueueId);
-            if (string.IsNullOrWhiteSpace(url))
-            {
-                return null;
-            }
-
-            var result = await GetListAsync<QueueStatsResponseDto>(url, cancellationToken);
+            var result = await GetListAsync<QueueStatsResponseDto>(request.GetUrlPath(), cancellationToken);
             return Mapper.Map<SmiteClientListResponse<QueueStatsResponse>>(result);
         }
 
         public async Task<SmiteClientListResponse<SearchPlayersResponse>?> SearchPlayersAsync(
-            SearchPlayersRequest searchPlayersRequest, CancellationToken cancellationToken)
+            SearchPlayersRequest request, CancellationToken cancellationToken)
         {
-            var url = ConstructUrl(searchPlayersRequest, searchPlayersRequest.PlayerId);
-            if (string.IsNullOrWhiteSpace(url))
-            {
-                return null;
-            }
-
-            var result = await GetListAsync<SearchPlayersResponseDto>(url, cancellationToken);
+            var result = await GetListAsync<SearchPlayersResponseDto>(request.GetUrlPath(), cancellationToken);
             return Mapper.Map<SmiteClientListResponse<SearchPlayersResponse>>(result);
         }
     }

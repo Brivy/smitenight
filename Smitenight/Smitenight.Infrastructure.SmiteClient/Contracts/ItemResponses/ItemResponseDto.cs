@@ -3,35 +3,35 @@
 namespace Smitenight.Infrastructure.SmiteClient.Contracts.ItemResponses
 {
     public record class ItemResponseDto
-    (
-        [property: JsonPropertyName("ActiveFlag")] string ActiveFlag,
-        [property: JsonPropertyName("ChildItemId")] int ChildItemId,
-        [property: JsonPropertyName("DeviceName")] string DeviceName,
-        [property: JsonPropertyName("Glyph")] string Glyph,
-        [property: JsonPropertyName("IconId")] int IconId,
-        [property: JsonPropertyName("ItemDescription")] ItemDescriptionDto ItemDescription,
-        [property: JsonPropertyName("ItemId")] int ItemId,
-        [property: JsonPropertyName("ItemTier")] int ItemTier,
-        [property: JsonPropertyName("Price")] int Price,
-        [property: JsonPropertyName("RestrictedRoles")] string RestrictedRoles,
-        [property: JsonPropertyName("RootItemId")] int RootItemId,
-        [property: JsonPropertyName("ShortDesc")] string ShortDesc,
-        [property: JsonPropertyName("StartingItem")] bool StartingItem,
-        [property: JsonPropertyName("Type")] string Type,
-        [property: JsonPropertyName("itemIcon_URL")] string ItemIconUrl,
-        [property: JsonPropertyName("ret_msg")] object RetMsg
-    );
+    {
+        [JsonPropertyName("ActiveFlag")] public string? ActiveFlag { get; set; }
+        [JsonPropertyName("ChildItemId")] public int ChildItemId { get; set; }
+        [JsonPropertyName("DeviceName")] public string? DeviceName { get; set; }
+        [JsonPropertyName("Glyph")] public string? Glyph { get; set; }
+        [JsonPropertyName("IconId")] public int IconId { get; set; }
+        [JsonPropertyName("ItemDescription")] public ItemDescriptionDto? ItemDescription { get; set; }
+        [JsonPropertyName("ItemId")] public int ItemId { get; set; }
+        [JsonPropertyName("ItemTier")] public int ItemTier { get; set; }
+        [JsonPropertyName("Price")] public int Price { get; set; }
+        [JsonPropertyName("RestrictedRoles")] public string? RestrictedRoles { get; set; }
+        [JsonPropertyName("RootItemId")] public int RootItemId { get; set; }
+        [JsonPropertyName("ShortDesc")] public string? ShortDesc { get; set; }
+        [JsonPropertyName("StartingItem")] public bool StartingItem { get; set; }
+        [JsonPropertyName("Type")] public string? Type { get; set; }
+        [JsonPropertyName("itemIcon_URL")] public string? ItemIconUrl { get; set; }
+        [JsonPropertyName("ret_msg")] public string? RetMsg { get; set; }
+    }
 
     public record class ItemDescriptionDto
-    (
-        [property: JsonPropertyName("Description")] string Description,
-        [property: JsonPropertyName("Menuitems")] MenuItemDto[] MenuItems,
-        [property: JsonPropertyName("SecondaryDescription")] object SecondaryDescription
-    );
+    {
+        [JsonPropertyName("Description")] public string? Description { get; set; }
+        [JsonPropertyName("Menuitems")] public MenuItemDto[]? MenuItems { get; set; }
+        [JsonPropertyName("SecondaryDescription")] public object? SecondaryDescription { get; set; }
+    }
 
     public record class MenuItemDto
-    (
-        [property: JsonPropertyName("Description")] string Description,
-        [property: JsonPropertyName("Value")] string Value
-    );
+    {
+        [JsonPropertyName("Description")] public string? Description { get; set; }
+        [JsonPropertyName("Value")] public string? Value { get; set; }
+    }
 }

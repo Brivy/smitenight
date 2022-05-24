@@ -10,5 +10,9 @@ namespace Smitenight.Domain.Clients.SmiteClient.Requests.RetrievePlayerRequests
         string SessionId,
         string CurrentDate,
         PortalTypeEnum PortalType,
-        string PortalUserId) : SmiteClientRequest(DeveloperId, MethodName, ResponseType, Signature, SessionId, CurrentDate);
+        string PortalUserId) : SmiteClientRequest(DeveloperId, MethodName, ResponseType, Signature, SessionId, CurrentDate)
+    {
+        public override string GetUrlPath() =>
+            ConstructUrlPath((int)PortalType, PortalUserId);
+    }
 }

@@ -9,5 +9,9 @@ namespace Smitenight.Domain.Clients.SmiteClient.Requests.GodRequests
         string Signature,
         string SessionId,
         string CurrentDate,
-        LanguageCodeEnum LanguageCode) : SmiteClientRequest(DeveloperId, MethodName, ResponseType, Signature, SessionId, CurrentDate);
+        LanguageCodeEnum LanguageCode) : SmiteClientRequest(DeveloperId, MethodName, ResponseType, Signature, SessionId, CurrentDate)
+    {
+        public override string GetUrlPath() =>
+            ConstructUrlPath((int)LanguageCode);
+    }
 }

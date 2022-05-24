@@ -10,5 +10,9 @@ namespace Smitenight.Domain.Clients.SmiteClient.Requests.PlayerInfoRequests
         string SessionId,
         string CurrentDate,
         string PlayerId,
-        GameModeQueueIdEnum GameModeQueueId) : SmiteClientRequest(DeveloperId, MethodName, ResponseType, Signature, SessionId, CurrentDate);
+        GameModeQueueIdEnum GameModeQueueId) : SmiteClientRequest(DeveloperId, MethodName, ResponseType, Signature, SessionId, CurrentDate)
+    {
+        public override string GetUrlPath() =>
+            ConstructUrlPath(PlayerId, (int)GameModeQueueId);
+    }
 }

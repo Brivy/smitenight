@@ -3,16 +3,16 @@
 namespace Smitenight.Infrastructure.SmiteClient.Contracts.ItemResponses
 {
     public record class GodRecommendedItemsResponseDto
-    (
-        [property: JsonPropertyName("Category")] string Category,
-        [property: JsonPropertyName("Item")] string Item,
-        [property: JsonPropertyName("Role")] string Role,
-        [property: JsonPropertyName("category_value_id")] int CategoryValueId,
-        [property: JsonPropertyName("god_id")] int GodId,
-        [property: JsonPropertyName("god_name")] string GodName,
-        [property: JsonPropertyName("icon_id")] int IconId,
-        [property: JsonPropertyName("item_id")] int ItemId,
-        [property: JsonPropertyName("ret_msg")] object RetMsg,
-        [property: JsonPropertyName("role_value_id")] int RoleValueId
-    );
+    {
+        [JsonPropertyName("Category")] public string? Category { get; set; }
+        [JsonPropertyName("Item")] public string? Item { get; set; }
+        [JsonPropertyName("Role")] public string? Role { get; set; }
+        [JsonPropertyName("category_value_id")] public int CategoryValueId { get; set; }
+        [JsonPropertyName("god_id")] public int GodId { get; set; }
+        [JsonPropertyName("god_name")] public string? GodName { get; set; }
+        [JsonPropertyName("icon_id")] public int IconId { get; set; }
+        [JsonPropertyName("item_id")] public int ItemId { get; set; }
+        [JsonPropertyName("ret_msg")] public string? RetMsg { get; set; }
+        [JsonPropertyName("role_value_id")] public int RoleValueId { get; set; }
+    }
 }

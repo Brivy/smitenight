@@ -2,13 +2,15 @@
 
 namespace Smitenight.Infrastructure.SmiteClient.Contracts.SystemResponses
 {
-    public record class DataUsedResponseDto(
-        [property: JsonPropertyName("Active_Sessions")] int ActiveSessions,
-        [property: JsonPropertyName("Concurrent_Sessions")] int ConcurrentSessions, 
-        [property: JsonPropertyName("Request_Limit_Daily")] int RequestLimitDaily,
-        [property: JsonPropertyName("Session_Cap")] int SessionCap,
-        [property: JsonPropertyName("Session_Time_Limit")] int SessionTimeLimit,
-        [property: JsonPropertyName("Total_Requests_Today")] int TotalRequestsToday,
-        [property: JsonPropertyName("Total_Sessions_Today")] int TotalSessionsToday,
-        [property: JsonPropertyName("ret_msg")] object RetMsg);
+    public record class DataUsedResponseDto
+    {
+        [JsonPropertyName("Active_Sessions")] public int ActiveSessions { get; set; }
+        [JsonPropertyName("Concurrent_Sessions")] public int ConcurrentSessions { get; set; } 
+        [JsonPropertyName("Request_Limit_Daily")] public int RequestLimitDaily { get; set; }
+        [JsonPropertyName("Session_Cap")] public int SessionCap { get; set; }
+        [JsonPropertyName("Session_Time_Limit")] public int SessionTimeLimit { get; set; }
+        [JsonPropertyName("Total_Requests_Today")] public int TotalRequestsToday { get; set; }
+        [JsonPropertyName("Total_Sessions_Today")] public int TotalSessionsToday { get; set; }
+        [JsonPropertyName("ret_msg")] public string? RetMsg { get; set; }
+        }
 }

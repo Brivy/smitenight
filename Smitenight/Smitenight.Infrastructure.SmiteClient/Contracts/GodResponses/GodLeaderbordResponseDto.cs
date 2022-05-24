@@ -2,13 +2,15 @@
 
 namespace Smitenight.Infrastructure.SmiteClient.Contracts.GodResponses
 {
-    public record class GodLeaderbordResponseDto(
-        [property: JsonPropertyName("god_id")] string GodId,
-        [property: JsonPropertyName("losses")] string Losses,
-        [property: JsonPropertyName("player_id")] string PlayerId,
-        [property: JsonPropertyName("player_name")] string PlayerName,
-        [property: JsonPropertyName("player_ranking")] string PlayerRanking,
-        [property: JsonPropertyName("rank")] string Rank,
-        [property: JsonPropertyName("ret_msg")] object RetMsg,
-        [property: JsonPropertyName("wins")] string Wins);
+    public record class GodLeaderbordResponseDto
+    {
+        [JsonPropertyName("god_id")] public string? GodId { get; set; }
+        [JsonPropertyName("losses")] public string? Losses { get; set; }
+        [JsonPropertyName("player_id")] public string? PlayerId { get; set; }
+        [JsonPropertyName("player_name")] public string? PlayerName { get; set; }
+        [JsonPropertyName("player_ranking")] public string? PlayerRanking { get; set; }
+        [JsonPropertyName("rank")] public string? Rank { get; set; }
+        [JsonPropertyName("ret_msg")] public string? RetMsg { get; set; }
+        [JsonPropertyName("wins")] public string? Wins { get; set; }
+    }
 }
