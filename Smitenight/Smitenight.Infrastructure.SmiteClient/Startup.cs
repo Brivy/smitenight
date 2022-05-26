@@ -21,6 +21,7 @@ namespace Smitenight.Infrastructure.SmiteClient
             serviceCollection.AddHttpClient<IRetrievePlayerClient, RetrievePlayerClient>();
             serviceCollection.AddHttpClient<IPlayerInfoClient, PlayerInfoClient>();
             serviceCollection.AddHttpClient<IMatchInfoClient, MatchInfoClient>();
+            serviceCollection.AddHttpClient<ILeagueClient, LeagueClient>();
         }
     }
 }
