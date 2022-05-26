@@ -35,5 +35,8 @@
         public const string MatchIdsByQueueMethod = "getmatchidsbyqueue";
         public const string MatchPlayerDetailsMethod = "getmatchplayerdetails";
         public const string TopMatchesMethod = "gettopmatches";
+
+        public const string LeagueLeaderbordMethod = "getleagueleaderboard";
+        public const string LeagueSeasonsMethod = "getleagueseasons";
     }
 }
