@@ -2,6 +2,6 @@
 {
     public class DateTimeFormats
     {
-        public const string SessionIdFormat = "YYYYMMDDHHmmss";
+        public const string SessionIdFormat = "yyyyMMddHHmmss";
     }
 }

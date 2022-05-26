@@ -7,18 +7,9 @@ namespace Smitenight.Domain.Clients.SmiteClient.Requests
     public abstract record class SmiteClientRequest
     {
         public int DeveloperId { get; }
-        public string? AuthenticationKey { get; }
+        public string AuthenticationKey { get; }
         public string MethodName { get; }
         public string? SessionId { get; }
-
-        /// <summary>
-        /// Intended for pinging the Hirez servers
-        /// </summary>
-        /// <param name="methodName">Name of the Smite endpoint</param>
-        protected SmiteClientRequest(string methodName)
-        {
-            MethodName = methodName;
-        }
 
         /// <summary>
         /// Intended for creating sessions

@@ -2,7 +2,6 @@
 {
     public static class MethodNameConstants
     {
-        public const string PingMethod = "ping";
         public const string CreateSessionMethod = "createsession";
         public const string TestSessionMethod = "testsession";
         public const string DataUsedMethod = "getdataused";

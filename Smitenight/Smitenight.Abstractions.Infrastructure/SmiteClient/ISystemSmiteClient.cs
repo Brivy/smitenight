@@ -6,9 +6,6 @@ namespace Smitenight.Abstractions.Infrastructure.SmiteClient;
 
 public interface ISystemSmiteClient
 {
-    Task<SmiteClientResponse?> PingHirezAsync(
-        PingHirezRequest request, CancellationToken cancellationToken);
-
     Task<SmiteClientResponse<CreateSmiteSessionResponse>?> CreateSmiteSessionAsync(
         CreateSmiteSessionRequest request, CancellationToken cancellationToken);
 
