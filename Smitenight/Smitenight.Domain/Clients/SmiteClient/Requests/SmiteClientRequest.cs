@@ -1,4 +1,5 @@
-﻿using System.Text;
+﻿using System.Security.Cryptography;
+using System.Text;
 using Smitenight.Domain.Constants;
 
 namespace Smitenight.Domain.Clients.SmiteClient.Requests
@@ -6,58 +7,45 @@ namespace Smitenight.Domain.Clients.SmiteClient.Requests
     public abstract record class SmiteClientRequest
     {
         public int DeveloperId { get; }
+        public string? AuthenticationKey { get; }
         public string MethodName { get; }
-        public string ResponseType { get; }
-        public string? Signature { get; }
         public string? SessionId { get; }
-        public string? CurrentDate { get; }
 
         /// <summary>
         /// Intended for pinging the Hirez servers
         /// </summary>
         /// <param name="methodName">Name of the Smite endpoint</param>
-        /// <param name="responseType">Type of response: Json or Xml</param>
-        protected SmiteClientRequest(string methodName, string responseType)
+        protected SmiteClientRequest(string methodName)
         {
             MethodName = methodName;
-            ResponseType = responseType;
         }
 
         /// <summary>
         /// Intended for creating sessions
         /// </summary>
         /// <param name="developerId">Smite developers ID</param>
+        /// <param name="authenticationKey">Smite developers authentication key</param>
         /// <param name="methodName">Name of the Smite endpoint</param>
-        /// <param name="responseType">Type of response: Json or Xml</param>
-        /// <param name="signature">The ID of the generated session</param>
-        /// <param name="currentDate">Date format in '<see cref="DateTimeFormats.SessionIdFormat"/>'</param>
-        protected SmiteClientRequest(int developerId, string methodName, string responseType, string signature, string currentDate)
+        protected SmiteClientRequest(int developerId, string authenticationKey, string methodName)
         {
             DeveloperId = developerId;
+            AuthenticationKey = authenticationKey;
             MethodName = methodName;
-            ResponseType = responseType;
-            Signature = signature;
-            CurrentDate = currentDate;
         }
 
         /// <summary>
         /// Intended for all Smite calls except pinging and creating sessions
         /// </summary>
         /// <param name="developerId">Smite developers ID</param>
+        /// <param name="authenticationKey">Smite developers authentication key</param>
         /// <param name="methodName">Name of the Smite endpoint</param>
-        /// <param name="responseType">Type of response: Json or Xml</param>
-        /// <param name="signature">A generated MD5 hash for authenticating with the servers</param>
         /// <param name="sessionId">The ID of the generated session</param>
-        /// <param name="currentDate">Date format in '<see cref="DateTimeFormats.SessionIdFormat"/>'</param>
-        protected SmiteClientRequest(int developerId, string methodName, string responseType, string signature,
-            string sessionId, string currentDate)
+        protected SmiteClientRequest(int developerId, string authenticationKey, string methodName, string sessionId)
         {
             DeveloperId = developerId;
+            AuthenticationKey = authenticationKey;
             MethodName = methodName;
-            ResponseType = responseType;
-            Signature = signature;
             SessionId = sessionId;
-            CurrentDate = currentDate;
         }
 
         /// <summary>
@@ -95,15 +83,17 @@ namespace Smitenight.Domain.Clients.SmiteClient.Requests
         /// <returns></returns>
         private string ConstructBaseUrlPath()
         {
-            var baseUrlPath = $"{MethodName}{ResponseType}/";
+            var utcDateString = GetCurrentUtcDate();
+            var baseUrlPath = $"{MethodName}Json/";
             if (DeveloperId != 0)
             {
                 baseUrlPath += $"{DeveloperId}/";
             }
 
-            if (!string.IsNullOrWhiteSpace(Signature))
+            if (DeveloperId != 0 && !string.IsNullOrWhiteSpace(AuthenticationKey))
             {
-                baseUrlPath += $"{Signature}/";
+                var signature = GenerateMd5Hash(utcDateString);
+                baseUrlPath += $"{signature}/";
             }
 
             if (!string.IsNullOrWhiteSpace(SessionId))
@@ -111,13 +101,40 @@ namespace Smitenight.Domain.Clients.SmiteClient.Requests
                 baseUrlPath += $"{SessionId}/";
             }
 
-            if (!string.IsNullOrWhiteSpace(CurrentDate))
+            if (!string.IsNullOrWhiteSpace(utcDateString))
             {
-                baseUrlPath += $"{CurrentDate}/";
+                baseUrlPath += $"{utcDateString}/";
             }
 
             return baseUrlPath;
         }
+
+        /// <summary>
+        /// Creates a MD5 hash from the method we are calling and our credentials
+        /// This is needed for each request to Smite (except Ping)
+        /// </summary>
+        /// <returns></returns>
+        private string GenerateMd5Hash(string utcDateString)
+        {
+            var credentials = $"{DeveloperId}{MethodName}{AuthenticationKey}{utcDateString}";
+
+            using var md5 = MD5.Create();
+            var bytes = md5.ComputeHash(Encoding.ASCII.GetBytes(credentials));
+            var sb = new StringBuilder();
+            foreach (var b in bytes)
+            {
+                sb.Append(b.ToString("x2").ToLower());
+            }
+
+            return sb.ToString();
+        }
+
+        /// <summary>
+        /// Converts the current UTC date to a string in the <see cref="DateTimeFormats.SessionIdFormat"/> format
+        /// </summary>
+        /// <returns></returns>
+        private static string GetCurrentUtcDate() =>
+            DateTime.UtcNow.ToString(DateTimeFormats.SessionIdFormat);
 
         #endregion
     }

@@ -17,11 +17,11 @@ namespace Smitenight.Infrastructure.SmiteClient.Clients
         {
         }
 
-        public async Task<SmiteClientListResponse<GodResponse>?> GetGodsAsync(
-            GodRequest request, CancellationToken cancellationToken)
+        public async Task<SmiteClientListResponse<GodsResponse>?> GetGodsAsync(
+            GodsRequest request, CancellationToken cancellationToken)
         {
-            var result = await GetListAsync<GodResponseDto>(request.GetUrlPath(), cancellationToken);
-            return Mapper.Map<SmiteClientListResponse<GodResponse>>(result);
+            var result = await GetListAsync<GodsResponseDto>(request.GetUrlPath(), cancellationToken);
+            return Mapper.Map<SmiteClientListResponse<GodsResponse>>(result);
         }
 
         public async Task<SmiteClientListResponse<GodLeaderbordResponse>?> GetGodLeaderbordAsync(

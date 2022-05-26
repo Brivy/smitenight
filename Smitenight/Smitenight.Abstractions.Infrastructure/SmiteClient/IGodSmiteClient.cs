@@ -6,8 +6,8 @@ namespace Smitenight.Abstractions.Infrastructure.SmiteClient;
 
 public interface IGodSmiteClient
 {
-    Task<SmiteClientListResponse<GodResponse>?> GetGodsAsync(
-        GodRequest request, CancellationToken cancellationToken);
+    Task<SmiteClientListResponse<GodsResponse>?> GetGodsAsync(
+        GodsRequest request, CancellationToken cancellationToken);
 
     Task<SmiteClientListResponse<GodLeaderbordResponse>?> GetGodLeaderbordAsync(
         GodLeaderboardRequest request, CancellationToken cancellationToken);

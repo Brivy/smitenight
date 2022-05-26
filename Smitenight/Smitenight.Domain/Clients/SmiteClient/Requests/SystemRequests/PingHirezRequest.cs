@@ -1,6 +1,7 @@
-﻿namespace Smitenight.Domain.Clients.SmiteClient.Requests.SystemRequests
+﻿using Smitenight.Domain.Constants.SmiteClient;
+
+namespace Smitenight.Domain.Clients.SmiteClient.Requests.SystemRequests
 {
-    public record class PingHirezRequest(
-        string MethodName, 
-        string ResponseType) : SmiteClientRequest(MethodName, ResponseType);
+    public record class PingHirezRequest() 
+        : SmiteClientRequest(MethodNameConstants.PingMethod);
 }

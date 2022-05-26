@@ -32,7 +32,7 @@ namespace Smitenight.Infrastructure.SmiteClient.Clients
         }
 
         public async Task<SmiteClientListResponse<PlayerIdResponse>?> GetPlayerIdByPlayerNameAsync(
-            PlayerIdByPlayerNameRequest request, CancellationToken cancellationToken)
+            PlayerIdByNameRequest request, CancellationToken cancellationToken)
         {
             var result = await GetListAsync<PlayerIdResponseDto>(request.GetUrlPath(), cancellationToken);
             return Mapper.Map<SmiteClientListResponse<PlayerIdResponse>>(result);

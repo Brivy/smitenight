@@ -1,10 +1,9 @@
-﻿namespace Smitenight.Domain.Clients.SmiteClient.Requests.SystemRequests
+﻿using Smitenight.Domain.Constants.SmiteClient;
+
+namespace Smitenight.Domain.Clients.SmiteClient.Requests.SystemRequests
 {
     public record class PatchInfoRequest(
         int DeveloperId,
-        string MethodName,
-        string ResponseType,
-        string Signature,
-        string SessionId,
-        string CurrentDate) : SmiteClientRequest(DeveloperId, MethodName, ResponseType, Signature, SessionId, CurrentDate);
+        string AuthenticationKey,
+        string SessionId) : SmiteClientRequest(DeveloperId, AuthenticationKey, MethodNameConstants.PatchInfoMethod, SessionId);
 }

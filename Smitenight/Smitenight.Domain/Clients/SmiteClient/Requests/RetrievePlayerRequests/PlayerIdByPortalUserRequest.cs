@@ -1,16 +1,14 @@
-﻿using Smitenight.Domain.Enums.SmiteClient;
+﻿using Smitenight.Domain.Constants.SmiteClient;
+using Smitenight.Domain.Enums.SmiteClient;
 
 namespace Smitenight.Domain.Clients.SmiteClient.Requests.RetrievePlayerRequests
 {
     public record class PlayerIdByPortalUserRequest(
         int DeveloperId,
-        string MethodName,
-        string ResponseType,
-        string Signature,
+        string AuthenticationKey,
         string SessionId,
-        string CurrentDate,
         PortalTypeEnum PortalType,
-        string PortalUserId) : SmiteClientRequest(DeveloperId, MethodName, ResponseType, Signature, SessionId, CurrentDate)
+        string PortalUserId) : SmiteClientRequest(DeveloperId, AuthenticationKey, MethodNameConstants.PlayerIdByPortalUserIdMethod, SessionId)
     {
         public override string GetUrlPath() =>
             ConstructUrlPath((int)PortalType, PortalUserId);

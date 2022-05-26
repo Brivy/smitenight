@@ -1,6 +1,6 @@
 ﻿namespace Smitenight.Domain.Clients.SmiteClient.Responses.GodResponses
 {
-    public record class GodResponse(
+    public record class GodsResponse(
         string Ability1,
         string Ability2,
         string Ability3,

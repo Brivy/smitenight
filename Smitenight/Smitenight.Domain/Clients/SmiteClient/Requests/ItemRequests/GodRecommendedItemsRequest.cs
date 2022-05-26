@@ -1,16 +1,14 @@
-﻿using Smitenight.Domain.Enums.SmiteClient;
+﻿using Smitenight.Domain.Constants.SmiteClient;
+using Smitenight.Domain.Enums.SmiteClient;
 
 namespace Smitenight.Domain.Clients.SmiteClient.Requests.ItemRequests
 {
     public record class GodRecommendedItemsRequest(
         int DeveloperId,
-        string MethodName,
-        string ResponseType,
-        string Signature,
+        string AuthenticationKey,
         string SessionId,
-        string CurrentDate,
         int GodId,
-        LanguageCodeEnum LanguageCode) : SmiteClientRequest(DeveloperId, MethodName, ResponseType, Signature, SessionId, CurrentDate)
+        LanguageCodeEnum LanguageCode) : SmiteClientRequest(DeveloperId, AuthenticationKey, MethodNameConstants.GodRecommendedItemsMethod, SessionId)
     {
         public override string GetUrlPath() =>
             ConstructUrlPath(GodId, (int)LanguageCode);

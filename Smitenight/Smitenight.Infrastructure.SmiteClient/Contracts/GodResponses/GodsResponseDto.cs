@@ -2,7 +2,7 @@
 
 namespace Smitenight.Infrastructure.SmiteClient.Contracts.GodResponses
 {
-    public record class GodResponseDto
+    public record class GodsResponseDto
     {
         [JsonPropertyName("Ability1")] public string? Ability1 { get; set; }
         [JsonPropertyName("Ability2")] public string? Ability2 { get; set; }
