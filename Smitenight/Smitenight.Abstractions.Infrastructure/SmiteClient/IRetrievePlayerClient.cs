@@ -13,7 +13,7 @@ public interface IRetrievePlayerClient
         PlayerWithoutPortalRequest request, CancellationToken cancellationToken);
 
     Task<SmiteClientListResponse<PlayerIdResponse>?> GetPlayerIdByPlayerNameAsync(
-        PlayerIdByPlayerNameRequest request, CancellationToken cancellationToken);
+        PlayerIdByNameRequest request, CancellationToken cancellationToken);
 
     Task<SmiteClientListResponse<PlayerIdResponse>?> GetPlayerIdByPortalUserAsync(
         PlayerIdByPortalUserRequest request, CancellationToken cancellationToken);

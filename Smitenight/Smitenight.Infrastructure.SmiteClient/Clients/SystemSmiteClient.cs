@@ -17,13 +17,6 @@ namespace Smitenight.Infrastructure.SmiteClient.Clients
         {
         }
 
-        public async Task<SmiteClientResponse?> PingHirezAsync(
-            PingHirezRequest request, CancellationToken cancellationToken)
-        {
-            var result = await GetAsync(request.GetUrlPath(), cancellationToken);
-            return Mapper.Map<SmiteClientResponse>(result);
-        }
-
         public async Task<SmiteClientResponse<CreateSmiteSessionResponse>?> CreateSmiteSessionAsync(
             CreateSmiteSessionRequest request, CancellationToken cancellationToken)
         {

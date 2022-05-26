@@ -10,10 +10,10 @@ namespace Smitenight.Infrastructure.SmiteClient.Profiles
         {
             CreateMap<GodAltAbilitiesResponseDto, GodAltAbilitiesResponse>();
             CreateMap<GodLeaderbordResponseDto, GodLeaderbordResponse>();
-            CreateMap<GodResponseDto, GodResponse>();
+            CreateMap<GodsResponseDto, GodsResponse>();
             CreateMap<GodSkinsResponseDto, GodSkinsResponse>();
 
-            #region Subobjects of GodResponse
+            #region Subobjects of GodsResponse
 
             CreateMap<AbilityDetails1Dto, AbilityDetails1>();
             CreateMap<AbilityDetails2Dto, AbilityDetails2>();

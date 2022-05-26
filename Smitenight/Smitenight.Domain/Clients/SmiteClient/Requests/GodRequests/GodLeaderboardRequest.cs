@@ -1,16 +1,14 @@
-﻿using Smitenight.Domain.Enums.SmiteClient;
+﻿using Smitenight.Domain.Constants.SmiteClient;
+using Smitenight.Domain.Enums.SmiteClient;
 
 namespace Smitenight.Domain.Clients.SmiteClient.Requests.GodRequests
 {
     public record class GodLeaderboardRequest(
         int DeveloperId,
-        string MethodName,
-        string ResponseType,
-        string Signature,
+        string AuthenticationKey,
         string SessionId,
-        string CurrentDate,
         int GodId,
-        GameModeQueueIdEnum GameModeQueueId) : SmiteClientRequest(DeveloperId, MethodName, ResponseType, Signature, SessionId, CurrentDate)
+        GameModeQueueIdEnum GameModeQueueId) : SmiteClientRequest(DeveloperId, AuthenticationKey, MethodNameConstants.GodLeaderboardMethod, SessionId)
     {
         public override string GetUrlPath() =>
             ConstructUrlPath(GodId, (int)GameModeQueueId);
