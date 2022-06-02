@@ -6,7 +6,7 @@ namespace Smitenight.Domain.Clients.SmiteClient.Requests.TeamRequests
         int DeveloperId,
         string AuthenticationKey,
         string SessionId,
-        string ClanId) : SmiteClientRequest(DeveloperId, AuthenticationKey, MethodNameConstants.TeamDetailsMethod, SessionId)
+        int ClanId) : SmiteClientRequest(DeveloperId, AuthenticationKey, MethodNameConstants.TeamDetailsMethod, SessionId)
     {
         public override string GetUrlPath() =>
             ConstructUrlPath(ClanId);
