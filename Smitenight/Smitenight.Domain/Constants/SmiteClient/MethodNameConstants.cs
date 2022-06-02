@@ -38,5 +38,9 @@
 
         public const string LeagueLeaderbordMethod = "getleagueleaderboard";
         public const string LeagueSeasonsMethod = "getleagueseasons";
+
+        public const string TeamDetailsMethod = "getteamdetails";
+        public const string TeamPlayersMethod = "getteamplayers";
+        public const string SearchTeamsMethod = "searchteams";
     }
 }
