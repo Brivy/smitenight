@@ -16,11 +16,11 @@ namespace Smitenight.Infrastructure.SmiteClient
                 .Bind(configuration.GetSection(nameof(SmiteClientSettings)));
 
             serviceCollection.AddHttpClient<ISystemSmiteClient, SystemSmiteClient>();
-            serviceCollection.AddHttpClient<IGodSmiteClient, GodSmiteClient>();
-            serviceCollection.AddHttpClient<IItemSmiteClient, ItemSmiteClient>();
+            serviceCollection.AddHttpClient<IGodSmiteClient, GodClient>();
+            serviceCollection.AddHttpClient<IItemSmiteClient, ItemClient>();
             serviceCollection.AddHttpClient<IRetrievePlayerClient, RetrievePlayerClient>();
-            serviceCollection.AddHttpClient<IPlayerInfoClient, PlayerInfoClient>();
-            serviceCollection.AddHttpClient<IMatchInfoClient, MatchInfoClient>();
+            serviceCollection.AddHttpClient<IPlayerInfoClient, PlayerClient>();
+            serviceCollection.AddHttpClient<IMatchInfoClient, MatchClient>();
             serviceCollection.AddHttpClient<ILeagueClient, LeagueClient>();
             serviceCollection.AddHttpClient<ITeamClient, TeamClient>();
             serviceCollection.AddHttpClient<IOtherClient, OtherClient>();

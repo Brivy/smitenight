@@ -1,6 +1,6 @@
-﻿using Smitenight.Domain.Clients.SmiteClient.Requests.MatchInfoRequests;
+﻿using Smitenight.Domain.Clients.SmiteClient.Requests.MatchRequests;
 using Smitenight.Domain.Clients.SmiteClient.Responses;
-using Smitenight.Domain.Clients.SmiteClient.Responses.MatchInfoResponses;
+using Smitenight.Domain.Clients.SmiteClient.Responses.MatchResponses;
 
 namespace Smitenight.Abstractions.Infrastructure.SmiteClient;
 
