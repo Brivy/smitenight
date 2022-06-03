@@ -2,13 +2,13 @@
 
 namespace Smitenight.Infrastructure.SmiteClient.Contracts.TeamResponses
 {
-    public class SearchTeamsResponseDto
+    public record class SearchTeamsResponseDto
     {
-        [JsonPropertyName("Founder")] public string? Founder { get; set; }
-        [JsonPropertyName("Name")] public string? Name { get; set; }
-        [JsonPropertyName("Players")] public int Players { get; set; }
-        [JsonPropertyName("Tag")] public string? Tag { get; set; }
-        [JsonPropertyName("TeamId")] public int TeamId { get; set; }
-        [JsonPropertyName("ret_msg")] public string? RetMsg { get; set; }
+        [JsonPropertyName("Founder")] public string? Founder { get; init; }
+        [JsonPropertyName("Name")] public string? Name { get; init; }
+        [JsonPropertyName("Players")] public int Players { get; init; }
+        [JsonPropertyName("Tag")] public string? Tag { get; init; }
+        [JsonPropertyName("TeamId")] public int TeamId { get; init; }
+        [JsonPropertyName("ret_msg")] public string? RetMsg { get; init; }
     }
 }

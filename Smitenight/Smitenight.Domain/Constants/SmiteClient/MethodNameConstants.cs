@@ -42,5 +42,8 @@
         public const string TeamDetailsMethod = "getteamdetails";
         public const string TeamPlayersMethod = "getteamplayers";
         public const string SearchTeamsMethod = "searchteams";
+
+        public const string EsportProLeagueMethod = "getesportsproleaguedetails";
+        public const string MotdMethod = "getmotd";
     }
 }
