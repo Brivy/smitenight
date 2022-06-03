@@ -2,18 +2,18 @@
 
 namespace Smitenight.Infrastructure.SmiteClient.Contracts.TeamResponses
 {
-    public class TeamDetailsResponseDto
+    public record class TeamDetailsResponseDto
     {
-        [JsonPropertyName("AvatarURL")] public string? AvatarUrl { get; set; }
-        [JsonPropertyName("Founder")] public string? Founder { get; set; }
-        [JsonPropertyName("FounderId")] public string? FounderId { get; set; }
-        [JsonPropertyName("Losses")] public int Losses { get; set; }
-        [JsonPropertyName("Name")] public string? Name { get; set; }
-        [JsonPropertyName("Players")] public int Players { get; set; }
-        [JsonPropertyName("Rating")] public int Rating { get; set; }
-        [JsonPropertyName("Tag")] public string? Tag { get; set; }
-        [JsonPropertyName("TeamId")] public int TeamId { get; set; }
-        [JsonPropertyName("Wins")] public int Wins { get; set; }
-        [JsonPropertyName("ret_msg")] public string? RetMsg { get; set; }
+        [JsonPropertyName("AvatarURL")] public string? AvatarUrl { get; init; }
+        [JsonPropertyName("Founder")] public string? Founder { get; init; }
+        [JsonPropertyName("FounderId")] public string? FounderId { get; init; }
+        [JsonPropertyName("Losses")] public int Losses { get; init; }
+        [JsonPropertyName("Name")] public string? Name { get; init; }
+        [JsonPropertyName("Players")] public int Players { get; init; }
+        [JsonPropertyName("Rating")] public int Rating { get; init; }
+        [JsonPropertyName("Tag")] public string? Tag { get; init; }
+        [JsonPropertyName("TeamId")] public int TeamId { get; init; }
+        [JsonPropertyName("Wins")] public int Wins { get; init; }
+        [JsonPropertyName("ret_msg")] public string? RetMsg { get; init; }
     }
 }
