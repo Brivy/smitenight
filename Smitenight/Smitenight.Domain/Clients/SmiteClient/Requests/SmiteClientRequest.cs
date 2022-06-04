@@ -55,7 +55,12 @@ namespace Smitenight.Domain.Clients.SmiteClient.Requests
         /// <returns></returns>
         protected string ConstructUrlPath(params object[] urlPaths)
         {
-            var sb = new StringBuilder();
+            if (!urlPaths.Any())
+            {
+                return string.Empty;
+            }
+
+            var sb = new StringBuilder("/");
             foreach (var urlPath in urlPaths)
             {
                 sb.Append($"{urlPath.ToString()}/");

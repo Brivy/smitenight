@@ -97,7 +97,7 @@ namespace Smitenight.Infrastructure.SmiteClient.Clients
 
         #region Private functionality
 
-        private string? ConstructUrl(SmiteClientRequest smiteRequest)
+        private string ConstructUrl(SmiteClientRequest smiteRequest)
         {
             var smiteUrl = _smiteClientSettings.Url;
             if (smiteUrl == null)
@@ -116,29 +116,31 @@ namespace Smitenight.Infrastructure.SmiteClient.Clients
         private string ConstructBaseUrlPath(SmiteClientRequest smiteRequest)
         {
             var utcDateString = GetCurrentUtcDate();
-            var baseUrlPath = $"{smiteRequest.MethodName}Json/";
+            var baseUrlPath = new StringBuilder($"{smiteRequest.MethodName}Json/");
             if (smiteRequest.DeveloperId != 0)
             {
-                baseUrlPath += $"{smiteRequest.DeveloperId}/";
+                baseUrlPath.Append($"{smiteRequest.DeveloperId}/");
             }
 
             if (smiteRequest.DeveloperId != 0 && !string.IsNullOrWhiteSpace(smiteRequest.AuthenticationKey))
             {
                 var signature = GenerateMd5Hash(smiteRequest, utcDateString);
-                baseUrlPath += $"{signature}/";
+                baseUrlPath.Append($"{signature}/");
             }
 
             if (!string.IsNullOrWhiteSpace(smiteRequest.SessionId))
             {
-                baseUrlPath += $"{smiteRequest.SessionId}/";
+                baseUrlPath.Append($"{smiteRequest.SessionId}/");
             }
 
             if (!string.IsNullOrWhiteSpace(utcDateString))
             {
-                baseUrlPath += $"{utcDateString}/";
+                baseUrlPath.Append($"{utcDateString}/");
             }
 
-            return baseUrlPath;
+            // Remove the last slash
+            baseUrlPath.Length--;
+            return baseUrlPath.ToString();
         }
 
         /// <summary>
