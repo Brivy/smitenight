@@ -20,14 +20,14 @@ namespace Smitenight.Infrastructure.SmiteClient.Clients
         public async Task<SmiteClientListResponse<EsportProLeagueResponse>?> GetEsportProLeagueAsync(
             EsportProLeagueRequest request, CancellationToken cancellationToken)
         {
-            var result = await GetListAsync<EsportProLeagueResponseDto>(request.GetUrlPath(), cancellationToken);
+            var result = await GetListAsync<EsportProLeagueRequest, EsportProLeagueResponseDto>(request, cancellationToken);
             return Mapper.Map<SmiteClientListResponse<EsportProLeagueResponse>>(result);
         }
 
         public async Task<SmiteClientListResponse<MotdResponse>?> GetMotdAsync(
             MotdRequest request, CancellationToken cancellationToken)
         {
-            var result = await GetListAsync<MotdResponseDto>(request.GetUrlPath(), cancellationToken);
+            var result = await GetListAsync<MotdRequest, MotdResponseDto>(request, cancellationToken);
             return Mapper.Map<SmiteClientListResponse<MotdResponse>>(result);
         }
     }

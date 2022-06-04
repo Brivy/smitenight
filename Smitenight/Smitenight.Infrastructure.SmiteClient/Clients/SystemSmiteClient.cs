@@ -20,35 +20,35 @@ namespace Smitenight.Infrastructure.SmiteClient.Clients
         public async Task<SmiteClientResponse<CreateSmiteSessionResponse>?> CreateSmiteSessionAsync(
             CreateSmiteSessionRequest request, CancellationToken cancellationToken)
         {
-            var result = await GetAsync<CreateSmiteSessionResponseDto>(request.GetUrlPath(), cancellationToken);
+            var result = await GetAsync<CreateSmiteSessionRequest, CreateSmiteSessionResponseDto>(request, cancellationToken);
             return Mapper.Map<SmiteClientResponse<CreateSmiteSessionResponse>>(result);
         }
 
         public async Task<SmiteClientResponse?> TestSmiteSessionAsync(
             TestSmiteSessionRequest request, CancellationToken cancellationToken)
         {
-            var result = await GetAsync(request.GetUrlPath(), cancellationToken);
+            var result = await GetAsync(request, cancellationToken);
             return Mapper.Map<SmiteClientResponse>(result);
         }
 
         public async Task<SmiteClientListResponse<DataUsedResponse>?> GetDataUsedAsync(
             DataUsedRequest request, CancellationToken cancellationToken)
         {
-            var result = await GetListAsync<DataUsedResponseDto>(request.GetUrlPath(), cancellationToken);
+            var result = await GetListAsync<DataUsedRequest, DataUsedResponseDto>(request, cancellationToken);
             return Mapper.Map<SmiteClientListResponse<DataUsedResponse>>(result);
         }
 
         public async Task<SmiteClientListResponse<HirezServerStatusResponse>?> GetHirezServerStatusAsync(
             HirezServerStatusRequest request, CancellationToken cancellationToken)
         {
-            var result = await GetListAsync<HirezServerStatusResponseDto>(request.GetUrlPath(), cancellationToken);
+            var result = await GetListAsync<HirezServerStatusRequest, HirezServerStatusResponseDto>(request, cancellationToken);
             return Mapper.Map<SmiteClientListResponse<HirezServerStatusResponse>>(result);
         }
 
         public async Task<SmiteClientResponse<PatchInfoResponse>?> GetPatchInfoAsync(
             PatchInfoRequest request, CancellationToken cancellationToken)
         {
-            var result = await GetAsync<PatchInfoResponseDto>(request.GetUrlPath(), cancellationToken);
+            var result = await GetAsync<PatchInfoRequest, PatchInfoResponseDto>(request, cancellationToken);
             return Mapper.Map<SmiteClientResponse<PatchInfoResponse>>(result);
         }
     }

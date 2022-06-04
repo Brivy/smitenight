@@ -20,14 +20,14 @@ namespace Smitenight.Infrastructure.SmiteClient.Clients
         public async Task<SmiteClientListResponse<GodRecommendedItemsResponse>?> GetGodRecommendedItemsAsync(
             GodRecommendedItemsRequest request, CancellationToken cancellationToken)
         {
-            var result = await GetListAsync<GodRecommendedItemsResponseDto>(request.GetUrlPath(), cancellationToken);
+            var result = await GetListAsync<GodRecommendedItemsRequest, GodRecommendedItemsResponseDto>(request, cancellationToken);
             return Mapper.Map<SmiteClientListResponse<GodRecommendedItemsResponse>>(result);
         }
 
         public async Task<SmiteClientListResponse<ItemResponse>?> GetItemsAsync(
             ItemsRequest request, CancellationToken cancellationToken)
         {
-            var result = await GetListAsync<ItemResponseDto>(request.GetUrlPath(), cancellationToken);
+            var result = await GetListAsync<ItemsRequest, ItemResponseDto>(request, cancellationToken);
             return Mapper.Map<SmiteClientListResponse<ItemResponse>>(result);
         }
     }
