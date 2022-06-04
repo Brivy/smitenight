@@ -9,6 +9,6 @@ public interface IItemSmiteClient
     Task<SmiteClientListResponse<GodRecommendedItemsResponse>?> GetGodRecommendedItemsAsync(
         GodRecommendedItemsRequest request, CancellationToken cancellationToken);
 
-    Task<SmiteClientListResponse<ItemResponse>?> GetItemsAsync(
+    Task<SmiteClientListResponse<ItemsResponse>?> GetItemsAsync(
         ItemsRequest request, CancellationToken cancellationToken);
 }

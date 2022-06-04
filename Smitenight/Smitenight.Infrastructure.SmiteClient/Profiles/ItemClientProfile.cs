@@ -9,7 +9,7 @@ namespace Smitenight.Infrastructure.SmiteClient.Profiles
         public ItemClientProfile()
         {
             CreateMap<GodRecommendedItemsResponseDto, GodRecommendedItemsResponse>();
-            CreateMap<ItemResponseDto, ItemResponse>();
+            CreateMap<ItemsResponseDto, ItemsResponse>();
 
             #region Subobjects of ItemResponse
 
