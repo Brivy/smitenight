@@ -1,6 +1,6 @@
-﻿using Smitenight.Domain.Clients.SmiteClient.Requests.PlayerInfoRequests;
+﻿using Smitenight.Domain.Clients.SmiteClient.Requests.PlayerRequests;
 using Smitenight.Domain.Clients.SmiteClient.Responses;
-using Smitenight.Domain.Clients.SmiteClient.Responses.PlayerInfoResponses;
+using Smitenight.Domain.Clients.SmiteClient.Responses.PlayerResponses;
 
 namespace Smitenight.Abstractions.Infrastructure.SmiteClient;
 
