@@ -20,21 +20,21 @@ namespace Smitenight.Infrastructure.SmiteClient.Clients
         public async Task<SmiteClientListResponse<TeamDetailsResponse>?> GetTeamDetailsAsync(
             TeamDetailsRequest request, CancellationToken cancellationToken)
         {
-            var result = await GetListAsync<TeamDetailsResponseDto>(request.GetUrlPath(), cancellationToken);
+            var result = await GetListAsync<TeamDetailsRequest, TeamDetailsResponseDto>(request, cancellationToken);
             return Mapper.Map<SmiteClientListResponse<TeamDetailsResponse>>(result);
         }
 
         public async Task<SmiteClientListResponse<TeamPlayersResponse>?> GetTeamPlayersAsync(
             TeamPlayersRequest request, CancellationToken cancellationToken)
         {
-            var result = await GetListAsync<TeamPlayersResponseDto>(request.GetUrlPath(), cancellationToken);
+            var result = await GetListAsync<TeamPlayersRequest, TeamPlayersResponseDto>(request, cancellationToken);
             return Mapper.Map<SmiteClientListResponse<TeamPlayersResponse>>(result);
         }
 
         public async Task<SmiteClientListResponse<SearchTeamsResponse>?> SearchTeamsAsync(
             SearchTeamsRequest request, CancellationToken cancellationToken)
         {
-            var result = await GetListAsync<SearchTeamsResponseDto>(request.GetUrlPath(), cancellationToken);
+            var result = await GetListAsync<SearchTeamsRequest, SearchTeamsResponseDto>(request, cancellationToken);
             return Mapper.Map<SmiteClientListResponse<SearchTeamsResponse>>(result);
         }
     }

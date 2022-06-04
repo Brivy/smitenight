@@ -1,7 +1,11 @@
 ﻿using System.Net;
 using System.Net.Http.Json;
+using System.Security.Cryptography;
+using System.Text;
 using AutoMapper;
 using Microsoft.Extensions.Options;
+using Smitenight.Domain.Clients.SmiteClient.Requests;
+using Smitenight.Domain.Constants;
 using Smitenight.Infrastructure.SmiteClient.Contracts;
 using Smitenight.Infrastructure.SmiteClient.Settings;
 
@@ -23,11 +27,12 @@ namespace Smitenight.Infrastructure.SmiteClient.Clients
             Mapper = mapper;
         }
 
-        protected async Task<SmiteClientResponseDto> GetAsync(string urlPath, CancellationToken cancellationToken)
+        protected async Task<SmiteClientResponseDto> GetAsync<TRequest>(TRequest smiteRequest, CancellationToken cancellationToken)
+            where TRequest : SmiteClientRequest
         {
             try
             {
-                var url = ConstructUrl(urlPath);
+                var url = ConstructUrl(smiteRequest);
                 var request = new HttpRequestMessage(HttpMethod.Get, url);
                 using var response = await _httpClient.SendAsync(request, cancellationToken);
                 return new SmiteClientResponseDto(response.StatusCode, response.ReasonPhrase);
@@ -38,57 +43,61 @@ namespace Smitenight.Infrastructure.SmiteClient.Clients
             }
         }
 
-        protected async Task<SmiteClientResponseDto<TResponseType>> GetAsync<TResponseType>(string urlPath, CancellationToken cancellationToken)
-            where TResponseType : class
+        protected async Task<SmiteClientResponseDto<TResponse>> GetAsync<TRequest, TResponse>(TRequest smiteRequest, CancellationToken cancellationToken)
+            where TRequest : SmiteClientRequest
+            where TResponse : class
         {
             try
             {
-                var url = ConstructUrl(urlPath);
+                var url = ConstructUrl(smiteRequest);
                 var request = new HttpRequestMessage(HttpMethod.Get, url);
                 using var response = await _httpClient.SendAsync(request, cancellationToken);
 
                 try
                 {
-                    var responseBody = await response.Content.ReadFromJsonAsync<TResponseType>(cancellationToken: cancellationToken);
-                    return new SmiteClientResponseDto<TResponseType>(response.StatusCode, response.ReasonPhrase, responseBody);
+                    var responseBody = await response.Content.ReadFromJsonAsync<TResponse>(cancellationToken: cancellationToken);
+                    return new SmiteClientResponseDto<TResponse>(response.StatusCode, response.ReasonPhrase, responseBody);
                 }
                 catch (Exception)
                 {
-                    return new SmiteClientResponseDto<TResponseType>(response.StatusCode, response.ReasonPhrase, default);
+                    return new SmiteClientResponseDto<TResponse>(response.StatusCode, response.ReasonPhrase, default);
                 }
             }
             catch (Exception ex)
             {
-                return new SmiteClientResponseDto<TResponseType>(HttpStatusCode.InternalServerError, ex.Message, default);
+                return new SmiteClientResponseDto<TResponse>(HttpStatusCode.InternalServerError, ex.Message, default);
             }
         }
 
-        protected async Task<SmiteClientListResponseDto<TResponseType>> GetListAsync<TResponseType>(string urlPath, CancellationToken cancellationToken)
-            where TResponseType : class
+        protected async Task<SmiteClientListResponseDto<TResponse>> GetListAsync<TRequest, TResponse>(TRequest smiteRequest, CancellationToken cancellationToken)
+            where TRequest : SmiteClientRequest
+            where TResponse : class
         {
             try
             {
-                var url = ConstructUrl(urlPath);
+                var url = ConstructUrl(smiteRequest);
                 var request = new HttpRequestMessage(HttpMethod.Get, url);
                 using var response = await _httpClient.SendAsync(request, cancellationToken);
 
                 try
                 {
-                    var responseBody = await response.Content.ReadFromJsonAsync<List<TResponseType>>(cancellationToken: cancellationToken);
-                    return new SmiteClientListResponseDto<TResponseType>(response.StatusCode, response.ReasonPhrase, responseBody);
+                    var responseBody = await response.Content.ReadFromJsonAsync<List<TResponse>>(cancellationToken: cancellationToken);
+                    return new SmiteClientListResponseDto<TResponse>(response.StatusCode, response.ReasonPhrase, responseBody);
                 }
                 catch (Exception)
                 {
-                    return new SmiteClientListResponseDto<TResponseType>(response.StatusCode, response.ReasonPhrase, default);
+                    return new SmiteClientListResponseDto<TResponse>(response.StatusCode, response.ReasonPhrase, default);
                 }
             }
             catch (Exception ex)
             {
-                return new SmiteClientListResponseDto<TResponseType>(HttpStatusCode.InternalServerError, ex.Message, default);
+                return new SmiteClientListResponseDto<TResponse>(HttpStatusCode.InternalServerError, ex.Message, default);
             }
         }
 
-        private string? ConstructUrl(string urlPath)
+        #region Private functionality
+
+        private string? ConstructUrl(SmiteClientRequest smiteRequest)
         {
             var smiteUrl = _smiteClientSettings.Url;
             if (smiteUrl == null)
@@ -96,7 +105,69 @@ namespace Smitenight.Infrastructure.SmiteClient.Clients
                 throw new NullReferenceException("Smite URL is not defined in the settings");
             }
 
-            return $"{smiteUrl}{urlPath}";
+            var baseUrlPath = ConstructBaseUrlPath(smiteRequest);
+            return $"{smiteUrl}{baseUrlPath}{smiteRequest.GetUrlPath()}";
         }
+
+        /// <summary>
+        /// Constructs the base of the url path string needed for each request
+        /// </summary>
+        /// <returns></returns>
+        private string ConstructBaseUrlPath(SmiteClientRequest smiteRequest)
+        {
+            var utcDateString = GetCurrentUtcDate();
+            var baseUrlPath = $"{smiteRequest.MethodName}Json/";
+            if (smiteRequest.DeveloperId != 0)
+            {
+                baseUrlPath += $"{smiteRequest.DeveloperId}/";
+            }
+
+            if (smiteRequest.DeveloperId != 0 && !string.IsNullOrWhiteSpace(smiteRequest.AuthenticationKey))
+            {
+                var signature = GenerateMd5Hash(smiteRequest, utcDateString);
+                baseUrlPath += $"{signature}/";
+            }
+
+            if (!string.IsNullOrWhiteSpace(smiteRequest.SessionId))
+            {
+                baseUrlPath += $"{smiteRequest.SessionId}/";
+            }
+
+            if (!string.IsNullOrWhiteSpace(utcDateString))
+            {
+                baseUrlPath += $"{utcDateString}/";
+            }
+
+            return baseUrlPath;
+        }
+
+        /// <summary>
+        /// Creates a MD5 hash from the method we are calling and our credentials
+        /// This is needed for each request to Smite (except Ping)
+        /// </summary>
+        /// <returns></returns>
+        private string GenerateMd5Hash(SmiteClientRequest smiteRequest, string utcDateString)
+        {
+            var credentials = $"{smiteRequest.DeveloperId}{smiteRequest.MethodName}{smiteRequest.AuthenticationKey}{utcDateString}";
+
+            using var md5 = MD5.Create();
+            var bytes = md5.ComputeHash(Encoding.ASCII.GetBytes(credentials));
+            var sb = new StringBuilder();
+            foreach (var b in bytes)
+            {
+                sb.Append(b.ToString("x2").ToLower());
+            }
+
+            return sb.ToString();
+        }
+
+        /// <summary>
+        /// Converts the current UTC date to a string in the <see cref="DateTimeFormats.SessionIdFormat"/> format
+        /// </summary>
+        /// <returns></returns>
+        private static string GetCurrentUtcDate() =>
+            DateTime.UtcNow.ToString(DateTimeFormats.SessionIdFormat);
+
+        #endregion
     }
 }

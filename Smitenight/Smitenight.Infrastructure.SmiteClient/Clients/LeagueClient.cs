@@ -20,14 +20,14 @@ namespace Smitenight.Infrastructure.SmiteClient.Clients
         public async Task<SmiteClientListResponse<LeagueLeaderboardResponse>?> GetLeagueLeaderboardAsync(
             LeagueLeaderboardRequest request, CancellationToken cancellationToken)
         {
-            var result = await GetListAsync<LeagueLeaderboardResponseDto>(request.GetUrlPath(), cancellationToken);
+            var result = await GetListAsync<LeagueLeaderboardRequest, LeagueLeaderboardResponseDto>(request, cancellationToken);
             return Mapper.Map<SmiteClientListResponse<LeagueLeaderboardResponse>>(result);
         }
 
         public async Task<SmiteClientListResponse<LeagueSeasonsResponse>?> GetLeagueSeasonsAsync(
             LeagueSeasonsRequest request, CancellationToken cancellationToken)
         {
-            var result = await GetListAsync<LeagueSeasonsResponseDto>(request.GetUrlPath(), cancellationToken);
+            var result = await GetListAsync<LeagueSeasonsRequest, LeagueSeasonsResponseDto>(request, cancellationToken);
             return Mapper.Map<SmiteClientListResponse<LeagueSeasonsResponse>>(result);
         }
     }

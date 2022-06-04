@@ -10,6 +10,7 @@ namespace Smitenight.Domain.Clients.SmiteClient.Requests
         public string AuthenticationKey { get; }
         public string MethodName { get; }
         public string? SessionId { get; }
+        public string? UrlPath { get; set; }
 
         /// <summary>
         /// Intended for creating sessions
@@ -54,8 +55,7 @@ namespace Smitenight.Domain.Clients.SmiteClient.Requests
         /// <returns></returns>
         protected string ConstructUrlPath(params object[] urlPaths)
         {
-            var baseUrlPath = ConstructBaseUrlPath();
-            var sb = new StringBuilder(baseUrlPath);
+            var sb = new StringBuilder();
             foreach (var urlPath in urlPaths)
             {
                 sb.Append($"{urlPath.ToString()}/");
@@ -65,68 +65,5 @@ namespace Smitenight.Domain.Clients.SmiteClient.Requests
             sb.Length--;
             return sb.ToString();
         }
-
-        #region Private functionality
-
-        /// <summary>
-        /// Constructs the base of the url path string needed for each request
-        /// </summary>
-        /// <returns></returns>
-        private string ConstructBaseUrlPath()
-        {
-            var utcDateString = GetCurrentUtcDate();
-            var baseUrlPath = $"{MethodName}Json/";
-            if (DeveloperId != 0)
-            {
-                baseUrlPath += $"{DeveloperId}/";
-            }
-
-            if (DeveloperId != 0 && !string.IsNullOrWhiteSpace(AuthenticationKey))
-            {
-                var signature = GenerateMd5Hash(utcDateString);
-                baseUrlPath += $"{signature}/";
-            }
-
-            if (!string.IsNullOrWhiteSpace(SessionId))
-            {
-                baseUrlPath += $"{SessionId}/";
-            }
-
-            if (!string.IsNullOrWhiteSpace(utcDateString))
-            {
-                baseUrlPath += $"{utcDateString}/";
-            }
-
-            return baseUrlPath;
-        }
-
-        /// <summary>
-        /// Creates a MD5 hash from the method we are calling and our credentials
-        /// This is needed for each request to Smite (except Ping)
-        /// </summary>
-        /// <returns></returns>
-        private string GenerateMd5Hash(string utcDateString)
-        {
-            var credentials = $"{DeveloperId}{MethodName}{AuthenticationKey}{utcDateString}";
-
-            using var md5 = MD5.Create();
-            var bytes = md5.ComputeHash(Encoding.ASCII.GetBytes(credentials));
-            var sb = new StringBuilder();
-            foreach (var b in bytes)
-            {
-                sb.Append(b.ToString("x2").ToLower());
-            }
-
-            return sb.ToString();
-        }
-
-        /// <summary>
-        /// Converts the current UTC date to a string in the <see cref="DateTimeFormats.SessionIdFormat"/> format
-        /// </summary>
-        /// <returns></returns>
-        private static string GetCurrentUtcDate() =>
-            DateTime.UtcNow.ToString(DateTimeFormats.SessionIdFormat);
-
-        #endregion
     }
 }
