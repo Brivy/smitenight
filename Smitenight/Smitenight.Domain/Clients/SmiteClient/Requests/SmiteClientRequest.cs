@@ -1,6 +1,4 @@
-﻿using System.Security.Cryptography;
-using System.Text;
-using Smitenight.Domain.Constants;
+﻿using System.Text;
 
 namespace Smitenight.Domain.Clients.SmiteClient.Requests
 {
@@ -10,7 +8,6 @@ namespace Smitenight.Domain.Clients.SmiteClient.Requests
         public string AuthenticationKey { get; }
         public string MethodName { get; }
         public string? SessionId { get; }
-        public string? UrlPath { get; set; }
 
         /// <summary>
         /// Intended for creating sessions
