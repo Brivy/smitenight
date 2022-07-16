@@ -2,7 +2,7 @@ name: Linux Container .NET 6.0 Workflow
 
 on:
   push:
-    branches: [ main, updating_docker_image_action ]
+    branches: [ main ]
 
 jobs:
   build-and-deploy:
@@ -30,7 +30,7 @@ jobs:
     - name: 'Deploy to Azure WebApps'
       uses: azure/webapps-deploy@v2
       with:
-        app-name: '${{ secrets.APP_SERVICE }}'
+        app-name: '${{ secrets.APP_SERVICE_NAME }}
         images: '${{ secrets.REGISTRY_LOGIN_SERVER }}/smitenight:${{ github.sha }}'
     
     - name: 'Azure logout'
