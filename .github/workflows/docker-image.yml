@@ -30,7 +30,7 @@ jobs:
     - name: 'Deploy to Azure WebApps'
       uses: azure/webapps-deploy@v2
       with:
-        app-name: 'app-smitenight-dev-001'
+        app-name: '${{ secrets.APP_SERVICE_NAME }}'
         images: '${{ secrets.REGISTRY_LOGIN_SERVER }}/smitenight:${{ github.sha }}'
     
     - name: 'Azure logout'
