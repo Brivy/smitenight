@@ -31,7 +31,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Smitenight.Abstractions.App
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Smitenight.CompositionRoot", "Smitenight\Smitenight.CompositionRoot\Smitenight.CompositionRoot.csproj", "{4E33A2EE-D5AF-4511-BE18-F977798D0D19}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Smitenight.Infrastructure.SmiteClient", "Smitenight\Smitenight.Infrastructure.SmiteClient\Smitenight.Infrastructure.SmiteClient.csproj", "{CCBF1D99-D526-441C-9ADD-1B07C640FD92}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Smitenight.Infrastructure.SmiteClient", "Smitenight\Smitenight.Infrastructure.SmiteClient\Smitenight.Infrastructure.SmiteClient.csproj", "{CCBF1D99-D526-441C-9ADD-1B07C640FD92}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Smitenight.Persistence", "Smitenight\Smitenight.Persistence\Smitenight.Persistence.csproj", "{FDE35ACD-FBBF-490D-B54E-1DDC0667967C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Smitenight.Abstractions.Persistence", "Smitenight\Smitenight.Abstractions.Persistence\Smitenight.Abstractions.Persistence.csproj", "{790B7DD7-DC51-4561-A01F-319E114D586A}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Persistence", "Persistence", "{7E178BB9-3D2D-4DC0-907D-EBD87C20E963}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,6 +81,14 @@ Global
 		{CCBF1D99-D526-441C-9ADD-1B07C640FD92}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CCBF1D99-D526-441C-9ADD-1B07C640FD92}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CCBF1D99-D526-441C-9ADD-1B07C640FD92}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FDE35ACD-FBBF-490D-B54E-1DDC0667967C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FDE35ACD-FBBF-490D-B54E-1DDC0667967C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FDE35ACD-FBBF-490D-B54E-1DDC0667967C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FDE35ACD-FBBF-490D-B54E-1DDC0667967C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{790B7DD7-DC51-4561-A01F-319E114D586A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{790B7DD7-DC51-4561-A01F-319E114D586A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{790B7DD7-DC51-4561-A01F-319E114D586A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{790B7DD7-DC51-4561-A01F-319E114D586A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -90,6 +104,8 @@ Global
 		{E51F3E9A-ED37-4E51-93BA-24EC097F8B37} = {DADF39D7-C33D-4F13-A1E3-31EA64BAE343}
 		{4E33A2EE-D5AF-4511-BE18-F977798D0D19} = {24F27201-F7B8-4A52-82B5-61D4C21B0257}
 		{CCBF1D99-D526-441C-9ADD-1B07C640FD92} = {6F508BDC-34B8-410D-B4BC-857DBF833318}
+		{FDE35ACD-FBBF-490D-B54E-1DDC0667967C} = {7E178BB9-3D2D-4DC0-907D-EBD87C20E963}
+		{790B7DD7-DC51-4561-A01F-319E114D586A} = {DADF39D7-C33D-4F13-A1E3-31EA64BAE343}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3C8D7E88-4284-4074-85EF-6F7EA1429EE4}
