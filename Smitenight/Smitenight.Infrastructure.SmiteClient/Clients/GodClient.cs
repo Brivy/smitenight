@@ -5,6 +5,7 @@ using Smitenight.Domain.Clients.SmiteClient.Requests.GodRequests;
 using Smitenight.Domain.Clients.SmiteClient.Responses;
 using Smitenight.Domain.Clients.SmiteClient.Responses.GodResponses;
 using Smitenight.Infrastructure.SmiteClient.Contracts.GodResponses;
+using Smitenight.Infrastructure.SmiteClient.Secrets;
 using Smitenight.Infrastructure.SmiteClient.Settings;
 
 namespace Smitenight.Infrastructure.SmiteClient.Clients
@@ -13,7 +14,8 @@ namespace Smitenight.Infrastructure.SmiteClient.Clients
     {
         public GodClient(HttpClient httpClient,
             IOptions<SmiteClientSettings> smiteClientSettings,
-            IMapper mapper) : base(httpClient, smiteClientSettings, mapper)
+            IOptions<SmiteClientSecrets> smiteClientSecrets,
+            IMapper mapper) : base(httpClient, smiteClientSettings, smiteClientSecrets, mapper)
         {
         }
 

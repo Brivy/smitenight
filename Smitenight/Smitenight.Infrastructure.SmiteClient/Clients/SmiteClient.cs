@@ -6,7 +6,9 @@ using AutoMapper;
 using Microsoft.Extensions.Options;
 using Smitenight.Domain.Clients.SmiteClient.Requests;
 using Smitenight.Domain.Constants;
+using Smitenight.Domain.Secrets;
 using Smitenight.Infrastructure.SmiteClient.Contracts;
+using Smitenight.Infrastructure.SmiteClient.Secrets;
 using Smitenight.Infrastructure.SmiteClient.Settings;
 
 namespace Smitenight.Infrastructure.SmiteClient.Clients
@@ -14,16 +16,19 @@ namespace Smitenight.Infrastructure.SmiteClient.Clients
     public abstract class SmiteClient
     {
         private readonly HttpClient _httpClient;
+        private readonly SmiteClientSecrets _smiteClientSecrets;
         private readonly SmiteClientSettings _smiteClientSettings;
 
         protected readonly IMapper Mapper;
 
         protected SmiteClient(HttpClient httpClient,
             IOptions<SmiteClientSettings> smiteClientSettings,
+            IOptions<SmiteClientSecrets> smiteClientSecrets,
             IMapper mapper)
         {
             _httpClient = httpClient;
             _smiteClientSettings = smiteClientSettings.Value;
+            _smiteClientSecrets = smiteClientSecrets.Value;
             Mapper = mapper;
         }
 
@@ -117,12 +122,12 @@ namespace Smitenight.Infrastructure.SmiteClient.Clients
         {
             var utcDateString = GetCurrentUtcDate();
             var baseUrlPath = new StringBuilder($"{smiteRequest.MethodName}Json/");
-            if (smiteRequest.DeveloperId != 0)
+            if (_smiteClientSecrets.DeveloperId != 0)
             {
-                baseUrlPath.Append($"{smiteRequest.DeveloperId}/");
+                baseUrlPath.Append($"{_smiteClientSecrets.DeveloperId}/");
             }
 
-            if (smiteRequest.DeveloperId != 0 && !string.IsNullOrWhiteSpace(smiteRequest.AuthenticationKey))
+            if (_smiteClientSecrets.DeveloperId != 0 && !string.IsNullOrWhiteSpace(_smiteClientSecrets.AuthenticationKey))
             {
                 var signature = GenerateMd5Hash(smiteRequest, utcDateString);
                 baseUrlPath.Append($"{signature}/");
@@ -150,7 +155,7 @@ namespace Smitenight.Infrastructure.SmiteClient.Clients
         /// <returns></returns>
         private string GenerateMd5Hash(SmiteClientRequest smiteRequest, string utcDateString)
         {
-            var credentials = $"{smiteRequest.DeveloperId}{smiteRequest.MethodName}{smiteRequest.AuthenticationKey}{utcDateString}";
+            var credentials = $"{_smiteClientSecrets.DeveloperId}{smiteRequest.MethodName}{_smiteClientSecrets.AuthenticationKey}{utcDateString}";
 
             using var md5 = MD5.Create();
             var bytes = md5.ComputeHash(Encoding.ASCII.GetBytes(credentials));

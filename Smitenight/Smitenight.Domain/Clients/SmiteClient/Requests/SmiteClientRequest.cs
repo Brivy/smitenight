@@ -4,35 +4,25 @@ namespace Smitenight.Domain.Clients.SmiteClient.Requests
 {
     public abstract record class SmiteClientRequest
     {
-        public int DeveloperId { get; }
-        public string AuthenticationKey { get; }
         public string MethodName { get; }
         public string? SessionId { get; }
 
         /// <summary>
         /// Intended for creating sessions
         /// </summary>
-        /// <param name="developerId">Smite developers ID</param>
-        /// <param name="authenticationKey">Smite developers authentication key</param>
         /// <param name="methodName">Name of the Smite endpoint</param>
-        protected SmiteClientRequest(int developerId, string authenticationKey, string methodName)
+        protected SmiteClientRequest(string methodName)
         {
-            DeveloperId = developerId;
-            AuthenticationKey = authenticationKey;
             MethodName = methodName;
         }
 
         /// <summary>
         /// Intended for all Smite calls except pinging and creating sessions
         /// </summary>
-        /// <param name="developerId">Smite developers ID</param>
-        /// <param name="authenticationKey">Smite developers authentication key</param>
         /// <param name="methodName">Name of the Smite endpoint</param>
         /// <param name="sessionId">The ID of the generated session</param>
-        protected SmiteClientRequest(int developerId, string authenticationKey, string methodName, string sessionId)
+        protected SmiteClientRequest(string methodName, string sessionId)
         {
-            DeveloperId = developerId;
-            AuthenticationKey = authenticationKey;
             MethodName = methodName;
             SessionId = sessionId;
         }
