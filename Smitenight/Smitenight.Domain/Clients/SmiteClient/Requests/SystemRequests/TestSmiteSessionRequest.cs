@@ -2,8 +2,6 @@
 
 namespace Smitenight.Domain.Clients.SmiteClient.Requests.SystemRequests
 {
-    public record class TestSmiteSessionRequest(
-            int DeveloperId,
-            string AuthenticationKey,
-            string SessionId) : SmiteClientRequest(DeveloperId, AuthenticationKey, MethodNameConstants.TestSessionMethod, SessionId);
+    public record class TestSmiteSessionRequest(string SessionId) 
+        : SmiteClientRequest(MethodNameConstants.TestSessionMethod, SessionId);
 }

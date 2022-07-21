@@ -5,6 +5,7 @@ using Smitenight.Domain.Clients.SmiteClient.Requests.SystemRequests;
 using Smitenight.Domain.Clients.SmiteClient.Responses;
 using Smitenight.Domain.Clients.SmiteClient.Responses.SystemResponses;
 using Smitenight.Infrastructure.SmiteClient.Contracts.SystemResponses;
+using Smitenight.Infrastructure.SmiteClient.Secrets;
 using Smitenight.Infrastructure.SmiteClient.Settings;
 
 namespace Smitenight.Infrastructure.SmiteClient.Clients
@@ -13,7 +14,8 @@ namespace Smitenight.Infrastructure.SmiteClient.Clients
     {
         public SystemSmiteClient(HttpClient httpClient,
             IOptions<SmiteClientSettings> smiteClientSettings,
-            IMapper mapper) : base(httpClient, smiteClientSettings, mapper)
+            IOptions<SmiteClientSecrets> smiteClientSecrets,
+            IMapper mapper) : base(httpClient, smiteClientSettings, smiteClientSecrets, mapper)
         {
         }
 
