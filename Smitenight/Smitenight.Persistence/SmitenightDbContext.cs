@@ -39,10 +39,6 @@ namespace Smitenight.Persistence
         {
 #if (DEBUG)
             optionsBuilder.EnableSensitiveDataLogging();
-            if (!optionsBuilder.IsConfigured)
-            {
-                optionsBuilder.UseSqlServer("Connection sring here");
-            }
 #endif
             base.OnConfiguring(optionsBuilder);
         }
