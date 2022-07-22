@@ -10,6 +10,7 @@ namespace Smitenight.Application
         {
             serviceCollection.AddScoped<IMaintainSmitenight, MaintainSmitenight>();
             serviceCollection.AddScoped<IMaintainItemsService, MaintainItemsService>();
+            serviceCollection.AddScoped<IMaintainGodsService, MaintainGodsService>();
         }
     }
 }

@@ -8,12 +8,15 @@ namespace Smitenight.Application.Services.Maintenance
     {
         private readonly ISystemSmiteClient _systemSmiteClient;
         private readonly IMaintainItemsService _maintainItemsService;
+        private readonly IMaintainGodsService _godsService;
 
         public MaintainSmitenight(ISystemSmiteClient systemSmiteClient,
-            IMaintainItemsService maintainItemsService)
+            IMaintainItemsService maintainItemsService,
+            IMaintainGodsService godsService)
         {
             _systemSmiteClient = systemSmiteClient;
             _maintainItemsService = maintainItemsService;
+            _godsService = godsService;
         }
 
         /// <summary>
@@ -30,7 +33,8 @@ namespace Smitenight.Application.Services.Maintenance
                 return;
             }
 
-            await _maintainItemsService.MaintainAsync(sessionResponse.Response.SessionId, cancellationToken);
+            await _godsService.MaintainAsync(sessionResponse.Response.SessionId, cancellationToken);
+            //await _maintainItemsService.MaintainAsync(sessionResponse.Response.SessionId, cancellationToken);
         }
     }
 }
