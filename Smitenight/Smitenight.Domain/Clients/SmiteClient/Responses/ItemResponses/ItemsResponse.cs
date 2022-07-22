@@ -22,9 +22,9 @@
 
     public record class ItemDescription
     (
-        string Description,
+        string? Description,
         MenuItem[] MenuItems,
-        object SecondaryDescription
+        string? SecondaryDescription
     );
 
     public record class MenuItem

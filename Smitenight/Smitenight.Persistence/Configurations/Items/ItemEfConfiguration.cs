@@ -12,10 +12,14 @@ namespace Smitenight.Persistence.Configurations.Items
 
             builder.HasKey(x => x.Id);
             builder.Property(x => x.ActiveFlag).IsRequired();
+            builder.Property(x => x.ChildItemId).IsRequired(false);
             builder.Property(x => x.DeviceName).IsRequired();
-            builder.Property(x => x.Description).IsRequired();
+            builder.Property(x => x.Description).IsRequired(false);
             builder.Property(x => x.Glyph).IsRequired();
             builder.Property(x => x.RestrictedRoles).IsRequired();
+            builder.Property(x => x.RootItemId).IsRequired(false);
+            builder.Property(x => x.SecondaryDescription).IsRequired(false);
+            builder.Property(x => x.SmiteId).IsRequired();
             builder.Property(x => x.ShortDescription).IsRequired();
             builder.Property(x => x.Type).IsRequired();
             builder.Property(x => x.ItemIconUrl).IsRequired();

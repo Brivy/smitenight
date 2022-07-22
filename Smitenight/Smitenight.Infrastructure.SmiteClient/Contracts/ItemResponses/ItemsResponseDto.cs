@@ -26,7 +26,7 @@ namespace Smitenight.Infrastructure.SmiteClient.Contracts.ItemResponses
     {
         [JsonPropertyName("Description")] public string? Description { get; set; }
         [JsonPropertyName("Menuitems")] public MenuItemDto[]? MenuItems { get; set; }
-        [JsonPropertyName("SecondaryDescription")] public object? SecondaryDescription { get; set; }
+        [JsonPropertyName("SecondaryDescription")] public string? SecondaryDescription { get; set; }
     }
 
     public record class MenuItemDto

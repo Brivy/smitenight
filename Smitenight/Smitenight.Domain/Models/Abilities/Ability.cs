@@ -9,11 +9,11 @@ namespace Smitenight.Domain.Models.Abilities
         public int Id { get; set; }
         public int GodId { get; set; }
 
-        public string Cooldown { get; set; }
-        public string Cost { get; set; }
-        public string Description { get; set; }
-        public string Summary { get; set; }
-        public string Url { get; set; }
+        public string Cooldown { get; set; } = null!;
+        public string Cost { get; set; } = null!;
+        public string Description { get; set; } = null!;
+        public string Summary { get; set; } = null!;
+        public string Url { get; set; } = null!;
 
         #region Navigation
 
@@ -30,13 +30,8 @@ namespace Smitenight.Domain.Models.Abilities
 
         #endregion
 
-        public Ability(string cooldown, string cost, string description, string summary, string url)
+        public Ability()
         {
-            Cooldown = cooldown;
-            Cost = cost;
-            Description = description;
-            Summary = summary;
-            Url = url;
             AbilityRanks = new List<AbilityRank>();
             AbilityTags = new List<AbilityTag>();
         }

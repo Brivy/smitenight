@@ -7,8 +7,8 @@ namespace Smitenight.Domain.Models.Items
         public int Id { get; set; }
         public int ItemId { get; set; }
 
-        public string Description { get; set; }
-        public string Value { get; set; }
+        public string Description { get; set; } = null!;
+        public string Value { get; set; } = null!;
 
         #region Navigation
 
@@ -22,10 +22,9 @@ namespace Smitenight.Domain.Models.Items
 
         #endregion
 
-        public ItemDescription(string description, string value)
+        public ItemDescription()
         {
-            Description = description;
-            Value = value;
+
         }   
     }
 }
