@@ -13,6 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\Smitenight.Abstractions.Application\Smitenight.Abstractions.Application.csproj" />
     <ProjectReference Include="..\Smitenight.Abstractions.Infrastructure\Smitenight.Abstractions.Infrastructure.csproj" />
+    <ProjectReference Include="..\Smitenight.Persistence\Smitenight.Persistence.csproj" />
   </ItemGroup>
 
 </Project>
