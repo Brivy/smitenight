@@ -8,8 +8,8 @@ namespace Smitenight.Domain.Models.Abilities
         public int Id { get; set; }
         public int AbilityId { get; set; }
 
-        public string Description { get; set; }
-        public string Value { get; set; }
+        public string Description { get; set; } = null!;
+        public string Value { get; set; } = null!;
 
         #region Navigation
 
@@ -23,10 +23,9 @@ namespace Smitenight.Domain.Models.Abilities
 
         #endregion
 
-        public AbilityRank(string description, string value)
+        public AbilityRank()
         {
-            Description = description;
-            Value = value;
+
         }
     }
 }

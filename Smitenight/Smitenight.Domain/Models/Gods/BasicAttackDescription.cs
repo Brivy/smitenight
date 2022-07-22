@@ -8,8 +8,8 @@ namespace Smitenight.Domain.Models.Gods
         public int Id { get; set; }
         public int GodId { get; set; }
 
-        public string Description { get; set; }
-        public string Value { get; set; }
+        public string Description { get; set; } = null!;
+        public string Value { get; set; } = null!;
 
         #region Navigation
 
@@ -23,10 +23,9 @@ namespace Smitenight.Domain.Models.Gods
 
         #endregion
 
-        public BasicAttackDescription(string description, string value)
+        public BasicAttackDescription()
         {
-            Description = description;
-            Value = value;
+
         }
     }
 }

@@ -6,21 +6,22 @@ namespace Smitenight.Domain.Models.Items
     public class Item : IEntity
     {
         public int Id { get; set; }
+        public int SmiteId { get; set; }
         public int? RootItemId { get; set; }
         public int? ChildItemId { get; set; }
 
-        public string ActiveFlag { get; set; }
-        public string DeviceName { get; set; }
-        public string Description { get; set; }
-        public string Glyph { get; set; }
+        public string ActiveFlag { get; set; } = null!;
+        public string DeviceName { get; set; } = null!;
+        public string? Description { get; set; } = null!;
+        public string Glyph { get; set; } = null!;
         public int ItemTier { get; set; }
         public int Price { get; set; }
-        public string RestrictedRoles { get; set; }
+        public string RestrictedRoles { get; set; } = null!;
         public string? SecondaryDescription { get; set; }
-        public string ShortDescription { get; set; }
+        public string ShortDescription { get; set; } = null!;
         public bool StartingItem { get; set; }
-        public string Type { get; set; }
-        public string ItemIconUrl { get; set; }
+        public string Type { get; set; } = null!;
+        public string ItemIconUrl { get; set; } = null!;
 
         #region Navigation
 
@@ -43,16 +44,8 @@ namespace Smitenight.Domain.Models.Items
 
         #endregion
 
-        public Item(string activeFlag, string deviceName, string description, string glyph, string restrictedRoles, string shortDescription, string type, string itemIconUrl)
+        public Item()
         {
-            ActiveFlag = activeFlag;
-            DeviceName = deviceName;
-            Description = description;
-            Glyph = glyph;
-            RestrictedRoles = restrictedRoles;
-            ShortDescription = shortDescription;
-            Type = type;
-            ItemIconUrl = itemIconUrl;
             ItemDescriptions = new List<ItemDescription>();
         }
     }

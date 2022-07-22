@@ -1,4 +1,6 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Smitenight.Abstractions.Application.Services.Maintenance;
+using Smitenight.Application.Services.Maintenance;
 
 namespace Smitenight.Application
 {
@@ -6,6 +8,8 @@ namespace Smitenight.Application
     {
         public static void ConfigureServices(IServiceCollection serviceCollection)
         {
+            serviceCollection.AddScoped<IMaintainSmitenight, MaintainSmitenight>();
+            serviceCollection.AddScoped<IMaintainItemsService, MaintainItemsService>();
         }
     }
 }

@@ -22,6 +22,7 @@ namespace Smitenight.Persistence.Configurations.Gods
             builder.Property(x => x.Pantheon).IsRequired();
             builder.Property(x => x.Pros).IsRequired();
             builder.Property(x => x.Roles).IsRequired();
+            builder.Property(x => x.SmiteId).IsRequired();
             builder.Property(x => x.Title).IsRequired();
             builder.Property(x => x.Type).IsRequired();
 
