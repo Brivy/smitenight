@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using System.Reflection.Metadata.Ecma335;
+using Microsoft.EntityFrameworkCore;
 using Smitenight.Abstractions.Application.Services.Maintenance;
 using Smitenight.Abstractions.Infrastructure.SmiteClient;
 using Smitenight.Domain.Clients.SmiteClient.Requests.GodRequests;
@@ -42,10 +43,12 @@ namespace Smitenight.Application.Services.Maintenance
             {
                 foreach (var god in godsResponse.Response)
                 {
-                    var godEntityExists = await _dbContext.Gods.AnyAsync(x => x.SmiteId == god.Id, cancellationToken);
-                    if (godEntityExists)
+                    var existingGodEntity = await _dbContext.Gods.AsNoTracking()
+                        .Include(x => x.Abilities)
+                        .SingleOrDefaultAsync(x => x.SmiteId == god.Id, cancellationToken);
+                    if (existingGodEntity != null)
                     {
-                        await UpdateGodsAsync(god, cancellationToken);
+                        await UpdateGodsAsync(existingGodEntity, god, cancellationToken);
                     }
                     else
                     {
@@ -208,161 +211,157 @@ namespace Smitenight.Application.Services.Maintenance
             await _dbContext.SaveChangesAsync(cancellationToken);
         }
 
-        private async Task UpdateGodsAsync(GodsResponse god, CancellationToken cancellationToken)
+        private async Task UpdateGodsAsync(God existingGodEntity, GodsResponse god, CancellationToken cancellationToken)
         {
-            var existingGodEntity = await _dbContext.Gods
-                .Include(x => x.Abilities).ThenInclude(x => x.AbilityRanks)
-                .Include(x => x.Abilities).ThenInclude(x => x.AbilityTags)
-                .Include(x => x.BasicAttackDescriptions)
-                .SingleAsync(x => x.SmiteId == god.Id, cancellationToken);
+            var abilityIds = existingGodEntity.Abilities.Select(x => x.Id).ToList();
+            _dbContext.BasicAttackDescriptions.RemoveRange(await _dbContext.BasicAttackDescriptions.AsNoTracking().Where(x => x.GodId == existingGodEntity.Id).ToListAsync(cancellationToken));
+            _dbContext.AbilityRanks.RemoveRange(await _dbContext.AbilityRanks.AsNoTracking().Where(x => abilityIds.Contains(x.AbilityId)).ToListAsync(cancellationToken));
+            _dbContext.AbilityTags.RemoveRange(await _dbContext.AbilityTags.AsNoTracking().Where(x => abilityIds.Contains(x.AbilityId)).ToListAsync(cancellationToken));
 
-            existingGodEntity.AttackSpeed = god.AttackSpeed;
-            existingGodEntity.AttackSpeedPerLevel = god.AttackSpeedPerLevel;
-            existingGodEntity.AutoBanned = god.AutoBanned;
-            existingGodEntity.Cons = god.Cons;
-            existingGodEntity.GodCardUrl = god.GodCardUrl;
-            existingGodEntity.GodIconUrl = god.GodIconUrl;
-            existingGodEntity.Health = god.Health;
-            existingGodEntity.HealthPerFive = god.HealthPerFive;
-            existingGodEntity.HealthPerLevel = god.HealthPerLevel;
-            existingGodEntity.Hp5PerLevel = god.Hp5PerLevel;
-            existingGodEntity.LatestGod = god.LatestGod;
-            existingGodEntity.Lore = god.Lore;
-            existingGodEntity.MagicProtection = god.MagicProtection;
-            existingGodEntity.MagicProtectionPerLevel = god.MagicProtectionPerLevel;
-            existingGodEntity.MagicalPower = god.MagicalPower;
-            existingGodEntity.MagicalPowerPerLevel = god.MagicalPowerPerLevel;
-            existingGodEntity.Mana = god.Mana;
-            existingGodEntity.ManaPerFive = god.ManaPerFive;
-            existingGodEntity.ManaPerLevel = god.ManaPerLevel;
-            existingGodEntity.Mp5PerLevel = god.Mp5PerLevel;
-            existingGodEntity.Name = god.Name;
-            existingGodEntity.OnFreeRotation = god.OnFreeRotation;
-            existingGodEntity.Pantheon = god.Pantheon;
-            existingGodEntity.PhysicalPower = god.PhysicalPower;
-            existingGodEntity.PhysicalPowerPerLevel = god.PhysicalPowerPerLevel;
-            existingGodEntity.PhysicalProtection = god.PhysicalProtection;
-            existingGodEntity.PhysicalProtectionPerLevel = god.PhysicalProtectionPerLevel;
-            existingGodEntity.Pros = god.Pros;
-            existingGodEntity.Roles = god.Roles;
-            existingGodEntity.Speed = god.Speed;
-            existingGodEntity.Title = god.Title;
-            existingGodEntity.Type = god.Type;
-            existingGodEntity.Abilities = new List<Ability>
+            await _dbContext.SaveChangesAsync(cancellationToken);
+
+            var godEntity = new God
             {
-                new()
+                Id = existingGodEntity.Id,
+                AttackSpeed = god.AttackSpeed,
+                AttackSpeedPerLevel = god.AttackSpeedPerLevel,
+                AutoBanned = god.AutoBanned,
+                Cons = god.Cons,
+                GodCardUrl = god.GodCardUrl,
+                GodIconUrl = god.GodIconUrl,
+                Health = god.Health,
+                HealthPerFive = god.HealthPerFive,
+                HealthPerLevel = god.HealthPerLevel,
+                Hp5PerLevel = god.Hp5PerLevel,
+                LatestGod = god.LatestGod,
+                Lore = god.Lore,
+                MagicProtection = god.MagicProtection,
+                MagicProtectionPerLevel = god.MagicProtectionPerLevel,
+                MagicalPower = god.MagicalPower,
+                MagicalPowerPerLevel = god.MagicalPowerPerLevel,
+                Mana = god.Mana,
+                ManaPerFive = god.ManaPerFive,
+                ManaPerLevel = god.ManaPerLevel,
+                Mp5PerLevel = god.Mp5PerLevel,
+                Name = god.Name,
+                OnFreeRotation = god.OnFreeRotation,
+                Pantheon = god.Pantheon,
+                PhysicalPower = god.PhysicalPower,
+                PhysicalPowerPerLevel = god.PhysicalPowerPerLevel,
+                PhysicalProtection = god.PhysicalProtection,
+                PhysicalProtectionPerLevel = god.PhysicalProtectionPerLevel,
+                Pros = god.Pros,
+                Roles = god.Roles,
+                SmiteId = god.Id,
+                Speed = god.Speed,
+                Title = god.Title,
+                Type = god.Type,
+                Abilities = new List<Ability>
                 {
-                    Cooldown = god.AbilityDetails1.Description.ItemDescription.Cooldown,
-                    Cost = god.AbilityDetails1.Description.ItemDescription.Cost,
-                    Description = god.AbilityDetails1.Description.ItemDescription.Description,
-                    SmiteId = god.AbilityDetails1.Id,
-                    Summary = god.AbilityDetails1.Summary,
-                    Url = god.AbilityDetails1.Url,
-                    AbilityRanks = god.AbilityDetails1.Description.ItemDescription.RankItems.Select(rankItem =>
-                        new AbilityRank
+                    new()
+                    {
+                        Id = existingGodEntity.Abilities.Single(x => x.SmiteId == god.AbilityDetails1.Id).Id,
+                        Cooldown = god.AbilityDetails1.Description.ItemDescription.Cooldown,
+                        Cost = god.AbilityDetails1.Description.ItemDescription.Cost,
+                        Description = god.AbilityDetails1.Description.ItemDescription.Description,
+                        Summary = god.AbilityDetails1.Summary,
+                        Url = god.AbilityDetails1.Url,
+                        AbilityRanks = god.AbilityDetails1.Description.ItemDescription.RankItems.Select(rankItem => new AbilityRank
                         {
                             Description = rankItem.Description,
                             Value = rankItem.Value
                         }).ToList(),
-                    AbilityTags = god.AbilityDetails1.Description.ItemDescription.MenuItems.Select(menuItem =>
-                        new AbilityTag
+                        AbilityTags = god.AbilityDetails1.Description.ItemDescription.MenuItems.Select(menuItem => new AbilityTag
                         {
                             Description = menuItem.Description,
                             Value = menuItem.Value
                         }).ToList()
+                    },
+                    new()
+                    {
+                        Id = existingGodEntity.Abilities.Single(x => x.SmiteId == god.AbilityDetails2.Id).Id,
+                        Cooldown = god.AbilityDetails2.Description.ItemDescription.Cooldown,
+                        Cost = god.AbilityDetails2.Description.ItemDescription.Cost,
+                        Description = god.AbilityDetails2.Description.ItemDescription.Description,
+                        Summary = god.AbilityDetails2.Summary,
+                        Url = god.AbilityDetails2.Url,
+                        AbilityRanks = god.AbilityDetails2.Description.ItemDescription.RankItems.Select(rankItem => new AbilityRank
+                        {
+                            Description = rankItem.Description,
+                            Value = rankItem.Value
+                        }).ToList(),
+                        AbilityTags = god.AbilityDetails2.Description.ItemDescription.MenuItems.Select(menuItem => new AbilityTag
+                        {
+                            Description = menuItem.Description,
+                            Value = menuItem.Value
+                        }).ToList()
+                    },
+                    new()
+                    {
+                        Id = existingGodEntity.Abilities.Single(x => x.SmiteId == god.AbilityDetails3.Id).Id,
+                        Cooldown = god.AbilityDetails3.Description.ItemDescription.Cooldown,
+                        Cost = god.AbilityDetails3.Description.ItemDescription.Cost,
+                        Description = god.AbilityDetails3.Description.ItemDescription.Description,
+                        Summary = god.AbilityDetails3.Summary,
+                        Url = god.AbilityDetails3.Url,
+                        AbilityRanks = god.AbilityDetails3.Description.ItemDescription.RankItems.Select(rankItem => new AbilityRank
+                        {
+                            Description = rankItem.Description,
+                            Value = rankItem.Value
+                        }).ToList(),
+                        AbilityTags = god.AbilityDetails3.Description.ItemDescription.MenuItems.Select(menuItem => new AbilityTag
+                        {
+                            Description = menuItem.Description,
+                            Value = menuItem.Value
+                        }).ToList()
+                    },
+                    new()
+                    {
+                        Id = existingGodEntity.Abilities.Single(x => x.SmiteId == god.AbilityDetails4.Id).Id,
+                        Cooldown = god.AbilityDetails4.Description.ItemDescription.Cooldown,
+                        Cost = god.AbilityDetails4.Description.ItemDescription.Cost,
+                        Description = god.AbilityDetails4.Description.ItemDescription.Description,
+                        Summary = god.AbilityDetails4.Summary,
+                        Url = god.AbilityDetails4.Url,
+                        AbilityRanks = god.AbilityDetails4.Description.ItemDescription.RankItems.Select(rankItem => new AbilityRank
+                        {
+                            Description = rankItem.Description,
+                            Value = rankItem.Value
+                        }).ToList(),
+                        AbilityTags = god.AbilityDetails4.Description.ItemDescription.MenuItems.Select(menuItem => new AbilityTag
+                        {
+                            Description = menuItem.Description,
+                            Value = menuItem.Value
+                        }).ToList()
+                    },
+                    new()
+                    {
+                        Id = existingGodEntity.Abilities.Single(x => x.SmiteId == god.AbilityDetails5.Id).Id,
+                        Cooldown = god.AbilityDetails5.Description.ItemDescription.Cooldown,
+                        Cost = god.AbilityDetails5.Description.ItemDescription.Cost,
+                        Description = god.AbilityDetails5.Description.ItemDescription.Description,
+                        Summary = god.AbilityDetails5.Summary,
+                        Url = god.AbilityDetails5.Url,
+                        AbilityRanks = god.AbilityDetails5.Description.ItemDescription.RankItems.Select(rankItem => new AbilityRank
+                        {
+                            Description = rankItem.Description,
+                            Value = rankItem.Value
+                        }).ToList(),
+                        AbilityTags = god.AbilityDetails5.Description.ItemDescription.MenuItems.Select(menuItem => new AbilityTag
+                        {
+                            Description = menuItem.Description,
+                            Value = menuItem.Value
+                        }).ToList()
+                    }
                 },
-                new()
+                BasicAttackDescriptions = god.BasicAttack.ItemDescription.MenuItems.Select(basicAttack => new BasicAttackDescription
                 {
-                    Cooldown = god.AbilityDetails2.Description.ItemDescription.Cooldown,
-                    Cost = god.AbilityDetails2.Description.ItemDescription.Cost,
-                    Description = god.AbilityDetails2.Description.ItemDescription.Description,
-                    SmiteId = god.AbilityDetails2.Id,
-                    Summary = god.AbilityDetails2.Summary,
-                    Url = god.AbilityDetails2.Url,
-                    AbilityRanks = god.AbilityDetails2.Description.ItemDescription.RankItems.Select(rankItem =>
-                        new AbilityRank
-                        {
-                            Description = rankItem.Description,
-                            Value = rankItem.Value
-                        }).ToList(),
-                    AbilityTags = god.AbilityDetails2.Description.ItemDescription.MenuItems.Select(menuItem =>
-                        new AbilityTag
-                        {
-                            Description = menuItem.Description,
-                            Value = menuItem.Value
-                        }).ToList()
-                },
-                new()
-                {
-                    Cooldown = god.AbilityDetails3.Description.ItemDescription.Cooldown,
-                    Cost = god.AbilityDetails3.Description.ItemDescription.Cost,
-                    Description = god.AbilityDetails3.Description.ItemDescription.Description,
-                    SmiteId = god.AbilityDetails3.Id,
-                    Summary = god.AbilityDetails3.Summary,
-                    Url = god.AbilityDetails3.Url,
-                    AbilityRanks = god.AbilityDetails3.Description.ItemDescription.RankItems.Select(rankItem =>
-                        new AbilityRank
-                        {
-                            Description = rankItem.Description,
-                            Value = rankItem.Value
-                        }).ToList(),
-                    AbilityTags = god.AbilityDetails3.Description.ItemDescription.MenuItems.Select(menuItem =>
-                        new AbilityTag
-                        {
-                            Description = menuItem.Description,
-                            Value = menuItem.Value
-                        }).ToList()
-                },
-                new()
-                {
-                    Cooldown = god.AbilityDetails4.Description.ItemDescription.Cooldown,
-                    Cost = god.AbilityDetails4.Description.ItemDescription.Cost,
-                    Description = god.AbilityDetails4.Description.ItemDescription.Description,
-                    SmiteId = god.AbilityDetails4.Id,
-                    Summary = god.AbilityDetails4.Summary,
-                    Url = god.AbilityDetails4.Url,
-                    AbilityRanks = god.AbilityDetails4.Description.ItemDescription.RankItems.Select(rankItem =>
-                        new AbilityRank
-                        {
-                            Description = rankItem.Description,
-                            Value = rankItem.Value
-                        }).ToList(),
-                    AbilityTags = god.AbilityDetails4.Description.ItemDescription.MenuItems.Select(menuItem =>
-                        new AbilityTag
-                        {
-                            Description = menuItem.Description,
-                            Value = menuItem.Value
-                        }).ToList()
-                },
-                new()
-                {
-                    Cooldown = god.AbilityDetails5.Description.ItemDescription.Cooldown,
-                    Cost = god.AbilityDetails5.Description.ItemDescription.Cost,
-                    Description = god.AbilityDetails5.Description.ItemDescription.Description,
-                    SmiteId = god.AbilityDetails5.Id,
-                    Summary = god.AbilityDetails5.Summary,
-                    Url = god.AbilityDetails5.Url,
-                    AbilityRanks = god.AbilityDetails5.Description.ItemDescription.RankItems.Select(rankItem =>
-                        new AbilityRank
-                        {
-                            Description = rankItem.Description,
-                            Value = rankItem.Value
-                        }).ToList(),
-                    AbilityTags = god.AbilityDetails5.Description.ItemDescription.MenuItems.Select(menuItem =>
-                        new AbilityTag
-                        {
-                            Description = menuItem.Description,
-                            Value = menuItem.Value
-                        }).ToList()
-                }
+                    Description = basicAttack.Description,
+                    Value = basicAttack.Value
+                }).ToList()
             };
-            existingGodEntity.BasicAttackDescriptions = god.BasicAttack.ItemDescription.MenuItems.Select(menuItem => new BasicAttackDescription
-            {
-                Description = menuItem.Description,
-                GodId = existingGodEntity.Id,
-                Value = menuItem.Value
-            }).ToList();
 
+            _dbContext.Gods.Update(godEntity);
             await _dbContext.SaveChangesAsync(cancellationToken);
         }
     }
