@@ -49,10 +49,13 @@ namespace Smitenight.Application.Services.Maintenance
                 var onlyUpdates = true;
                 foreach (var item in itemsResponse.Response)
                 {
-                    var itemEntityExists = await _dbContext.Items.AnyAsync(x => x.SmiteId == item.ItemId, cancellationToken);
-                    if (itemEntityExists)
+                    var existingItemEntity = await _dbContext.Items
+                        .AsNoTracking()
+                        .Include(x => x.ItemDescriptions)
+                        .SingleOrDefaultAsync(x => x.SmiteId == item.ItemId, cancellationToken);
+                    if (existingItemEntity != null)
                     {
-                        await UpdateItemsAsync(item, cancellationToken);
+                        await UpdateItemsAsync(existingItemEntity, item, cancellationToken);
                     }
                     else
                     {
@@ -83,66 +86,26 @@ namespace Smitenight.Application.Services.Maintenance
         /// <returns></returns>
         private async Task AddItemsAsync(ItemsResponse item, CancellationToken cancellationToken)
         {
-            var itemEntity = new Item
-            {
-                ActiveFlag = item.ActiveFlag,
-                Description = item.ItemDescription.Description,
-                DeviceName = item.DeviceName,
-                Glyph = item.Glyph,
-                ItemIconUrl = item.ItemIconUrl,
-                ItemTier = item.ItemTier,
-                Price = item.Price,
-                RestrictedRoles = item.RestrictedRoles,
-                SecondaryDescription = item.ItemDescription.SecondaryDescription,
-                ShortDescription = item.ShortDesc,
-                SmiteId = item.ItemId,
-                StartingItem = item.StartingItem,
-                Type = item.Type
-            };
-
+            var itemEntity = BuildItemEntity(item);
             _dbContext.Items.Add(itemEntity);
-            await _dbContext.SaveChangesAsync(cancellationToken);
-
-            _dbContext.ItemDescriptions.AddRange(item.ItemDescription.MenuItems.Select(menuItem => new ItemDescription
-            {
-                Description = menuItem.Description,
-                ItemId = itemEntity.Id,
-                Value = menuItem.Value
-            }).ToList());
             await _dbContext.SaveChangesAsync(cancellationToken);
         }
 
         /// <summary>
         /// Updates existing items and replacing their descriptions
         /// </summary>
+        /// <param name="existingItem"></param>
         /// <param name="item"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        private async Task UpdateItemsAsync(ItemsResponse item, CancellationToken cancellationToken)
+        private async Task UpdateItemsAsync(Item existingItem, ItemsResponse item, CancellationToken cancellationToken)
         {
-            var existingItemEntity = await _dbContext.Items
-                .Include(x => x.ItemDescriptions)
-                .SingleAsync(x => x.SmiteId == item.ItemId, cancellationToken);
+            _dbContext.ItemDescriptions.RemoveRange(await _dbContext.ItemDescriptions.Where(x => x.ItemId == existingItem.Id).ToListAsync(cancellationToken));
+            await _dbContext.SaveChangesAsync(cancellationToken);
 
-            existingItemEntity.ActiveFlag = item.ActiveFlag;
-            existingItemEntity.Description = item.ItemDescription.Description;
-            existingItemEntity.DeviceName = item.DeviceName;
-            existingItemEntity.Glyph = item.Glyph;
-            existingItemEntity.ItemIconUrl = item.ItemIconUrl;
-            existingItemEntity.ItemTier = item.ItemTier;
-            existingItemEntity.Price = item.Price;
-            existingItemEntity.RestrictedRoles = item.RestrictedRoles;
-            existingItemEntity.SecondaryDescription = item.ItemDescription.SecondaryDescription;
-            existingItemEntity.ShortDescription = item.ShortDesc;
-            existingItemEntity.StartingItem = item.StartingItem;
-            existingItemEntity.Type = item.Type;
-            existingItemEntity.ItemDescriptions = item.ItemDescription.MenuItems.Select(menuItem => new ItemDescription
-            {
-                Description = menuItem.Description,
-                ItemId = existingItemEntity.Id,
-                Value = menuItem.Value
-            }).ToList(); 
-            
+            var itemEntity = BuildItemEntity(item);
+            itemEntity.Id = existingItem.Id;
+            _dbContext.Items.Update(itemEntity);
             await _dbContext.SaveChangesAsync(cancellationToken);
         }
 
@@ -166,6 +129,31 @@ namespace Smitenight.Application.Services.Maintenance
                 itemEntity.RootItemId = rootItemEntity?.Id;
             }
             await _dbContext.SaveChangesAsync(cancellationToken);
+        }
+
+        private Item BuildItemEntity(ItemsResponse item)
+        {
+            return new Item
+            {
+                ActiveFlag = item.ActiveFlag,
+                Description = item.ItemDescription.Description,
+                DeviceName = item.DeviceName,
+                Glyph = item.Glyph,
+                ItemIconUrl = item.ItemIconUrl,
+                ItemTier = item.ItemTier,
+                Price = item.Price,
+                RestrictedRoles = item.RestrictedRoles,
+                SecondaryDescription = item.ItemDescription.SecondaryDescription,
+                ShortDescription = item.ShortDesc,
+                SmiteId = item.ItemId,
+                StartingItem = item.StartingItem,
+                Type = item.Type,
+                ItemDescriptions = item.ItemDescription.MenuItems.Select(menuItem => new ItemDescription
+                {
+                    Description = menuItem.Description,
+                    Value = menuItem.Value
+                }).ToList()
+            };
         }
     }
 }
