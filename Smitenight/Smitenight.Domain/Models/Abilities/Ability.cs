@@ -1,4 +1,5 @@
-﻿using Smitenight.Domain.Exceptions;
+﻿using Smitenight.Domain.Enums.Ability;
+using Smitenight.Domain.Exceptions;
 using Smitenight.Domain.Interfaces;
 using Smitenight.Domain.Models.Gods;
 
@@ -15,6 +16,8 @@ namespace Smitenight.Domain.Models.Abilities
         public string Description { get; set; } = null!;
         public string Summary { get; set; } = null!;
         public string Url { get; set; } = null!;
+
+        public AbilityTypeEnum AbilityType { get; set; }
 
         #region Navigation
 
