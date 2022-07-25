@@ -52,14 +52,16 @@ namespace Smitenight.Application.Services.Maintenance
                     var existingItemEntity = await _dbContext.Items
                         .AsNoTracking()
                         .Include(x => x.ItemDescriptions)
+                        .Include(x => x.RootItem)
+                        .Include(x => x.ChildItem)
                         .SingleOrDefaultAsync(x => x.SmiteId == item.ItemId, cancellationToken);
                     if (existingItemEntity != null)
                     {
-                        await UpdateItemsAsync(existingItemEntity, item, cancellationToken);
+                        await UpdateItemAsync(existingItemEntity, item, cancellationToken);
                     }
                     else
                     {
-                        await AddItemsAsync(item, cancellationToken);
+                        AddItem(item);
                         onlyUpdates = false;
                     }
                 }
@@ -70,6 +72,7 @@ namespace Smitenight.Application.Services.Maintenance
                     await LinkItemsAsync(itemsResponse.Response, cancellationToken);
                 }
 
+                await _dbContext.SaveChangesAsync(cancellationToken);
                 await transaction.CommitAsync(cancellationToken);
             }
             catch (Exception e)
@@ -82,13 +85,11 @@ namespace Smitenight.Application.Services.Maintenance
         /// Starts adding new items and their descriptions to the database
         /// </summary>
         /// <param name="item"></param>
-        /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        private async Task AddItemsAsync(ItemsResponse item, CancellationToken cancellationToken)
+        private void AddItem(ItemsResponse item)
         {
             var itemEntity = BuildItemEntity(item);
             _dbContext.Items.Add(itemEntity);
-            await _dbContext.SaveChangesAsync(cancellationToken);
         }
 
         /// <summary>
@@ -98,15 +99,15 @@ namespace Smitenight.Application.Services.Maintenance
         /// <param name="item"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        private async Task UpdateItemsAsync(Item existingItem, ItemsResponse item, CancellationToken cancellationToken)
+        private async Task UpdateItemAsync(Item existingItem, ItemsResponse item, CancellationToken cancellationToken)
         {
             _dbContext.ItemDescriptions.RemoveRange(await _dbContext.ItemDescriptions.Where(x => x.ItemId == existingItem.Id).ToListAsync(cancellationToken));
-            await _dbContext.SaveChangesAsync(cancellationToken);
 
             var itemEntity = BuildItemEntity(item);
             itemEntity.Id = existingItem.Id;
+            itemEntity.RootItemId = existingItem.RootItemId;
+            itemEntity.ChildItemId = existingItem.ChildItemId;
             _dbContext.Items.Update(itemEntity);
-            await _dbContext.SaveChangesAsync(cancellationToken);
         }
 
         /// <summary>
@@ -128,7 +129,6 @@ namespace Smitenight.Application.Services.Maintenance
                 var rootItemEntity = await _dbContext.Items.SingleOrDefaultAsync(x => x.SmiteId == item.RootItemId, cancellationToken);
                 itemEntity.RootItemId = rootItemEntity?.Id;
             }
-            await _dbContext.SaveChangesAsync(cancellationToken);
         }
 
         private Item BuildItemEntity(ItemsResponse item)
