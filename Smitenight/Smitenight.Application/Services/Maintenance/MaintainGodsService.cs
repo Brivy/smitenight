@@ -55,20 +55,20 @@ namespace Smitenight.Application.Services.Maintenance
                         .SingleOrDefaultAsync(x => x.SmiteId == god.Id, cancellationToken);
                     if (existingGodEntity != null)
                     {
-                        await UpdateGodsAsync(existingGodEntity, god, cancellationToken);
+                        await UpdateGodAsync(existingGodEntity, god, cancellationToken);
                     }
                     else
                     {
-                        await AddGodsAsync(god, cancellationToken);
+                        AddGod(god);
                     }
                 }
 
+                await _dbContext.SaveChangesAsync(cancellationToken);
                 await transaction.CommitAsync(cancellationToken);
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                throw;
             }
         }
 
@@ -76,13 +76,11 @@ namespace Smitenight.Application.Services.Maintenance
         /// Starts adding new gods and their descriptions to the database
         /// </summary>
         /// <param name="god"></param>
-        /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        private async Task AddGodsAsync(GodsResponse god, CancellationToken cancellationToken)
+        private void AddGod(GodsResponse god)
         {
             var godEntity = BuildGodEntity(god);
             _dbContext.Gods.Add(godEntity);
-            await _dbContext.SaveChangesAsync(cancellationToken);
         }
 
         /// <summary>
@@ -92,14 +90,12 @@ namespace Smitenight.Application.Services.Maintenance
         /// <param name="god"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        private async Task UpdateGodsAsync(God existingGodEntity, GodsResponse god, CancellationToken cancellationToken)
+        private async Task UpdateGodAsync(God existingGodEntity, GodsResponse god, CancellationToken cancellationToken)
         {
             var abilityIds = existingGodEntity.Abilities.Select(x => x.Id).ToList();
             _dbContext.BasicAttackDescriptions.RemoveRange(await _dbContext.BasicAttackDescriptions.Where(x => x.GodId == existingGodEntity.Id).ToListAsync(cancellationToken));
             _dbContext.AbilityRanks.RemoveRange(await _dbContext.AbilityRanks.Where(x => abilityIds.Contains(x.AbilityId)).ToListAsync(cancellationToken));
             _dbContext.AbilityTags.RemoveRange(await _dbContext.AbilityTags.Where(x => abilityIds.Contains(x.AbilityId)).ToListAsync(cancellationToken));
-
-            await _dbContext.SaveChangesAsync(cancellationToken);
 
             var godEntity = BuildGodEntity(god);
             godEntity.Id = existingGodEntity.Id;
@@ -109,7 +105,6 @@ namespace Smitenight.Application.Services.Maintenance
             });
             
             _dbContext.Gods.Update(godEntity);
-            await _dbContext.SaveChangesAsync(cancellationToken);
         }
 
         /// <summary>
