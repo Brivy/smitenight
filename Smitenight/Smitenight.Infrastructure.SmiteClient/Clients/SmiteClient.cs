@@ -5,7 +5,7 @@ using System.Text;
 using AutoMapper;
 using Microsoft.Extensions.Options;
 using Smitenight.Domain.Clients.SmiteClient.Requests;
-using Smitenight.Domain.Constants;
+using Smitenight.Domain.Constants.Common;
 using Smitenight.Domain.Secrets;
 using Smitenight.Infrastructure.SmiteClient.Contracts;
 using Smitenight.Infrastructure.SmiteClient.Secrets;

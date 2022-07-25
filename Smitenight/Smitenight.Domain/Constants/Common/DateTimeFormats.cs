@@ -1,4 +1,4 @@
-﻿namespace Smitenight.Domain.Constants
+﻿namespace Smitenight.Domain.Constants.Common
 {
     public class DateTimeFormats
     {
