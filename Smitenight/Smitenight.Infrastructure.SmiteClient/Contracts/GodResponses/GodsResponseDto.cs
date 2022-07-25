@@ -29,7 +29,7 @@ namespace Smitenight.Infrastructure.SmiteClient.Contracts.GodResponses
         [JsonPropertyName("HealthPerLevel")] public int HealthPerLevel { get; set; }
         [JsonPropertyName("Lore")] public string? Lore { get; set; }
         [JsonPropertyName("MP5PerLevel")] public float Mp5PerLevel { get; set; }
-        [JsonPropertyName("MagicProtection")] public int MagicProtection { get; set; }
+        [JsonPropertyName("MagicProtection")] public float MagicProtection { get; set; }
         [JsonPropertyName("MagicProtectionPerLevel")] public float MagicProtectionPerLevel { get; set; }
         [JsonPropertyName("MagicalPower")] public int MagicalPower { get; set; }
         [JsonPropertyName("MagicalPowerPerLevel")] public float MagicalPowerPerLevel { get; set; }
@@ -41,7 +41,7 @@ namespace Smitenight.Infrastructure.SmiteClient.Contracts.GodResponses
         [JsonPropertyName("Pantheon")] public string? Pantheon { get; set; }
         [JsonPropertyName("PhysicalPower")] public int PhysicalPower { get; set; }
         [JsonPropertyName("PhysicalPowerPerLevel")] public float PhysicalPowerPerLevel { get; set; }
-        [JsonPropertyName("PhysicalProtection")] public int PhysicalProtection { get; set; }
+        [JsonPropertyName("PhysicalProtection")] public float PhysicalProtection { get; set; }
         [JsonPropertyName("PhysicalProtectionPerLevel")] public float PhysicalProtectionPerLevel { get; set; }
         [JsonPropertyName("Pros")] public string? Pros { get; set; }
         [JsonPropertyName("Roles")] public string? Roles { get; set; }

@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Smitenight.Persistence;
 
@@ -11,9 +12,10 @@ using Smitenight.Persistence;
 namespace Smitenight.Persistence.Migrations
 {
     [DbContext(typeof(SmitenightDbContext))]
-    partial class SmitenightDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220722205906_Updated_gods_to_have_more_floats")]
+    partial class Updated_gods_to_have_more_floats
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -29,9 +31,6 @@ namespace Smitenight.Persistence.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<int>("AbilityType")
-                        .HasColumnType("int");
 
                     b.Property<string>("Cooldown")
                         .IsRequired()

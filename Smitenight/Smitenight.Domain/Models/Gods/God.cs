@@ -21,7 +21,7 @@ namespace Smitenight.Domain.Models.Gods
         public string LatestGod { get; set; } = null!;
         public string Lore { get; set; } = null!;
         public float Mp5PerLevel { get; set; }
-        public int MagicProtection { get; set; }
+        public float MagicProtection { get; set; }
         public float MagicProtectionPerLevel { get; set; }
         public int MagicalPower { get; set; }
         public float MagicalPowerPerLevel { get; set; }
@@ -33,7 +33,7 @@ namespace Smitenight.Domain.Models.Gods
         public string Pantheon { get; set; } = null!;
         public int PhysicalPower { get; set; }
         public float PhysicalPowerPerLevel { get; set; }
-        public int PhysicalProtection { get; set; }
+        public float PhysicalProtection { get; set; }
         public float PhysicalProtectionPerLevel { get; set; }
         public string Pros { get; set; } = null!;
         public string Roles { get; set; } = null!;

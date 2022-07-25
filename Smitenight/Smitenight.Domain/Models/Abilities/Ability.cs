@@ -1,4 +1,5 @@
-﻿using Smitenight.Domain.Exceptions;
+﻿using Smitenight.Domain.Enums.Ability;
+using Smitenight.Domain.Exceptions;
 using Smitenight.Domain.Interfaces;
 using Smitenight.Domain.Models.Gods;
 
@@ -8,12 +9,15 @@ namespace Smitenight.Domain.Models.Abilities
     {
         public int Id { get; set; }
         public int GodId { get; set; }
+        public int SmiteId { get; set; }
 
         public string Cooldown { get; set; } = null!;
         public string Cost { get; set; } = null!;
         public string Description { get; set; } = null!;
         public string Summary { get; set; } = null!;
         public string Url { get; set; } = null!;
+
+        public AbilityTypeEnum AbilityType { get; set; }
 
         #region Navigation
 
