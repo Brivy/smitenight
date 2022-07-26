@@ -3,6 +3,8 @@ using Smitenight.Abstractions.Application.Services.Maintenance;
 using Smitenight.Abstractions.Infrastructure.SmiteClient;
 using Smitenight.Domain.Clients.SmiteClient.Requests.ItemRequests;
 using Smitenight.Domain.Clients.SmiteClient.Responses.ItemResponses;
+using Smitenight.Domain.Constants.SmiteClient.Responses;
+using Smitenight.Domain.Enums.Items;
 using Smitenight.Domain.Enums.SmiteClient;
 using Smitenight.Domain.Models.Items;
 using Smitenight.Persistence;
@@ -65,10 +67,12 @@ namespace Smitenight.Application.Services.Maintenance
                         onlyUpdates = false;
                     }
                 }
-
+                
                 // Linking items is if new items are added, because we need to update the existing item tree
+                // Need to save the changes so the Ids are available
                 if (!onlyUpdates)
                 {
+                    await _dbContext.SaveChangesAsync(cancellationToken);
                     await LinkItemsAsync(itemsResponse.Response, cancellationToken);
                 }
 
@@ -131,23 +135,28 @@ namespace Smitenight.Application.Services.Maintenance
             }
         }
 
+        /// <summary>
+        /// Builds a new item entity based on the response from the API
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
         private Item BuildItemEntity(ItemsResponse item)
         {
             return new Item
             {
-                ActiveFlag = item.ActiveFlag,
-                Description = item.ItemDescription.Description,
-                DeviceName = item.DeviceName,
-                Glyph = item.Glyph,
+                Active = item.ActiveFlag == ResponseConstants.Yes,
+                Description = !string.IsNullOrWhiteSpace(item.ItemDescription.Description) ? item.ItemDescription.Description : null,
+                Name = item.DeviceName,
+                Glyph = item.Glyph == ResponseConstants.Yes,
                 ItemIconUrl = item.ItemIconUrl,
-                ItemTier = item.ItemTier,
+                ItemTier = ConvertToItemTierEnum(item.ItemTier),
                 Price = item.Price,
-                RestrictedRoles = item.RestrictedRoles,
-                SecondaryDescription = item.ItemDescription.SecondaryDescription,
-                ShortDescription = item.ShortDesc,
+                RestrictedRoles = ConvertToRestrictedRolesEnum(item.RestrictedRoles),
+                SecondaryDescription = !string.IsNullOrWhiteSpace(item.ItemDescription.SecondaryDescription) ? item.ItemDescription.SecondaryDescription : null,
+                ShortDescription = !string.IsNullOrWhiteSpace(item.ShortDesc) ? item.ShortDesc : null,
                 SmiteId = item.ItemId,
                 StartingItem = item.StartingItem,
-                Type = item.Type,
+                Type = ConvertToItemTypeEnum(item.Type),
                 ItemDescriptions = item.ItemDescription.MenuItems.Select(menuItem => new ItemDescription
                 {
                     Description = menuItem.Description,
@@ -155,5 +164,49 @@ namespace Smitenight.Application.Services.Maintenance
                 }).ToList()
             };
         }
+
+        /// <summary>
+        /// Converts an item tier integer to <see cref="ItemTierEnum"/>
+        /// </summary>
+        /// <param name="itemTier"></param>
+        /// <returns></returns>
+        private ItemTierEnum ConvertToItemTierEnum(int itemTier) => itemTier switch
+        {
+            ItemsResponseConstants.TierOneItem => ItemTierEnum.TierOne,
+            ItemsResponseConstants.TierTwoItem => ItemTierEnum.TierTwo,
+            ItemsResponseConstants.TierThreeItem => ItemTierEnum.TierThree,
+            ItemsResponseConstants.TierFourItem => ItemTierEnum.TierFour,
+            _ => ItemTierEnum.Unknown
+        };
+
+        /// <summary>
+        /// Converts a restricted role string to <see cref="RestrictedRolesEnum"/>
+        /// </summary>
+        /// <param name="restrictedRole"></param>
+        /// <returns></returns>
+        private RestrictedRolesEnum ConvertToRestrictedRolesEnum(string restrictedRole) => restrictedRole switch
+        {
+            ItemsResponseConstants.NoRestrictionsRole => RestrictedRolesEnum.NoRestrictions,
+            ItemsResponseConstants.HunterRestrictedRole => RestrictedRolesEnum.Hunter,
+            ItemsResponseConstants.GuardianAndHunterAndMageRestrictedRole => RestrictedRolesEnum.GuardianAndHunterAndMage,
+            ItemsResponseConstants.GuardianAndWarriorRestrictedRole => RestrictedRolesEnum.GuardianAndWarrior,
+            ItemsResponseConstants.AssassinAndHunterAndMageRestrictedRole => RestrictedRolesEnum.AssassinAndHunterAndMage,
+            ItemsResponseConstants.AssassinAndWarriorRestrictedRole => RestrictedRolesEnum.AssassinAndWarrior,
+            ItemsResponseConstants.AssassinAndGuardianAndWarriorRestrictedRole => RestrictedRolesEnum.AssassinAndGuardianAndWarrior,
+            _ => RestrictedRolesEnum.Unknown
+        };
+
+        /// <summary>
+        /// Convert a item type string to <see cref="ItemTypeEnum"/>
+        /// </summary>
+        /// <param name="itemType"></param>
+        /// <returns></returns>
+        private ItemTypeEnum ConvertToItemTypeEnum(string itemType) => itemType switch
+        {
+            ItemsResponseConstants.ItemType => ItemTypeEnum.Item,
+            ItemsResponseConstants.ConsumableItemType => ItemTypeEnum.Consumable,
+            ItemsResponseConstants.ActiveItemType => ItemTypeEnum.Active,
+            _ => ItemTypeEnum.Unknown
+        };
     }
 }

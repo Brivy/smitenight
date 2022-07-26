@@ -12,7 +12,6 @@ namespace Smitenight.Persistence.Configurations.Gods
 
             builder.HasKey(x => x.Id);
             builder.Property(x => x.AutoBanned).IsRequired();
-            builder.Property(x => x.Cons).IsRequired();
             builder.Property(x => x.GodCardUrl).IsRequired();
             builder.Property(x => x.GodIconUrl).IsRequired();
             builder.Property(x => x.LatestGod).IsRequired();
@@ -21,7 +20,7 @@ namespace Smitenight.Persistence.Configurations.Gods
             builder.Property(x => x.OnFreeRotation).IsRequired();
             builder.Property(x => x.Pantheon).IsRequired();
             builder.Property(x => x.Pros).IsRequired();
-            builder.Property(x => x.Roles).IsRequired();
+            builder.Property(x => x.Role).IsRequired();
             builder.Property(x => x.SmiteId).IsRequired();
             builder.Property(x => x.Title).IsRequired();
             builder.Property(x => x.Type).IsRequired();

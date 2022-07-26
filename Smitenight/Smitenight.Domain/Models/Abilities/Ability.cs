@@ -11,8 +11,8 @@ namespace Smitenight.Domain.Models.Abilities
         public int GodId { get; set; }
         public int SmiteId { get; set; }
 
-        public string Cooldown { get; set; } = null!;
-        public string Cost { get; set; } = null!;
+        public string? Cooldown { get; set; }
+        public string? Cost { get; set; }
         public string Description { get; set; } = null!;
         public string Summary { get; set; } = null!;
         public string Url { get; set; } = null!;
