@@ -1,20 +1,19 @@
 ﻿using Smitenight.Abstractions.Application.Services.Maintenance;
-using Smitenight.Abstractions.Infrastructure.SmiteClient;
-using Smitenight.Domain.Clients.SmiteClient.Requests.SystemRequests;
+using Smitenight.Abstractions.Application.Services.System;
 
 namespace Smitenight.Application.Services.Maintenance
 {
     public class MaintainSmitenight : IMaintainSmitenight
     {
-        private readonly ISystemSmiteClient _systemSmiteClient;
+        private readonly ISmiteSessionService _smiteSessionService;
         private readonly IMaintainItemsService _maintainItemsService;
         private readonly IMaintainGodsService _godsService;
 
-        public MaintainSmitenight(ISystemSmiteClient systemSmiteClient,
+        public MaintainSmitenight(ISmiteSessionService smiteSessionService,
             IMaintainItemsService maintainItemsService,
             IMaintainGodsService godsService)
         {
-            _systemSmiteClient = systemSmiteClient;
+            _smiteSessionService = smiteSessionService;
             _maintainItemsService = maintainItemsService;
             _godsService = godsService;
         }
@@ -26,15 +25,14 @@ namespace Smitenight.Application.Services.Maintenance
         /// <returns></returns>
         public async Task MaintainAsync(CancellationToken cancellationToken = default)
         {
-            var sessionRequest = new CreateSmiteSessionRequest();
-            var sessionResponse = await _systemSmiteClient.CreateSmiteSessionAsync(sessionRequest, cancellationToken);
-            if (sessionResponse?.Response == null)
+            var sessionId = await _smiteSessionService.GetSessionIdAsync(cancellationToken);
+            if (sessionId == null)
             {
                 return;
             }
 
-            await _godsService.MaintainAsync(sessionResponse.Response.SessionId, cancellationToken);
-            await _maintainItemsService.MaintainAsync(sessionResponse.Response.SessionId, cancellationToken);
+            await _godsService.MaintainAsync(sessionId, cancellationToken);
+            await _maintainItemsService.MaintainAsync(sessionId, cancellationToken);
         }
     }
 }
