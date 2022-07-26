@@ -12,8 +12,8 @@ namespace Smitenight.Persistence.Configurations.Abilities
 
             builder.HasKey(x => x.Id);
             builder.Property(x => x.AbilityType).IsRequired();
-            builder.Property(x => x.Cooldown).IsRequired();
-            builder.Property(x => x.Cost).IsRequired();
+            builder.Property(x => x.Cooldown).IsRequired(false);
+            builder.Property(x => x.Cost).IsRequired(false);
             builder.Property(x => x.Summary).IsRequired();
             builder.Property(x => x.Url).IsRequired();
 

@@ -3,7 +3,9 @@ using Smitenight.Abstractions.Application.Services.Maintenance;
 using Smitenight.Abstractions.Infrastructure.SmiteClient;
 using Smitenight.Domain.Clients.SmiteClient.Requests.GodRequests;
 using Smitenight.Domain.Clients.SmiteClient.Responses.GodResponses;
+using Smitenight.Domain.Constants.SmiteClient.Responses;
 using Smitenight.Domain.Enums.Ability;
+using Smitenight.Domain.Enums.Gods;
 using Smitenight.Domain.Enums.SmiteClient;
 using Smitenight.Domain.Models.Abilities;
 using Smitenight.Domain.Models.Gods;
@@ -118,15 +120,14 @@ namespace Smitenight.Application.Services.Maintenance
             {
                 AttackSpeed = god.AttackSpeed,
                 AttackSpeedPerLevel = god.AttackSpeedPerLevel,
-                AutoBanned = god.AutoBanned,
-                Cons = god.Cons,
+                AutoBanned = god.AutoBanned == ResponseConstants.Yes,
                 GodCardUrl = god.GodCardUrl,
                 GodIconUrl = god.GodIconUrl,
                 Health = god.Health,
                 HealthPerFive = god.HealthPerFive,
                 HealthPerLevel = god.HealthPerLevel,
                 Hp5PerLevel = god.Hp5PerLevel,
-                LatestGod = god.LatestGod,
+                LatestGod = god.LatestGod == ResponseConstants.Yes,
                 Lore = god.Lore,
                 MagicProtection = god.MagicProtection,
                 MagicProtectionPerLevel = god.MagicProtectionPerLevel,
@@ -137,25 +138,25 @@ namespace Smitenight.Application.Services.Maintenance
                 ManaPerLevel = god.ManaPerLevel,
                 Mp5PerLevel = god.Mp5PerLevel,
                 Name = god.Name,
-                OnFreeRotation = god.OnFreeRotation,
+                OnFreeRotation = god.OnFreeRotation == ResponseConstants.Yes,
                 Pantheon = god.Pantheon,
                 PhysicalPower = god.PhysicalPower,
                 PhysicalPowerPerLevel = god.PhysicalPowerPerLevel,
                 PhysicalProtection = god.PhysicalProtection,
                 PhysicalProtectionPerLevel = god.PhysicalProtectionPerLevel,
                 Pros = god.Pros,
-                Roles = god.Roles,
+                Role = ConvertToGodRoleEnum(god.Roles),
                 SmiteId = god.Id,
                 Speed = god.Speed,
                 Title = god.Title,
-                Type = god.Type,
+                Type = ConvertToGodTypeEnum(god.Type),
                 Abilities = new List<Ability>
                 {
                     new()
                     {
                         AbilityType = AbilityTypeEnum.Primary,
-                        Cooldown = god.AbilityDetails1.Description.ItemDescription.Cooldown,
-                        Cost = god.AbilityDetails1.Description.ItemDescription.Cost,
+                        Cooldown = !string.IsNullOrWhiteSpace(god.AbilityDetails1.Description.ItemDescription.Cooldown) ? god.AbilityDetails1.Description.ItemDescription.Cooldown : null,
+                        Cost = !string.IsNullOrWhiteSpace(god.AbilityDetails1.Description.ItemDescription.Cost) ? god.AbilityDetails1.Description.ItemDescription.Cost : null,
                         Description = god.AbilityDetails1.Description.ItemDescription.Description,
                         SmiteId = god.AbilityDetails1.Id,
                         Summary = god.AbilityDetails1.Summary,
@@ -174,8 +175,8 @@ namespace Smitenight.Application.Services.Maintenance
                     new()
                     {
                         AbilityType = AbilityTypeEnum.Secondary,
-                        Cooldown = god.AbilityDetails2.Description.ItemDescription.Cooldown,
-                        Cost = god.AbilityDetails2.Description.ItemDescription.Cost,
+                        Cooldown = !string.IsNullOrWhiteSpace(god.AbilityDetails2.Description.ItemDescription.Cooldown) ? god.AbilityDetails2.Description.ItemDescription.Cooldown : null,
+                        Cost = !string.IsNullOrWhiteSpace(god.AbilityDetails2.Description.ItemDescription.Cost) ? god.AbilityDetails2.Description.ItemDescription.Cost : null,
                         Description = god.AbilityDetails2.Description.ItemDescription.Description,
                         SmiteId = god.AbilityDetails2.Id,
                         Summary = god.AbilityDetails2.Summary,
@@ -194,10 +195,10 @@ namespace Smitenight.Application.Services.Maintenance
                     new()
                     {
                         AbilityType = AbilityTypeEnum.Tertiary,
-                        Cooldown = god.AbilityDetails3.Description.ItemDescription.Cooldown,
-                        Cost = god.AbilityDetails3.Description.ItemDescription.Cost,
+                        Cooldown = !string.IsNullOrWhiteSpace(god.AbilityDetails3.Description.ItemDescription.Cooldown) ? god.AbilityDetails3.Description.ItemDescription.Cooldown : null,
+                        Cost = !string.IsNullOrWhiteSpace(god.AbilityDetails3.Description.ItemDescription.Cost) ? god.AbilityDetails3.Description.ItemDescription.Cost : null,
                         Description = god.AbilityDetails3.Description.ItemDescription.Description,
-                        SmiteId = god.AbilityDetails2.Id,
+                        SmiteId = god.AbilityDetails3.Id,
                         Summary = god.AbilityDetails3.Summary,
                         Url = god.AbilityDetails3.Url,
                         AbilityRanks = god.AbilityDetails3.Description.ItemDescription.RankItems.Select(rankItem => new AbilityRank
@@ -214,8 +215,8 @@ namespace Smitenight.Application.Services.Maintenance
                     new()
                     {
                         AbilityType = AbilityTypeEnum.Ultimate,
-                        Cooldown = god.AbilityDetails4.Description.ItemDescription.Cooldown,
-                        Cost = god.AbilityDetails4.Description.ItemDescription.Cost,
+                        Cooldown = !string.IsNullOrWhiteSpace(god.AbilityDetails4.Description.ItemDescription.Cooldown) ? god.AbilityDetails4.Description.ItemDescription.Cooldown : null,
+                        Cost = !string.IsNullOrWhiteSpace(god.AbilityDetails4.Description.ItemDescription.Cost) ? god.AbilityDetails4.Description.ItemDescription.Cost : null,
                         Description = god.AbilityDetails4.Description.ItemDescription.Description,
                         SmiteId = god.AbilityDetails4.Id,
                         Summary = god.AbilityDetails4.Summary,
@@ -234,8 +235,8 @@ namespace Smitenight.Application.Services.Maintenance
                     new()
                     {
                         AbilityType = AbilityTypeEnum.Passive,
-                        Cooldown = god.AbilityDetails5.Description.ItemDescription.Cooldown,
-                        Cost = god.AbilityDetails5.Description.ItemDescription.Cost,
+                        Cooldown = !string.IsNullOrWhiteSpace(god.AbilityDetails5.Description.ItemDescription.Cooldown) ? god.AbilityDetails5.Description.ItemDescription.Cooldown : null,
+                        Cost = !string.IsNullOrWhiteSpace(god.AbilityDetails5.Description.ItemDescription.Cost) ? god.AbilityDetails5.Description.ItemDescription.Cost : null,
                         Description = god.AbilityDetails5.Description.ItemDescription.Description,
                         SmiteId = god.AbilityDetails5.Id,
                         Summary = god.AbilityDetails5.Summary,
@@ -259,5 +260,34 @@ namespace Smitenight.Application.Services.Maintenance
                 }).ToList()
             };
         }
+
+        /// <summary>
+        /// Converts a god role string to <see cref="GodRoleEnum"/>
+        /// </summary>
+        /// <param name="godRoles"></param>
+        /// <returns></returns>
+        private GodRoleEnum ConvertToGodRoleEnum(string godRoles) => godRoles switch
+        {
+            GodResponseConstants.WarriorRole => GodRoleEnum.Warrior,
+            GodResponseConstants.MageRole => GodRoleEnum.Mage,
+            GodResponseConstants.HunterRole => GodRoleEnum.Hunter,
+            GodResponseConstants.AssassinRole => GodRoleEnum.Assassin,
+            GodResponseConstants.GuardianRole => GodRoleEnum.Guardian,
+            _ => GodRoleEnum.Unknown
+        };
+
+        /// <summary>
+        /// Converts a god type string to <see cref="GodTypeEnum"/>
+        /// </summary>
+        /// <param name="godType"></param>
+        /// <returns></returns>
+        private GodTypeEnum ConvertToGodTypeEnum(string godType) => godType switch
+        {
+            GodResponseConstants.MeleePhysicalType => GodTypeEnum.MeleePhysical,
+            GodResponseConstants.MeleeMagicalType => GodTypeEnum.MeleeMagical,
+            GodResponseConstants.RangedPhysicalType => GodTypeEnum.RangedPhysical,
+            GodResponseConstants.RangedMagicalType => GodTypeEnum.RangedMagical,
+            _ => GodTypeEnum.Unknown
+        };
     }
 }
