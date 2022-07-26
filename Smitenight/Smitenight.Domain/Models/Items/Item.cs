@@ -1,4 +1,5 @@
-﻿using Smitenight.Domain.Exceptions;
+﻿using Smitenight.Domain.Enums.Items;
+using Smitenight.Domain.Exceptions;
 using Smitenight.Domain.Interfaces;
 
 namespace Smitenight.Domain.Models.Items
@@ -10,17 +11,17 @@ namespace Smitenight.Domain.Models.Items
         public int? RootItemId { get; set; }
         public int? ChildItemId { get; set; }
 
-        public string ActiveFlag { get; set; } = null!;
-        public string DeviceName { get; set; } = null!;
-        public string? Description { get; set; } = null!;
-        public string Glyph { get; set; } = null!;
-        public int ItemTier { get; set; }
+        public bool Active { get; set; }
+        public string Name { get; set; } = null!;
+        public string? Description { get; set; }
+        public bool Glyph { get; set; }
+        public ItemTierEnum ItemTier { get; set; }
         public int Price { get; set; }
-        public string RestrictedRoles { get; set; } = null!;
+        public RestrictedRolesEnum RestrictedRoles { get; set; }
         public string? SecondaryDescription { get; set; }
-        public string ShortDescription { get; set; } = null!;
+        public string? ShortDescription { get; set; }
         public bool StartingItem { get; set; }
-        public string Type { get; set; } = null!;
+        public ItemTypeEnum Type { get; set; }
         public string ItemIconUrl { get; set; } = null!;
 
         #region Navigation
