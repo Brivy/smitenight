@@ -45,6 +45,7 @@ namespace Smitenight.Domain.Models.Gods
 
         public List<BasicAttackDescription> BasicAttackDescriptions { get; set; }
         public List<Ability> Abilities { get; set; }
+        public List<GodSkin> GodSkins { get; set; }
 
         #endregion
 
@@ -52,6 +53,7 @@ namespace Smitenight.Domain.Models.Gods
         {
             BasicAttackDescriptions = new List<BasicAttackDescription>();
             Abilities = new List<Ability>();
+            GodSkins = new List<GodSkin>();
         }
     }
 }

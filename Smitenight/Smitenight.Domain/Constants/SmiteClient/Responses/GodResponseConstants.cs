@@ -14,5 +14,11 @@
         public const string MeleeMagicalType = "Melee, Magical";
         public const string RangedPhysicalType = "Ranged, Physical";
         public const string RangedMagicalType = "Ranged, Magical";
+
+        // API responses for GodSkinsObtainabilityEnum
+        public const string NormalObtainability = "Normal";
+        public const string CrossoverObtainability = "Crossover";
+        public const string LimitedObtainability = "Limited";
+        public const string ExclusiveObtainability = "Exclusive";
     }
 }
