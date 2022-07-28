@@ -81,8 +81,8 @@ namespace Smitenight.Persistence.Migrations
                     GameMap = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     GameModeQueue = table.Column<int>(type: "int", nullable: false),
                     MatchDuration = table.Column<int>(type: "int", nullable: false),
-                    MatchTeam1Score = table.Column<int>(type: "int", nullable: false),
-                    MatchTeam2Score = table.Column<int>(type: "int", nullable: false),
+                    TeamOneScore = table.Column<int>(type: "int", nullable: false),
+                    TeamTwoScore = table.Column<int>(type: "int", nullable: false),
                     Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Region = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     StartDate = table.Column<DateTime>(type: "datetime2", nullable: false)

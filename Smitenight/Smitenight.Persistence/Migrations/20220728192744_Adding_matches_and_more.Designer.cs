@@ -12,7 +12,7 @@ using Smitenight.Persistence;
 namespace Smitenight.Persistence.Migrations
 {
     [DbContext(typeof(SmitenightDbContext))]
-    [Migration("20220728191641_Adding_matches_and_more")]
+    [Migration("20220728192744_Adding_matches_and_more")]
     partial class Adding_matches_and_more
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -604,12 +604,6 @@ namespace Smitenight.Persistence.Migrations
                     b.Property<int>("MatchDuration")
                         .HasColumnType("int");
 
-                    b.Property<int>("MatchTeam1Score")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MatchTeam2Score")
-                        .HasColumnType("int");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -623,6 +617,12 @@ namespace Smitenight.Persistence.Migrations
 
                     b.Property<DateTime>("StartDate")
                         .HasColumnType("datetime2");
+
+                    b.Property<int>("TeamOneScore")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TeamTwoScore")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
