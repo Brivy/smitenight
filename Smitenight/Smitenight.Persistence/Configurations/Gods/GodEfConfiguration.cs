@@ -25,12 +25,17 @@ namespace Smitenight.Persistence.Configurations.Gods
             builder.Property(x => x.Title).IsRequired();
             builder.Property(x => x.Type).IsRequired();
 
+            builder.HasMany(x => x.Abilities)
+                .WithOne(x => x.God)
+                .HasForeignKey(x => x.GodId)
+                .OnDelete(DeleteBehavior.Cascade);
+
             builder.HasMany(x => x.BasicAttackDescriptions)
                 .WithOne(x => x.God)
                 .HasForeignKey(x => x.GodId)
                 .OnDelete(DeleteBehavior.Cascade);
 
-            builder.HasMany(x => x.Abilities)
+            builder.HasMany(x => x.GodBans)
                 .WithOne(x => x.God)
                 .HasForeignKey(x => x.GodId)
                 .OnDelete(DeleteBehavior.Cascade);
@@ -38,7 +43,13 @@ namespace Smitenight.Persistence.Configurations.Gods
             builder.HasMany(x => x.GodSkins)
                 .WithOne(x => x.God)
                 .HasForeignKey(x => x.GodId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Cascade)
+                .IsRequired();
+
+            builder.HasMany(x => x.MatchDetails)
+                .WithOne(x => x.God)
+                .HasForeignKey(x => x.GodId)
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }

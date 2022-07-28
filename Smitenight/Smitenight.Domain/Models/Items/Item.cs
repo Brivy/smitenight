@@ -11,7 +11,7 @@ namespace Smitenight.Domain.Models.Items
         public int? RootItemId { get; set; }
         public int? ChildItemId { get; set; }
 
-        public bool Active { get; set; }
+        public bool Enabled { get; set; }
         public string Name { get; set; } = null!;
         public string? Description { get; set; }
         public bool Glyph { get; set; }
@@ -21,7 +21,6 @@ namespace Smitenight.Domain.Models.Items
         public string? SecondaryDescription { get; set; }
         public string? ShortDescription { get; set; }
         public bool StartingItem { get; set; }
-        public ItemTypeEnum Type { get; set; }
         public string ItemIconUrl { get; set; } = null!;
 
         #region Navigation
@@ -42,12 +41,14 @@ namespace Smitenight.Domain.Models.Items
         }
 
         public List<ItemDescription> ItemDescriptions { get; set; }
+        public List<ItemPurchase> ItemPurchases { get; set; }
 
         #endregion
 
         public Item()
         {
             ItemDescriptions = new List<ItemDescription>();
+            ItemPurchases = new List<ItemPurchase>();
         }
     }
 }

@@ -144,7 +144,7 @@ namespace Smitenight.Application.Services.Maintenance
         {
             return new Item
             {
-                Active = item.ActiveFlag == ResponseConstants.Yes,
+                Enabled = item.ActiveFlag == ResponseConstants.Yes,
                 Description = !string.IsNullOrWhiteSpace(item.ItemDescription.Description) ? item.ItemDescription.Description : null,
                 Name = item.DeviceName,
                 Glyph = item.Glyph == ResponseConstants.Yes,
@@ -156,7 +156,6 @@ namespace Smitenight.Application.Services.Maintenance
                 ShortDescription = !string.IsNullOrWhiteSpace(item.ShortDesc) ? item.ShortDesc : null,
                 SmiteId = item.ItemId,
                 StartingItem = item.StartingItem,
-                Type = ConvertToItemTypeEnum(item.Type),
                 ItemDescriptions = item.ItemDescription.MenuItems.Select(menuItem => new ItemDescription
                 {
                     Description = menuItem.Description,
