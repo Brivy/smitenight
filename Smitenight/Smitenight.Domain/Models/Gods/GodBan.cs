@@ -5,22 +5,18 @@ using Smitenight.Domain.Models.Matches;
 
 namespace Smitenight.Domain.Models.Gods
 {
-    public class GodSkin : IEntity
+    public class GodBan : IEntity
     {
         public int Id { get; set; }
         public int GodId { get; set; }
-        public int SmiteId { get; set; }
-        public int SecondarySmiteId { get; set; }
+        public int MatchId { get; set; }
 
-        public string? GodSkinUrl { get; set; }
-        public string Name { get; set; } = null!;
-        public GodSkinsObtainabilityEnum Obtainability { get; set; }
-        public int PriceFavor { get; set; }
-        public int PriceGems { get; set; }
+        public GodBanOrderEnum GodBanOrder { get; set; }
 
         #region Navigation
 
         private God? _god;
+        private Match? _match;
 
         public God God
         {
@@ -28,13 +24,17 @@ namespace Smitenight.Domain.Models.Gods
             set => _god = value;
         }
 
-        public List<MatchDetail> MatchDetails { get; set; }
+        public Match Match
+        {
+            get => _match ?? throw new NavigationPropertyNullException(nameof(Match));
+            set => _match = value;
+        }
 
         #endregion
 
-        public GodSkin()
+        public GodBan()
         {
-            MatchDetails = new List<MatchDetail>();
+
         }
     }
 }

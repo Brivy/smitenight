@@ -1,6 +1,7 @@
 ﻿using Smitenight.Domain.Enums.Gods;
 using Smitenight.Domain.Interfaces;
 using Smitenight.Domain.Models.Abilities;
+using Smitenight.Domain.Models.Matches;
 
 namespace Smitenight.Domain.Models.Gods
 {
@@ -43,17 +44,21 @@ namespace Smitenight.Domain.Models.Gods
 
         #region Navigation
 
-        public List<BasicAttackDescription> BasicAttackDescriptions { get; set; }
         public List<Ability> Abilities { get; set; }
+        public List<BasicAttackDescription> BasicAttackDescriptions { get; set; }
+        public List<GodBan> GodBans { get; set; }
         public List<GodSkin> GodSkins { get; set; }
+        public List<MatchDetail> MatchDetails { get; set; }
 
         #endregion
 
         public God()
         {
-            BasicAttackDescriptions = new List<BasicAttackDescription>();
             Abilities = new List<Ability>();
+            BasicAttackDescriptions = new List<BasicAttackDescription>();
+            GodBans = new List<GodBan>();
             GodSkins = new List<GodSkin>();
+            MatchDetails = new List<MatchDetail>();
         }
     }
 }

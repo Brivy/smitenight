@@ -24,6 +24,11 @@ namespace Smitenight.Persistence.Configurations.Gods
                 .HasForeignKey(x => x.GodId)
                 .OnDelete(DeleteBehavior.Cascade)
                 .IsRequired();
+
+            builder.HasMany(x => x.MatchDetails)
+                .WithOne(x => x.GodSkin)
+                .HasForeignKey(x => x.GodSkinId)
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }
