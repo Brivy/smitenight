@@ -15,7 +15,7 @@ namespace Smitenight.Persistence.Configurations.Items
             builder.Property(x => x.Enabled).IsRequired();
             builder.Property(x => x.Name).IsRequired();
             builder.Property(x => x.Description).IsRequired(false);
-            builder.Property(x => x.RootActiveId).IsRequired();
+            builder.Property(x => x.RootActiveId).IsRequired(false);
             builder.Property(x => x.SecondaryDescription).IsRequired();
             builder.Property(x => x.SmiteId).IsRequired();
             builder.Property(x => x.ShortDescription).IsRequired();
@@ -31,8 +31,7 @@ namespace Smitenight.Persistence.Configurations.Items
             builder.HasOne(x => x.RootActive)
                 .WithMany()
                 .HasForeignKey(x => x.RootActiveId)
-                .OnDelete(DeleteBehavior.NoAction)
-                .IsRequired();
+                .OnDelete(DeleteBehavior.NoAction);
 
             builder.HasMany(x => x.ActivePurchases)
                 .WithOne(x => x.Active)

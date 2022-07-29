@@ -25,8 +25,7 @@ namespace Smitenight.Application.Services.Maintenance
         }
 
         /// <summary>
-        /// Adds new items and updates all existing ones
-        /// This includes the item descriptions
+        /// Adds new items (including actives and consumables) and updates all existing ones
         /// </summary>
         /// <param name="sessionId"></param>
         /// <param name="cancellationToken"></param>
@@ -48,35 +47,40 @@ namespace Smitenight.Application.Services.Maintenance
             await using var transaction = await _dbContext.Database.BeginTransactionAsync(cancellationToken);
             try
             {
-                var onlyUpdates = true;
+                var itemsModified = false;
+                var activesModified = false;
                 foreach (var item in itemsResponse.Response)
                 {
-                    var existingItemEntity = await _dbContext.Items
-                        .AsNoTracking()
-                        .Include(x => x.ItemDescriptions)
-                        .Include(x => x.RootItem)
-                        .Include(x => x.ChildItem)
-                        .SingleOrDefaultAsync(x => x.SmiteId == item.ItemId, cancellationToken);
-                    if (existingItemEntity != null)
+                    switch (item.Type)
                     {
-                        await UpdateItemAsync(existingItemEntity, item, cancellationToken);
+                        case ItemsResponseConstants.ItemType:
+                            await ProcessItemAsync(item, cancellationToken);
+                            itemsModified = true;
+                            break;
+                        case ItemsResponseConstants.ConsumableItemType:
+                            await ProcessConsumableAsync(item, cancellationToken);
+                            break;
+                        case ItemsResponseConstants.ActiveItemType:
+                            await ProcessActivesAsync(item, cancellationToken);
+                            activesModified = true;
+                            break;
                     }
-                    else
-                    {
-                        AddItem(item);
-                        onlyUpdates = false;
-                    }
-                }
-                
-                // Linking items is if new items are added, because we need to update the existing item tree
-                // Need to save the changes so the Ids are available
-                if (!onlyUpdates)
-                {
-                    await _dbContext.SaveChangesAsync(cancellationToken);
-                    await LinkItemsAsync(itemsResponse.Response, cancellationToken);
                 }
 
                 await _dbContext.SaveChangesAsync(cancellationToken);
+
+                if (itemsModified)
+                {
+                    var allItems = itemsResponse.Response.Where(x => x.Type == ItemsResponseConstants.ItemType).ToList();
+                    await LinkItemsAsync(allItems, cancellationToken);
+                }
+
+                if (activesModified)
+                {
+                    var allActives = itemsResponse.Response.Where(x => x.Type == ItemsResponseConstants.ActiveItemType).ToList();
+                    await LinkActivesAsync(allActives, cancellationToken);
+                }
+
                 await transaction.CommitAsync(cancellationToken);
             }
             catch (Exception e)
@@ -85,34 +89,99 @@ namespace Smitenight.Application.Services.Maintenance
             }
         }
 
-        /// <summary>
-        /// Starts adding new items and their descriptions to the database
-        /// </summary>
-        /// <param name="item"></param>
-        /// <returns></returns>
-        private void AddItem(ItemsResponse item)
-        {
-            var itemEntity = BuildItemEntity(item);
-            _dbContext.Items.Add(itemEntity);
-        }
+        #region Processing
 
         /// <summary>
-        /// Updates existing items and replacing their descriptions
+        /// Process an <see cref="Item"/> based on the parameters from the SMITE API
         /// </summary>
-        /// <param name="existingItem"></param>
         /// <param name="item"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        private async Task UpdateItemAsync(Item existingItem, ItemsResponse item, CancellationToken cancellationToken)
+        private async Task ProcessItemAsync(ItemsResponse item, CancellationToken cancellationToken = default)
         {
-            _dbContext.ItemDescriptions.RemoveRange(await _dbContext.ItemDescriptions.Where(x => x.ItemId == existingItem.Id).ToListAsync(cancellationToken));
-
             var itemEntity = BuildItemEntity(item);
-            itemEntity.Id = existingItem.Id;
-            itemEntity.RootItemId = existingItem.RootItemId;
-            itemEntity.ChildItemId = existingItem.ChildItemId;
-            _dbContext.Items.Update(itemEntity);
+            var existingItemEntity = await _dbContext.Items
+                .AsNoTracking()
+                .Include(x => x.ItemDescriptions)
+                .Include(x => x.RootItem)
+                .Include(x => x.ChildItem)
+                .SingleOrDefaultAsync(x => x.SmiteId == item.ItemId, cancellationToken);
+            
+            if (existingItemEntity == null)
+            {
+                _dbContext.Items.Add(itemEntity);
+            }
+            else
+            {
+                var oldItemDescriptions = await _dbContext.ItemDescriptions.Where(x => x.ItemId == existingItemEntity.Id).ToListAsync(cancellationToken);
+                _dbContext.ItemDescriptions.RemoveRange(oldItemDescriptions);
+
+                itemEntity.Id = existingItemEntity.Id;
+                itemEntity.RootItemId = existingItemEntity.RootItemId;
+                itemEntity.ChildItemId = existingItemEntity.ChildItemId;
+                _dbContext.Items.Update(itemEntity);
+            }
         }
+
+        /// <summary>
+        /// Process an <see cref="Consumable"/> based on the parameters from the SMITE API
+        /// </summary>
+        /// <param name="consumable"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        private async Task ProcessConsumableAsync(ItemsResponse consumable, CancellationToken cancellationToken = default)
+        {
+            var consumableEntity = BuildConsumableEntity(consumable);
+            var existingConsumableEntity = await _dbContext.Consumables
+                .AsNoTracking()
+                .Include(x => x.ConsumableDescriptions)
+                .SingleOrDefaultAsync(x => x.SmiteId == consumable.ItemId, cancellationToken);
+
+            if (existingConsumableEntity == null)
+            {
+                _dbContext.Consumables.Add(consumableEntity);
+            }
+            else
+            {
+                var oldConsumableDescriptions = await _dbContext.ConsumableDescriptions.Where(x => x.ConsumableId == existingConsumableEntity.Id).ToListAsync(cancellationToken);
+                _dbContext.ConsumableDescriptions.RemoveRange(oldConsumableDescriptions);
+
+                consumableEntity.Id = existingConsumableEntity.Id;
+                _dbContext.Consumables.Update(consumableEntity);
+            }
+        }
+
+        /// <summary>
+        /// Process an <see cref="Active"/> based on the parameters from the SMITE API
+        /// </summary>
+        /// <param name="active"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        private async Task ProcessActivesAsync(ItemsResponse active, CancellationToken cancellationToken = default)
+        {
+            var activeEntity = BuildActiveEntity(active);
+            var existingActiveEntity = await _dbContext.Actives
+                .AsNoTracking()
+                .Include(x => x.RootActive)
+                .Include(x => x.ChildActive)
+                .SingleOrDefaultAsync(x => x.SmiteId == active.ItemId, cancellationToken);
+
+            if (existingActiveEntity == null)
+            {
+                _dbContext.Actives.Add(activeEntity);
+            }
+            else
+            {
+                activeEntity.Id = existingActiveEntity.Id;
+                activeEntity.RootActiveId = existingActiveEntity.RootActiveId;
+                activeEntity.ChildActiveId = existingActiveEntity.ChildActiveId;
+                _dbContext.Actives.Update(activeEntity);
+            }
+        }
+
+        #endregion
+
+        #region Linking
 
         /// <summary>
         /// Link the items with each other to create an item tree
@@ -133,10 +202,41 @@ namespace Smitenight.Application.Services.Maintenance
                 var rootItemEntity = await _dbContext.Items.SingleOrDefaultAsync(x => x.SmiteId == item.RootItemId, cancellationToken);
                 itemEntity.RootItemId = rootItemEntity?.Id;
             }
+
+            await _dbContext.SaveChangesAsync(cancellationToken);
         }
 
         /// <summary>
-        /// Builds a new item entity based on the response from the API
+        /// Link the actives with each other to create an active tree
+        /// </summary>
+        /// <param name="actives"></param>
+        /// <param name="cancellationToken"></param>
+        /// <returns></returns>
+        private async Task LinkActivesAsync(List<ItemsResponse> actives, CancellationToken cancellationToken)
+        {
+            var activeEntities = await _dbContext.Actives.ToListAsync(cancellationToken);
+            foreach (var activeEntity in activeEntities)
+            {
+                var active = actives.Single(x => x.ItemId == activeEntity.SmiteId);
+
+                Console.WriteLine(active.ChildItemId);
+                var childActiveEntity = await _dbContext.Actives.SingleOrDefaultAsync(x => x.SmiteId == active.ChildItemId, cancellationToken);
+                activeEntity.ChildActiveId = childActiveEntity?.Id;
+
+                Console.WriteLine(active.RootItemId);
+                var rootActiveEntity = await _dbContext.Actives.SingleOrDefaultAsync(x => x.SmiteId == active.RootItemId, cancellationToken);
+                activeEntity.RootActiveId = rootActiveEntity?.Id;
+            }
+
+            await _dbContext.SaveChangesAsync(cancellationToken);
+        }
+
+        #endregion
+
+        #region Builders
+
+        /// <summary>
+        /// Builds a new <see cref="Item"/> entity based on the response from the API
         /// </summary>
         /// <param name="item"></param>
         /// <returns></returns>
@@ -163,6 +263,56 @@ namespace Smitenight.Application.Services.Maintenance
                 }).ToList()
             };
         }
+
+        /// <summary>
+        /// Builds a new <see cref="Consumable"/> entity based on the response from the API
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        private Consumable BuildConsumableEntity(ItemsResponse item)
+        {
+            return new Consumable
+            {
+                Enabled = item.ActiveFlag == ResponseConstants.Yes,
+                Description = !string.IsNullOrWhiteSpace(item.ItemDescription.Description) ? item.ItemDescription.Description : null,
+                Name = item.DeviceName,
+                ItemIconUrl = item.ItemIconUrl,
+                Price = item.Price,
+                SecondaryDescription = !string.IsNullOrWhiteSpace(item.ItemDescription.SecondaryDescription) ? item.ItemDescription.SecondaryDescription : null,
+                ShortDescription = !string.IsNullOrWhiteSpace(item.ShortDesc) ? item.ShortDesc : null,
+                SmiteId = item.ItemId,
+                ConsumableDescriptions = item.ItemDescription.MenuItems.Select(menuItem => new ConsumableDescription
+                {
+                    Description = menuItem.Description,
+                    Value = menuItem.Value
+                }).ToList()
+            };
+        }
+
+        /// <summary>
+        /// Builds a new <see cref="Active"/> entity based on the response from the API
+        /// </summary>
+        /// <param name="item"></param>
+        /// <returns></returns>
+        private Active BuildActiveEntity(ItemsResponse item)
+        {
+            return new Active
+            {
+                Enabled = item.ActiveFlag == ResponseConstants.Yes,
+                Description = !string.IsNullOrWhiteSpace(item.ItemDescription.Description) ? item.ItemDescription.Description : null,
+                Name = item.DeviceName,
+                ItemIconUrl = item.ItemIconUrl,
+                ItemTier = ConvertToItemTierEnum(item.ItemTier),
+                Price = item.Price,
+                SecondaryDescription = item.ItemDescription.SecondaryDescription!, // Actives do always have a secondary description
+                ShortDescription = item.ShortDesc,
+                SmiteId = item.ItemId
+            };
+        }
+
+        #endregion
+
+        #region Converters
 
         /// <summary>
         /// Converts an item tier integer to <see cref="ItemTierEnum"/>
@@ -195,17 +345,6 @@ namespace Smitenight.Application.Services.Maintenance
             _ => RestrictedRolesEnum.Unknown
         };
 
-        /// <summary>
-        /// Convert a item type string to <see cref="ItemTypeEnum"/>
-        /// </summary>
-        /// <param name="itemType"></param>
-        /// <returns></returns>
-        private ItemTypeEnum ConvertToItemTypeEnum(string itemType) => itemType switch
-        {
-            ItemsResponseConstants.ItemType => ItemTypeEnum.Item,
-            ItemsResponseConstants.ConsumableItemType => ItemTypeEnum.Consumable,
-            ItemsResponseConstants.ActiveItemType => ItemTypeEnum.Active,
-            _ => ItemTypeEnum.Unknown
-        };
+        #endregion
     }
 }
