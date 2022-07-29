@@ -56,18 +56,7 @@ namespace Smitenight.Application.Services.Maintenance
                     var godSkinsResponse = await _godSmiteClient.GetGodSkinsAsync(godSkinsRequest, cancellationToken);
                     var godSkins = godSkinsResponse?.Response ?? new List<GodSkinsResponse>();
 
-                    var existingGodEntity = await _dbContext.Gods.AsNoTracking()
-                        .Include(x => x.Abilities)
-                        .Include(x => x.GodSkins)
-                        .SingleOrDefaultAsync(x => x.SmiteId == god.Id, cancellationToken);
-                    if (existingGodEntity != null)
-                    {
-                        await UpdateGodAsync(existingGodEntity, god, godSkins, cancellationToken);
-                    }
-                    else
-                    {
-                        AddGod(god, godSkins);
-                    }
+                    await ProcessGodAsync(god, godSkins, cancellationToken);
                 }
 
                 await _dbContext.SaveChangesAsync(cancellationToken);
@@ -79,51 +68,56 @@ namespace Smitenight.Application.Services.Maintenance
             }
         }
 
-        /// <summary>
-        /// Starts adding new gods and their skins to the database
-        /// </summary>
-        /// <param name="god"></param>
-        /// <param name="godSkins"></param>
-        /// <returns></returns>
-        private void AddGod(GodsResponse god, List<GodSkinsResponse> godSkins)
-        {
-            var godEntity = BuildGodEntity(god, godSkins);
-            _dbContext.Gods.Add(godEntity);
-        }
+        #region Processing
 
         /// <summary>
-        /// Updates existing gods and replacing their descriptions
+        /// Process an <see cref="GodsResponse"/> and a list of <see cref="GodSkin"/> based on the parameters from the SMITE API
         /// </summary>
-        /// <param name="existingGodEntity"></param>
         /// <param name="god"></param>
         /// <param name="godSkins"></param>
         /// <param name="cancellationToken"></param>
         /// <returns></returns>
-        private async Task UpdateGodAsync(God existingGodEntity, GodsResponse god, List<GodSkinsResponse> godSkins, CancellationToken cancellationToken)
+        private async Task ProcessGodAsync(GodsResponse god, List<GodSkinsResponse> godSkins, CancellationToken cancellationToken = default)
         {
-            var abilityIds = existingGodEntity.Abilities.Select(x => x.Id).ToList();
-            _dbContext.BasicAttackDescriptions.RemoveRange(await _dbContext.BasicAttackDescriptions.Where(x => x.GodId == existingGodEntity.Id).ToListAsync(cancellationToken));
-            _dbContext.AbilityRanks.RemoveRange(await _dbContext.AbilityRanks.Where(x => abilityIds.Contains(x.AbilityId)).ToListAsync(cancellationToken));
-            _dbContext.AbilityTags.RemoveRange(await _dbContext.AbilityTags.Where(x => abilityIds.Contains(x.AbilityId)).ToListAsync(cancellationToken));
-
             var godEntity = BuildGodEntity(god, godSkins);
-            godEntity.Id = existingGodEntity.Id;
-            godEntity.Abilities.ForEach(ability =>
-            {
-                ability.Id = existingGodEntity.Abilities.Single(x => x.AbilityType == ability.AbilityType).Id;
-            });
+            var existingGodEntity = await _dbContext.Gods.AsNoTracking()
+                .Include(x => x.Abilities)
+                .Include(x => x.GodSkins)
+                .SingleOrDefaultAsync(x => x.SmiteId == god.Id, cancellationToken);
 
-            // Possible to have a new skin that doesn't have both the Ids in the existing God entity
-            godEntity.GodSkins.ForEach(godSkin =>
+            if (existingGodEntity == null)
             {
-                godSkin.Id = existingGodEntity.GodSkins.SingleOrDefault(x => x.SmiteId == godSkin.SmiteId && x.SecondarySmiteId == godSkin.SecondarySmiteId)?.Id ?? 0;
-            });
-            
-            _dbContext.Gods.Update(godEntity);
+                _dbContext.Gods.Add(godEntity);
+            }
+            else
+            {
+                var abilityIds = existingGodEntity.Abilities.Select(x => x.Id).ToList();
+                _dbContext.BasicAttackDescriptions.RemoveRange(await _dbContext.BasicAttackDescriptions.Where(x => x.GodId == existingGodEntity.Id).ToListAsync(cancellationToken));
+                _dbContext.AbilityRanks.RemoveRange(await _dbContext.AbilityRanks.Where(x => abilityIds.Contains(x.AbilityId)).ToListAsync(cancellationToken));
+                _dbContext.AbilityTags.RemoveRange(await _dbContext.AbilityTags.Where(x => abilityIds.Contains(x.AbilityId)).ToListAsync(cancellationToken));
+
+                godEntity.Id = existingGodEntity.Id;
+                godEntity.Abilities.ForEach(ability =>
+                {
+                    ability.Id = existingGodEntity.Abilities.Single(x => x.AbilityType == ability.AbilityType).Id;
+                });
+
+                // Possible to have a new skin that doesn't have both the Ids in the existing God entity
+                godEntity.GodSkins.ForEach(godSkin =>
+                {
+                    godSkin.Id = existingGodEntity.GodSkins.SingleOrDefault(x => x.SmiteId == godSkin.SmiteId && x.SecondarySmiteId == godSkin.SecondarySmiteId)?.Id ?? 0;
+                });
+
+                _dbContext.Gods.Update(godEntity);
+            }
         }
 
+        #endregion
+
+        #region Builders
+
         /// <summary>
-        /// Builds a new god entity based on the response from the API
+        /// Builds a new <see cref="God"/> entity based on the response from the API
         /// </summary>
         /// <param name="god"></param>
         /// <param name="godSkins"></param>
@@ -285,6 +279,10 @@ namespace Smitenight.Application.Services.Maintenance
             };
         }
 
+        #endregion
+
+        #region Converters
+
         /// <summary>
         /// Converts a god role string to <see cref="GodRoleEnum"/>
         /// </summary>
@@ -327,5 +325,7 @@ namespace Smitenight.Application.Services.Maintenance
             GodResponseConstants.ExclusiveObtainability => GodSkinsObtainabilityEnum.Exclusive,
             _ => GodSkinsObtainabilityEnum.Unknown
         };
+
+        #endregion
     }
 }

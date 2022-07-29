@@ -31,7 +31,7 @@ namespace Smitenight.Application.Services.Maintenance
                 return;
             }
 
-            //await _godsService.MaintainAsync(sessionId, cancellationToken);
+            await _godsService.MaintainAsync(sessionId, cancellationToken);
             await _maintainItemsService.MaintainAsync(sessionId, cancellationToken);
         }
     }
