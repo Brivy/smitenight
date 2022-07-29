@@ -2,6 +2,9 @@
 using Smitenight.Domain.Models.Abilities;
 using Smitenight.Domain.Models.Gods;
 using Smitenight.Domain.Models.Items;
+using Smitenight.Domain.Models.Matches;
+using Smitenight.Domain.Models.Players;
+using Smitenight.Domain.Models.Teams;
 
 namespace Smitenight.Persistence
 {
@@ -23,10 +26,23 @@ namespace Smitenight.Persistence
 
         public DbSet<BasicAttackDescription> BasicAttackDescriptions => Set<BasicAttackDescription>();
         public DbSet<God> Gods => Set<God>();
+        public DbSet<GodBan> GodBans => Set<GodBan>();
+        public DbSet<GodSkin> GodSkins => Set<GodSkin>();
 
-
+        public DbSet<Active> Actives => Set<Active>();
+        public DbSet<ActivePurchase> ActivePurchases => Set<ActivePurchase>();
+        public DbSet<Consumable> Consumables => Set<Consumable>();
+        public DbSet<ConsumableDescription> ConsumableDescriptions => Set<ConsumableDescription>();
         public DbSet<Item> Items => Set<Item>();
         public DbSet<ItemDescription> ItemDescriptions => Set<ItemDescription>();
+        public DbSet<ItemPurchase> ItemPurchases => Set<ItemPurchase>();
+
+        public DbSet<Match> Matches => Set<Match>();
+        public DbSet<MatchDetail> MatchDetails => Set<MatchDetail>();
+
+        public DbSet<Player> Players => Set<Player>();
+
+        public DbSet<Team> Teams => Set<Team>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

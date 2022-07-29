@@ -8,7 +8,7 @@ namespace Smitenight.Domain.Models.Items
     {
         public int Id { get; set; }
         public int SmiteId { get; set; }
-        public int RootActiveId { get; set; }
+        public int? RootActiveId { get; set; }
         public int? ChildActiveId { get; set; }
 
         public bool Enabled { get; set; }
