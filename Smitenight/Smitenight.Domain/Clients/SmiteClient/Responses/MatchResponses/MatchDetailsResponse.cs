@@ -131,8 +131,8 @@
         string? HzPlayerName,
         int MatchQueueId,
         string Name,
-        string PlayerId,
-        string PlayerName,
+        string? PlayerId,
+        string? PlayerName,
         string? PlayerPortalId,
         string? PlayerPortalUserId,
         object RetMsg

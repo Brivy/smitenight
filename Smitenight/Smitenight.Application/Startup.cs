@@ -1,7 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using Smitenight.Abstractions.Application.Services.Builders;
 using Smitenight.Abstractions.Application.Services.Maintenance;
 using Smitenight.Abstractions.Application.Services.Matches;
 using Smitenight.Abstractions.Application.Services.System;
+using Smitenight.Application.Services.Builders;
 using Smitenight.Application.Services.Common;
 using Smitenight.Application.Services.Maintenance;
 using Smitenight.Application.Services.Matches;
@@ -13,6 +15,14 @@ namespace Smitenight.Application
     {
         public static void ConfigureServices(IServiceCollection serviceCollection)
         {
+            // Builder services
+            serviceCollection.AddScoped<IActivePurchaseBuilderService, ActivePurchaseBuilderService>();
+            serviceCollection.AddScoped<IGodBanBuilderService, GodBanBuilderService>();
+            serviceCollection.AddScoped<IItemPurchaseBuilderService, ItemPurchaseBuilderService>();
+            serviceCollection.AddScoped<IMatchBuilderService, MatchBuilderService>();
+            serviceCollection.AddScoped<IMatchDetailBuilderService, MatchDetailBuilderService>();
+            serviceCollection.AddScoped<IPlayerBuilderService, PlayerBuilderService>();
+
             // Common services
             serviceCollection.AddSingleton<IClock, Clock>();
 
