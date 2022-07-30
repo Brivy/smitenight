@@ -18,6 +18,8 @@ namespace Smitenight.Application
             // Builder services
             serviceCollection.AddScoped<IActivePurchaseBuilderService, ActivePurchaseBuilderService>();
             serviceCollection.AddScoped<IGodBanBuilderService, GodBanBuilderService>();
+            serviceCollection.AddScoped<IGodBuilderService, GodBuilderService>();
+            serviceCollection.AddScoped<IItemBuilderService, ItemBuilderService>();
             serviceCollection.AddScoped<IItemPurchaseBuilderService, ItemPurchaseBuilderService>();
             serviceCollection.AddScoped<IMatchBuilderService, MatchBuilderService>();
             serviceCollection.AddScoped<IMatchDetailBuilderService, MatchDetailBuilderService>();
