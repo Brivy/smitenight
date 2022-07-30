@@ -127,14 +127,14 @@
         string WinStatus,
         int WinningTaskForce,
         string HasReplay,
-        object HzGamerTag,
-        string HzPlayerName,
+        string? HzGamerTag,
+        string? HzPlayerName,
         int MatchQueueId,
         string Name,
-        string PlayerId,
-        string PlayerName,
-        string PlayerPortalId,
-        string PlayerPortalUserId,
+        string? PlayerId,
+        string? PlayerName,
+        string? PlayerPortalId,
+        string? PlayerPortalUserId,
         object RetMsg
     );
 }

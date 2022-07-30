@@ -18,11 +18,6 @@ namespace Smitenight.Application.Services.Maintenance
             _godsService = godsService;
         }
 
-        /// <summary>
-        /// Maintain the static data from the SMITE API
-        /// </summary>
-        /// <param name="cancellationToken"></param>
-        /// <returns></returns>
         public async Task MaintainAsync(CancellationToken cancellationToken = default)
         {
             var sessionId = await _smiteSessionService.GetSessionIdAsync(cancellationToken);

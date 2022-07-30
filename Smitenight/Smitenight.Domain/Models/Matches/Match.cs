@@ -12,8 +12,8 @@ namespace Smitenight.Domain.Models.Matches
         public string GameMap { get; set; } = null!;
         public GameModeQueueIdEnum GameModeQueue { get; set; }
         public int MatchDuration { get; set; }
-        public int TeamOneScore { get; set; }
-        public int TeamTwoScore { get; set; }
+        public int? TeamOneScore { get; set; }
+        public int? TeamTwoScore { get; set; }
         public string Name { get; set; } = null!;
         public string Region { get; set; } = null!;
         public DateTime StartDate { get; set; }

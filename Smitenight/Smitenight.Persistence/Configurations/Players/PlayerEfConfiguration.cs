@@ -11,12 +11,15 @@ namespace Smitenight.Persistence.Configurations.Players
             builder.ToTable("Players");
 
             builder.HasKey(x => x.Id);
-            builder.Property(x => x.HirezPlayerName).IsRequired();
+            builder.Property(x => x.HirezGamerTag).IsRequired(false);
+            builder.Property(x => x.HirezPlayerName).IsRequired(false);
+            builder.Property(x => x.LastSynchronizedMatchId).IsRequired(false);
             builder.Property(x => x.Level).IsRequired();
             builder.Property(x => x.MasteryLevel).IsRequired();
-            builder.Property(x => x.PlayerName).IsRequired();
-            builder.Property(x => x.PortalType).IsRequired();
-            builder.Property(x => x.SmiteId).IsRequired();
+            builder.Property(x => x.PlayerName).IsRequired(false);
+            builder.Property(x => x.PortalType).IsRequired(false);
+            builder.Property(x => x.PrivacyEnabled).IsRequired();
+            builder.Property(x => x.SmiteId).IsRequired(false);
             builder.Property(x => x.SmitePortalUserId).IsRequired(false);
 
             builder.HasMany(x => x.MatchDetails)
