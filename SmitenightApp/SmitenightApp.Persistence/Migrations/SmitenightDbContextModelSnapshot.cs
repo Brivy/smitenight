@@ -4,7 +4,6 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
-using Smitenight.Persistence;
 using SmitenightApp.Persistence;
 
 #nullable disable
@@ -23,7 +22,7 @@ namespace Smitenight.Persistence.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("Smitenight.Domain.Models.Abilities.Ability", b =>
+            modelBuilder.Entity("SmitenightApp.Domain.Models.Abilities.Ability", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -65,7 +64,7 @@ namespace Smitenight.Persistence.Migrations
                     b.ToTable("Abilities", (string)null);
                 });
 
-            modelBuilder.Entity("Smitenight.Domain.Models.Abilities.AbilityRank", b =>
+            modelBuilder.Entity("SmitenightApp.Domain.Models.Abilities.AbilityRank", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -91,7 +90,7 @@ namespace Smitenight.Persistence.Migrations
                     b.ToTable("AbilityRanks", (string)null);
                 });
 
-            modelBuilder.Entity("Smitenight.Domain.Models.Abilities.AbilityTag", b =>
+            modelBuilder.Entity("SmitenightApp.Domain.Models.Abilities.AbilityTag", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -117,7 +116,7 @@ namespace Smitenight.Persistence.Migrations
                     b.ToTable("AbilityTags", (string)null);
                 });
 
-            modelBuilder.Entity("Smitenight.Domain.Models.Gods.BasicAttackDescription", b =>
+            modelBuilder.Entity("SmitenightApp.Domain.Models.Gods.BasicAttackDescription", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -143,7 +142,7 @@ namespace Smitenight.Persistence.Migrations
                     b.ToTable("BasicAttackDescriptions", (string)null);
                 });
 
-            modelBuilder.Entity("Smitenight.Domain.Models.Gods.God", b =>
+            modelBuilder.Entity("SmitenightApp.Domain.Models.Gods.God", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -259,7 +258,7 @@ namespace Smitenight.Persistence.Migrations
                     b.ToTable("Gods", (string)null);
                 });
 
-            modelBuilder.Entity("Smitenight.Domain.Models.Gods.GodBan", b =>
+            modelBuilder.Entity("SmitenightApp.Domain.Models.Gods.GodBan", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -285,7 +284,7 @@ namespace Smitenight.Persistence.Migrations
                     b.ToTable("GodBans", (string)null);
                 });
 
-            modelBuilder.Entity("Smitenight.Domain.Models.Gods.GodSkin", b =>
+            modelBuilder.Entity("SmitenightApp.Domain.Models.Gods.GodSkin", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -325,7 +324,7 @@ namespace Smitenight.Persistence.Migrations
                     b.ToTable("GodSkins", (string)null);
                 });
 
-            modelBuilder.Entity("Smitenight.Domain.Models.Items.Active", b =>
+            modelBuilder.Entity("SmitenightApp.Domain.Models.Items.Active", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -379,7 +378,7 @@ namespace Smitenight.Persistence.Migrations
                     b.ToTable("Actives", (string)null);
                 });
 
-            modelBuilder.Entity("Smitenight.Domain.Models.Items.ActivePurchase", b =>
+            modelBuilder.Entity("SmitenightApp.Domain.Models.Items.ActivePurchase", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -405,7 +404,7 @@ namespace Smitenight.Persistence.Migrations
                     b.ToTable("ActivePurchases", (string)null);
                 });
 
-            modelBuilder.Entity("Smitenight.Domain.Models.Items.Consumable", b =>
+            modelBuilder.Entity("SmitenightApp.Domain.Models.Items.Consumable", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -446,7 +445,7 @@ namespace Smitenight.Persistence.Migrations
                     b.ToTable("Consumables", (string)null);
                 });
 
-            modelBuilder.Entity("Smitenight.Domain.Models.Items.ConsumableDescription", b =>
+            modelBuilder.Entity("SmitenightApp.Domain.Models.Items.ConsumableDescription", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -472,7 +471,7 @@ namespace Smitenight.Persistence.Migrations
                     b.ToTable("ConsumableDescriptions", (string)null);
                 });
 
-            modelBuilder.Entity("Smitenight.Domain.Models.Items.Item", b =>
+            modelBuilder.Entity("SmitenightApp.Domain.Models.Items.Item", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -533,7 +532,7 @@ namespace Smitenight.Persistence.Migrations
                     b.ToTable("Items", (string)null);
                 });
 
-            modelBuilder.Entity("Smitenight.Domain.Models.Items.ItemDescription", b =>
+            modelBuilder.Entity("SmitenightApp.Domain.Models.Items.ItemDescription", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -559,7 +558,7 @@ namespace Smitenight.Persistence.Migrations
                     b.ToTable("ItemDescriptions", (string)null);
                 });
 
-            modelBuilder.Entity("Smitenight.Domain.Models.Items.ItemPurchase", b =>
+            modelBuilder.Entity("SmitenightApp.Domain.Models.Items.ItemPurchase", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -585,7 +584,7 @@ namespace Smitenight.Persistence.Migrations
                     b.ToTable("ItemPurchases", (string)null);
                 });
 
-            modelBuilder.Entity("Smitenight.Domain.Models.Matches.Match", b =>
+            modelBuilder.Entity("SmitenightApp.Domain.Models.Matches.Match", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -628,7 +627,7 @@ namespace Smitenight.Persistence.Migrations
                     b.ToTable("Matches", (string)null);
                 });
 
-            modelBuilder.Entity("Smitenight.Domain.Models.Matches.MatchDetail", b =>
+            modelBuilder.Entity("SmitenightApp.Domain.Models.Matches.MatchDetail", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -794,7 +793,7 @@ namespace Smitenight.Persistence.Migrations
                     b.ToTable("MatchDetails", (string)null);
                 });
 
-            modelBuilder.Entity("Smitenight.Domain.Models.Players.Player", b =>
+            modelBuilder.Entity("SmitenightApp.Domain.Models.Players.Player", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -837,9 +836,9 @@ namespace Smitenight.Persistence.Migrations
                     b.ToTable("Players", (string)null);
                 });
 
-            modelBuilder.Entity("Smitenight.Domain.Models.Abilities.Ability", b =>
+            modelBuilder.Entity("SmitenightApp.Domain.Models.Abilities.Ability", b =>
                 {
-                    b.HasOne("Smitenight.Domain.Models.Gods.God", "God")
+                    b.HasOne("SmitenightApp.Domain.Models.Gods.God", "God")
                         .WithMany("Abilities")
                         .HasForeignKey("GodId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -848,9 +847,9 @@ namespace Smitenight.Persistence.Migrations
                     b.Navigation("God");
                 });
 
-            modelBuilder.Entity("Smitenight.Domain.Models.Abilities.AbilityRank", b =>
+            modelBuilder.Entity("SmitenightApp.Domain.Models.Abilities.AbilityRank", b =>
                 {
-                    b.HasOne("Smitenight.Domain.Models.Abilities.Ability", "Ability")
+                    b.HasOne("SmitenightApp.Domain.Models.Abilities.Ability", "Ability")
                         .WithMany("AbilityRanks")
                         .HasForeignKey("AbilityId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -859,9 +858,9 @@ namespace Smitenight.Persistence.Migrations
                     b.Navigation("Ability");
                 });
 
-            modelBuilder.Entity("Smitenight.Domain.Models.Abilities.AbilityTag", b =>
+            modelBuilder.Entity("SmitenightApp.Domain.Models.Abilities.AbilityTag", b =>
                 {
-                    b.HasOne("Smitenight.Domain.Models.Abilities.Ability", "Ability")
+                    b.HasOne("SmitenightApp.Domain.Models.Abilities.Ability", "Ability")
                         .WithMany("AbilityTags")
                         .HasForeignKey("AbilityId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -870,9 +869,9 @@ namespace Smitenight.Persistence.Migrations
                     b.Navigation("Ability");
                 });
 
-            modelBuilder.Entity("Smitenight.Domain.Models.Gods.BasicAttackDescription", b =>
+            modelBuilder.Entity("SmitenightApp.Domain.Models.Gods.BasicAttackDescription", b =>
                 {
-                    b.HasOne("Smitenight.Domain.Models.Gods.God", "God")
+                    b.HasOne("SmitenightApp.Domain.Models.Gods.God", "God")
                         .WithMany("BasicAttackDescriptions")
                         .HasForeignKey("GodId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -881,15 +880,15 @@ namespace Smitenight.Persistence.Migrations
                     b.Navigation("God");
                 });
 
-            modelBuilder.Entity("Smitenight.Domain.Models.Gods.GodBan", b =>
+            modelBuilder.Entity("SmitenightApp.Domain.Models.Gods.GodBan", b =>
                 {
-                    b.HasOne("Smitenight.Domain.Models.Gods.God", "God")
+                    b.HasOne("SmitenightApp.Domain.Models.Gods.God", "God")
                         .WithMany("GodBans")
                         .HasForeignKey("GodId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Smitenight.Domain.Models.Matches.Match", "Match")
+                    b.HasOne("SmitenightApp.Domain.Models.Matches.Match", "Match")
                         .WithMany("GodBans")
                         .HasForeignKey("MatchId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -900,9 +899,9 @@ namespace Smitenight.Persistence.Migrations
                     b.Navigation("Match");
                 });
 
-            modelBuilder.Entity("Smitenight.Domain.Models.Gods.GodSkin", b =>
+            modelBuilder.Entity("SmitenightApp.Domain.Models.Gods.GodSkin", b =>
                 {
-                    b.HasOne("Smitenight.Domain.Models.Gods.God", "God")
+                    b.HasOne("SmitenightApp.Domain.Models.Gods.God", "God")
                         .WithMany("GodSkins")
                         .HasForeignKey("GodId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -911,14 +910,14 @@ namespace Smitenight.Persistence.Migrations
                     b.Navigation("God");
                 });
 
-            modelBuilder.Entity("Smitenight.Domain.Models.Items.Active", b =>
+            modelBuilder.Entity("SmitenightApp.Domain.Models.Items.Active", b =>
                 {
-                    b.HasOne("Smitenight.Domain.Models.Items.Active", "ChildActive")
+                    b.HasOne("SmitenightApp.Domain.Models.Items.Active", "ChildActive")
                         .WithMany()
                         .HasForeignKey("ChildActiveId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("Smitenight.Domain.Models.Items.Active", "RootActive")
+                    b.HasOne("SmitenightApp.Domain.Models.Items.Active", "RootActive")
                         .WithMany()
                         .HasForeignKey("RootActiveId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -929,15 +928,15 @@ namespace Smitenight.Persistence.Migrations
                     b.Navigation("RootActive");
                 });
 
-            modelBuilder.Entity("Smitenight.Domain.Models.Items.ActivePurchase", b =>
+            modelBuilder.Entity("SmitenightApp.Domain.Models.Items.ActivePurchase", b =>
                 {
-                    b.HasOne("Smitenight.Domain.Models.Items.Active", "Active")
+                    b.HasOne("SmitenightApp.Domain.Models.Items.Active", "Active")
                         .WithMany("ActivePurchases")
                         .HasForeignKey("ActiveId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Smitenight.Domain.Models.Matches.MatchDetail", "MatchDetail")
+                    b.HasOne("SmitenightApp.Domain.Models.Matches.MatchDetail", "MatchDetail")
                         .WithMany("ActivePurchases")
                         .HasForeignKey("MatchDetailId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -948,9 +947,9 @@ namespace Smitenight.Persistence.Migrations
                     b.Navigation("MatchDetail");
                 });
 
-            modelBuilder.Entity("Smitenight.Domain.Models.Items.ConsumableDescription", b =>
+            modelBuilder.Entity("SmitenightApp.Domain.Models.Items.ConsumableDescription", b =>
                 {
-                    b.HasOne("Smitenight.Domain.Models.Items.Consumable", "Consumable")
+                    b.HasOne("SmitenightApp.Domain.Models.Items.Consumable", "Consumable")
                         .WithMany("ConsumableDescriptions")
                         .HasForeignKey("ConsumableId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -959,14 +958,14 @@ namespace Smitenight.Persistence.Migrations
                     b.Navigation("Consumable");
                 });
 
-            modelBuilder.Entity("Smitenight.Domain.Models.Items.Item", b =>
+            modelBuilder.Entity("SmitenightApp.Domain.Models.Items.Item", b =>
                 {
-                    b.HasOne("Smitenight.Domain.Models.Items.Item", "ChildItem")
+                    b.HasOne("SmitenightApp.Domain.Models.Items.Item", "ChildItem")
                         .WithMany()
                         .HasForeignKey("ChildItemId")
                         .OnDelete(DeleteBehavior.NoAction);
 
-                    b.HasOne("Smitenight.Domain.Models.Items.Item", "RootItem")
+                    b.HasOne("SmitenightApp.Domain.Models.Items.Item", "RootItem")
                         .WithMany()
                         .HasForeignKey("RootItemId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -977,9 +976,9 @@ namespace Smitenight.Persistence.Migrations
                     b.Navigation("RootItem");
                 });
 
-            modelBuilder.Entity("Smitenight.Domain.Models.Items.ItemDescription", b =>
+            modelBuilder.Entity("SmitenightApp.Domain.Models.Items.ItemDescription", b =>
                 {
-                    b.HasOne("Smitenight.Domain.Models.Items.Item", "Item")
+                    b.HasOne("SmitenightApp.Domain.Models.Items.Item", "Item")
                         .WithMany("ItemDescriptions")
                         .HasForeignKey("ItemId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -988,15 +987,15 @@ namespace Smitenight.Persistence.Migrations
                     b.Navigation("Item");
                 });
 
-            modelBuilder.Entity("Smitenight.Domain.Models.Items.ItemPurchase", b =>
+            modelBuilder.Entity("SmitenightApp.Domain.Models.Items.ItemPurchase", b =>
                 {
-                    b.HasOne("Smitenight.Domain.Models.Items.Item", "Item")
+                    b.HasOne("SmitenightApp.Domain.Models.Items.Item", "Item")
                         .WithMany("ItemPurchases")
                         .HasForeignKey("ItemId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Smitenight.Domain.Models.Matches.MatchDetail", "MatchDetail")
+                    b.HasOne("SmitenightApp.Domain.Models.Matches.MatchDetail", "MatchDetail")
                         .WithMany("ItemPurchases")
                         .HasForeignKey("MatchDetailId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1007,27 +1006,27 @@ namespace Smitenight.Persistence.Migrations
                     b.Navigation("MatchDetail");
                 });
 
-            modelBuilder.Entity("Smitenight.Domain.Models.Matches.MatchDetail", b =>
+            modelBuilder.Entity("SmitenightApp.Domain.Models.Matches.MatchDetail", b =>
                 {
-                    b.HasOne("Smitenight.Domain.Models.Gods.God", "God")
+                    b.HasOne("SmitenightApp.Domain.Models.Gods.God", "God")
                         .WithMany("MatchDetails")
                         .HasForeignKey("GodId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("Smitenight.Domain.Models.Gods.GodSkin", "GodSkin")
+                    b.HasOne("SmitenightApp.Domain.Models.Gods.GodSkin", "GodSkin")
                         .WithMany("MatchDetails")
                         .HasForeignKey("GodSkinId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("Smitenight.Domain.Models.Matches.Match", "Match")
+                    b.HasOne("SmitenightApp.Domain.Models.Matches.Match", "Match")
                         .WithMany("MatchDetails")
                         .HasForeignKey("MatchId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.HasOne("Smitenight.Domain.Models.Players.Player", "Player")
+                    b.HasOne("SmitenightApp.Domain.Models.Players.Player", "Player")
                         .WithMany("MatchDetails")
                         .HasForeignKey("PlayerId")
                         .OnDelete(DeleteBehavior.NoAction)
@@ -1042,14 +1041,14 @@ namespace Smitenight.Persistence.Migrations
                     b.Navigation("Player");
                 });
 
-            modelBuilder.Entity("Smitenight.Domain.Models.Abilities.Ability", b =>
+            modelBuilder.Entity("SmitenightApp.Domain.Models.Abilities.Ability", b =>
                 {
                     b.Navigation("AbilityRanks");
 
                     b.Navigation("AbilityTags");
                 });
 
-            modelBuilder.Entity("Smitenight.Domain.Models.Gods.God", b =>
+            modelBuilder.Entity("SmitenightApp.Domain.Models.Gods.God", b =>
                 {
                     b.Navigation("Abilities");
 
@@ -1062,43 +1061,43 @@ namespace Smitenight.Persistence.Migrations
                     b.Navigation("MatchDetails");
                 });
 
-            modelBuilder.Entity("Smitenight.Domain.Models.Gods.GodSkin", b =>
+            modelBuilder.Entity("SmitenightApp.Domain.Models.Gods.GodSkin", b =>
                 {
                     b.Navigation("MatchDetails");
                 });
 
-            modelBuilder.Entity("Smitenight.Domain.Models.Items.Active", b =>
+            modelBuilder.Entity("SmitenightApp.Domain.Models.Items.Active", b =>
                 {
                     b.Navigation("ActivePurchases");
                 });
 
-            modelBuilder.Entity("Smitenight.Domain.Models.Items.Consumable", b =>
+            modelBuilder.Entity("SmitenightApp.Domain.Models.Items.Consumable", b =>
                 {
                     b.Navigation("ConsumableDescriptions");
                 });
 
-            modelBuilder.Entity("Smitenight.Domain.Models.Items.Item", b =>
+            modelBuilder.Entity("SmitenightApp.Domain.Models.Items.Item", b =>
                 {
                     b.Navigation("ItemDescriptions");
 
                     b.Navigation("ItemPurchases");
                 });
 
-            modelBuilder.Entity("Smitenight.Domain.Models.Matches.Match", b =>
+            modelBuilder.Entity("SmitenightApp.Domain.Models.Matches.Match", b =>
                 {
                     b.Navigation("GodBans");
 
                     b.Navigation("MatchDetails");
                 });
 
-            modelBuilder.Entity("Smitenight.Domain.Models.Matches.MatchDetail", b =>
+            modelBuilder.Entity("SmitenightApp.Domain.Models.Matches.MatchDetail", b =>
                 {
                     b.Navigation("ActivePurchases");
 
                     b.Navigation("ItemPurchases");
                 });
 
-            modelBuilder.Entity("Smitenight.Domain.Models.Players.Player", b =>
+            modelBuilder.Entity("SmitenightApp.Domain.Models.Players.Player", b =>
                 {
                     b.Navigation("MatchDetails");
                 });
