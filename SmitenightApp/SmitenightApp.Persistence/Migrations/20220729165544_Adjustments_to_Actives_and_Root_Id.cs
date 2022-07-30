@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace Smitenight.Persistence.Migrations
+namespace SmitenightApp.Persistence.Migrations
 {
     public partial class Adjustments_to_Actives_and_Root_Id : Migration
     {

@@ -8,7 +8,7 @@ using SmitenightApp.Persistence;
 
 #nullable disable
 
-namespace Smitenight.Persistence.Migrations
+namespace SmitenightApp.Persistence.Migrations
 {
     [DbContext(typeof(SmitenightDbContext))]
     partial class SmitenightDbContextModelSnapshot : ModelSnapshot

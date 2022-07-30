@@ -9,7 +9,7 @@ using SmitenightApp.Persistence;
 
 #nullable disable
 
-namespace Smitenight.Persistence.Migrations
+namespace SmitenightApp.Persistence.Migrations
 {
     [DbContext(typeof(SmitenightDbContext))]
     [Migration("20220728192744_Adding_matches_and_more")]
