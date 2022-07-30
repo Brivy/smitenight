@@ -50,6 +50,7 @@ namespace Smitenight.Persistence.Configurations.Matches
             builder.Property(x => x.LevelReached).IsRequired();
             builder.Property(x => x.MatchTeam).IsRequired();
             builder.Property(x => x.Surrendered).IsRequired();
+            builder.Property(x => x.TeamId).IsRequired(false);
             builder.Property(x => x.TotalTimeDead).IsRequired();
             builder.Property(x => x.WardsPlaced).IsRequired();
             builder.Property(x => x.Winner).IsRequired();
@@ -75,12 +76,6 @@ namespace Smitenight.Persistence.Configurations.Matches
             builder.HasOne(x => x.Player)
                 .WithMany(x => x.MatchDetails)
                 .HasForeignKey(x => x.PlayerId)
-                .OnDelete(DeleteBehavior.NoAction)
-                .IsRequired();
-
-            builder.HasOne(x => x.Team)
-                .WithMany(x => x.MatchDetails)
-                .HasForeignKey(x => x.TeamId)
                 .OnDelete(DeleteBehavior.NoAction)
                 .IsRequired();
 

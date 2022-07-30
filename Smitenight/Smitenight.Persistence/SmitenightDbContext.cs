@@ -4,7 +4,6 @@ using Smitenight.Domain.Models.Gods;
 using Smitenight.Domain.Models.Items;
 using Smitenight.Domain.Models.Matches;
 using Smitenight.Domain.Models.Players;
-using Smitenight.Domain.Models.Teams;
 
 namespace Smitenight.Persistence
 {
@@ -41,8 +40,6 @@ namespace Smitenight.Persistence
         public DbSet<MatchDetail> MatchDetails => Set<MatchDetail>();
 
         public DbSet<Player> Players => Set<Player>();
-
-        public DbSet<Team> Teams => Set<Team>();
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

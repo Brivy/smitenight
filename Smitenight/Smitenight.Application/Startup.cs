@@ -1,8 +1,10 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using Smitenight.Abstractions.Application.Services.Maintenance;
+using Smitenight.Abstractions.Application.Services.Matches;
 using Smitenight.Abstractions.Application.Services.System;
 using Smitenight.Application.Services.Common;
 using Smitenight.Application.Services.Maintenance;
+using Smitenight.Application.Services.Matches;
 using Smitenight.Application.Services.System;
 
 namespace Smitenight.Application
@@ -18,6 +20,9 @@ namespace Smitenight.Application
             serviceCollection.AddScoped<IMaintainSmitenight, MaintainSmitenight>();
             serviceCollection.AddScoped<IMaintainItemsService, MaintainItemsService>();
             serviceCollection.AddScoped<IMaintainGodsService, MaintainGodsService>();
+
+            // Matches services
+            serviceCollection.AddScoped<IImportMatchService, ImportMatchService>();
 
             // System services
             serviceCollection.AddScoped<ISmiteSessionService, SmiteSessionService>();

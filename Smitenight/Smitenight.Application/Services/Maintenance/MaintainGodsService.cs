@@ -26,6 +26,7 @@ namespace Smitenight.Application.Services.Maintenance
             _dbContext = dbContext;
         }
 
+        // TODO: Create a dummy god with ID 1, so we can refer to them when we can't find anything
         /// <summary>
         /// Adds new gods and updates all existing ones
         /// This includes the abilities and basic attacks

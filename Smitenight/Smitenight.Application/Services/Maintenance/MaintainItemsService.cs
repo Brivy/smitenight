@@ -24,6 +24,7 @@ namespace Smitenight.Application.Services.Maintenance
             _itemSmiteClient = itemSmiteClient;
         }
 
+        // TODO: Create dummy items with ID 1, so we can refer to them when we can't find anything
         /// <summary>
         /// Adds new items (including actives and consumables) and updates all existing ones
         /// </summary>

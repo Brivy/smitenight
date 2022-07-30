@@ -4,7 +4,6 @@ using Smitenight.Domain.Exceptions;
 using Smitenight.Domain.Models.Gods;
 using Smitenight.Domain.Models.Items;
 using Smitenight.Domain.Models.Players;
-using Smitenight.Domain.Models.Teams;
 
 namespace Smitenight.Domain.Models.Matches
 {
@@ -15,8 +14,8 @@ namespace Smitenight.Domain.Models.Matches
         public int GodSkinId { get; set; }
         public int MatchId { get; set; }
         public int PartyId { get; set; } // Not (yet) linked to an entity
-        public int PlayerId { get; set; }
-        public int TeamId { get; set; }
+        public int? PlayerId { get; set; } // In case of privacy set to 'true' this can be null
+        public int? TeamId { get; set; } // Not (yet) linked to an entity
 
         // Damage stuff
         public int DamageDone { get; set; }
@@ -71,7 +70,6 @@ namespace Smitenight.Domain.Models.Matches
         private GodSkin? _godSkin;
         private Match? _match;
         private Player? _player;
-        private Team? _team;
         
         public God God
         {
@@ -91,17 +89,10 @@ namespace Smitenight.Domain.Models.Matches
             set => _match = value;
         }
         
-        public Player Player
+        public Player? Player
         {
             get => _player ?? throw new NavigationPropertyNullException(nameof(Player));
             set => _player = value;
-        }
-
-
-        public Team Team
-        {
-            get => _team ?? throw new NavigationPropertyNullException(nameof(Team));
-            set => _team = value;
         }
 
         public List<ActivePurchase> ActivePurchases { get; set; }

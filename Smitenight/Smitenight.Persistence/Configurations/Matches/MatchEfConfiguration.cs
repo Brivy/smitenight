@@ -14,8 +14,8 @@ namespace Smitenight.Persistence.Configurations.Matches
             builder.Property(x => x.GameMap).IsRequired();
             builder.Property(x => x.GameModeQueue).IsRequired();
             builder.Property(x => x.MatchDuration).IsRequired();
-            builder.Property(x => x.TeamOneScore).IsRequired();
-            builder.Property(x => x.TeamTwoScore).IsRequired();
+            builder.Property(x => x.TeamOneScore).IsRequired(false);
+            builder.Property(x => x.TeamTwoScore).IsRequired(false);
             builder.Property(x => x.Name).IsRequired();
             builder.Property(x => x.Region).IsRequired();
             builder.Property(x => x.SmiteId).IsRequired();
