@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace Smitenight.Persistence.Migrations
+namespace SmitenightApp.Persistence.Migrations
 {
     public partial class Added_GodSkins : Migration
     {

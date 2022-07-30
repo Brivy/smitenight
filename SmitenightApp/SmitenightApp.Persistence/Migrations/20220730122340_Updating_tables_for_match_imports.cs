@@ -2,7 +2,7 @@
 
 #nullable disable
 
-namespace Smitenight.Persistence.Migrations
+namespace SmitenightApp.Persistence.Migrations
 {
     public partial class Updating_tables_for_match_imports : Migration
     {
