@@ -45,35 +45,92 @@ namespace SmitenightApp.Application.Services.Matches
             _dbContext = dbContext;
         }
 
-        public async Task ImportAsync(int smiteMatchId, CancellationToken cancellationToken = default)
+        public async Task<int?> ImportAsync(int smiteMatchId, CancellationToken cancellationToken = default)
         {
             var matchAlreadyExists = await _dbContext.Matches.AnyAsync(x => x.SmiteId == smiteMatchId, cancellationToken);
             if (matchAlreadyExists)
             {
-                return;
+                return null;
             }
 
             var sessionId = await _smiteSessionService.GetSessionIdAsync(cancellationToken);
             if (string.IsNullOrEmpty(sessionId))
             {
-                return;
+                return null;
             }
 
             var matchDetailsRequest = new MatchDetailsRequest(sessionId, smiteMatchId);
             var matchDetailsResponse = await _matchInfoClient.GetMatchDetailsAsync(matchDetailsRequest, cancellationToken);
             if (matchDetailsResponse?.Response?.Any() != true)
             {
-                return;
+                return null;
             }
 
+            return await ProcessImportingMatchAsync(matchDetailsResponse.Response, cancellationToken);
+        }
+
+        public async Task<List<int>> ImportAsync(List<int> smiteMatchIds, CancellationToken cancellationToken = default)
+        {
+            var matchIdList = new List<int>();
+            if (!smiteMatchIds.Any())
+            {
+                return matchIdList;
+            }
+
+            var alreadyExistingMatches = await _dbContext.Matches.AsNoTracking().Where(x => smiteMatchIds.Contains(x.SmiteId)).Select(x => x.SmiteId).ToListAsync(cancellationToken);
+            if (alreadyExistingMatches.Any())
+            {
+                foreach (var alreadyExistingMatch in alreadyExistingMatches)
+                {
+                    smiteMatchIds.Remove(alreadyExistingMatch);
+                    matchIdList.Add(alreadyExistingMatch);
+                }
+
+                if (!smiteMatchIds.Any())
+                {
+                    return matchIdList;
+                }
+            }
+
+            var sessionId = await _smiteSessionService.GetSessionIdAsync(cancellationToken);
+            if (string.IsNullOrEmpty(sessionId))
+            {
+                return matchIdList;
+            }
+
+            var matchDetailsBatchRequest = new MatchDetailsBatchRequest(sessionId, smiteMatchIds);
+            var matchDetailsBatchResponse = await _matchInfoClient.GetMatchDetailsBatchAsync(matchDetailsBatchRequest, cancellationToken);
+            if (matchDetailsBatchResponse?.Response?.Any() != true)
+            {
+                return matchIdList;
+            }
+
+
+            foreach (var matchDetailsResponse in matchDetailsBatchResponse.Response.OrderByDescending(x => x.Match).GroupBy(x => x.Match))
+            {
+                var matchId = await ProcessImportingMatchAsync(matchDetailsResponse.ToList(), cancellationToken);
+                if (matchId.HasValue)
+                {
+                    matchIdList.Add(matchId.Value);
+                }
+            }
+
+            return matchIdList;
+        }
+
+        #region Processing
+
+        private async Task<int?> ProcessImportingMatchAsync(List<MatchDetailsResponse> matchDetailsResponse, CancellationToken cancellationToken = default)
+        {
+            int? insertedMatchId = null;
             await using var transaction = await _dbContext.Database.BeginTransactionAsync(cancellationToken);
             try
             {
-                var singleMatchDetails = matchDetailsResponse.Response.First();
+                var singleMatchDetails = matchDetailsResponse.First();
                 var matchEntity = _matchBuilderService.Build(singleMatchDetails);
                 matchEntity.GodBans = await _godBanBuilderService.BuildAsync(singleMatchDetails, cancellationToken);
 
-                foreach (var matchDetails in matchDetailsResponse.Response)
+                foreach (var matchDetails in matchDetailsResponse)
                 {
                     var matchDetailsEntity = _matchDetailBuilderService.Build(matchDetails);
 
@@ -102,14 +159,16 @@ namespace SmitenightApp.Application.Services.Matches
                 _dbContext.Matches.Add(matchEntity);
                 await _dbContext.SaveChangesAsync(cancellationToken);
                 await transaction.CommitAsync(cancellationToken);
+
+                insertedMatchId = matchEntity.Id;
             }
             catch (Exception e)
             {
                 Console.WriteLine(e);
             }
-        }
 
-        #region Processing
+            return insertedMatchId;
+        }
 
         public async Task ProcessPlayerAsync(MatchDetailsResponse matchDetails, MatchDetail matchDetailsEntity, CancellationToken cancellationToken = default)
         {

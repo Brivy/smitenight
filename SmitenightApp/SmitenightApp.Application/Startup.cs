@@ -1,12 +1,15 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using SmitenightApp.Abstractions.Application.Services.Builders;
+using SmitenightApp.Abstractions.Application.Services.Common;
 using SmitenightApp.Abstractions.Application.Services.Maintenance;
 using SmitenightApp.Abstractions.Application.Services.Matches;
+using SmitenightApp.Abstractions.Application.Services.Smitenight;
 using SmitenightApp.Abstractions.Application.Services.System;
 using SmitenightApp.Application.Services.Builders;
 using SmitenightApp.Application.Services.Common;
 using SmitenightApp.Application.Services.Maintenance;
 using SmitenightApp.Application.Services.Matches;
+using SmitenightApp.Application.Services.Smitenight;
 using SmitenightApp.Application.Services.System;
 
 namespace SmitenightApp.Application
@@ -35,6 +38,9 @@ namespace SmitenightApp.Application
 
             // Matches services
             serviceCollection.AddScoped<IImportMatchService, ImportMatchService>();
+
+            // Smitenight services
+            serviceCollection.AddScoped<ISmitenightService, SmitenightService>();
 
             // System services
             serviceCollection.AddScoped<ISmiteSessionService, SmiteSessionService>();

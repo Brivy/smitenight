@@ -1,4 +1,6 @@
-﻿namespace SmitenightApp.Application.Services.Common
+﻿using SmitenightApp.Abstractions.Application.Services.Common;
+
+namespace SmitenightApp.Application.Services.Common
 {
     public class Clock : IClock
     {
