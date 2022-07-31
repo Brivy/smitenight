@@ -26,6 +26,11 @@ namespace SmitenightApp.Persistence.Configurations.Players
                 .WithOne(x => x.Player)
                 .HasForeignKey(x => x.PlayerId)
                 .OnDelete(DeleteBehavior.NoAction);
+
+            builder.HasMany(x => x.Smitenights)
+                .WithOne(x => x.Player)
+                .HasForeignKey(x => x.PlayerId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

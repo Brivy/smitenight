@@ -30,6 +30,11 @@ namespace SmitenightApp.Persistence.Configurations.Matches
                 .WithOne(x => x.Match)
                 .HasForeignKey(x => x.MatchId)
                 .OnDelete(DeleteBehavior.Cascade);
+
+            builder.HasMany(x => x.SmitenightMatches)
+                .WithOne(x => x.Match)
+                .HasForeignKey(x => x.MatchId)
+                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

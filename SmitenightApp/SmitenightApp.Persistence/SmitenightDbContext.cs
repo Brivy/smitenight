@@ -4,6 +4,7 @@ using SmitenightApp.Domain.Models.Gods;
 using SmitenightApp.Domain.Models.Items;
 using SmitenightApp.Domain.Models.Matches;
 using SmitenightApp.Domain.Models.Players;
+using SmitenightApp.Domain.Models.Smitenights;
 
 namespace SmitenightApp.Persistence
 {
@@ -41,6 +42,10 @@ namespace SmitenightApp.Persistence
 
         public DbSet<Player> Players => Set<Player>();
 
+        public DbSet<SmitenightMatch> SmitenightMatches => Set<SmitenightMatch>();
+        public DbSet<Smitenight> Smitenights => Set<Smitenight>();
+        
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(SmitenightDbContext).Assembly);

@@ -1,6 +1,7 @@
 ﻿using SmitenightApp.Domain.Enums.SmiteClient;
 using SmitenightApp.Domain.Interfaces;
 using SmitenightApp.Domain.Models.Matches;
+using SmitenightApp.Domain.Models.Smitenights;
 
 namespace SmitenightApp.Domain.Models.Players
 {
@@ -22,12 +23,14 @@ namespace SmitenightApp.Domain.Models.Players
         #region Navigation
 
         public List<MatchDetail> MatchDetails { get; set; }
+        public List<Smitenight> Smitenights { get; set; }
 
         #endregion
 
         public Player()
         {
             MatchDetails = new List<MatchDetail>();
+            Smitenights = new List<Smitenight>();
         }
     }
 }

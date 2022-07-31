@@ -1,6 +1,7 @@
 ﻿using SmitenightApp.Domain.Enums.SmiteClient;
 using SmitenightApp.Domain.Interfaces;
 using SmitenightApp.Domain.Models.Gods;
+using SmitenightApp.Domain.Models.Smitenights;
 
 namespace SmitenightApp.Domain.Models.Matches
 {
@@ -22,6 +23,7 @@ namespace SmitenightApp.Domain.Models.Matches
 
         public List<GodBan> GodBans { get; set; }
         public List<MatchDetail> MatchDetails { get; set; }
+        public List<SmitenightMatch> SmitenightMatches { get; set; }
 
         #endregion
 
@@ -29,6 +31,7 @@ namespace SmitenightApp.Domain.Models.Matches
         {
             GodBans = new List<GodBan>();
             MatchDetails = new List<MatchDetail>();
+            SmitenightMatches = new List<SmitenightMatch>();
         }
     }
 }
