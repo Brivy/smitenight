@@ -5,5 +5,5 @@ namespace SmitenightApp.Abstractions.Application.Services.Builders;
 
 public interface IGodBuilderService
 {
-    God Build(GodsResponse god, List<GodSkinsResponse> godSkins);
+    God Build(GodsResponse godResponse, List<GodSkinsResponse> godSkinsResponse);
 }

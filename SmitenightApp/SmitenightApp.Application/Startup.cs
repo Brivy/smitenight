@@ -3,13 +3,13 @@ using SmitenightApp.Abstractions.Application.Services.Builders;
 using SmitenightApp.Abstractions.Application.Services.Common;
 using SmitenightApp.Abstractions.Application.Services.Maintenance;
 using SmitenightApp.Abstractions.Application.Services.Matches;
-using SmitenightApp.Abstractions.Application.Services.Smitenight;
+using SmitenightApp.Abstractions.Application.Services.Smitenights;
 using SmitenightApp.Abstractions.Application.Services.System;
 using SmitenightApp.Application.Services.Builders;
 using SmitenightApp.Application.Services.Common;
 using SmitenightApp.Application.Services.Maintenance;
 using SmitenightApp.Application.Services.Matches;
-using SmitenightApp.Application.Services.Smitenight;
+using SmitenightApp.Application.Services.Smitenights;
 using SmitenightApp.Application.Services.System;
 
 namespace SmitenightApp.Application
@@ -27,6 +27,7 @@ namespace SmitenightApp.Application
             serviceCollection.AddScoped<IMatchBuilderService, MatchBuilderService>();
             serviceCollection.AddScoped<IMatchDetailBuilderService, MatchDetailBuilderService>();
             serviceCollection.AddScoped<IPlayerBuilderService, PlayerBuilderService>();
+            serviceCollection.AddScoped<ISmitenightBuilderService, SmitenightBuilderService>();
 
             // Common services
             serviceCollection.AddSingleton<IClock, Clock>();

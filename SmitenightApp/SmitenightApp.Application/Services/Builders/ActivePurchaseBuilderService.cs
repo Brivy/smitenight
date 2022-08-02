@@ -17,24 +17,24 @@ namespace SmitenightApp.Application.Services.Builders
             _dbContext = dbContext;
         }
 
-        public async Task<List<ActivePurchase>> BuildAsync(MatchDetailsResponse matchDetails, CancellationToken cancellationToken = default)
+        public async Task<List<ActivePurchase>> BuildAsync(MatchDetailsResponse matchDetailsResponse, CancellationToken cancellationToken = default)
         {
             var activePurchases = new List<ActivePurchase>();
-            var activeIdList = new List<int> { matchDetails.ActiveId1, matchDetails.ActiveId2 };
-            activeIdList.RemoveAll(x => x == MatchResponseConstants.EmptyResponse);
+            var activeIdList = new List<int> { matchDetailsResponse.ActiveId1, matchDetailsResponse.ActiveId2 };
+            activeIdList.RemoveAll(x => x == ResponseConstants.EmptyResponse);
             if (!activeIdList.Any())
             {
                 return activePurchases;
             }
 
             var actives = await _dbContext.Actives.AsNoTracking().Where(x => activeIdList.Contains(x.SmiteId)).ToListAsync(cancellationToken);
-            if (matchDetails.ActiveId1 != MatchResponseConstants.EmptyResponse)
+            if (matchDetailsResponse.ActiveId1 != ResponseConstants.EmptyResponse)
             {
-                activePurchases.Add(new ActivePurchase { ActiveId = actives.SingleOrDefault(x => x.SmiteId == matchDetails.ActiveId1)?.Id ?? MatchResponseConstants.DefaultActiveId, ActivePurchaseOrder = ActivePurchaseOrderEnum.FirstActive });
+                activePurchases.Add(new ActivePurchase { ActiveId = actives.SingleOrDefault(x => x.SmiteId == matchDetailsResponse.ActiveId1)?.Id ?? MatchResponseConstants.DefaultActiveId, ActivePurchaseOrder = ActivePurchaseOrderEnum.FirstActive });
             }
-            if (matchDetails.ActiveId2 != MatchResponseConstants.EmptyResponse)
+            if (matchDetailsResponse.ActiveId2 != ResponseConstants.EmptyResponse)
             {
-                activePurchases.Add(new ActivePurchase { ActiveId = actives.SingleOrDefault(x => x.SmiteId == matchDetails.ActiveId2)?.Id ?? MatchResponseConstants.DefaultActiveId, ActivePurchaseOrder = ActivePurchaseOrderEnum.SecondActive });
+                activePurchases.Add(new ActivePurchase { ActiveId = actives.SingleOrDefault(x => x.SmiteId == matchDetailsResponse.ActiveId2)?.Id ?? MatchResponseConstants.DefaultActiveId, ActivePurchaseOrder = ActivePurchaseOrderEnum.SecondActive });
             }
 
             return activePurchases;

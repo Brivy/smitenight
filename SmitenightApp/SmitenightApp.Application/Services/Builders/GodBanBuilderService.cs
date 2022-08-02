@@ -17,79 +17,79 @@ namespace SmitenightApp.Application.Services.Builders
             _dbContext = dbContext;
         }
 
-        public async Task<List<GodBan>> BuildAsync(MatchDetailsResponse matchDetails, CancellationToken cancellationToken = default)
+        public async Task<List<GodBan>> BuildAsync(MatchDetailsResponse matchDetailsResponse, CancellationToken cancellationToken = default)
         {
             var godBans = new List<GodBan>();
             var godBanIdList = new List<int>
             {
-                matchDetails.Ban1Id, 
-                matchDetails.Ban2Id, 
-                matchDetails.Ban3Id, 
-                matchDetails.Ban4Id, 
-                matchDetails.Ban5Id, 
-                matchDetails.Ban6Id, 
-                matchDetails.Ban7Id, 
-                matchDetails.Ban8Id, 
-                matchDetails.Ban9Id, 
-                matchDetails.Ban10Id, 
-                matchDetails.Ban11Id, 
-                matchDetails.Ban12Id
+                matchDetailsResponse.Ban1Id, 
+                matchDetailsResponse.Ban2Id, 
+                matchDetailsResponse.Ban3Id, 
+                matchDetailsResponse.Ban4Id, 
+                matchDetailsResponse.Ban5Id, 
+                matchDetailsResponse.Ban6Id, 
+                matchDetailsResponse.Ban7Id, 
+                matchDetailsResponse.Ban8Id, 
+                matchDetailsResponse.Ban9Id, 
+                matchDetailsResponse.Ban10Id, 
+                matchDetailsResponse.Ban11Id, 
+                matchDetailsResponse.Ban12Id
             };
 
-            godBanIdList.RemoveAll(x => x == MatchResponseConstants.EmptyResponse);
+            godBanIdList.RemoveAll(x => x == ResponseConstants.EmptyResponse);
             if (!godBanIdList.Any())
             {
                 return godBans;
             }
             
             var gods = await _dbContext.Gods.AsNoTracking().Where(x => godBanIdList.Contains(x.SmiteId)).ToListAsync(cancellationToken);
-            if (matchDetails.Ban1Id != MatchResponseConstants.EmptyResponse)
+            if (matchDetailsResponse.Ban1Id != ResponseConstants.EmptyResponse)
             {
-                godBans.Add(new GodBan { GodId = gods.SingleOrDefault(x => x.SmiteId == matchDetails.Ban1Id)?.Id ?? MatchResponseConstants.DefaultGodId, GodBanOrder = GodBanOrderEnum.FirstBan });
+                godBans.Add(new GodBan { GodId = gods.SingleOrDefault(x => x.SmiteId == matchDetailsResponse.Ban1Id)?.Id ?? MatchResponseConstants.DefaultGodId, GodBanOrder = GodBanOrderEnum.FirstBan });
             }
-            if (matchDetails.Ban2Id != MatchResponseConstants.EmptyResponse)
+            if (matchDetailsResponse.Ban2Id != ResponseConstants.EmptyResponse)
             {
-                godBans.Add(new GodBan { GodId = gods.SingleOrDefault(x => x.SmiteId == matchDetails.Ban2Id)?.Id ?? MatchResponseConstants.DefaultGodId, GodBanOrder = GodBanOrderEnum.SecondBan });
+                godBans.Add(new GodBan { GodId = gods.SingleOrDefault(x => x.SmiteId == matchDetailsResponse.Ban2Id)?.Id ?? MatchResponseConstants.DefaultGodId, GodBanOrder = GodBanOrderEnum.SecondBan });
             }
-            if (matchDetails.Ban3Id != MatchResponseConstants.EmptyResponse)
+            if (matchDetailsResponse.Ban3Id != ResponseConstants.EmptyResponse)
             {
-                godBans.Add(new GodBan { GodId = gods.SingleOrDefault(x => x.SmiteId == matchDetails.Ban3Id)?.Id ?? MatchResponseConstants.DefaultGodId, GodBanOrder = GodBanOrderEnum.ThirdBan });
+                godBans.Add(new GodBan { GodId = gods.SingleOrDefault(x => x.SmiteId == matchDetailsResponse.Ban3Id)?.Id ?? MatchResponseConstants.DefaultGodId, GodBanOrder = GodBanOrderEnum.ThirdBan });
             }
-            if (matchDetails.Ban4Id != MatchResponseConstants.EmptyResponse)
+            if (matchDetailsResponse.Ban4Id != ResponseConstants.EmptyResponse)
             {
-                godBans.Add(new GodBan { GodId = gods.SingleOrDefault(x => x.SmiteId == matchDetails.Ban4Id)?.Id ?? MatchResponseConstants.DefaultGodId, GodBanOrder = GodBanOrderEnum.FourthBan });
+                godBans.Add(new GodBan { GodId = gods.SingleOrDefault(x => x.SmiteId == matchDetailsResponse.Ban4Id)?.Id ?? MatchResponseConstants.DefaultGodId, GodBanOrder = GodBanOrderEnum.FourthBan });
             }
-            if (matchDetails.Ban5Id != MatchResponseConstants.EmptyResponse)
+            if (matchDetailsResponse.Ban5Id != ResponseConstants.EmptyResponse)
             {
-                godBans.Add(new GodBan { GodId = gods.SingleOrDefault(x => x.SmiteId == matchDetails.Ban5Id)?.Id ?? MatchResponseConstants.DefaultGodId, GodBanOrder = GodBanOrderEnum.FifthBan });
+                godBans.Add(new GodBan { GodId = gods.SingleOrDefault(x => x.SmiteId == matchDetailsResponse.Ban5Id)?.Id ?? MatchResponseConstants.DefaultGodId, GodBanOrder = GodBanOrderEnum.FifthBan });
             }
-            if (matchDetails.Ban6Id != MatchResponseConstants.EmptyResponse)
+            if (matchDetailsResponse.Ban6Id != ResponseConstants.EmptyResponse)
             {
-                godBans.Add(new GodBan { GodId = gods.SingleOrDefault(x => x.SmiteId == matchDetails.Ban6Id)?.Id ?? MatchResponseConstants.DefaultGodId, GodBanOrder = GodBanOrderEnum.SixthBan });
+                godBans.Add(new GodBan { GodId = gods.SingleOrDefault(x => x.SmiteId == matchDetailsResponse.Ban6Id)?.Id ?? MatchResponseConstants.DefaultGodId, GodBanOrder = GodBanOrderEnum.SixthBan });
             }
-            if (matchDetails.Ban7Id != MatchResponseConstants.EmptyResponse)
+            if (matchDetailsResponse.Ban7Id != ResponseConstants.EmptyResponse)
             {
-                godBans.Add(new GodBan { GodId = gods.SingleOrDefault(x => x.SmiteId == matchDetails.Ban7Id)?.Id ?? MatchResponseConstants.DefaultGodId, GodBanOrder = GodBanOrderEnum.SeventhBan });
+                godBans.Add(new GodBan { GodId = gods.SingleOrDefault(x => x.SmiteId == matchDetailsResponse.Ban7Id)?.Id ?? MatchResponseConstants.DefaultGodId, GodBanOrder = GodBanOrderEnum.SeventhBan });
             }
-            if (matchDetails.Ban8Id != MatchResponseConstants.EmptyResponse)
+            if (matchDetailsResponse.Ban8Id != ResponseConstants.EmptyResponse)
             {
-                godBans.Add(new GodBan { GodId = gods.SingleOrDefault(x => x.SmiteId == matchDetails.Ban8Id)?.Id ?? MatchResponseConstants.DefaultGodId, GodBanOrder = GodBanOrderEnum.EightBan });
+                godBans.Add(new GodBan { GodId = gods.SingleOrDefault(x => x.SmiteId == matchDetailsResponse.Ban8Id)?.Id ?? MatchResponseConstants.DefaultGodId, GodBanOrder = GodBanOrderEnum.EightBan });
             }
-            if (matchDetails.Ban9Id != MatchResponseConstants.EmptyResponse)
+            if (matchDetailsResponse.Ban9Id != ResponseConstants.EmptyResponse)
             {
-                godBans.Add(new GodBan { GodId = gods.SingleOrDefault(x => x.SmiteId == matchDetails.Ban9Id)?.Id ?? MatchResponseConstants.DefaultGodId, GodBanOrder = GodBanOrderEnum.NinthBan });
+                godBans.Add(new GodBan { GodId = gods.SingleOrDefault(x => x.SmiteId == matchDetailsResponse.Ban9Id)?.Id ?? MatchResponseConstants.DefaultGodId, GodBanOrder = GodBanOrderEnum.NinthBan });
             }
-            if (matchDetails.Ban10Id != MatchResponseConstants.EmptyResponse)
+            if (matchDetailsResponse.Ban10Id != ResponseConstants.EmptyResponse)
             {
-                godBans.Add(new GodBan { GodId = gods.SingleOrDefault(x => x.SmiteId == matchDetails.Ban10Id)?.Id ?? MatchResponseConstants.DefaultGodId, GodBanOrder = GodBanOrderEnum.TenthBan });
+                godBans.Add(new GodBan { GodId = gods.SingleOrDefault(x => x.SmiteId == matchDetailsResponse.Ban10Id)?.Id ?? MatchResponseConstants.DefaultGodId, GodBanOrder = GodBanOrderEnum.TenthBan });
             }
-            if (matchDetails.Ban11Id != MatchResponseConstants.EmptyResponse)
+            if (matchDetailsResponse.Ban11Id != ResponseConstants.EmptyResponse)
             {
-                godBans.Add(new GodBan { GodId = gods.SingleOrDefault(x => x.SmiteId == matchDetails.Ban11Id)?.Id ?? MatchResponseConstants.DefaultGodId, GodBanOrder = GodBanOrderEnum.EleventhBan });
+                godBans.Add(new GodBan { GodId = gods.SingleOrDefault(x => x.SmiteId == matchDetailsResponse.Ban11Id)?.Id ?? MatchResponseConstants.DefaultGodId, GodBanOrder = GodBanOrderEnum.EleventhBan });
             }
-            if (matchDetails.Ban12Id != MatchResponseConstants.EmptyResponse)
+            if (matchDetailsResponse.Ban12Id != ResponseConstants.EmptyResponse)
             {
-                godBans.Add(new GodBan { GodId = gods.SingleOrDefault(x => x.SmiteId == matchDetails.Ban12Id)?.Id ?? MatchResponseConstants.DefaultGodId, GodBanOrder = GodBanOrderEnum.TwelfthBan });
+                godBans.Add(new GodBan { GodId = gods.SingleOrDefault(x => x.SmiteId == matchDetailsResponse.Ban12Id)?.Id ?? MatchResponseConstants.DefaultGodId, GodBanOrder = GodBanOrderEnum.TwelfthBan });
             }
 
             return godBans;

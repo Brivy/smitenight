@@ -1,15 +1,17 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SmitenightApp.Abstractions.Application.Services.Builders;
 using SmitenightApp.Abstractions.Application.Services.Common;
 using SmitenightApp.Abstractions.Application.Services.Matches;
-using SmitenightApp.Abstractions.Application.Services.Smitenight;
+using SmitenightApp.Abstractions.Application.Services.Smitenights;
 using SmitenightApp.Abstractions.Application.Services.System;
 using SmitenightApp.Abstractions.Infrastructure.SmiteClient;
 using SmitenightApp.Domain.Clients.SmiteClient.Requests.PlayerRequests;
 using SmitenightApp.Domain.Clients.SmiteClient.Requests.RetrievePlayerRequests;
+using SmitenightApp.Domain.Constants.SmiteClient.Responses;
 using SmitenightApp.Domain.Models.Smitenights;
 using SmitenightApp.Persistence;
 
-namespace SmitenightApp.Application.Services.Smitenight
+namespace SmitenightApp.Application.Services.Smitenights
 {
     public class SmitenightService : ISmitenightService
     {
@@ -17,6 +19,7 @@ namespace SmitenightApp.Application.Services.Smitenight
         private readonly IPlayerInfoClient _playerInfoClient;
         private readonly IRetrievePlayerClient _retrievePlayerClient;
         private readonly IImportMatchService _importMatchService;
+        private readonly ISmitenightBuilderService _smitenightBuilderService;
         private readonly IClock _clock;
         private readonly SmitenightDbContext _dbContext;
 
@@ -25,6 +28,7 @@ namespace SmitenightApp.Application.Services.Smitenight
             IPlayerInfoClient playerInfoClient,
             IRetrievePlayerClient retrievePlayerClient,
             IImportMatchService importMatchService,
+            ISmitenightBuilderService smitenightBuilderService,
             IClock clock,
             SmitenightDbContext dbContext)
         {
@@ -32,6 +36,7 @@ namespace SmitenightApp.Application.Services.Smitenight
             _playerInfoClient = playerInfoClient;
             _retrievePlayerClient = retrievePlayerClient;
             _importMatchService = importMatchService;
+            _smitenightBuilderService = smitenightBuilderService;
             _clock = clock;
             _dbContext = dbContext;
         }
@@ -51,15 +56,37 @@ namespace SmitenightApp.Application.Services.Smitenight
                 return;
             }
 
-            var smitePlayerId = playerIdResponse.Response.First().PlayerId;
-            var playerEntityId = await _dbContext.Players.AsNoTracking().Where(x => x.SmiteId == smitePlayerId).Select(x => x.Id).SingleAsync(cancellationToken);
-            var smiteNight = new Domain.Models.Smitenights.Smitenight
+            var smitePlayer = playerIdResponse.Response.First();
+            if (smitePlayer.PrivacyFlag == ResponseConstants.Yes)
             {
-                PlayerId = playerEntityId,
-                StartDate = _clock.Now()
-            };
+                return;
+            }
 
-            _dbContext.Add(smiteNight);
+            Smitenight smitenight;
+            var playerEntity = await _dbContext.Players.AsNoTracking().Where(x => x.SmiteId == smitePlayer.PlayerId).SingleOrDefaultAsync(cancellationToken);
+            if (playerEntity == null)
+            {
+                var playerRequest = new PlayerWithoutPortalRequest(sessionId, smitePlayer.PlayerId.ToString());
+                var player = await _retrievePlayerClient.GetPlayerWithoutPortalAsync(playerRequest, cancellationToken);
+                if (player?.Response?.Any() != true || player.Response.First().Id == ResponseConstants.AnonymousPlayerIntId)
+                {
+                    return;
+                }
+
+                smitenight = _smitenightBuilderService.Build(player.Response.First());
+            }
+            else
+            {
+                var smitenightExists = await _dbContext.Smitenights.AnyAsync(x => x.PlayerId == playerEntity.Id && !x.EndDate.HasValue, cancellationToken);
+                if (smitenightExists)
+                {
+                    return;
+                }
+
+                smitenight = _smitenightBuilderService.Build(playerEntity.Id);
+            }
+
+            _dbContext.Add(smitenight);
             await _dbContext.SaveChangesAsync(cancellationToken);
         }
 
@@ -88,7 +115,7 @@ namespace SmitenightApp.Application.Services.Smitenight
 
             var smitenightMatchIds = new List<int>();
             var playerEntityId = await _dbContext.Players.AsNoTracking().Where(x => x.SmiteId == smitePlayerId).Select(x => x.Id).SingleAsync(cancellationToken);
-            var smitenight = await _dbContext.Smitenights.AsNoTracking().Where(x => x.PlayerId == playerEntityId && x.EndDate == null).SingleAsync(cancellationToken);
+            var smitenight = await _dbContext.Smitenights.Where(x => x.PlayerId == playerEntityId && x.EndDate == null).SingleAsync(cancellationToken);
             playerHistoryResponse.Response.ForEach(matchHistory =>
             {
                 if (!DateTime.TryParse(matchHistory.MatchTime, out var startTime))
@@ -113,10 +140,11 @@ namespace SmitenightApp.Application.Services.Smitenight
             }
             else
             {
-                var totalCallsToApi = (smitenightMatchIds.Count - 1) / 5 + 1;
+                const int batchSize = 5;
+                var totalCallsToApi = (smitenightMatchIds.Count - 1) / batchSize + 1;
                 for (var i = 0; i < totalCallsToApi; i++)
                 {
-                    var currentBatch = smitenightMatchIds.Skip(i * 5).Take((i + 1) * 5).ToList();
+                    var currentBatch = smitenightMatchIds.Skip(i * batchSize).Take(batchSize).ToList();
                     var matchIds = await _importMatchService.ImportAsync(currentBatch, cancellationToken);
                     if (matchIds.Any())
                     {
@@ -125,8 +153,10 @@ namespace SmitenightApp.Application.Services.Smitenight
                 }
             }
 
+            smitenight.EndDate = _clock.Now();
             var smitenightMatches = matchEntityIds.Select(matchEntityId => new SmitenightMatch {MatchId = matchEntityId, SmitenightId = smitenight.Id}).ToList();
             _dbContext.SmitenightMatches.AddRange(smitenightMatches);
+
             await _dbContext.SaveChangesAsync(cancellationToken);
         }
     }

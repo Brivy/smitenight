@@ -47,10 +47,10 @@ namespace SmitenightApp.Application.Services.Matches
 
         public async Task<int?> ImportAsync(int smiteMatchId, CancellationToken cancellationToken = default)
         {
-            var matchAlreadyExists = await _dbContext.Matches.AnyAsync(x => x.SmiteId == smiteMatchId, cancellationToken);
-            if (matchAlreadyExists)
+            var existingMatch = await _dbContext.Matches.AsNoTracking().Where(x => x.SmiteId == smiteMatchId).SingleOrDefaultAsync(cancellationToken);
+            if (existingMatch != null)
             {
-                return null;
+                return existingMatch.Id;
             }
 
             var sessionId = await _smiteSessionService.GetSessionIdAsync(cancellationToken);
@@ -77,13 +77,13 @@ namespace SmitenightApp.Application.Services.Matches
                 return matchIdList;
             }
 
-            var alreadyExistingMatches = await _dbContext.Matches.AsNoTracking().Where(x => smiteMatchIds.Contains(x.SmiteId)).Select(x => x.SmiteId).ToListAsync(cancellationToken);
-            if (alreadyExistingMatches.Any())
+            var existingMatches = await _dbContext.Matches.AsNoTracking().Where(x => smiteMatchIds.Contains(x.SmiteId)).ToListAsync(cancellationToken);
+            if (existingMatches.Any())
             {
-                foreach (var alreadyExistingMatch in alreadyExistingMatches)
+                foreach (var existingMatch in existingMatches)
                 {
-                    smiteMatchIds.Remove(alreadyExistingMatch);
-                    matchIdList.Add(alreadyExistingMatch);
+                    smiteMatchIds.Remove(existingMatch.SmiteId);
+                    matchIdList.Add(existingMatch.Id);
                 }
 
                 if (!smiteMatchIds.Any())
@@ -144,7 +144,7 @@ namespace SmitenightApp.Application.Services.Matches
                     matchDetailsEntity.ItemPurchases = await _itemPurchaseBuilderService.BuildAsync(matchDetails, cancellationToken);
 
                     // Attach player (and update if already exists)
-                    if (!string.IsNullOrWhiteSpace(matchDetails.PlayerId) && matchDetails.PlayerId != MatchResponseConstants.AnonymousPlayerId)
+                    if (!string.IsNullOrWhiteSpace(matchDetails.PlayerId) && matchDetails.PlayerId != ResponseConstants.AnonymousPlayerStringId)
                     {
                         await ProcessPlayerAsync(matchDetails, matchDetailsEntity, cancellationToken);
                     }
@@ -184,7 +184,7 @@ namespace SmitenightApp.Application.Services.Matches
                 var player = _playerBuilderService.Build(matchDetails);
                 matchDetailsEntity.Player = player;
             }
-            else if (existingPlayer.LastSynchronizedMatchId < matchDetails.Match)
+            else if (!existingPlayer.LastSynchronizedMatchId.HasValue || existingPlayer.LastSynchronizedMatchId < matchDetails.Match)
             {
                 var player = _playerBuilderService.Build(matchDetails);
                 player.Id = existingPlayer.Id;
@@ -200,7 +200,7 @@ namespace SmitenightApp.Application.Services.Matches
 
         public async Task ProcessAnonymousPlayerAsync(MatchDetailsResponse matchDetails, MatchDetail matchDetailsEntity, CancellationToken cancellationToken = default)
         {
-            var existingPlayer = await _dbContext.Players.AsNoTracking().SingleOrDefaultAsync(x => x.Level == matchDetails.AccountLevel && x.MasteryLevel == matchDetails.MasteryLevel, cancellationToken);
+            var existingPlayer = await _dbContext.Players.AsNoTracking().SingleOrDefaultAsync(x => x.PrivacyEnabled && x.Level == matchDetails.AccountLevel && x.MasteryLevel == matchDetails.MasteryLevel, cancellationToken);
             if (existingPlayer == null)
             {
                 var player = _playerBuilderService.BuildAnonymous(matchDetails);

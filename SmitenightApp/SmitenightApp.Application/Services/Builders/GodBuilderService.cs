@@ -13,62 +13,62 @@ namespace SmitenightApp.Application.Services.Builders
         /// <summary>
         /// Builds a new <see cref="God"/> entity based on the response from the API
         /// </summary>
-        /// <param name="god"></param>
-        /// <param name="godSkins"></param>
+        /// <param name="godResponse"></param>
+        /// <param name="godSkinsResponse"></param>
         /// <returns></returns>
-        public God Build(GodsResponse god, List<GodSkinsResponse> godSkins)
+        public God Build(GodsResponse godResponse, List<GodSkinsResponse> godSkinsResponse)
         {
             return new God
             {
-                AttackSpeed = god.AttackSpeed,
-                AttackSpeedPerLevel = god.AttackSpeedPerLevel,
-                AutoBanned = god.AutoBanned == ResponseConstants.Yes,
-                GodCardUrl = god.GodCardUrl,
-                GodIconUrl = god.GodIconUrl,
-                Health = god.Health,
-                HealthPerFive = god.HealthPerFive,
-                HealthPerLevel = god.HealthPerLevel,
-                Hp5PerLevel = god.Hp5PerLevel,
-                LatestGod = god.LatestGod == ResponseConstants.Yes,
-                Lore = god.Lore,
-                MagicProtection = god.MagicProtection,
-                MagicProtectionPerLevel = god.MagicProtectionPerLevel,
-                MagicalPower = god.MagicalPower,
-                MagicalPowerPerLevel = god.MagicalPowerPerLevel,
-                Mana = god.Mana,
-                ManaPerFive = god.ManaPerFive,
-                ManaPerLevel = god.ManaPerLevel,
-                Mp5PerLevel = god.Mp5PerLevel,
-                Name = god.Name,
-                OnFreeRotation = god.OnFreeRotation == ResponseConstants.Yes,
-                Pantheon = god.Pantheon,
-                PhysicalPower = god.PhysicalPower,
-                PhysicalPowerPerLevel = god.PhysicalPowerPerLevel,
-                PhysicalProtection = god.PhysicalProtection,
-                PhysicalProtectionPerLevel = god.PhysicalProtectionPerLevel,
-                Pros = god.Pros,
-                Role = ConvertToGodRoleEnum(god.Roles),
-                SmiteId = god.Id,
-                Speed = god.Speed,
-                Title = god.Title,
-                Type = ConvertToGodTypeEnum(god.Type),
+                AttackSpeed = godResponse.AttackSpeed,
+                AttackSpeedPerLevel = godResponse.AttackSpeedPerLevel,
+                AutoBanned = godResponse.AutoBanned == ResponseConstants.Yes,
+                GodCardUrl = godResponse.GodCardUrl,
+                GodIconUrl = godResponse.GodIconUrl,
+                Health = godResponse.Health,
+                HealthPerFive = godResponse.HealthPerFive,
+                HealthPerLevel = godResponse.HealthPerLevel,
+                Hp5PerLevel = godResponse.Hp5PerLevel,
+                LatestGod = godResponse.LatestGod == ResponseConstants.Yes,
+                Lore = godResponse.Lore,
+                MagicProtection = godResponse.MagicProtection,
+                MagicProtectionPerLevel = godResponse.MagicProtectionPerLevel,
+                MagicalPower = godResponse.MagicalPower,
+                MagicalPowerPerLevel = godResponse.MagicalPowerPerLevel,
+                Mana = godResponse.Mana,
+                ManaPerFive = godResponse.ManaPerFive,
+                ManaPerLevel = godResponse.ManaPerLevel,
+                Mp5PerLevel = godResponse.Mp5PerLevel,
+                Name = godResponse.Name,
+                OnFreeRotation = godResponse.OnFreeRotation == ResponseConstants.Yes,
+                Pantheon = godResponse.Pantheon,
+                PhysicalPower = godResponse.PhysicalPower,
+                PhysicalPowerPerLevel = godResponse.PhysicalPowerPerLevel,
+                PhysicalProtection = godResponse.PhysicalProtection,
+                PhysicalProtectionPerLevel = godResponse.PhysicalProtectionPerLevel,
+                Pros = godResponse.Pros,
+                Role = ConvertToGodRoleEnum(godResponse.Roles),
+                SmiteId = godResponse.Id,
+                Speed = godResponse.Speed,
+                Title = godResponse.Title,
+                Type = ConvertToGodTypeEnum(godResponse.Type),
                 Abilities = new List<Ability>
                 {
                     new()
                     {
                         AbilityType = AbilityTypeEnum.Primary,
-                        Cooldown = !string.IsNullOrWhiteSpace(god.AbilityDetails1.Description.ItemDescription.Cooldown) ? god.AbilityDetails1.Description.ItemDescription.Cooldown : null,
-                        Cost = !string.IsNullOrWhiteSpace(god.AbilityDetails1.Description.ItemDescription.Cost) ? god.AbilityDetails1.Description.ItemDescription.Cost : null,
-                        Description = god.AbilityDetails1.Description.ItemDescription.Description,
-                        SmiteId = god.AbilityDetails1.Id,
-                        Summary = god.AbilityDetails1.Summary,
-                        Url = god.AbilityDetails1.Url,
-                        AbilityRanks = god.AbilityDetails1.Description.ItemDescription.RankItems.Select(rankItem => new AbilityRank
+                        Cooldown = !string.IsNullOrWhiteSpace(godResponse.AbilityDetails1.Description.ItemDescription.Cooldown) ? godResponse.AbilityDetails1.Description.ItemDescription.Cooldown : null,
+                        Cost = !string.IsNullOrWhiteSpace(godResponse.AbilityDetails1.Description.ItemDescription.Cost) ? godResponse.AbilityDetails1.Description.ItemDescription.Cost : null,
+                        Description = godResponse.AbilityDetails1.Description.ItemDescription.Description,
+                        SmiteId = godResponse.AbilityDetails1.Id,
+                        Summary = godResponse.AbilityDetails1.Summary,
+                        Url = godResponse.AbilityDetails1.Url,
+                        AbilityRanks = godResponse.AbilityDetails1.Description.ItemDescription.RankItems.Select(rankItem => new AbilityRank
                         {
                             Description = rankItem.Description,
                             Value = rankItem.Value
                         }).ToList(),
-                        AbilityTags = god.AbilityDetails1.Description.ItemDescription.MenuItems.Select(menuItem => new AbilityTag
+                        AbilityTags = godResponse.AbilityDetails1.Description.ItemDescription.MenuItems.Select(menuItem => new AbilityTag
                         {
                             Description = menuItem.Description,
                             Value = menuItem.Value
@@ -77,18 +77,18 @@ namespace SmitenightApp.Application.Services.Builders
                     new()
                     {
                         AbilityType = AbilityTypeEnum.Secondary,
-                        Cooldown = !string.IsNullOrWhiteSpace(god.AbilityDetails2.Description.ItemDescription.Cooldown) ? god.AbilityDetails2.Description.ItemDescription.Cooldown : null,
-                        Cost = !string.IsNullOrWhiteSpace(god.AbilityDetails2.Description.ItemDescription.Cost) ? god.AbilityDetails2.Description.ItemDescription.Cost : null,
-                        Description = god.AbilityDetails2.Description.ItemDescription.Description,
-                        SmiteId = god.AbilityDetails2.Id,
-                        Summary = god.AbilityDetails2.Summary,
-                        Url = god.AbilityDetails2.Url,
-                        AbilityRanks = god.AbilityDetails2.Description.ItemDescription.RankItems.Select(rankItem => new AbilityRank
+                        Cooldown = !string.IsNullOrWhiteSpace(godResponse.AbilityDetails2.Description.ItemDescription.Cooldown) ? godResponse.AbilityDetails2.Description.ItemDescription.Cooldown : null,
+                        Cost = !string.IsNullOrWhiteSpace(godResponse.AbilityDetails2.Description.ItemDescription.Cost) ? godResponse.AbilityDetails2.Description.ItemDescription.Cost : null,
+                        Description = godResponse.AbilityDetails2.Description.ItemDescription.Description,
+                        SmiteId = godResponse.AbilityDetails2.Id,
+                        Summary = godResponse.AbilityDetails2.Summary,
+                        Url = godResponse.AbilityDetails2.Url,
+                        AbilityRanks = godResponse.AbilityDetails2.Description.ItemDescription.RankItems.Select(rankItem => new AbilityRank
                         {
                             Description = rankItem.Description,
                             Value = rankItem.Value
                         }).ToList(),
-                        AbilityTags = god.AbilityDetails2.Description.ItemDescription.MenuItems.Select(menuItem => new AbilityTag
+                        AbilityTags = godResponse.AbilityDetails2.Description.ItemDescription.MenuItems.Select(menuItem => new AbilityTag
                         {
                             Description = menuItem.Description,
                             Value = menuItem.Value
@@ -97,18 +97,18 @@ namespace SmitenightApp.Application.Services.Builders
                     new()
                     {
                         AbilityType = AbilityTypeEnum.Tertiary,
-                        Cooldown = !string.IsNullOrWhiteSpace(god.AbilityDetails3.Description.ItemDescription.Cooldown) ? god.AbilityDetails3.Description.ItemDescription.Cooldown : null,
-                        Cost = !string.IsNullOrWhiteSpace(god.AbilityDetails3.Description.ItemDescription.Cost) ? god.AbilityDetails3.Description.ItemDescription.Cost : null,
-                        Description = god.AbilityDetails3.Description.ItemDescription.Description,
-                        SmiteId = god.AbilityDetails3.Id,
-                        Summary = god.AbilityDetails3.Summary,
-                        Url = god.AbilityDetails3.Url,
-                        AbilityRanks = god.AbilityDetails3.Description.ItemDescription.RankItems.Select(rankItem => new AbilityRank
+                        Cooldown = !string.IsNullOrWhiteSpace(godResponse.AbilityDetails3.Description.ItemDescription.Cooldown) ? godResponse.AbilityDetails3.Description.ItemDescription.Cooldown : null,
+                        Cost = !string.IsNullOrWhiteSpace(godResponse.AbilityDetails3.Description.ItemDescription.Cost) ? godResponse.AbilityDetails3.Description.ItemDescription.Cost : null,
+                        Description = godResponse.AbilityDetails3.Description.ItemDescription.Description,
+                        SmiteId = godResponse.AbilityDetails3.Id,
+                        Summary = godResponse.AbilityDetails3.Summary,
+                        Url = godResponse.AbilityDetails3.Url,
+                        AbilityRanks = godResponse.AbilityDetails3.Description.ItemDescription.RankItems.Select(rankItem => new AbilityRank
                         {
                             Description = rankItem.Description,
                             Value = rankItem.Value
                         }).ToList(),
-                        AbilityTags = god.AbilityDetails3.Description.ItemDescription.MenuItems.Select(menuItem => new AbilityTag
+                        AbilityTags = godResponse.AbilityDetails3.Description.ItemDescription.MenuItems.Select(menuItem => new AbilityTag
                         {
                             Description = menuItem.Description,
                             Value = menuItem.Value
@@ -117,18 +117,18 @@ namespace SmitenightApp.Application.Services.Builders
                     new()
                     {
                         AbilityType = AbilityTypeEnum.Ultimate,
-                        Cooldown = !string.IsNullOrWhiteSpace(god.AbilityDetails4.Description.ItemDescription.Cooldown) ? god.AbilityDetails4.Description.ItemDescription.Cooldown : null,
-                        Cost = !string.IsNullOrWhiteSpace(god.AbilityDetails4.Description.ItemDescription.Cost) ? god.AbilityDetails4.Description.ItemDescription.Cost : null,
-                        Description = god.AbilityDetails4.Description.ItemDescription.Description,
-                        SmiteId = god.AbilityDetails4.Id,
-                        Summary = god.AbilityDetails4.Summary,
-                        Url = god.AbilityDetails4.Url,
-                        AbilityRanks = god.AbilityDetails4.Description.ItemDescription.RankItems.Select(rankItem => new AbilityRank
+                        Cooldown = !string.IsNullOrWhiteSpace(godResponse.AbilityDetails4.Description.ItemDescription.Cooldown) ? godResponse.AbilityDetails4.Description.ItemDescription.Cooldown : null,
+                        Cost = !string.IsNullOrWhiteSpace(godResponse.AbilityDetails4.Description.ItemDescription.Cost) ? godResponse.AbilityDetails4.Description.ItemDescription.Cost : null,
+                        Description = godResponse.AbilityDetails4.Description.ItemDescription.Description,
+                        SmiteId = godResponse.AbilityDetails4.Id,
+                        Summary = godResponse.AbilityDetails4.Summary,
+                        Url = godResponse.AbilityDetails4.Url,
+                        AbilityRanks = godResponse.AbilityDetails4.Description.ItemDescription.RankItems.Select(rankItem => new AbilityRank
                         {
                             Description = rankItem.Description,
                             Value = rankItem.Value
                         }).ToList(),
-                        AbilityTags = god.AbilityDetails4.Description.ItemDescription.MenuItems.Select(menuItem => new AbilityTag
+                        AbilityTags = godResponse.AbilityDetails4.Description.ItemDescription.MenuItems.Select(menuItem => new AbilityTag
                         {
                             Description = menuItem.Description,
                             Value = menuItem.Value
@@ -137,30 +137,30 @@ namespace SmitenightApp.Application.Services.Builders
                     new()
                     {
                         AbilityType = AbilityTypeEnum.Passive,
-                        Cooldown = !string.IsNullOrWhiteSpace(god.AbilityDetails5.Description.ItemDescription.Cooldown) ? god.AbilityDetails5.Description.ItemDescription.Cooldown : null,
-                        Cost = !string.IsNullOrWhiteSpace(god.AbilityDetails5.Description.ItemDescription.Cost) ? god.AbilityDetails5.Description.ItemDescription.Cost : null,
-                        Description = god.AbilityDetails5.Description.ItemDescription.Description,
-                        SmiteId = god.AbilityDetails5.Id,
-                        Summary = god.AbilityDetails5.Summary,
-                        Url = god.AbilityDetails5.Url,
-                        AbilityRanks = god.AbilityDetails5.Description.ItemDescription.RankItems.Select(rankItem => new AbilityRank
+                        Cooldown = !string.IsNullOrWhiteSpace(godResponse.AbilityDetails5.Description.ItemDescription.Cooldown) ? godResponse.AbilityDetails5.Description.ItemDescription.Cooldown : null,
+                        Cost = !string.IsNullOrWhiteSpace(godResponse.AbilityDetails5.Description.ItemDescription.Cost) ? godResponse.AbilityDetails5.Description.ItemDescription.Cost : null,
+                        Description = godResponse.AbilityDetails5.Description.ItemDescription.Description,
+                        SmiteId = godResponse.AbilityDetails5.Id,
+                        Summary = godResponse.AbilityDetails5.Summary,
+                        Url = godResponse.AbilityDetails5.Url,
+                        AbilityRanks = godResponse.AbilityDetails5.Description.ItemDescription.RankItems.Select(rankItem => new AbilityRank
                         {
                             Description = rankItem.Description,
                             Value = rankItem.Value
                         }).ToList(),
-                        AbilityTags = god.AbilityDetails5.Description.ItemDescription.MenuItems.Select(menuItem => new AbilityTag
+                        AbilityTags = godResponse.AbilityDetails5.Description.ItemDescription.MenuItems.Select(menuItem => new AbilityTag
                         {
                             Description = menuItem.Description,
                             Value = menuItem.Value
                         }).ToList()
                     }
                 },
-                BasicAttackDescriptions = god.BasicAttack.ItemDescription.MenuItems.Select(basicAttack => new BasicAttackDescription
+                BasicAttackDescriptions = godResponse.BasicAttack.ItemDescription.MenuItems.Select(basicAttack => new BasicAttackDescription
                 {
                     Description = basicAttack.Description,
                     Value = basicAttack.Value
                 }).ToList(),
-                GodSkins = godSkins.Select(godSkin => new GodSkin
+                GodSkins = godSkinsResponse.Select(godSkin => new GodSkin
                 {
                     GodSkinUrl = !string.IsNullOrWhiteSpace(godSkin.GodSkinUrl) ? godSkin.GodSkinUrl : null,
                     Name = godSkin.SkinName,

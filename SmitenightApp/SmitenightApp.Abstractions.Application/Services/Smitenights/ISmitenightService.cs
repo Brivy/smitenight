@@ -1,4 +1,4 @@
-﻿namespace SmitenightApp.Abstractions.Application.Services.Smitenight;
+﻿namespace SmitenightApp.Abstractions.Application.Services.Smitenights;
 
 public interface ISmitenightService
 {

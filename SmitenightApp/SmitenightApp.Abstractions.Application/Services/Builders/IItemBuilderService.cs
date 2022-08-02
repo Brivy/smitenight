@@ -5,9 +5,9 @@ namespace SmitenightApp.Abstractions.Application.Services.Builders;
 
 public interface IItemBuilderService
 {
-    Item BuildItem(ItemsResponse item);
+    Item BuildItem(ItemsResponse itemResponse);
 
-    Consumable BuildConsumable(ItemsResponse item);
+    Consumable BuildConsumable(ItemsResponse consumableResponse);
 
-    Active BuildActive(ItemsResponse item);
+    Active BuildActive(ItemsResponse activeResponse);
 }

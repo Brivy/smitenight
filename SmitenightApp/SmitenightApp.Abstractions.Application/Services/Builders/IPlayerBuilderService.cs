@@ -5,6 +5,6 @@ namespace SmitenightApp.Abstractions.Application.Services.Builders;
 
 public interface IPlayerBuilderService
 {
-    Player Build(MatchDetailsResponse matchDetails, CancellationToken cancellationToken = default);
-    Player BuildAnonymous(MatchDetailsResponse matchDetails, CancellationToken cancellationToken = default);
+    Player Build(MatchDetailsResponse matchDetailsResponse);
+    Player BuildAnonymous(MatchDetailsResponse matchDetailsResponse);
 }
