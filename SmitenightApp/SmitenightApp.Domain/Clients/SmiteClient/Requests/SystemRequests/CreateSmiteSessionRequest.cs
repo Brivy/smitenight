@@ -3,5 +3,5 @@
 namespace SmitenightApp.Domain.Clients.SmiteClient.Requests.SystemRequests
 {
     public record class CreateSmiteSessionRequest() 
-        : SmiteClientRequest(MethodNameConstants.CreateSessionMethod);
+        : SmiteClientRequest(MethodNameConstants.CreateSessionMethod, false);
 }

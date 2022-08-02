@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.Extensions.Options;
 using SmitenightApp.Abstractions.Infrastructure.SmiteClient;
+using SmitenightApp.Abstractions.Infrastructure.System;
 using SmitenightApp.Domain.Clients.SmiteClient.Requests.PlayerRequests;
 using SmitenightApp.Domain.Clients.SmiteClient.Responses;
 using SmitenightApp.Domain.Clients.SmiteClient.Responses.PlayerResponses;
@@ -13,9 +14,10 @@ namespace SmitenightApp.Infrastructure.SmiteClient.Clients
     public class PlayerClient : SmiteClient, IPlayerInfoClient
     {
         public PlayerClient(HttpClient httpClient,
+            ISmiteSessionService smiteSessionService,
             IOptions<SmiteClientSettings> smiteClientSettings,
             IOptions<SmiteClientSecrets> smiteClientSecrets,
-            IMapper mapper) : base(httpClient, smiteClientSettings, smiteClientSecrets, mapper)
+            IMapper mapper) : base(httpClient, smiteSessionService, smiteClientSettings, smiteClientSecrets, mapper)
         {
         }
 

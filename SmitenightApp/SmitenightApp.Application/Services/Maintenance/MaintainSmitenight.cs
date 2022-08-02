@@ -1,33 +1,23 @@
 ﻿using SmitenightApp.Abstractions.Application.Services.Maintenance;
-using SmitenightApp.Abstractions.Application.Services.System;
 
 namespace SmitenightApp.Application.Services.Maintenance
 {
     public class MaintainSmitenight : IMaintainSmitenight
     {
-        private readonly ISmiteSessionService _smiteSessionService;
         private readonly IMaintainItemsService _maintainItemsService;
         private readonly IMaintainGodsService _godsService;
 
-        public MaintainSmitenight(ISmiteSessionService smiteSessionService,
-            IMaintainItemsService maintainItemsService,
+        public MaintainSmitenight(IMaintainItemsService maintainItemsService,
             IMaintainGodsService godsService)
         {
-            _smiteSessionService = smiteSessionService;
             _maintainItemsService = maintainItemsService;
             _godsService = godsService;
         }
 
         public async Task MaintainAsync(CancellationToken cancellationToken = default)
         {
-            var sessionId = await _smiteSessionService.GetSessionIdAsync(cancellationToken);
-            if (sessionId == null)
-            {
-                return;
-            }
-
-            await _godsService.MaintainAsync(sessionId, cancellationToken);
-            await _maintainItemsService.MaintainAsync(sessionId, cancellationToken);
+            await _godsService.MaintainAsync(cancellationToken);
+            await _maintainItemsService.MaintainAsync(cancellationToken);
         }
     }
 }

@@ -3,8 +3,7 @@
 namespace SmitenightApp.Domain.Clients.SmiteClient.Requests.PlayerRequests
 {
     public record class MatchHistoryRequest(
-        string SessionId,
-        string PlayerId) : SmiteClientRequest(MethodNameConstants.MatchHistoryMethod, SessionId)
+        string PlayerId) : SmiteClientRequest(MethodNameConstants.MatchHistoryMethod)
     {
         public override string GetUrlPath() =>
             ConstructUrlPath(PlayerId);

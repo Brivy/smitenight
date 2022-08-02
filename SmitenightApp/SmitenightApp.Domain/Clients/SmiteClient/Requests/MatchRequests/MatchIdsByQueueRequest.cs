@@ -4,10 +4,9 @@ using SmitenightApp.Domain.Enums.SmiteClient;
 namespace SmitenightApp.Domain.Clients.SmiteClient.Requests.MatchRequests
 {
     public record class MatchIdsByQueueRequest(
-        string SessionId,
         GameModeQueueIdEnum GameModeQueueId,
         int MatchIdDate,
-        int MatchIdHour) : SmiteClientRequest(MethodNameConstants.MatchIdsByQueueMethod, SessionId)
+        int MatchIdHour) : SmiteClientRequest(MethodNameConstants.MatchIdsByQueueMethod)
     {
         public override string GetUrlPath() =>
             ConstructUrlPath((int)GameModeQueueId, MatchIdDate, MatchIdHour);

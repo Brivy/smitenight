@@ -4,8 +4,7 @@ using SmitenightApp.Domain.Enums.SmiteClient;
 namespace SmitenightApp.Domain.Clients.SmiteClient.Requests.GodRequests
 {
     public record class GodsRequest(
-        string SessionId,
-        LanguageCodeEnum LanguageCode) : SmiteClientRequest(MethodNameConstants.GodsMethod, SessionId)
+        LanguageCodeEnum LanguageCode) : SmiteClientRequest(MethodNameConstants.GodsMethod)
     {
         public override string GetUrlPath() =>
             ConstructUrlPath((int)LanguageCode);

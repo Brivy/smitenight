@@ -3,7 +3,6 @@ using SmitenightApp.Abstractions.Application.Services.Builders;
 using SmitenightApp.Abstractions.Application.Services.Common;
 using SmitenightApp.Abstractions.Application.Services.Matches;
 using SmitenightApp.Abstractions.Application.Services.Smitenights;
-using SmitenightApp.Abstractions.Application.Services.System;
 using SmitenightApp.Abstractions.Infrastructure.SmiteClient;
 using SmitenightApp.Domain.Clients.SmiteClient.Requests.PlayerRequests;
 using SmitenightApp.Domain.Clients.SmiteClient.Requests.RetrievePlayerRequests;
@@ -15,7 +14,6 @@ namespace SmitenightApp.Application.Services.Smitenights
 {
     public class SmitenightService : ISmitenightService
     {
-        private readonly ISmiteSessionService _smiteSessionService;
         private readonly IPlayerInfoClient _playerInfoClient;
         private readonly IRetrievePlayerClient _retrievePlayerClient;
         private readonly IImportMatchService _importMatchService;
@@ -24,7 +22,6 @@ namespace SmitenightApp.Application.Services.Smitenights
         private readonly SmitenightDbContext _dbContext;
 
         public SmitenightService(
-            ISmiteSessionService smiteSessionService,
             IPlayerInfoClient playerInfoClient,
             IRetrievePlayerClient retrievePlayerClient,
             IImportMatchService importMatchService,
@@ -32,7 +29,6 @@ namespace SmitenightApp.Application.Services.Smitenights
             IClock clock,
             SmitenightDbContext dbContext)
         {
-            _smiteSessionService = smiteSessionService;
             _playerInfoClient = playerInfoClient;
             _retrievePlayerClient = retrievePlayerClient;
             _importMatchService = importMatchService;
@@ -43,13 +39,7 @@ namespace SmitenightApp.Application.Services.Smitenights
 
         public async Task StartSmitenight(string playerName, CancellationToken cancellationToken = default)
         {
-            var sessionId = await _smiteSessionService.GetSessionIdAsync(cancellationToken);
-            if (string.IsNullOrWhiteSpace(sessionId))
-            {
-                return;
-            }
-
-            var playerIdRequest = new PlayerIdByNameRequest(sessionId, playerName);
+            var playerIdRequest = new PlayerIdByNameRequest(playerName);
             var playerIdResponse = await _retrievePlayerClient.GetPlayerIdByPlayerNameAsync(playerIdRequest, cancellationToken);
             if (playerIdResponse?.Response?.Any() != true)
             {
@@ -66,7 +56,7 @@ namespace SmitenightApp.Application.Services.Smitenights
             var playerEntity = await _dbContext.Players.AsNoTracking().Where(x => x.SmiteId == smitePlayer.PlayerId).SingleOrDefaultAsync(cancellationToken);
             if (playerEntity == null)
             {
-                var playerRequest = new PlayerWithoutPortalRequest(sessionId, smitePlayer.PlayerId.ToString());
+                var playerRequest = new PlayerWithoutPortalRequest(smitePlayer.PlayerId.ToString());
                 var player = await _retrievePlayerClient.GetPlayerWithoutPortalAsync(playerRequest, cancellationToken);
                 if (player?.Response?.Any() != true || player.Response.First().Id == ResponseConstants.AnonymousPlayerIntId)
                 {
@@ -92,13 +82,7 @@ namespace SmitenightApp.Application.Services.Smitenights
 
         public async Task EndSmitenight(string playerName, CancellationToken cancellationToken = default)
         {
-            var sessionId = await _smiteSessionService.GetSessionIdAsync(cancellationToken);
-            if (string.IsNullOrWhiteSpace(sessionId))
-            {
-                return;
-            }
-
-            var playerIdRequest = new PlayerIdByNameRequest(sessionId, playerName);
+            var playerIdRequest = new PlayerIdByNameRequest(playerName);
             var playerIdResponse = await _retrievePlayerClient.GetPlayerIdByPlayerNameAsync(playerIdRequest, cancellationToken);
             if (playerIdResponse?.Response?.Any() != true)
             {
@@ -106,7 +90,7 @@ namespace SmitenightApp.Application.Services.Smitenights
             }
 
             var smitePlayerId = playerIdResponse.Response.First().PlayerId;
-            var playerHistoryRequest = new MatchHistoryRequest(sessionId, smitePlayerId.ToString());
+            var playerHistoryRequest = new MatchHistoryRequest(smitePlayerId.ToString());
             var playerHistoryResponse = await _playerInfoClient.GetMatchHistoryAsync(playerHistoryRequest, cancellationToken);
             if (playerHistoryResponse?.Response?.Any() != true)
             {
@@ -115,7 +99,12 @@ namespace SmitenightApp.Application.Services.Smitenights
 
             var smitenightMatchIds = new List<int>();
             var playerEntityId = await _dbContext.Players.AsNoTracking().Where(x => x.SmiteId == smitePlayerId).Select(x => x.Id).SingleAsync(cancellationToken);
-            var smitenight = await _dbContext.Smitenights.Where(x => x.PlayerId == playerEntityId && x.EndDate == null).SingleAsync(cancellationToken);
+            var smitenight = await _dbContext.Smitenights.Where(x => x.PlayerId == playerEntityId && x.EndDate == null).SingleOrDefaultAsync(cancellationToken);
+            if (smitenight == null)
+            {
+                return;
+            }
+
             playerHistoryResponse.Response.ForEach(matchHistory =>
             {
                 if (!DateTime.TryParse(matchHistory.MatchTime, out var startTime))

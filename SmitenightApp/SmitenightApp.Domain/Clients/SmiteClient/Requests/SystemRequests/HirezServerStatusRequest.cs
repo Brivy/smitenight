@@ -2,6 +2,5 @@
 
 namespace SmitenightApp.Domain.Clients.SmiteClient.Requests.SystemRequests
 {
-    public record class HirezServerStatusRequest(string SessionId) 
-        : SmiteClientRequest(MethodNameConstants.HirezServerStatusMethod, SessionId);
+    public record class HirezServerStatusRequest() : SmiteClientRequest(MethodNameConstants.HirezServerStatusMethod);
 }

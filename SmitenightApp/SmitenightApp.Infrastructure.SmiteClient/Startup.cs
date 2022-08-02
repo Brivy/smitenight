@@ -1,9 +1,11 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using SmitenightApp.Abstractions.Infrastructure.SmiteClient;
+using SmitenightApp.Abstractions.Infrastructure.System;
 using SmitenightApp.Infrastructure.SmiteClient.Clients;
 using SmitenightApp.Infrastructure.SmiteClient.Secrets;
 using SmitenightApp.Infrastructure.SmiteClient.Settings;
+using SmitenightApp.Infrastructure.SmiteClient.System;
 
 namespace SmitenightApp.Infrastructure.SmiteClient
 {
@@ -27,6 +29,10 @@ namespace SmitenightApp.Infrastructure.SmiteClient
             serviceCollection.AddHttpClient<ILeagueClient, LeagueClient>();
             serviceCollection.AddHttpClient<ITeamClient, TeamClient>();
             serviceCollection.AddHttpClient<IOtherClient, OtherClient>();
+            serviceCollection.AddHttpClient<ISessionClient, SessionClient>();
+
+            // System services
+            serviceCollection.AddScoped<ISmiteSessionService, SmiteSessionService>();
         }
     }
 }

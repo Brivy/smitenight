@@ -2,6 +2,5 @@
 
 namespace SmitenightApp.Domain.Clients.SmiteClient.Requests.SystemRequests
 {
-    public record class PatchInfoRequest(string SessionId) 
-        : SmiteClientRequest(MethodNameConstants.PatchInfoMethod, SessionId);
+    public record class PatchInfoRequest() : SmiteClientRequest(MethodNameConstants.PatchInfoMethod);
 }

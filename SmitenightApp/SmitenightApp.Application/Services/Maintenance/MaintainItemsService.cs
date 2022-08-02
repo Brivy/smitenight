@@ -25,10 +25,9 @@ namespace SmitenightApp.Application.Services.Maintenance
             _itemBuilderService = itemBuilderService;
         }
 
-        // TODO: Create dummy items with ID 1, so we can refer to them when we can't find anything
-        public async Task MaintainAsync(string sessionId, CancellationToken cancellationToken = default)
+        public async Task MaintainAsync(CancellationToken cancellationToken = default)
         {
-            var itemsRequest = new ItemsRequest(sessionId, LanguageCodeEnum.English);
+            var itemsRequest = new ItemsRequest(LanguageCodeEnum.English);
             var itemsResponse = await _itemSmiteClient.GetItemsAsync(itemsRequest, cancellationToken);
             if (itemsResponse?.Response == null)
             {

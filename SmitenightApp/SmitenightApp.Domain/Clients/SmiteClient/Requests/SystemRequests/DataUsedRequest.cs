@@ -2,6 +2,5 @@
 
 namespace SmitenightApp.Domain.Clients.SmiteClient.Requests.SystemRequests
 {
-    public record class DataUsedRequest(string SessionId) 
-        : SmiteClientRequest(MethodNameConstants.DataUsedMethod, SessionId);
+    public record class DataUsedRequest() : SmiteClientRequest(MethodNameConstants.DataUsedMethod);
 }

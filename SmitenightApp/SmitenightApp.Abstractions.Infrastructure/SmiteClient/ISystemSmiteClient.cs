@@ -6,9 +6,6 @@ namespace SmitenightApp.Abstractions.Infrastructure.SmiteClient;
 
 public interface ISystemSmiteClient
 {
-    Task<SmiteClientResponse<CreateSmiteSessionResponse>?> CreateSmiteSessionAsync(
-        CreateSmiteSessionRequest request, CancellationToken cancellationToken);
-
     Task<SmiteClientResponse?> TestSmiteSessionAsync(
         TestSmiteSessionRequest request, CancellationToken cancellationToken);
 

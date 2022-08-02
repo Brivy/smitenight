@@ -4,9 +4,8 @@ using SmitenightApp.Domain.Enums.SmiteClient;
 namespace SmitenightApp.Domain.Clients.SmiteClient.Requests.GodRequests
 {
     public record class GodLeaderboardRequest(
-        string SessionId,
         int GodId,
-        GameModeQueueIdEnum GameModeQueueId) : SmiteClientRequest(MethodNameConstants.GodLeaderboardMethod, SessionId)
+        GameModeQueueIdEnum GameModeQueueId) : SmiteClientRequest(MethodNameConstants.GodLeaderboardMethod)
     {
         public override string GetUrlPath() =>
             ConstructUrlPath(GodId, (int)GameModeQueueId);
