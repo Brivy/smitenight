@@ -5,5 +5,5 @@ namespace SmitenightApp.Abstractions.Application.Services.Builders;
 
 public interface IActivePurchaseBuilderService
 {
-    Task<List<ActivePurchase>> BuildAsync(MatchDetailsResponse matchDetails, CancellationToken cancellationToken = default);
+    Task<List<ActivePurchase>> BuildAsync(MatchDetailsResponse matchDetailsResponse, CancellationToken cancellationToken = default);
 }

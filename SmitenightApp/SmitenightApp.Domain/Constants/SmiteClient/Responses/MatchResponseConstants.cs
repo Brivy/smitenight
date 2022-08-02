@@ -9,9 +9,6 @@
         public const string WinnerStatus = "Winner";
         public const string LoserStatus = "Loser";
 
-        public const string AnonymousPlayerId = "0";
-        public const int EmptyResponse = 0;
-
         public const int DefaultGodId = 1;
         public const int DefaultGodSkinId = 1;
         public const int DefaultActiveId = 1;

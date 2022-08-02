@@ -2,6 +2,7 @@
 {
     public enum PortalTypeEnum
     {
+        Unknown = 0,
         Hirez = 1,
         Steam = 5,
         Ps4 = 9,

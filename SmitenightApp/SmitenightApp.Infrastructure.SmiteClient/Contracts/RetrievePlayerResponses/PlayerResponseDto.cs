@@ -19,12 +19,12 @@ namespace SmitenightApp.Infrastructure.SmiteClient.Contracts.RetrievePlayerRespo
         [JsonPropertyName("Name")] public string? Name { get; set; }
         [JsonPropertyName("Personal_Status_Message")] public string? PersonalStatusMessage { get; set; }
         [JsonPropertyName("Platform")] public string? Platform { get; set; }
-        [JsonPropertyName("Rank_Stat_Conquest")] public int RankStatConquest { get; set; }
-        [JsonPropertyName("Rank_Stat_Conquest_Controller")] public int RankStatConquestController { get; set; }
-        [JsonPropertyName("Rank_Stat_Duel")] public int RankStatDuel { get; set; }
-        [JsonPropertyName("Rank_Stat_Duel_Controller")] public int RankStatDuelController { get; set; }
-        [JsonPropertyName("Rank_Stat_Joust")] public int RankStatJoust { get; set; }
-        [JsonPropertyName("Rank_Stat_Joust_Controller")] public int RankStatJoustController { get; set; }
+        [JsonPropertyName("Rank_Stat_Conquest")] public float RankStatConquest { get; set; }
+        [JsonPropertyName("Rank_Stat_Conquest_Controller")] public float RankStatConquestController { get; set; }
+        [JsonPropertyName("Rank_Stat_Duel")] public float RankStatDuel { get; set; }
+        [JsonPropertyName("Rank_Stat_Duel_Controller")] public float RankStatDuelController { get; set; }
+        [JsonPropertyName("Rank_Stat_Joust")] public float RankStatJoust { get; set; }
+        [JsonPropertyName("Rank_Stat_Joust_Controller")] public float RankStatJoustController { get; set; }
         [JsonPropertyName("RankedConquest")] public RankedConquestDto? RankedConquest { get; set; }
         [JsonPropertyName("RankedConquestController")] public RankedConquestControllerDto? RankedConquestController { get; set; }
         [JsonPropertyName("RankedDuel")] public RankedDuelDto? RankedDuel { get; set; }
@@ -53,7 +53,7 @@ namespace SmitenightApp.Infrastructure.SmiteClient.Contracts.RetrievePlayerRespo
         [JsonPropertyName("Points")] public int Points { get; set; }
         [JsonPropertyName("PrevRank")] public int PrevRank { get; set; }
         [JsonPropertyName("Rank")] public int Rank { get; set; }
-        [JsonPropertyName("Rank_Stat")] public int RankStat { get; set; }
+        [JsonPropertyName("Rank_Stat")] public float RankStat { get; set; }
         [JsonPropertyName("Rank_Stat_Conquest")] public int? RankStatConquest { get; set; }
         [JsonPropertyName("Rank_Stat_Joust")] public int? RankStatJoust { get; set; }
         [JsonPropertyName("Rank_Variance")] public int RankVariance { get; set; }
@@ -74,7 +74,7 @@ namespace SmitenightApp.Infrastructure.SmiteClient.Contracts.RetrievePlayerRespo
         [JsonPropertyName("Points")] public int Points { get; set; }
         [JsonPropertyName("PrevRank")] public int PrevRank { get; set; }
         [JsonPropertyName("Rank")] public int Rank { get; set; }
-        [JsonPropertyName("Rank_Stat")] public int RankStat { get; set; }
+        [JsonPropertyName("Rank_Stat")] public float RankStat { get; set; }
         [JsonPropertyName("Rank_Stat_Conquest")] public int? RankStatConquest { get; set; }
         [JsonPropertyName("Rank_Stat_Joust")] public int? RankStatJoust { get; set; }
         [JsonPropertyName("Rank_Variance")] public int RankVariance { get; set; }
@@ -95,7 +95,7 @@ namespace SmitenightApp.Infrastructure.SmiteClient.Contracts.RetrievePlayerRespo
         [JsonPropertyName("Points")] public int Points { get; set; }
         [JsonPropertyName("PrevRank")] public int PrevRank { get; set; }
         [JsonPropertyName("Rank")] public int Rank { get; set; }
-        [JsonPropertyName("Rank_Stat")] public int RankStat { get; set; }
+        [JsonPropertyName("Rank_Stat")] public float RankStat { get; set; }
         [JsonPropertyName("Rank_Stat_Conquest")] public int? RankStatConquest { get; set; }
         [JsonPropertyName("Rank_Stat_Joust")] public int? RankStatJoust { get; set; }
         [JsonPropertyName("Rank_Variance")] public int RankVariance { get; set; }
@@ -116,7 +116,7 @@ namespace SmitenightApp.Infrastructure.SmiteClient.Contracts.RetrievePlayerRespo
         [JsonPropertyName("Points")] public int Points { get; set; }
         [JsonPropertyName("PrevRank")] public int PrevRank { get; set; }
         [JsonPropertyName("Rank")] public int Rank { get; set; }
-        [JsonPropertyName("Rank_Stat")] public int RankStat { get; set; }
+        [JsonPropertyName("Rank_Stat")] public float RankStat { get; set; }
         [JsonPropertyName("Rank_Stat_Conquest")] public int? RankStatConquest { get; set; }
         [JsonPropertyName("Rank_Stat_Joust")] public int? RankStatJoust { get; set; }
         [JsonPropertyName("Rank_Variance")] public int RankVariance { get; set; }
@@ -137,7 +137,7 @@ namespace SmitenightApp.Infrastructure.SmiteClient.Contracts.RetrievePlayerRespo
         [JsonPropertyName("Points")] public int Points { get; set; }
         [JsonPropertyName("PrevRank")] public int PrevRank { get; set; }
         [JsonPropertyName("Rank")] public int Rank { get; set; }
-        [JsonPropertyName("Rank_Stat")] public int RankStat { get; set; }
+        [JsonPropertyName("Rank_Stat")] public float RankStat { get; set; }
         [JsonPropertyName("Rank_Stat_Conquest")] public int? RankStatConquest { get; set; }
         [JsonPropertyName("Rank_Stat_Joust")] public int? RankStatJoust { get; set; }
         [JsonPropertyName("Rank_Variance")] public int RankVariance { get; set; }
@@ -158,7 +158,7 @@ namespace SmitenightApp.Infrastructure.SmiteClient.Contracts.RetrievePlayerRespo
         [JsonPropertyName("Points")] public int Points { get; set; }
         [JsonPropertyName("PrevRank")] public int PrevRank { get; set; }
         [JsonPropertyName("Rank")] public int Rank { get; set; }
-        [JsonPropertyName("Rank_Stat")] public int RankStat { get; set; }
+        [JsonPropertyName("Rank_Stat")] public float RankStat { get; set; }
         [JsonPropertyName("Rank_Stat_Conquest")] public int? RankStatConquest { get; set; }
         [JsonPropertyName("Rank_Stat_Joust")] public int? RankStatJoust { get; set; }
         [JsonPropertyName("Rank_Variance")] public int RankVariance { get; set; }

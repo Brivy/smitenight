@@ -5,5 +5,5 @@ namespace SmitenightApp.Abstractions.Application.Services.Builders;
 
 public interface IGodBanBuilderService
 {
-    Task<List<GodBan>> BuildAsync(MatchDetailsResponse matchDetails, CancellationToken cancellationToken = default);
+    Task<List<GodBan>> BuildAsync(MatchDetailsResponse matchDetailsResponse, CancellationToken cancellationToken = default);
 }

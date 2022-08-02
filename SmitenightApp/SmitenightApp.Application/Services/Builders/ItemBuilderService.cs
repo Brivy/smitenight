@@ -9,28 +9,23 @@ namespace SmitenightApp.Application.Services.Builders
 {
     public class ItemBuilderService : IItemBuilderService
     {
-        /// <summary>
-        /// Builds a new <see cref="Item"/> entity based on the response from the API
-        /// </summary>
-        /// <param name="item"></param>
-        /// <returns></returns>
-        public Item BuildItem(ItemsResponse item)
+        public Item BuildItem(ItemsResponse itemResponse)
         {
             return new Item
             {
-                Enabled = item.ActiveFlag == ResponseConstants.Yes,
-                Description = !string.IsNullOrWhiteSpace(item.ItemDescription.Description) ? item.ItemDescription.Description : null,
-                Name = item.DeviceName,
-                Glyph = item.Glyph == ResponseConstants.Yes,
-                ItemIconUrl = item.ItemIconUrl,
-                ItemTier = ConvertToItemTierEnum(item.ItemTier),
-                Price = item.Price,
-                RestrictedRoles = ConvertToRestrictedRolesEnum(item.RestrictedRoles),
-                SecondaryDescription = !string.IsNullOrWhiteSpace(item.ItemDescription.SecondaryDescription) ? item.ItemDescription.SecondaryDescription : null,
-                ShortDescription = !string.IsNullOrWhiteSpace(item.ShortDesc) ? item.ShortDesc : null,
-                SmiteId = item.ItemId,
-                StartingItem = item.StartingItem,
-                ItemDescriptions = item.ItemDescription.MenuItems.Select(menuItem => new ItemDescription
+                Enabled = itemResponse.ActiveFlag == ResponseConstants.Yes,
+                Description = !string.IsNullOrWhiteSpace(itemResponse.ItemDescription.Description) ? itemResponse.ItemDescription.Description : null,
+                Name = itemResponse.DeviceName,
+                Glyph = itemResponse.Glyph == ResponseConstants.Yes,
+                ItemIconUrl = itemResponse.ItemIconUrl,
+                ItemTier = ConvertToItemTierEnum(itemResponse.ItemTier),
+                Price = itemResponse.Price,
+                RestrictedRoles = ConvertToRestrictedRolesEnum(itemResponse.RestrictedRoles),
+                SecondaryDescription = !string.IsNullOrWhiteSpace(itemResponse.ItemDescription.SecondaryDescription) ? itemResponse.ItemDescription.SecondaryDescription : null,
+                ShortDescription = !string.IsNullOrWhiteSpace(itemResponse.ShortDesc) ? itemResponse.ShortDesc : null,
+                SmiteId = itemResponse.ItemId,
+                StartingItem = itemResponse.StartingItem,
+                ItemDescriptions = itemResponse.ItemDescription.MenuItems.Select(menuItem => new ItemDescription
                 {
                     Description = menuItem.Description,
                     Value = menuItem.Value
@@ -38,24 +33,19 @@ namespace SmitenightApp.Application.Services.Builders
             };
         }
 
-        /// <summary>
-        /// Builds a new <see cref="Consumable"/> entity based on the response from the API
-        /// </summary>
-        /// <param name="item"></param>
-        /// <returns></returns>
-        public Consumable BuildConsumable(ItemsResponse item)
+        public Consumable BuildConsumable(ItemsResponse consumableResponse)
         {
             return new Consumable
             {
-                Enabled = item.ActiveFlag == ResponseConstants.Yes,
-                Description = !string.IsNullOrWhiteSpace(item.ItemDescription.Description) ? item.ItemDescription.Description : null,
-                Name = item.DeviceName,
-                ItemIconUrl = item.ItemIconUrl,
-                Price = item.Price,
-                SecondaryDescription = !string.IsNullOrWhiteSpace(item.ItemDescription.SecondaryDescription) ? item.ItemDescription.SecondaryDescription : null,
-                ShortDescription = !string.IsNullOrWhiteSpace(item.ShortDesc) ? item.ShortDesc : null,
-                SmiteId = item.ItemId,
-                ConsumableDescriptions = item.ItemDescription.MenuItems.Select(menuItem => new ConsumableDescription
+                Enabled = consumableResponse.ActiveFlag == ResponseConstants.Yes,
+                Description = !string.IsNullOrWhiteSpace(consumableResponse.ItemDescription.Description) ? consumableResponse.ItemDescription.Description : null,
+                Name = consumableResponse.DeviceName,
+                ItemIconUrl = consumableResponse.ItemIconUrl,
+                Price = consumableResponse.Price,
+                SecondaryDescription = !string.IsNullOrWhiteSpace(consumableResponse.ItemDescription.SecondaryDescription) ? consumableResponse.ItemDescription.SecondaryDescription : null,
+                ShortDescription = !string.IsNullOrWhiteSpace(consumableResponse.ShortDesc) ? consumableResponse.ShortDesc : null,
+                SmiteId = consumableResponse.ItemId,
+                ConsumableDescriptions = consumableResponse.ItemDescription.MenuItems.Select(menuItem => new ConsumableDescription
                 {
                     Description = menuItem.Description,
                     Value = menuItem.Value
@@ -63,24 +53,19 @@ namespace SmitenightApp.Application.Services.Builders
             };
         }
 
-        /// <summary>
-        /// Builds a new <see cref="Active"/> entity based on the response from the API
-        /// </summary>
-        /// <param name="item"></param>
-        /// <returns></returns>
-        public Active BuildActive(ItemsResponse item)
+        public Active BuildActive(ItemsResponse activeResponse)
         {
             return new Active
             {
-                Enabled = item.ActiveFlag == ResponseConstants.Yes,
-                Description = !string.IsNullOrWhiteSpace(item.ItemDescription.Description) ? item.ItemDescription.Description : null,
-                Name = item.DeviceName,
-                ItemIconUrl = item.ItemIconUrl,
-                ItemTier = ConvertToItemTierEnum(item.ItemTier),
-                Price = item.Price,
-                SecondaryDescription = item.ItemDescription.SecondaryDescription!, // Actives do always have a secondary description
-                ShortDescription = item.ShortDesc,
-                SmiteId = item.ItemId
+                Enabled = activeResponse.ActiveFlag == ResponseConstants.Yes,
+                Description = !string.IsNullOrWhiteSpace(activeResponse.ItemDescription.Description) ? activeResponse.ItemDescription.Description : null,
+                Name = activeResponse.DeviceName,
+                ItemIconUrl = activeResponse.ItemIconUrl,
+                ItemTier = ConvertToItemTierEnum(activeResponse.ItemTier),
+                Price = activeResponse.Price,
+                SecondaryDescription = activeResponse.ItemDescription.SecondaryDescription!, // Actives do always have a secondary description
+                ShortDescription = activeResponse.ShortDesc,
+                SmiteId = activeResponse.ItemId
             };
         }
 

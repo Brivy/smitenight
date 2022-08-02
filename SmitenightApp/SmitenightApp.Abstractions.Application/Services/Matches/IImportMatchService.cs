@@ -2,5 +2,6 @@
 
 public interface IImportMatchService
 {
-    Task ImportAsync(int smiteMatchId, CancellationToken cancellationToken = default);
+    Task<int?> ImportAsync(int smiteMatchId, CancellationToken cancellationToken = default);
+    Task<List<int>> ImportAsync(List<int> smiteMatchIds, CancellationToken cancellationToken = default);
 }

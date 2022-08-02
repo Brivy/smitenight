@@ -7,30 +7,30 @@ namespace SmitenightApp.Application.Services.Builders
 {
     public class PlayerBuilderService : IPlayerBuilderService
     {
-        public Player Build(MatchDetailsResponse matchDetails, CancellationToken cancellationToken = default)
+        public Player Build(MatchDetailsResponse matchDetailsResponse)
         {
             var player = new Player
             {
-                HirezGamerTag = matchDetails.HzGamerTag,
-                HirezPlayerName = matchDetails.HzPlayerName,
-                LastSynchronizedMatchId = matchDetails.Match,
-                Level = matchDetails.AccountLevel,
-                MasteryLevel = matchDetails.MasteryLevel,
-                PlayerName = matchDetails.PlayerName,
+                HirezGamerTag = matchDetailsResponse.HzGamerTag,
+                HirezPlayerName = matchDetailsResponse.HzPlayerName,
+                LastSynchronizedMatchId = matchDetailsResponse.Match,
+                Level = matchDetailsResponse.AccountLevel,
+                MasteryLevel = matchDetailsResponse.MasteryLevel,
+                PlayerName = matchDetailsResponse.PlayerName,
                 PrivacyEnabled = false,
             };
 
-            if (!string.IsNullOrWhiteSpace(matchDetails.PlayerPortalId) && int.TryParse(matchDetails.PlayerPortalId, out var parsedPlayerPortalId))
+            if (!string.IsNullOrWhiteSpace(matchDetailsResponse.PlayerPortalId) && int.TryParse(matchDetailsResponse.PlayerPortalId, out var parsedPlayerPortalId))
             {
                 player.PortalType = (PortalTypeEnum)parsedPlayerPortalId;
             }
 
-            if (!string.IsNullOrWhiteSpace(matchDetails.PlayerId) && int.TryParse(matchDetails.PlayerId, out var parsedPlayerId))
+            if (!string.IsNullOrWhiteSpace(matchDetailsResponse.PlayerId) && int.TryParse(matchDetailsResponse.PlayerId, out var parsedPlayerId))
             {
                 player.SmiteId = parsedPlayerId;
             }
 
-            if (!string.IsNullOrWhiteSpace(matchDetails.PlayerPortalUserId) && long.TryParse(matchDetails.PlayerPortalUserId, out var parsedPlayerPortalUserId))
+            if (!string.IsNullOrWhiteSpace(matchDetailsResponse.PlayerPortalUserId) && long.TryParse(matchDetailsResponse.PlayerPortalUserId, out var parsedPlayerPortalUserId))
             {
                 player.SmitePortalUserId = parsedPlayerPortalUserId;
             }
@@ -38,12 +38,12 @@ namespace SmitenightApp.Application.Services.Builders
             return player;
         }
 
-        public Player BuildAnonymous(MatchDetailsResponse matchDetails, CancellationToken cancellationToken = default)
+        public Player BuildAnonymous(MatchDetailsResponse matchDetailsResponse)
         {
             return new Player
             {
-                Level = matchDetails.AccountLevel,
-                MasteryLevel = matchDetails.MasteryLevel,
+                Level = matchDetailsResponse.AccountLevel,
+                MasteryLevel = matchDetailsResponse.MasteryLevel,
                 PrivacyEnabled = true,
             };
         }

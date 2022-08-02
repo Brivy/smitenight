@@ -5,5 +5,5 @@ namespace SmitenightApp.Abstractions.Application.Services.Builders;
 
 public interface IMatchDetailBuilderService
 {
-    MatchDetail Build(MatchDetailsResponse matchDetails);
+    MatchDetail Build(MatchDetailsResponse matchDetailsResponse);
 }
