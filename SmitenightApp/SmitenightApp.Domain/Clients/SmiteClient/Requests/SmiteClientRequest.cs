@@ -5,26 +5,18 @@ namespace SmitenightApp.Domain.Clients.SmiteClient.Requests
     public abstract record class SmiteClientRequest
     {
         public string MethodName { get; }
-        public string? SessionId { get; }
+        public bool RequiresSessionId { get; }
 
         /// <summary>
-        /// Intended for creating sessions
+        /// Builds a request for the SMITE API
+        /// Only a handful of requests can be done without a session ID, so by default it's true
         /// </summary>
-        /// <param name="methodName">Name of the Smite endpoint</param>
-        protected SmiteClientRequest(string methodName)
+        /// <param name="methodName"></param>
+        /// <param name="requiresSessionId"></param>
+        protected SmiteClientRequest(string methodName, bool requiresSessionId = true)
         {
             MethodName = methodName;
-        }
-
-        /// <summary>
-        /// Intended for all Smite calls except pinging and creating sessions
-        /// </summary>
-        /// <param name="methodName">Name of the Smite endpoint</param>
-        /// <param name="sessionId">The ID of the generated session</param>
-        protected SmiteClientRequest(string methodName, string sessionId)
-        {
-            MethodName = methodName;
-            SessionId = sessionId;
+            RequiresSessionId = requiresSessionId;
         }
 
         /// <summary>

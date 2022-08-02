@@ -25,10 +25,9 @@ namespace SmitenightApp.Application.Services.Maintenance
             _dbContext = dbContext;
         }
 
-        // TODO: Create a dummy god with ID 1, so we can refer to them when we can't find anything
-        public async Task MaintainAsync(string sessionId, CancellationToken cancellationToken = default)
+        public async Task MaintainAsync(CancellationToken cancellationToken = default)
         {
-            var godsRequest = new GodsRequest(sessionId, LanguageCodeEnum.English);
+            var godsRequest = new GodsRequest(LanguageCodeEnum.English);
             var godsResponse = await _godSmiteClient.GetGodsAsync(godsRequest, cancellationToken);
             if (godsResponse?.Response == null)
             {
@@ -45,7 +44,7 @@ namespace SmitenightApp.Application.Services.Maintenance
             {
                 foreach (var god in godsResponse.Response)
                 {
-                    var godSkinsRequest = new GodSkinsRequest(sessionId, god.Id, LanguageCodeEnum.English);
+                    var godSkinsRequest = new GodSkinsRequest(god.Id, LanguageCodeEnum.English);
                     var godSkinsResponse = await _godSmiteClient.GetGodSkinsAsync(godSkinsRequest, cancellationToken);
                     var godSkins = godSkinsResponse?.Response ?? new List<GodSkinsResponse>();
 

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.Extensions.Options;
 using SmitenightApp.Abstractions.Infrastructure.SmiteClient;
+using SmitenightApp.Abstractions.Infrastructure.System;
 using SmitenightApp.Domain.Clients.SmiteClient.Requests.SystemRequests;
 using SmitenightApp.Domain.Clients.SmiteClient.Responses;
 using SmitenightApp.Domain.Clients.SmiteClient.Responses.SystemResponses;
@@ -13,17 +14,11 @@ namespace SmitenightApp.Infrastructure.SmiteClient.Clients
     public class SystemSmiteClient : SmiteClient, ISystemSmiteClient
     {
         public SystemSmiteClient(HttpClient httpClient,
+            ISmiteSessionService smiteSessionService,
             IOptions<SmiteClientSettings> smiteClientSettings,
             IOptions<SmiteClientSecrets> smiteClientSecrets,
-            IMapper mapper) : base(httpClient, smiteClientSettings, smiteClientSecrets, mapper)
+            IMapper mapper) : base(httpClient, smiteSessionService, smiteClientSettings, smiteClientSecrets, mapper)
         {
-        }
-
-        public async Task<SmiteClientResponse<CreateSmiteSessionResponse>?> CreateSmiteSessionAsync(
-            CreateSmiteSessionRequest request, CancellationToken cancellationToken)
-        {
-            var result = await GetAsync<CreateSmiteSessionRequest, CreateSmiteSessionResponseDto>(request, cancellationToken);
-            return Mapper.Map<SmiteClientResponse<CreateSmiteSessionResponse>>(result);
         }
 
         public async Task<SmiteClientResponse?> TestSmiteSessionAsync(

@@ -3,8 +3,7 @@
 namespace SmitenightApp.Domain.Clients.SmiteClient.Requests.TeamRequests
 {
     public record class TeamDetailsRequest(
-        string SessionId,
-        int ClanId) : SmiteClientRequest(MethodNameConstants.TeamDetailsMethod, SessionId)
+        int ClanId) : SmiteClientRequest(MethodNameConstants.TeamDetailsMethod)
     {
         public override string GetUrlPath() =>
             ConstructUrlPath(ClanId);

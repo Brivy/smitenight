@@ -1,7 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SmitenightApp.Abstractions.Application.Services.Builders;
 using SmitenightApp.Abstractions.Application.Services.Matches;
-using SmitenightApp.Abstractions.Application.Services.System;
 using SmitenightApp.Abstractions.Infrastructure.SmiteClient;
 using SmitenightApp.Domain.Clients.SmiteClient.Requests.MatchRequests;
 using SmitenightApp.Domain.Clients.SmiteClient.Responses.MatchResponses;
@@ -13,7 +12,6 @@ namespace SmitenightApp.Application.Services.Matches
 {
     public class ImportMatchService : IImportMatchService
     {
-        private readonly ISmiteSessionService _smiteSessionService;
         private readonly IActivePurchaseBuilderService _activePurchaseBuilderService;
         private readonly IGodBanBuilderService _godBanBuilderService;
         private readonly IItemPurchaseBuilderService _itemPurchaseBuilderService;
@@ -24,7 +22,6 @@ namespace SmitenightApp.Application.Services.Matches
         private readonly SmitenightDbContext _dbContext;
 
         public ImportMatchService(
-            ISmiteSessionService smiteSessionService,
             IActivePurchaseBuilderService activePurchaseBuilderService,
             IGodBanBuilderService godBanBuilderService,
             IItemPurchaseBuilderService itemPurchaseBuilderService,
@@ -34,7 +31,6 @@ namespace SmitenightApp.Application.Services.Matches
             IMatchInfoClient matchInfoClient,
             SmitenightDbContext dbContext)
         {
-            _smiteSessionService = smiteSessionService;
             _activePurchaseBuilderService = activePurchaseBuilderService;
             _godBanBuilderService = godBanBuilderService;
             _itemPurchaseBuilderService = itemPurchaseBuilderService;
@@ -53,13 +49,7 @@ namespace SmitenightApp.Application.Services.Matches
                 return existingMatch.Id;
             }
 
-            var sessionId = await _smiteSessionService.GetSessionIdAsync(cancellationToken);
-            if (string.IsNullOrEmpty(sessionId))
-            {
-                return null;
-            }
-
-            var matchDetailsRequest = new MatchDetailsRequest(sessionId, smiteMatchId);
+            var matchDetailsRequest = new MatchDetailsRequest(smiteMatchId);
             var matchDetailsResponse = await _matchInfoClient.GetMatchDetailsAsync(matchDetailsRequest, cancellationToken);
             if (matchDetailsResponse?.Response?.Any() != true)
             {
@@ -92,13 +82,7 @@ namespace SmitenightApp.Application.Services.Matches
                 }
             }
 
-            var sessionId = await _smiteSessionService.GetSessionIdAsync(cancellationToken);
-            if (string.IsNullOrEmpty(sessionId))
-            {
-                return matchIdList;
-            }
-
-            var matchDetailsBatchRequest = new MatchDetailsBatchRequest(sessionId, smiteMatchIds);
+            var matchDetailsBatchRequest = new MatchDetailsBatchRequest(smiteMatchIds);
             var matchDetailsBatchResponse = await _matchInfoClient.GetMatchDetailsBatchAsync(matchDetailsBatchRequest, cancellationToken);
             if (matchDetailsBatchResponse?.Response?.Any() != true)
             {

@@ -2,5 +2,5 @@
 
 public interface IMaintainItemsService
 {
-    Task MaintainAsync(string sessionId, CancellationToken cancellationToken = default);
+    Task MaintainAsync(CancellationToken cancellationToken = default);
 }

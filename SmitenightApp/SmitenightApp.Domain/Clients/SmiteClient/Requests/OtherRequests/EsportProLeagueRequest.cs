@@ -2,6 +2,5 @@
 
 namespace SmitenightApp.Domain.Clients.SmiteClient.Requests.OtherRequests
 {
-    public record class EsportProLeagueRequest(string SessionId) 
-        : SmiteClientRequest(MethodNameConstants.EsportProLeagueMethod, SessionId);
+    public record class EsportProLeagueRequest() : SmiteClientRequest(MethodNameConstants.EsportProLeagueMethod);
 }

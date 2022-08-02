@@ -3,8 +3,7 @@
 namespace SmitenightApp.Domain.Clients.SmiteClient.Requests.PlayerRequests
 {
     public record class FriendsRequest(
-        string SessionId,
-        string PlayerId) : SmiteClientRequest(MethodNameConstants.FriendsMethod, SessionId)
+        string PlayerId) : SmiteClientRequest(MethodNameConstants.FriendsMethod)
     {
         public override string GetUrlPath() =>
             ConstructUrlPath(PlayerId);

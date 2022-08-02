@@ -4,9 +4,8 @@ using SmitenightApp.Domain.Enums.SmiteClient;
 namespace SmitenightApp.Domain.Clients.SmiteClient.Requests.RetrievePlayerRequests
 {
     public record class PlayerIdByGamerTagRequest(
-        string SessionId,
         PortalTypeEnum PortalType,
-        string GamerTag) : SmiteClientRequest(MethodNameConstants.PlayerIdByGamerTagMethod, SessionId)
+        string GamerTag) : SmiteClientRequest(MethodNameConstants.PlayerIdByGamerTagMethod)
     {
         public override string GetUrlPath() =>
             ConstructUrlPath((int)PortalType, GamerTag);
