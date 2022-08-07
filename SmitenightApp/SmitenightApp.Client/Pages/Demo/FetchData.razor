@@ -1,0 +1,47 @@
+﻿@page "/demo/fetchdata"
+@using SmitenightApp.Domain.Template
+@inject HttpClient Http
+
+<PageTitle>Weather forecast</PageTitle>
+
+<h1>Weather forecast</h1>
+
+<p>This component demonstrates fetching data from the server.</p>
+
+@if (forecasts == null)
+{
+    <p><em>Loading...</em></p>
+}
+else
+{
+    <Table>
+        <TableHeader>
+            <TableRow>
+                <TableHeaderCell>Date</TableHeaderCell>
+                <TableHeaderCell>Temp. (C)</TableHeaderCell>
+                <TableHeaderCell>Temp. (F)</TableHeaderCell>
+                <TableHeaderCell>Summary</TableHeaderCell>
+            </TableRow>
+        </TableHeader>
+        <TableBody>
+            @foreach (var forecast in forecasts)
+            {
+                <TableRow>
+                    <TableRowCell>@forecast.Date.ToShortDateString()</TableRowCell>
+                    <TableRowCell>@forecast.TemperatureC</TableRowCell>
+                    <TableRowCell>@forecast.TemperatureF</TableRowCell>
+                    <TableRowCell>@forecast.Summary</TableRowCell>
+                </TableRow>
+            }
+        </TableBody>
+    </Table>
+}
+
+@code {
+    private WeatherForecast[]? forecasts;
+
+    protected override async Task OnInitializedAsync()
+    {
+        forecasts = await Http.GetFromJsonAsync<WeatherForecast[]>("WeatherForecast");
+    }
+}

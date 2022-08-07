@@ -1,0 +1,28 @@
+﻿<Bar Breakpoint="Breakpoint.FullHD" NavigationBreakpoint="Breakpoint.Tablet"
+     Mode="BarMode.VerticalInline" CollapseMode="BarCollapseMode.Small" ThemeContrast="ThemeContrast.Light" Shadow="Shadow.Default">
+    <BarToggler />
+    <BarBrand>
+        <BarItem>
+            <BarLink To="">
+                <BarIcon IconName="IconName.Bolt" />
+                Smitenight
+            </BarLink>
+        </BarItem>
+    </BarBrand>
+    <BarMenu>
+        <BarStart>
+            <BarItem>
+                <BarDropdown>
+                    <BarDropdownToggle>
+                        <BarIcon IconName="IconName.Wrench" /> Demo details
+                    </BarDropdownToggle>
+                    <BarDropdownMenu>
+                        <BarDropdownItem To="demo">Home</BarDropdownItem>
+                        <BarDropdownItem To="demo/counter">Counter</BarDropdownItem>
+                        <BarDropdownItem To="demo/fetchdata">Fetch data</BarDropdownItem>
+                    </BarDropdownMenu>
+                </BarDropdown>
+            </BarItem>
+        </BarStart>
+    </BarMenu>
+</Bar>
