@@ -48,3 +48,10 @@ h1:focus {
     justify-content: center;
     align-items: center;
 }
+
+.sn-home {
+    position: relative;
+    top: 10rem;
+    width: 100%;
+    text-align: center;
+}
