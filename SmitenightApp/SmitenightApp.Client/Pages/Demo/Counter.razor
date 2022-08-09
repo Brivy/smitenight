@@ -2,11 +2,11 @@
 
 <PageTitle>Counter</PageTitle>
 
-<h1>Counter</h1>
+<Heading>Counter</Heading>
 
-<p role="status">Current count: @currentCount</p>
+<Paragraph>Current count: @currentCount</Paragraph>
 
-<button class="btn btn-primary" @onclick="IncrementCount">Click me</button>
+<Button Color="Color.Primary" @onclick="IncrementCount">Click me</Button>
 
 @code {
     private int currentCount = 0;

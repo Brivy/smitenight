@@ -1,15 +1,46 @@
-﻿@layout RootLayout
-@inherits LayoutComponentBase
+﻿@inherits LayoutComponentBase
 
 <Layout Sider>
     <LayoutSider>
         <LayoutSiderContent>
-            <SideMenu />
+            <Bar @ref="@_sideBar" Breakpoint="Breakpoint.FullHD" NavigationBreakpoint="Breakpoint.Tablet"
+                 Mode="BarMode.VerticalInline" CollapseMode="BarCollapseMode.Hide" ThemeContrast="ThemeContrast.Light" Shadow="Shadow.Default">
+                <BarBrand>
+                    <BarItem>
+                        <BarLink To="">
+                            Smitenight
+                        </BarLink>
+                    </BarItem>
+                </BarBrand>
+                <BarMenu>
+                    <BarStart>
+                        <BarItem>
+                            <BarDropdown>
+                                <BarDropdownToggle>
+                                    <BarIcon IconName="IconName.Wrench" /> Demo details
+                                </BarDropdownToggle>
+                                <BarDropdownMenu>
+                                    <BarDropdownItem To="demo">Home</BarDropdownItem>
+                                    <BarDropdownItem To="demo/counter">Counter</BarDropdownItem>
+                                    <BarDropdownItem To="demo/fetchdata">Fetch data</BarDropdownItem>
+                                </BarDropdownMenu>
+                            </BarDropdown>
+                        </BarItem>
+                    </BarStart>
+                </BarMenu>
+            </Bar>
         </LayoutSiderContent>
     </LayoutSider>
     <Layout>
-        <LayoutContent Padding="Padding.Is4.OnX">
-            @Body
+        <LayoutHeader ElementId="b-docs-layout-header">
+            <Bar @ref="@_topBar" Breakpoint="Breakpoint.Desktop" Background="Background.Light" ThemeContrast="ThemeContrast.Light">
+                <BarToggler Bar="@_sideBar" Border="Border.Is0" />
+            </Bar>
+        </LayoutHeader>
+        <LayoutContent Padding="Padding.Is0.OnX.Is4.OnY.Is4.OnWidescreen" Class="b-docs-page">
+            <Container Breakpoint="Breakpoint.Widescreen">
+                @Body
+            </Container>
         </LayoutContent>
     </Layout>
 </Layout>
