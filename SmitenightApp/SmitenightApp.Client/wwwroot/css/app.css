@@ -69,3 +69,7 @@ h1:focus {
 .sn-home-start span {
     font-size: 2rem;
 }
+
+.sn-home-loader {
+    display: none;
+}

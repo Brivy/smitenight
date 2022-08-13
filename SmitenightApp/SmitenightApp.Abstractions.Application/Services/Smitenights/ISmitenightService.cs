@@ -2,6 +2,6 @@
 
 public interface ISmitenightService
 {
-    Task StartSmitenight(string playerName, CancellationToken cancellationToken = default);
-    Task EndSmitenight(string playerName, CancellationToken cancellationToken = default);
+    Task StartSmitenightAsync(string playerName, CancellationToken cancellationToken = default);
+    Task EndSmitenightAsync(string playerName, CancellationToken cancellationToken = default);
 }
