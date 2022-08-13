@@ -12,30 +12,49 @@
             <Card Margin="Margin.Is4.OnY">
                 <CardBody>
                     <div class="sn-home-start">
+                        <Alert @ref="SmitenightSuccessAlert" Color="Color.Success">
+                            <AlertMessage>
+                                @SmitenightSuccessAlertMessage
+                            </AlertMessage>
+                        </Alert>
+                        <Alert @ref="SmitenightErrorAlert" Color="Color.Danger">
+                            <AlertMessage>
+                                @SmitenightErrorAlertMessage
+                            </AlertMessage>
+                        </Alert>
                         <span>Start the night!</span>
-                        <Divider />
-                        <Field>
-                            <FieldLabel>In-game playername</FieldLabel>
-                            <FieldBody>
-                                <TextEdit />
-                            </FieldBody>
-                        </Field>
-                        <Field>
-                            <FieldLabel>Passcode</FieldLabel>
-                            <FieldBody>
-                                <TextEdit Placeholder="a1b2" Role="TextRole.Password">
-                                    <FieldHelp>Required for stopping your session.</FieldHelp>
-                                </TextEdit>
-                            </FieldBody>
-                        </Field>
-                        <Row>
-                            <Column ColumnSize="ColumnSize.Is6">
-                                <Button Color="Color.Success" Block>Start!</Button>
-                            </Column>
-                            <Column ColumnSize="ColumnSize.Is6">
-                                <Button Color="Color.Danger" Block>Stop</Button>
-                            </Column>
-                        </Row>
+                        <Divider/>
+                        <EditForm Model="@_smitenightProcessModel" OnValidSubmit="@StartSmitenightAsync">
+                            <div>
+                                <Field>
+                                    <FieldLabel>In-game playername</FieldLabel>
+                                    <FieldBody>
+                                        <TextEdit @bind-Text="_smitenightProcessModel.PlayerName"/>
+                                    </FieldBody>
+                                </Field>
+                                <Field>
+                                    <FieldLabel>Passcode</FieldLabel>
+                                    <FieldBody>
+                                        <TextEdit Placeholder="a1b2" Role="TextRole.Password" @bind-Text="_smitenightProcessModel.PassCode">
+                                            <FieldHelp>Required for stopping your session.</FieldHelp>
+                                        </TextEdit>
+                                    </FieldBody>
+                                </Field>
+                            </div>
+                            <Row Visibility="Visibility.Invisible">
+                                <Column ColumnSize="ColumnSize.Is6">
+                                    <Button Color="Color.Success" Type="ButtonType.Submit" PreventDefaultOnSubmit Block Clicked="@StartSmitenightAsync">Start!</Button>
+                                </Column>
+                                <Column ColumnSize="ColumnSize.Is6">
+                                    <Button Color="Color.Danger" Type="ButtonType.Submit" PreventDefaultOnSubmit Block Clicked="@EndSmitenightAsync">Stop</Button>
+                                </Column>
+                            </Row>
+                            <Row>
+                                <Column ColumnSize="ColumnSize.Is12">
+                                    <Progress Value="100" Animated Striped></Progress>
+                                </Column>
+                            </Row>
+                        </EditForm>
                     </div>
                 </CardBody>
             </Card>

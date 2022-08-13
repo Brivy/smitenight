@@ -37,7 +37,7 @@ namespace SmitenightApp.Application.Services.Smitenights
             _dbContext = dbContext;
         }
 
-        public async Task StartSmitenight(string playerName, CancellationToken cancellationToken = default)
+        public async Task StartSmitenightAsync(string playerName, CancellationToken cancellationToken = default)
         {
             var playerIdRequest = new PlayerIdByNameRequest(playerName);
             var playerIdResponse = await _retrievePlayerClient.GetPlayerIdByPlayerNameAsync(playerIdRequest, cancellationToken);
@@ -80,7 +80,7 @@ namespace SmitenightApp.Application.Services.Smitenights
             await _dbContext.SaveChangesAsync(cancellationToken);
         }
 
-        public async Task EndSmitenight(string playerName, CancellationToken cancellationToken = default)
+        public async Task EndSmitenightAsync(string playerName, CancellationToken cancellationToken = default)
         {
             var playerIdRequest = new PlayerIdByNameRequest(playerName);
             var playerIdResponse = await _retrievePlayerClient.GetPlayerIdByPlayerNameAsync(playerIdRequest, cancellationToken);
