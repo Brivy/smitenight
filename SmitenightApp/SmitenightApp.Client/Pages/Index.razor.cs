@@ -1,9 +1,12 @@
 ﻿using System.Net.Http.Json;
 using Blazorise;
 using Microsoft.AspNetCore.Components;
+using SmitenightApp.Client.Extensions;
 using SmitenightApp.Client.Forms.Smitenights;
 using SmitenightApp.Domain.Constants.Endpoints;
 using SmitenightApp.Domain.Contracts.Smitenights;
+using SmitenightApp.Domain.Models.Common;
+using SmitenightApp.Domain.Models.Smitenights;
 
 namespace SmitenightApp.Client.Pages
 {
@@ -34,9 +37,10 @@ namespace SmitenightApp.Client.Pages
             SetBoxStyling();
             var requestDto = CreateSmitenightProcessRequest();
             var response = await HttpClient.PostAsJsonAsync(SmitenightEndpoints.StartSmitenight, requestDto, CancellationToken.None);
+            //var deserializedResponse = await response.Content.ReadFromJsonAsync<ServerResponse<Smitenight>>(cancellationToken: CancellationToken.None);
             if (!response.IsSuccessStatusCode)
             {
-                SmitenightErrorAlertMessage = "Something went wrong";
+                //SmitenightErrorAlertMessage = deserializedResponse.StatusCode.MapUserMessageByStatusCode();
                 await SmitenightErrorAlert.Show();
             }
             else
@@ -60,9 +64,10 @@ namespace SmitenightApp.Client.Pages
             SetBoxStyling();
             var requestDto = CreateSmitenightProcessRequest();
             var response = await HttpClient.PostAsJsonAsync(SmitenightEndpoints.EndSmitenight, requestDto, CancellationToken.None);
+            //var deserializedResponse = await response.Content.ReadFromJsonAsync<ServerResponse<Smitenight>>(cancellationToken: CancellationToken.None);
             if (!response.IsSuccessStatusCode)
             {
-                SmitenightErrorAlertMessage = "Something went wrong";
+                //SmitenightErrorAlertMessage = deserializedResponse.StatusCode.MapUserMessageByStatusCode();
                 await SmitenightErrorAlert.Show();
             }
             else

@@ -24,8 +24,8 @@ namespace SmitenightApp.Server.Controllers
                 return BadRequest(ModelState);
             }
 
-            await _smitenightService.StartSmitenightAsync(smitenightProcessRequestDto.PlayerName);
-            return Ok();
+            var result = await _smitenightService.StartSmitenightAsync(smitenightProcessRequestDto.PlayerName);
+            return Ok(result);
         }
 
         [HttpPost]
@@ -37,8 +37,8 @@ namespace SmitenightApp.Server.Controllers
                 return BadRequest(ModelState);
             }
 
-            await _smitenightService.EndSmitenightAsync(smitenightProcessRequestDto.PlayerName);
-            return Ok();
+            var result = await _smitenightService.EndSmitenightAsync(smitenightProcessRequestDto.PlayerName);
+            return Ok(result);
         }
     }
 }
