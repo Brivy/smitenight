@@ -17,27 +17,27 @@ namespace SmitenightApp.Server.Controllers
 
         [HttpPost]
         [Route("start")]
-        public async Task<IActionResult> Start([FromBody] SmitenightProcessResponseDto smitenightProcessDto)
+        public async Task<IActionResult> Start([FromBody] SmitenightProcessRequestDto smitenightProcessRequestDto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            await _smitenightService.StartSmitenightAsync(smitenightProcessDto.PlayerName);
+            await _smitenightService.StartSmitenightAsync(smitenightProcessRequestDto.PlayerName);
             return Ok();
         }
 
         [HttpPost]
         [Route("end")]
-        public async Task<IActionResult> End([FromBody] SmitenightProcessResponseDto smitenightProcessDto)
+        public async Task<IActionResult> End([FromBody] SmitenightProcessRequestDto smitenightProcessRequestDto)
         {
             if (!ModelState.IsValid)
             {
                 return BadRequest(ModelState);
             }
 
-            await _smitenightService.EndSmitenightAsync(smitenightProcessDto.PlayerName);
+            await _smitenightService.EndSmitenightAsync(smitenightProcessRequestDto.PlayerName);
             return Ok();
         }
     }

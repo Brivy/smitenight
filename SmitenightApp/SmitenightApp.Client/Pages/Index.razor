@@ -16,44 +16,62 @@
                             <AlertMessage>
                                 @SmitenightSuccessAlertMessage
                             </AlertMessage>
+                            <CloseButton />
                         </Alert>
                         <Alert @ref="SmitenightErrorAlert" Color="Color.Danger">
                             <AlertMessage>
                                 @SmitenightErrorAlertMessage
                             </AlertMessage>
+                            <CloseButton />
                         </Alert>
                         <span>Start the night!</span>
-                        <Divider/>
+                        <Divider />
                         <EditForm Model="@_smitenightProcessModel" OnValidSubmit="@StartSmitenightAsync">
-                            <div>
-                                <Field>
-                                    <FieldLabel>In-game playername</FieldLabel>
-                                    <FieldBody>
-                                        <TextEdit @bind-Text="_smitenightProcessModel.PlayerName"/>
-                                    </FieldBody>
-                                </Field>
-                                <Field>
-                                    <FieldLabel>Passcode</FieldLabel>
-                                    <FieldBody>
-                                        <TextEdit Placeholder="a1b2" Role="TextRole.Password" @bind-Text="_smitenightProcessModel.PassCode">
-                                            <FieldHelp>Required for stopping your session.</FieldHelp>
-                                        </TextEdit>
-                                    </FieldBody>
-                                </Field>
+                            <div style="@FormStyle">
+                                <Validations @ref="SmitenightValidations" Mode="ValidationMode.Manual" Model="_smitenightProcessModel">
+                                    <Validation>
+                                        <Field>
+                                            <FieldLabel>In-game playername</FieldLabel>
+                                            <FieldBody>
+                                                <TextEdit @bind-Text="_smitenightProcessModel.PlayerName">
+                                                    <Feedback>
+                                                        <ValidationError />
+                                                    </Feedback>
+                                                </TextEdit>
+                                            </FieldBody>
+                                        </Field>
+                                    </Validation>
+                                    <Validation>
+                                        <Field>
+                                            <FieldLabel>PIN code</FieldLabel>
+                                            <FieldBody>
+                                                <TextEdit Placeholder="Required for stopping your SMITE night" Role="TextRole.Password" @bind-Text="_smitenightProcessModel.PinCode">
+                                                    <Feedback>
+                                                        <ValidationError />
+                                                    </Feedback>
+                                                </TextEdit>
+                                            </FieldBody>
+                                        </Field>
+                                    </Validation>
+                                </Validations>
                             </div>
-                            <Row Visibility="Visibility.Invisible">
-                                <Column ColumnSize="ColumnSize.Is6">
-                                    <Button Color="Color.Success" Type="ButtonType.Submit" PreventDefaultOnSubmit Block Clicked="@StartSmitenightAsync">Start!</Button>
-                                </Column>
-                                <Column ColumnSize="ColumnSize.Is6">
-                                    <Button Color="Color.Danger" Type="ButtonType.Submit" PreventDefaultOnSubmit Block Clicked="@EndSmitenightAsync">Stop</Button>
-                                </Column>
-                            </Row>
-                            <Row>
-                                <Column ColumnSize="ColumnSize.Is12">
-                                    <Progress Value="100" Animated Striped></Progress>
-                                </Column>
-                            </Row>
+                            <div style="@ButtonStyle">
+                                <Row>
+                                    <Column ColumnSize="ColumnSize.Is6">
+                                        <Button Color="Color.Success" Type="ButtonType.Submit" PreventDefaultOnSubmit Block Clicked="@StartSmitenightAsync">Start!</Button>
+                                    </Column>
+                                    <Column ColumnSize="ColumnSize.Is6">
+                                        <Button Color="Color.Danger" Type="ButtonType.Submit" PreventDefaultOnSubmit Block Clicked="@EndSmitenightAsync">Stop</Button>
+                                    </Column>
+                                </Row>
+                            </div>
+                            <div class="sn-home-loader" style="@LoaderStyle">
+                                <Row>
+                                    <Column ColumnSize="ColumnSize.Is12">
+                                        <Progress Value="100" Animated Striped></Progress>
+                                    </Column>
+                                </Row>
+                            </div>
                         </EditForm>
                     </div>
                 </CardBody>
