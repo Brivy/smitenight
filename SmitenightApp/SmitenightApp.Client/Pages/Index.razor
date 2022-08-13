@@ -1,15 +1,44 @@
 ﻿@page "/"
 
 <div class="sn-home">
-    <h1>Welcome to Smitenight.com</h1>
-    <p>Image playing SMITE and you just want to know how well you did in your current session.<br />Use the text field below to enter your SMITE user name and start your SMITE night.</p>
-    
-    <Row>
-        <Column ColumnSize="ColumnSize.Is11">
-            <TextEdit Placeholder="Enter your SMITE username here..."/>
+    <Row Gutter="(100, 0)">
+        <Column ColumnSize="ColumnSize.Is6">
+            <div class="sn-home-intro">
+                <span>The first app that tracks your SMITE night!</span>
+                <p>We wanted to track a single SMITE session, instead of digging through some boring old lifetime statistics. So we build <b>Smitenight.com</b> to do that for you! Keep track of what you did good (or bad) in your current session and try to improve where needed!</p>
+            </div>
         </Column>
-        <Column ColumnSize="ColumnSize.Is1">
-            <Button Color="Color.Success">Start!</Button>
+        <Column ColumnSize="ColumnSize.Is6">
+            <Card Margin="Margin.Is4.OnY">
+                <CardBody>
+                    <div class="sn-home-start">
+                        <span>Start the night!</span>
+                        <Divider />
+                        <Field>
+                            <FieldLabel>In-game playername</FieldLabel>
+                            <FieldBody>
+                                <TextEdit />
+                            </FieldBody>
+                        </Field>
+                        <Field>
+                            <FieldLabel>Passcode</FieldLabel>
+                            <FieldBody>
+                                <TextEdit Placeholder="a1b2" Role="TextRole.Password">
+                                    <FieldHelp>Required for stopping your session.</FieldHelp>
+                                </TextEdit>
+                            </FieldBody>
+                        </Field>
+                        <Row>
+                            <Column ColumnSize="ColumnSize.Is6">
+                                <Button Color="Color.Success" Block>Start!</Button>
+                            </Column>
+                            <Column ColumnSize="ColumnSize.Is6">
+                                <Button Color="Color.Danger" Block>Stop</Button>
+                            </Column>
+                        </Row>
+                    </div>
+                </CardBody>
+            </Card>
         </Column>
     </Row>
 </div>
