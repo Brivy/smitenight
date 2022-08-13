@@ -1,0 +1,19 @@
+﻿@inherits LayoutComponentBase
+
+<Layout Sider>
+    <Layout>
+        <LayoutHeader ElementId="b-docs-layout-header">
+            <Bar Breakpoint="Breakpoint.Desktop" Background="Background.Light" ThemeContrast="ThemeContrast.Light">
+                <BarBrand>
+                    Smitenight.com
+                </BarBrand>
+                <BarToggler/>
+            </Bar>
+        </LayoutHeader>
+        <LayoutContent Padding="Padding.Is0.OnX.Is4.OnY.Is4.OnWidescreen">
+            <Container Breakpoint="Breakpoint.Widescreen">
+                @Body
+            </Container>
+        </LayoutContent>
+    </Layout>
+</Layout>
