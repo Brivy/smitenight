@@ -16,7 +16,6 @@ namespace SmitenightApp.Domain.Models.Abilities
         public string Description { get; set; } = null!;
         public string Summary { get; set; } = null!;
         public string Url { get; set; } = null!;
-
         public AbilityTypeEnum AbilityType { get; set; }
 
         #region Navigation
