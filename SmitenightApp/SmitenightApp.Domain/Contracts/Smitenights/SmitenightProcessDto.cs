@@ -2,7 +2,7 @@
 
 namespace SmitenightApp.Domain.Contracts.Smitenights
 {
-    public record class SmitenightProcessRequestDto
+    public record class SmitenightProcessDto
     {
         [Required]
         public string PlayerName { get; set; } = null!;

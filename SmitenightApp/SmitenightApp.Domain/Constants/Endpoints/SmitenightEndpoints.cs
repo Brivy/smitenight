@@ -2,7 +2,9 @@
 {
     public static class SmitenightEndpoints
     {
-        public const string StartSmitenight = "Smitenight/start";
-        public const string EndSmitenight = "Smitenight/end";
+        public const string BaseUrl = "smitenight/";
+
+        public const string StartSmitenight = "start";
+        public const string EndSmitenight = "end";
     }
 }

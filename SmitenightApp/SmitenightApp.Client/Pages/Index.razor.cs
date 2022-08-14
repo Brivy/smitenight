@@ -1,8 +1,9 @@
-﻿using System.Net.Http.Json;
-using Blazorise;
+﻿using Blazorise;
 using Microsoft.AspNetCore.Components;
+using SmitenightApp.Client.Constants;
+using SmitenightApp.Client.Extensions;
 using SmitenightApp.Client.Forms.Smitenights;
-using SmitenightApp.Domain.Constants.Endpoints;
+using SmitenightApp.Client.Interfaces;
 using SmitenightApp.Domain.Contracts.Smitenights;
 
 namespace SmitenightApp.Client.Pages
@@ -21,9 +22,9 @@ namespace SmitenightApp.Client.Pages
 
         private readonly SmitenightProcessModel _smitenightProcessModel = new();
 
-        [Inject] private HttpClient HttpClient { get; set; } = null!;
+        [Inject] private ISmitenightClient SmitenightClient { get; set; } = null!;
 
-        private async Task StartSmitenightAsync()
+        private async Task StartSmitenightAsync(CancellationToken cancellationToken = default)
         {
             var validate = await SmitenightValidations.ValidateAll();
             if (!validate)
@@ -31,70 +32,75 @@ namespace SmitenightApp.Client.Pages
                 return;
             }
 
-            SetBoxStyling();
+            await SetBoxStylingAsync();
             var requestDto = CreateSmitenightProcessRequest();
-            var response = await HttpClient.PostAsJsonAsync(SmitenightEndpoints.StartSmitenight, requestDto, CancellationToken.None);
-            if (!response.IsSuccessStatusCode)
+            var responseDto = await SmitenightClient.StartSmitenightAsync(requestDto, cancellationToken);
+            if (responseDto.IsSuccessStatusCode)
             {
-                SmitenightErrorAlertMessage = "Something went wrong";
-                await SmitenightErrorAlert.Show();
+                SmitenightSuccessAlertMessage = UserMessages.SmitenightStarted;
+                await SmitenightSuccessAlert.Show();
             }
             else
             {
-                SmitenightSuccessAlertMessage = "Smitenight started!";
-                await SmitenightSuccessAlert.Show();
+                SmitenightErrorAlertMessage = responseDto.StatusCode.MapUserMessageByStatusCode();
+                await SmitenightErrorAlert.Show();
             }
 
             UndoBoxStyling();
         }
 
-        private async Task EndSmitenightAsync()
+        private async Task EndSmitenightAsync(CancellationToken cancellationToken = default)
         {
             var validate = await SmitenightValidations.ValidateAll();
             if (!validate)
             {
-                UndoBoxStyling();
                 return;
             }
 
-            SetBoxStyling();
+            await SetBoxStylingAsync();
             var requestDto = CreateSmitenightProcessRequest();
-            var response = await HttpClient.PostAsJsonAsync(SmitenightEndpoints.EndSmitenight, requestDto, CancellationToken.None);
-            if (!response.IsSuccessStatusCode)
+            var responseDto = await SmitenightClient.EndSmitenightAsync(requestDto, cancellationToken);
+            if (responseDto.IsSuccessStatusCode)
             {
-                SmitenightErrorAlertMessage = "Something went wrong";
-                await SmitenightErrorAlert.Show();
+                SmitenightSuccessAlertMessage = UserMessages.SmitenightEnded;
+                await SmitenightSuccessAlert.Show();
             }
             else
             {
-                SmitenightSuccessAlertMessage = "Smitenight ended!";
-                await SmitenightSuccessAlert.Show();
+                SmitenightErrorAlertMessage = responseDto.StatusCode.MapUserMessageByStatusCode();
+                await SmitenightErrorAlert.Show();
             }
 
             UndoBoxStyling();
         }
 
-        private SmitenightProcessRequestDto CreateSmitenightProcessRequest()
+        #region Helper methods
+
+        private SmitenightProcessDto CreateSmitenightProcessRequest()
         {
-            return new SmitenightProcessRequestDto
+            return new SmitenightProcessDto
             {
                 PlayerName = _smitenightProcessModel.PlayerName,
                 PassCode = _smitenightProcessModel.PinCode
             };
         }
 
-        private void SetBoxStyling()
+        private async Task SetBoxStylingAsync()
         {
-            FormStyle = "opacity: 0.2";
-            ButtonStyle = "display: none";
-            LoaderStyle = "display: block";
+            await SmitenightSuccessAlert.Hide();
+            await SmitenightErrorAlert.Hide();
+            FormStyle = StylingConstants.OpacityToAQuarter;
+            ButtonStyle = StylingConstants.DisplayNone;
+            LoaderStyle = StylingConstants.DisplayBlock;
         }
 
         private void UndoBoxStyling()
         {
             FormStyle = string.Empty;
             ButtonStyle = string.Empty;
-            LoaderStyle = "display: none";
+            LoaderStyle = StylingConstants.DisplayNone;
         }
+
+        #endregion
     }
 }

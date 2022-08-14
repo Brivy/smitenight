@@ -1,7 +1,7 @@
 ﻿@page "/"
 
 <div class="sn-home">
-    <Row Gutter="(100, 0)">
+    <Row>
         <Column ColumnSize="ColumnSize.Is6">
             <div class="sn-home-intro">
                 <span>The first app that tracks your SMITE night!</span>
@@ -26,7 +26,7 @@
                         </Alert>
                         <span>Start the night!</span>
                         <Divider />
-                        <EditForm Model="@_smitenightProcessModel" OnValidSubmit="@StartSmitenightAsync">
+                        <EditForm Model="@_smitenightProcessModel">
                             <div style="@FormStyle">
                                 <Validations @ref="SmitenightValidations" Mode="ValidationMode.Manual" Model="_smitenightProcessModel">
                                     <Validation>
@@ -58,10 +58,10 @@
                             <div style="@ButtonStyle">
                                 <Row>
                                     <Column ColumnSize="ColumnSize.Is6">
-                                        <Button Color="Color.Success" Type="ButtonType.Submit" PreventDefaultOnSubmit Block Clicked="@StartSmitenightAsync">Start!</Button>
+                                        <Button Color="Color.Success" Type="ButtonType.Submit" PreventDefaultOnSubmit Block Clicked="@(async () => await StartSmitenightAsync())">Start!</Button>
                                     </Column>
                                     <Column ColumnSize="ColumnSize.Is6">
-                                        <Button Color="Color.Danger" Type="ButtonType.Submit" PreventDefaultOnSubmit Block Clicked="@EndSmitenightAsync">Stop</Button>
+                                        <Button Color="Color.Danger" Type="ButtonType.Submit" PreventDefaultOnSubmit Block Clicked="@(async () => await EndSmitenightAsync())">Stop</Button>
                                     </Column>
                                 </Row>
                             </div>
