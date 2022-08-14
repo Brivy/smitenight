@@ -70,6 +70,10 @@ h1:focus {
     font-size: 2rem;
 }
 
+.sn-home-pin {
+    display: none;
+}
+
 .sn-home-loader {
     display: none;
 }

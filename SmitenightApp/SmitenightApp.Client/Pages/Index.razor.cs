@@ -12,6 +12,7 @@ namespace SmitenightApp.Client.Pages
     {
         private string FormStyle { get; set; } = null!;
         private string ButtonStyle { get; set; } = null!;
+        private string PinStyle { get; set; } = null!;
         private string LoaderStyle { get; set; } = null!;
 
         private Validations SmitenightValidations { get; set; } = null!;
@@ -74,6 +75,14 @@ namespace SmitenightApp.Client.Pages
             UndoBoxStyling();
         }
 
+        private void OnPinCodeCheckChange(bool value)
+        {
+            _smitenightProcessModel.PinCodeCheck = value;
+            PinStyle = value 
+                ? StylingConstants.DisplayBlock 
+                : StylingConstants.DisplayNone;
+        }
+
         #region Helper methods
 
         private SmitenightProcessDto CreateSmitenightProcessRequest()
@@ -81,7 +90,7 @@ namespace SmitenightApp.Client.Pages
             return new SmitenightProcessDto
             {
                 PlayerName = _smitenightProcessModel.PlayerName,
-                PassCode = _smitenightProcessModel.PinCode
+                PinCode = _smitenightProcessModel.PinCodeCheck ? _smitenightProcessModel.PinCode : null
             };
         }
 
