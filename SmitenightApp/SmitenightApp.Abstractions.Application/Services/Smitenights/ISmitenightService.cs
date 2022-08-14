@@ -1,10 +1,10 @@
-﻿using SmitenightApp.Domain.Models.Common;
-using SmitenightApp.Domain.Models.Smitenights;
+﻿using SmitenightApp.Domain.Contracts.Common;
+using SmitenightApp.Domain.Contracts.Smitenights;
 
 namespace SmitenightApp.Abstractions.Application.Services.Smitenights;
 
 public interface ISmitenightService
 {
-    Task<ServerResponse<Smitenight>> StartSmitenightAsync(string playerName, CancellationToken cancellationToken = default);
-    Task<ServerResponse<Smitenight>> EndSmitenightAsync(string playerName, CancellationToken cancellationToken = default);
+    Task<ServerResponseDto<SmitenightDto>> StartSmitenightAsync(string playerName, CancellationToken cancellationToken = default);
+    Task<ServerResponseDto<SmitenightDto>> EndSmitenightAsync(string playerName, CancellationToken cancellationToken = default);
 }

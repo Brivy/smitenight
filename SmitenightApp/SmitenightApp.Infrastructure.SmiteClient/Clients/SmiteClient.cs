@@ -53,7 +53,7 @@ namespace SmitenightApp.Infrastructure.SmiteClient.Clients
             {
                 var url = await ConstructUrlAsync(smiteRequest, cancellationToken);
                 var request = new HttpRequestMessage(HttpMethod.Get, url);
-                using var response = await _httpClient.SendAsync(request, cancellationToken);
+                var response = await _httpClient.SendAsync(request, cancellationToken);
                 return new SmiteClientResponseDto(response.StatusCode, response.ReasonPhrase);
             }
             catch (Exception ex)
@@ -70,7 +70,7 @@ namespace SmitenightApp.Infrastructure.SmiteClient.Clients
             {
                 var url = await ConstructUrlAsync(smiteRequest, cancellationToken);
                 var request = new HttpRequestMessage(HttpMethod.Get, url);
-                using var response = await _httpClient.SendAsync(request, cancellationToken);
+                var response = await _httpClient.SendAsync(request, cancellationToken);
 
                 try
                 {
@@ -96,7 +96,7 @@ namespace SmitenightApp.Infrastructure.SmiteClient.Clients
             {
                 var url = await ConstructUrlAsync(smiteRequest, cancellationToken);
                 var request = new HttpRequestMessage(HttpMethod.Get, url);
-                using var response = await _httpClient.SendAsync(request, cancellationToken);
+                var response = await _httpClient.SendAsync(request, cancellationToken);
 
                 try
                 {

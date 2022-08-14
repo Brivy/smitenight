@@ -17,7 +17,7 @@ namespace SmitenightApp.Server.Controllers
 
         [HttpPost]
         [Route("start")]
-        public async Task<IActionResult> Start([FromBody] SmitenightProcessRequestDto smitenightProcessRequestDto)
+        public async Task<IActionResult> Start([FromBody] SmitenightProcessDto smitenightProcessRequestDto)
         {
             if (!ModelState.IsValid)
             {
@@ -30,7 +30,7 @@ namespace SmitenightApp.Server.Controllers
 
         [HttpPost]
         [Route("end")]
-        public async Task<IActionResult> End([FromBody] SmitenightProcessRequestDto smitenightProcessRequestDto)
+        public async Task<IActionResult> End([FromBody] SmitenightProcessDto smitenightProcessRequestDto)
         {
             if (!ModelState.IsValid)
             {

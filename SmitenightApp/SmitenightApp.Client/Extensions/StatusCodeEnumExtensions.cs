@@ -7,15 +7,13 @@ namespace SmitenightApp.Client.Extensions
     {
         public static string MapUserMessageByStatusCode(this StatusCodeEnum statusCode) => statusCode switch
         {
-            StatusCodeEnum.Unknown => UserMessages.UnknownError,
-            StatusCodeEnum.Success => UserMessages.Success,
-            StatusCodeEnum.PlayerByPlayerNameNotFoundInSmite => UserMessages.PlayerNotFoundInSmite,
-            StatusCodeEnum.PlayerHasPrivacyEnabled => UserMessages.PlayerHasPrivacyEnabled,
-            StatusCodeEnum.PlayerByPlayerIdNotFoundInSmite => UserMessages.PlayerNotFoundInSmite,
-            StatusCodeEnum.SmitenightAlreadyFound => UserMessages.SmitenightAlreadyFound,
-            StatusCodeEnum.PlayerHistoryNotFoundInSmite => UserMessages.UnknownError,
-            StatusCodeEnum.SmitenightNotFound => UserMessages.UnknownError,
-            _ => UserMessages.UnknownError
+            StatusCodeEnum.Success => ServerUserMessages.Success,
+            StatusCodeEnum.PlayerByPlayerNameNotFoundInSmite => ServerUserMessages.PlayerNotFoundInSmite,
+            StatusCodeEnum.PlayerHasPrivacyEnabled => ServerUserMessages.PlayerHasPrivacyEnabled,
+            StatusCodeEnum.PlayerByPlayerIdNotFoundInSmite => ServerUserMessages.PlayerNotFoundInSmite,
+            StatusCodeEnum.SmitenightAlreadyFound => ServerUserMessages.SmitenightAlreadyFound,
+            StatusCodeEnum.SmitenightNotFound => ServerUserMessages.ActiveSmitenightNotFound,
+            _ => ServerUserMessages.UnknownError
         };
     }
 }
