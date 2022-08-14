@@ -7,8 +7,9 @@ namespace SmitenightApp.Client.Forms.Smitenights
         [Required(ErrorMessage = "How can we track you without a playername :)")]
         public string PlayerName { get; set; } = null!;
         
-        [Required(ErrorMessage = "We need verification that it is you who started/stopped the SMITE night")]
-        [StringLength(4, ErrorMessage = "PIN should be 4 characters", MinimumLength = 4)]
+        public bool PinCodeCheck { get; set; }
+
+        [MaxLength(4, ErrorMessage = "PIN code should be 4 characters or less")]
         [DataType(DataType.Password)]
         public string PinCode { get; set; } = null!;
     }

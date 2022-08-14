@@ -11,6 +11,7 @@ namespace SmitenightApp.Domain.Models.Smitenights
 
         public DateTime StartDate { get; set; }
         public DateTime? EndDate { get; set; }
+        public string? PinCode { get; set; }
 
         #region Navigation
 

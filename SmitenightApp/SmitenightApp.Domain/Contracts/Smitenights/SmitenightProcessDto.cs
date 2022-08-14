@@ -7,7 +7,6 @@ namespace SmitenightApp.Domain.Contracts.Smitenights
         [Required]
         public string PlayerName { get; set; } = null!;
 
-        [Required]
-        public string PassCode { get; set; } = null!;
+        public string? PinCode { get; set; }
     }
 }

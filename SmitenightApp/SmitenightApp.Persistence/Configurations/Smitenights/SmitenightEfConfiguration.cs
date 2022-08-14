@@ -13,6 +13,7 @@ namespace SmitenightApp.Persistence.Configurations.Smitenights
             builder.HasKey(x => x.Id);
             builder.Property(x => x.StartDate).IsRequired();
             builder.Property(x => x.EndDate).IsRequired(false);
+            builder.Property(x => x.PinCode).IsRequired(false);
 
             builder.HasOne(x => x.Player)
                 .WithMany(x => x.Smitenights)
