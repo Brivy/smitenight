@@ -1,11 +1,13 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
 using SmitenightApp.Abstractions.Application.Services.Builders;
 using SmitenightApp.Abstractions.Application.Services.Common;
+using SmitenightApp.Abstractions.Application.Services.Gods;
 using SmitenightApp.Abstractions.Application.Services.Maintenance;
 using SmitenightApp.Abstractions.Application.Services.Matches;
 using SmitenightApp.Abstractions.Application.Services.Smitenights;
 using SmitenightApp.Application.Services.Builders;
 using SmitenightApp.Application.Services.Common;
+using SmitenightApp.Application.Services.Gods;
 using SmitenightApp.Application.Services.Maintenance;
 using SmitenightApp.Application.Services.Matches;
 using SmitenightApp.Application.Services.Smitenights;
@@ -40,6 +42,9 @@ namespace SmitenightApp.Application
 
             // Smitenight services
             serviceCollection.AddScoped<ISmitenightService, SmitenightService>();
+
+            // God services
+            serviceCollection.AddScoped<IGodService, GodService>();
         }
     }
 }

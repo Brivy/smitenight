@@ -49,16 +49,19 @@ h1:focus {
     align-items: center;
 }
 
-.sn-home {
-    position: relative;
-    top: 4rem;
-    width: 100%;
+.sn-home-intro-row {
+    height: 100%;
+}
+
+.sn-home-intro-row  {
+    height: 100%;
 }
 
 .sn-home-intro {
     text-align: left;
-    position: absolute;
-    top: 4rem;
+    position: relative;
+    top: 35%;
+    transform: translateY(-35%);
 }
 
 .sn-home-intro span {
@@ -66,8 +69,14 @@ h1:focus {
     font-weight: bold;
 }
 
-.sn-home-start span {
-    font-size: 2rem;
+.sn-home-card-intro {
+    color: white;
+    background: #343a40 !important;
+    border-radius: 10px !important;
+    position: relative;
+    opacity: 0.95;
+    top: 35%;
+    transform: translateY(-35%);
 }
 
 .sn-home-pin {
@@ -76,4 +85,43 @@ h1:focus {
 
 .sn-home-loader {
     display: none;
+}
+
+/*Testing area*/
+@keyframes godsAnimation {
+    0% {
+        margin-top: 5%;
+        opacity: 0;
+    }
+
+    25% {
+        opacity: 1;
+    }
+
+    50% {
+        opacity: 0;
+    }
+
+    100% {
+        margin-top: -80%;
+    }
+}
+
+.godBubble {
+    -webkit-box-shadow: 0 20px 30px rgba(0, 0, 0, 0.5), inset 0px 10px 30px 5px rgb(165, 165, 250);
+    -moz-box-shadow: 0 20px 30px rgba(0, 0, 0, 0.2), inset 0px 10px 30px 5px rgba(255, 255, 255, 1);
+    box-shadow: 0 20px 30px rgba(0, 0, 0, 0.5), inset 0px 10px 30px 5px rgb(139, 139, 236);
+    position: absolute;
+    height: 512px;
+    width: 380px;
+}
+
+#bubble-wrap {
+    bottom: 0;
+    left: 0;
+    position: fixed;
+    right: 0;
+    top: 0;
+    z-index: -1;
+    background: linear-gradient(65deg, rgba(255,255,255,0), rgba(0,0,0,0.25));
 }
