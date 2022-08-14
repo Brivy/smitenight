@@ -24,7 +24,7 @@ namespace SmitenightApp.Server.Controllers
                 return BadRequest(ModelState);
             }
 
-            var result = await _smitenightService.StartSmitenightAsync(smitenightProcessRequestDto.PlayerName);
+            var result = await _smitenightService.StartSmitenightAsync(smitenightProcessRequestDto.PlayerName, smitenightProcessRequestDto.PinCode);
             return Ok(result);
         }
 
@@ -37,7 +37,7 @@ namespace SmitenightApp.Server.Controllers
                 return BadRequest(ModelState);
             }
 
-            var result = await _smitenightService.EndSmitenightAsync(smitenightProcessRequestDto.PlayerName);
+            var result = await _smitenightService.EndSmitenightAsync(smitenightProcessRequestDto.PlayerName, smitenightProcessRequestDto.PinCode);
             return Ok(result);
         }
     }

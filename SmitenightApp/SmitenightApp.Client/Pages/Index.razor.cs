@@ -90,7 +90,11 @@ namespace SmitenightApp.Client.Pages
             return new SmitenightProcessDto
             {
                 PlayerName = _smitenightProcessModel.PlayerName,
-                PinCode = _smitenightProcessModel.PinCodeCheck ? _smitenightProcessModel.PinCode : null
+                PinCode = _smitenightProcessModel.PinCodeCheck 
+                    ? !string.IsNullOrWhiteSpace(_smitenightProcessModel.PinCode) 
+                        ? _smitenightProcessModel.PinCode 
+                        : null 
+                    : null
             };
         }
 

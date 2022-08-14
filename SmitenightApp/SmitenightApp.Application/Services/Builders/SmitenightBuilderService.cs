@@ -17,11 +17,12 @@ namespace SmitenightApp.Application.Services.Builders
             _clock = clock;
         }
 
-        public Smitenight Build(PlayerResponse playerResponse)
+        public Smitenight Build(PlayerResponse playerResponse, string? pinCode)
         {
             return new Smitenight
             {
                 StartDate = _clock.Now(),
+                PinCode = pinCode,
                 Player = new Player
                 {
                     HirezGamerTag = playerResponse.HzGamerTag,
@@ -36,11 +37,12 @@ namespace SmitenightApp.Application.Services.Builders
             };
         }
 
-        public Smitenight Build(int playerId)
+        public Smitenight Build(int playerId, string? pinCode)
         {
             return new Smitenight
             {
                 StartDate = _clock.Now(),
+                PinCode = pinCode,
                 PlayerId = playerId
             };
         }
