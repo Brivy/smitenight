@@ -58,6 +58,7 @@ h1:focus {
 }
 
 .sn-home-intro {
+    color: #343a40;
     text-align: left;
     position: relative;
     top: 35%;
@@ -65,8 +66,18 @@ h1:focus {
 }
 
 .sn-home-intro span {
-    font-size: 3rem;
+    font-size: 4rem;
+    font-weight: 900;
+}
+
+.sn-home-intro p {
     font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.sn-home-intro-smite {
+    color: #dabd37;
+    text-shadow: 3px 3px black;
 }
 
 .sn-home-card-intro {
@@ -95,7 +106,7 @@ h1:focus {
     }
 
     25% {
-        opacity: 1;
+        opacity: 0.5;
     }
 
     50% {
@@ -122,6 +133,6 @@ h1:focus {
     position: fixed;
     right: 0;
     top: 0;
-    z-index: -1;
+    z-index: -2;
     background: linear-gradient(65deg, rgba(255,255,255,0), rgba(0,0,0,0.25));
 }
