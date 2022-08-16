@@ -22,7 +22,7 @@ namespace SmitenightApp.Application.Services.Gods
 
         public async Task<ServerResponseDto<List<GodSkinDto>>> ListHomeLoadingSkinsAsync(CancellationToken cancellationToken = default)
         {
-            const int totalSkinsForShow = 15;
+            const int totalSkinsForShow = 20;
             var random = new Random();
             var randomIds = new List<int>();
 

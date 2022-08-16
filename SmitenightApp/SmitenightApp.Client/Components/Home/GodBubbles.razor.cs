@@ -44,7 +44,7 @@ namespace SmitenightApp.Client.Components.Home
                               $"-moz-transform: scale(0.{randomScale}); " +
                               $"transform: scale(0.{randomScale});";
                 GodBubbleStyles.Add(styling);
-                delay += 4;
+                delay += 5;
             }
         }
     }
