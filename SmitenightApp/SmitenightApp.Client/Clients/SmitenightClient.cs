@@ -1,5 +1,5 @@
-﻿using SmitenightApp.Client.Interfaces;
-using SmitenightApp.Domain.Constants.Endpoints;
+﻿using SmitenightApp.Client.Constants.Endpoints;
+using SmitenightApp.Client.Interfaces;
 using SmitenightApp.Domain.Contracts.Common;
 using SmitenightApp.Domain.Contracts.Smitenights;
 

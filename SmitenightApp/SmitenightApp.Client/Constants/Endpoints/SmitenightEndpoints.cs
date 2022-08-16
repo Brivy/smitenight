@@ -1,4 +1,4 @@
-﻿namespace SmitenightApp.Domain.Constants.Endpoints
+﻿namespace SmitenightApp.Client.Constants.Endpoints
 {
     public static class SmitenightEndpoints
     {

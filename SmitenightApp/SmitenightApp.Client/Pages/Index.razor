@@ -1,86 +1,16 @@
 ﻿@page "/"
 
-<div class="sn-home">
-    <Row>
-        <Column ColumnSize="ColumnSize.Is6">
-            <div class="sn-home-intro">
-                <span>The first app that tracks your SMITE night!</span>
-                <p>We wanted to track a single SMITE session, instead of digging through some boring old lifetime statistics. So we build <b>Smitenight.com</b> to do that for you! Keep track of what you did good (or bad) in your current session and try to improve where needed!</p>
-            </div>
-        </Column>
-        <Column ColumnSize="ColumnSize.Is6">
-            <Card Margin="Margin.Is4.OnY">
-                <CardBody>
-                    <div class="sn-home-start">
-                        <Alert @ref="SmitenightSuccessAlert" Color="Color.Success">
-                            <AlertMessage>
-                                @SmitenightSuccessAlertMessage
-                            </AlertMessage>
-                            <CloseButton />
-                        </Alert>
-                        <Alert @ref="SmitenightErrorAlert" Color="Color.Danger">
-                            <AlertMessage>
-                                @SmitenightErrorAlertMessage
-                            </AlertMessage>
-                            <CloseButton />
-                        </Alert>
-                        <span>Start the night!</span>
-                        <Divider />
-                        <EditForm Model="@_smitenightProcessModel">
-                            <div style="@FormStyle">
-                                <Validations @ref="SmitenightValidations" Mode="ValidationMode.Manual" Model="_smitenightProcessModel">
-                                    <Validation>
-                                        <Field>
-                                            <FieldLabel>In-game playername</FieldLabel>
-                                            <FieldBody>
-                                                <TextEdit @bind-Text="_smitenightProcessModel.PlayerName">
-                                                    <Feedback>
-                                                        <ValidationError />
-                                                    </Feedback>
-                                                </TextEdit>
-                                            </FieldBody>
-                                        </Field>
-                                    </Validation>
-                                    <Field>
-                                        <Check TValue="bool" Checked="@_smitenightProcessModel.PinCodeCheck" CheckedChanged="@OnPinCodeCheckChange">Enable PIN code</Check>
-                                    </Field>
-                                    <div class="sn-home-pin" style="@PinStyle">
-                                        <Validation>
-                                            <Field>
-                                                <FieldLabel>PIN code</FieldLabel>
-                                                <FieldBody>
-                                                    <TextEdit Placeholder="Required for stopping your SMITE night" Role="TextRole.Password" @bind-Text="_smitenightProcessModel.PinCode">
-                                                        <Feedback>
-                                                            <ValidationError />
-                                                        </Feedback>
-                                                    </TextEdit>
-                                                </FieldBody>
-                                            </Field>
-                                        </Validation>
-                                    </div>
-                                </Validations>
-                            </div>
-                            <div style="@ButtonStyle">
-                                <Row>
-                                    <Column ColumnSize="ColumnSize.Is6">
-                                        <Button Color="Color.Success" Type="ButtonType.Submit" PreventDefaultOnSubmit Block Clicked="@(async () => await StartSmitenightAsync())">Start!</Button>
-                                    </Column>
-                                    <Column ColumnSize="ColumnSize.Is6">
-                                        <Button Color="Color.Danger" Type="ButtonType.Submit" PreventDefaultOnSubmit Block Clicked="@(async () => await EndSmitenightAsync())">Stop</Button>
-                                    </Column>
-                                </Row>
-                            </div>
-                            <div class="sn-home-loader" style="@LoaderStyle">
-                                <Row>
-                                    <Column ColumnSize="ColumnSize.Is12">
-                                        <Progress Value="100" Animated Striped></Progress>
-                                    </Column>
-                                </Row>
-                            </div>
-                        </EditForm>
-                    </div>
-                </CardBody>
-            </Card>
-        </Column>
-    </Row>
-</div>
+<GodBubbles />
+<Row Class="sn-home-intro-row">
+    <Column ColumnSize="ColumnSize.Is2"></Column>
+    <Column ColumnSize="ColumnSize.Is4">
+        <div class="sn-home-intro">
+            <span>The first app to track your <span class="sn-home-intro-smite">SMITE</span> night!</span>
+            <p>We wanted to track a single SMITE session, instead of digging through some boring old lifetime statistics. So we build <b>Smitenight.com</b> to do that for you! Keep track of what you did good (or bad) in your current session and try to improve where needed!</p>
+        </div>
+    </Column>
+    <Column ColumnSize="ColumnSize.Is4">
+        <SmitenightBox />
+    </Column>
+    <Column ColumnSize="ColumnSize.Is2"></Column>
+</Row>

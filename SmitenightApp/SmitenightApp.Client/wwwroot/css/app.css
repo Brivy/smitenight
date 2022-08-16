@@ -49,31 +49,29 @@ h1:focus {
     align-items: center;
 }
 
-.sn-home {
-    position: relative;
-    top: 4rem;
-    width: 100%;
+.sn-home-intro-row {
+    height: 100%;
 }
 
 .sn-home-intro {
+    color: #343a40;
     text-align: left;
-    position: absolute;
-    top: 4rem;
+    position: relative;
+    top: 35%;
+    transform: translateY(-35%);
 }
 
 .sn-home-intro span {
-    font-size: 3rem;
+    font-size: 4rem;
+    font-weight: 900;
+}
+
+.sn-home-intro p {
     font-weight: bold;
+    font-size: 1.1rem;
 }
 
-.sn-home-start span {
-    font-size: 2rem;
-}
-
-.sn-home-pin {
-    display: none;
-}
-
-.sn-home-loader {
-    display: none;
+.sn-home-intro-smite {
+    color: #dabd37;
+    text-shadow: 3px 3px black;
 }

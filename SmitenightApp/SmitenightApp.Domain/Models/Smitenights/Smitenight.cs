@@ -1,5 +1,4 @@
-﻿using SmitenightApp.Domain.Exceptions;
-using SmitenightApp.Domain.Interfaces;
+﻿using SmitenightApp.Domain.Interfaces;
 using SmitenightApp.Domain.Models.Players;
 
 namespace SmitenightApp.Domain.Models.Smitenights
@@ -15,14 +14,7 @@ namespace SmitenightApp.Domain.Models.Smitenights
 
         #region Navigation
 
-        private Player? _player;
-
-        public Player Player
-        {
-            get => _player ?? throw new NavigationPropertyNullException(nameof(Player));
-            set => _player = value;
-        }
-
+        public Player? Player { get; set; }
         public List<SmitenightMatch> SmitenightMatches { get; set; }
 
         #endregion

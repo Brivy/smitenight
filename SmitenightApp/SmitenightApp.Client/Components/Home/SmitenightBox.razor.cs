@@ -6,9 +6,9 @@ using SmitenightApp.Client.Forms.Smitenights;
 using SmitenightApp.Client.Interfaces;
 using SmitenightApp.Domain.Contracts.Smitenights;
 
-namespace SmitenightApp.Client.Pages
+namespace SmitenightApp.Client.Components.Home
 {
-    public partial class Index
+    public partial class SmitenightBox
     {
         private string FormStyle { get; set; } = null!;
         private string ButtonStyle { get; set; } = null!;
@@ -78,8 +78,8 @@ namespace SmitenightApp.Client.Pages
         private void OnPinCodeCheckChange(bool value)
         {
             _smitenightProcessModel.PinCodeCheck = value;
-            PinStyle = value 
-                ? StylingConstants.DisplayBlock 
+            PinStyle = value
+                ? StylingConstants.DisplayBlock
                 : StylingConstants.DisplayNone;
         }
 
@@ -90,10 +90,10 @@ namespace SmitenightApp.Client.Pages
             return new SmitenightProcessDto
             {
                 PlayerName = _smitenightProcessModel.PlayerName,
-                PinCode = _smitenightProcessModel.PinCodeCheck 
-                    ? !string.IsNullOrWhiteSpace(_smitenightProcessModel.PinCode) 
-                        ? _smitenightProcessModel.PinCode 
-                        : null 
+                PinCode = _smitenightProcessModel.PinCodeCheck
+                    ? !string.IsNullOrWhiteSpace(_smitenightProcessModel.PinCode)
+                        ? _smitenightProcessModel.PinCode
+                        : null
                     : null
             };
         }
