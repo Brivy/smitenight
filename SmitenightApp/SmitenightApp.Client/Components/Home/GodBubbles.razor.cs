@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using SmitenightApp.Client.Interfaces;
 
-namespace SmitenightApp.Client.Components
+namespace SmitenightApp.Client.Components.Home
 {
     public partial class GodBubbles
     {

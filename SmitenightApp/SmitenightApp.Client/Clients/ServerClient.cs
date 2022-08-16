@@ -36,7 +36,7 @@ namespace SmitenightApp.Client.Clients
                 var response = await _httpClient.GetFromJsonAsync<ServerResponseDto<TResponse>>(_baseUrl + url, cancellationToken);
                 return response ?? new ServerResponseDto<TResponse>(StatusCodeEnum.DeserializationEndedInNull);
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return new ServerResponseDto<TResponse>(StatusCodeEnum.ExceptionDuringSendingRequest);
             }
@@ -73,7 +73,7 @@ namespace SmitenightApp.Client.Clients
                     var responseBody = await response.Content.ReadFromJsonAsync<ServerResponseDto<TResponse>>(cancellationToken: cancellationToken);
                     return responseBody ?? new ServerResponseDto<TResponse>(StatusCodeEnum.DeserializationEndedInNull);
                 }
-                catch (Exception e)
+                catch (Exception)
                 {
                     return new ServerResponseDto<TResponse>(StatusCodeEnum.ExceptionDuringDeserialization);
                 }

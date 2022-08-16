@@ -53,10 +53,6 @@ h1:focus {
     height: 100%;
 }
 
-.sn-home-intro-row  {
-    height: 100%;
-}
-
 .sn-home-intro {
     color: #343a40;
     text-align: left;
@@ -78,22 +74,4 @@ h1:focus {
 .sn-home-intro-smite {
     color: #dabd37;
     text-shadow: 3px 3px black;
-}
-
-.sn-home-card-intro {
-    color: white;
-    background: #343a40 !important;
-    border-radius: 10px !important;
-    position: relative;
-    opacity: 0.95;
-    top: 35%;
-    transform: translateY(-35%);
-}
-
-.sn-home-pin {
-    display: none;
-}
-
-.sn-home-loader {
-    display: none;
 }

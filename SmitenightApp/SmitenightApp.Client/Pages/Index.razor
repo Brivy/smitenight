@@ -10,74 +10,7 @@
         </div>
     </Column>
     <Column ColumnSize="ColumnSize.Is4">
-        <Card Class="sn-home-card-intro" Margin="Margin.Is4.OnY">
-            <CardBody>
-                <Alert @ref="SmitenightSuccessAlert" Color="Color.Success">
-                    <AlertMessage>
-                        @SmitenightSuccessAlertMessage
-                    </AlertMessage>
-                    <CloseButton />
-                </Alert>
-                <Alert @ref="SmitenightErrorAlert" Color="Color.Danger">
-                    <AlertMessage>
-                        @SmitenightErrorAlertMessage
-                    </AlertMessage>
-                    <CloseButton />
-                </Alert>
-                <EditForm Model="@_smitenightProcessModel">
-                    <div style="@FormStyle">
-                        <Validations @ref="SmitenightValidations" Mode="ValidationMode.Manual" Model="_smitenightProcessModel">
-                            <Validation>
-                                <Field>
-                                    <FieldLabel>In-game playername</FieldLabel>
-                                    <FieldBody>
-                                        <TextEdit @bind-Text="_smitenightProcessModel.PlayerName">
-                                            <Feedback>
-                                                <ValidationError />
-                                            </Feedback>
-                                        </TextEdit>
-                                    </FieldBody>
-                                </Field>
-                            </Validation>
-                            <Field>
-                                <Check TValue="bool" Checked="@_smitenightProcessModel.PinCodeCheck" CheckedChanged="@OnPinCodeCheckChange">Enable PIN code</Check>
-                            </Field>
-                            <div class="sn-home-pin" style="@PinStyle">
-                                <Validation>
-                                    <Field>
-                                        <FieldLabel>PIN code</FieldLabel>
-                                        <FieldBody>
-                                            <TextEdit Placeholder="Required for stopping your SMITE night" Role="TextRole.Password" @bind-Text="_smitenightProcessModel.PinCode">
-                                                <Feedback>
-                                                    <ValidationError />
-                                                </Feedback>
-                                            </TextEdit>
-                                        </FieldBody>
-                                    </Field>
-                                </Validation>
-                            </div>
-                        </Validations>
-                    </div>
-                    <div style="@ButtonStyle">
-                        <Row>
-                            <Column ColumnSize="ColumnSize.Is6">
-                                <Button Color="Color.Success" Type="ButtonType.Submit" PreventDefaultOnSubmit Block Clicked="@(async () => await StartSmitenightAsync())">Start!</Button>
-                            </Column>
-                            <Column ColumnSize="ColumnSize.Is6">
-                                <Button Color="Color.Danger" Type="ButtonType.Submit" PreventDefaultOnSubmit Block Clicked="@(async () => await EndSmitenightAsync())">Stop</Button>
-                            </Column>
-                        </Row>
-                    </div>
-                    <div class="sn-home-loader" style="@LoaderStyle">
-                        <Row>
-                            <Column ColumnSize="ColumnSize.Is12">
-                                <Progress Value="100" Animated Striped></Progress>
-                            </Column>
-                        </Row>
-                    </div>
-                </EditForm>
-            </CardBody>
-        </Card>
+        <SmitenightBox />
     </Column>
     <Column ColumnSize="ColumnSize.Is2"></Column>
 </Row>

@@ -6,9 +6,9 @@ using SmitenightApp.Client.Forms.Smitenights;
 using SmitenightApp.Client.Interfaces;
 using SmitenightApp.Domain.Contracts.Smitenights;
 
-namespace SmitenightApp.Client.Pages
+namespace SmitenightApp.Client.Components.Home
 {
-    public partial class Index
+    public partial class SmitenightBox
     {
         private string FormStyle { get; set; } = null!;
         private string ButtonStyle { get; set; } = null!;
