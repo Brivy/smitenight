@@ -1,11 +1,6 @@
 ﻿@page "/"
 
-<div id="bubble-wrap">
-    @foreach (var godBubbleStyling in GodBubbleStyles)
-    {
-        <img class="godBubble" style="@godBubbleStyling" alt="Floating god cards" />
-    }
-</div>
+<GodBubbles />
 <Row Class="sn-home-intro-row">
     <Column ColumnSize="ColumnSize.Is2"></Column>
     <Column ColumnSize="ColumnSize.Is4">
