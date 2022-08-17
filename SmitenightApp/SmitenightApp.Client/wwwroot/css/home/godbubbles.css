@@ -1,19 +1,19 @@
 @keyframes godsAnimation {
     0% {
-        margin-top: 5%;
+        top: 70%;
         opacity: 0;
     }
 
-    25% {
+    26% {
         opacity: 0.5;
     }
 
-    50% {
+    52% {
         opacity: 0;
     }
 
     100% {
-        margin-top: -80%;
+        top: -100%;
     }
 }
 

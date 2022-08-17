@@ -30,7 +30,7 @@ namespace SmitenightApp.Client.Components.Home
                 }
 
                 previousRandomLefts.Add(randomLeft);
-                var randomTimer = random.Next(20, 50);
+                var randomTimer = random.Next(40, 60);
                 var randomTop = random.Next(50, 60);
                 var randomScale = random.Next(20, 40);
                 var styling = $"content:url(\"{godCard}\"); " +
@@ -44,7 +44,7 @@ namespace SmitenightApp.Client.Components.Home
                               $"-moz-transform: scale(0.{randomScale}); " +
                               $"transform: scale(0.{randomScale});";
                 GodBubbleStyles.Add(styling);
-                delay += 2;
+                delay += 5;
             }
         }
     }
