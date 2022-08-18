@@ -8,6 +8,7 @@
     top: 35%;
     transform: translateY(-35%);
     margin: auto;
+    box-shadow: 5px 5px black;
 }
 
 .sn-box-pin {
