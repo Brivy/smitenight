@@ -2,7 +2,7 @@ name: Linux Container .NET 6.0 Workflow
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, Updating_docker_file ]
 
 jobs:
   build-and-deploy:
