@@ -2,7 +2,7 @@
 
 <Layout Sider>
     <Layout>
-        <LayoutHeader>
+        <LayoutHeader Fixed>
             <Bar Class="sn-bar" Breakpoint="Breakpoint.Desktop" Background="Background.Dark" ThemeContrast="ThemeContrast.Dark">
                 <Container>
                     <BarBrand Class="sn-bar-brand">
@@ -14,13 +14,15 @@
                     <BarMenu>
                         <BarEnd>
                             <BarItem>
-                                <BarLink To="history">History</BarLink>
+                                <BarLink To="about">About</BarLink>
                             </BarItem>
                         </BarEnd>
                     </BarMenu>
                 </Container>
             </Bar>
         </LayoutHeader>
-        @Body
+        <LayoutContent>
+            @Body
+        </LayoutContent>
     </Layout>
 </Layout>

@@ -1,5 +1,15 @@
-﻿html, body {
+﻿html {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    background: linear-gradient(65deg, rgba(255,255,255,0), rgba(0,0,0,0.2));
+    background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100vh;
 }
 
 h1:focus {
@@ -67,11 +77,13 @@ h1:focus {
 
 /* Smitenight homepage */
 .sn-home-intro-container {
-    height: 100%;
+    position: relative;
+    min-height: 100%;
 }
 
 .sn-home-intro-row {
-    height: 100%;
+    position: absolute;
+    min-height: 100%;
 }
 
 .sn-home-intro-column-text {
@@ -103,4 +115,132 @@ h1:focus {
 .sn-home-intro-smite {
     color: #DABD37;
     text-shadow: 3px 3px black;
+}
+
+/* Smitenight cards */
+.sn-home-card {
+    color: white;
+    background: #343a40 !important;
+    border-radius: 10px !important;
+    position: relative;
+    top: 35%;
+    transform: translateY(-35%);
+}
+
+.sn-home-card-area {
+    padding-top: 3rem;
+    padding-bottom: 3rem;
+}
+
+.sn-home-card span {
+    font-size: 4rem;
+    font-weight: 900;
+}
+
+/* Footer */
+.sn-footer {
+    padding-top: 3rem;
+    text-align: center;
+}
+
+/* About */
+
+.sn-about-container {
+    position: relative;
+    min-height: 100%;
+}
+
+.sn-about-container span {
+    font-size: 4rem;
+    font-weight: 900;
+}
+
+.sn-about-container p {
+    font-weight: bold;
+    font-size: 1.1rem;
+}
+
+.sn-about-intro-row {
+    position: absolute;
+    min-height: 100%;
+}
+
+.sn-about-card {
+    color: white;
+    background: #343a40 !important;
+    border-radius: 10px !important;
+    position: relative;
+    box-shadow: 5px 5px black;
+    top: 35%;
+    transform: translateY(-35%);
+}
+
+.sn-about-intro-start {
+    color: #28a745;
+}
+
+.sn-about-intro-stop {
+    color: #dc3545;
+}
+
+.sn-about-intro-column-text {
+    padding-right: 1rem;
+}
+
+.sn-about-intro-column-box {
+    padding-left: 1rem;
+}
+
+.godSlider {
+    position: relative;
+    perspective: 1000px;
+    transform-style: preserve-3d;
+    top: 35%;
+    transform: translateY(-35%);
+}
+
+.godSlider p {
+    position: absolute;
+    margin-top: 40%;
+}
+
+.sn-about-intro-column-box img {
+    margin: auto;
+    height: 200px;
+    width: 150px;
+    position: absolute;
+    left: 0;
+    right: 0;
+}
+
+.god-slider-info {
+    text-align: center;
+    position: relative;
+    top: 55%;
+    transform: translateY(-50%);
+}
+
+#godSlide1 {
+    box-shadow: 0 13px 25px 0 rgba(0,0,0,.3), 0 11px 7px 0 rgba(0,0,0,.19);
+    transform: translate3d(0,0,0);
+}
+
+#godSlide2 {
+    box-shadow: 0 13px 25px 0 rgba(0,0,0,.3), 0 11px 7px 0 rgba(0,0,0,.19);
+    transform: translate3d(55%,-20%,-100px);
+}
+
+#godSlide3 {
+    box-shadow: 0 13px 25px 0 rgba(0,0,0,.3), 0 11px 7px 0 rgba(0,0,0,.19);
+    transform: translate3d(110%,-40%,-200px);
+}
+
+#godSlide4 {
+    box-shadow: 0 13px 25px 0 rgba(0,0,0,.3), 0 11px 7px 0 rgba(0,0,0,.19);
+    transform: translate3d(-55%,-20%,-100px);
+}
+
+#godSlide5 {
+    box-shadow: 0 13px 25px 0 rgba(0,0,0,.3), 0 11px 7px 0 rgba(0,0,0,.19);
+    transform: translate3d(-110%,-40%,-200px);
 }

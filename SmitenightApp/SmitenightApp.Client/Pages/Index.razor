@@ -1,16 +1,18 @@
 ﻿@page "/"
 
-<GodBubbles />
-<Container Class="sn-home-intro-container">
-    <Row Class="sn-home-intro-row">
-        <Column Class="sn-home-intro-column-text" ColumnSize="ColumnSize.Is6">
-            <div class="sn-home-intro">
-                <span>The only app to track your <span class="sn-home-intro-smite">SMITE</span> night!</span>
-                <p>We wanted to track a single SMITE session, instead of digging through some boring old lifetime statistics. So we build <b>Smitenight.com</b> to do that for you! Keep track of what you did good (or bad) in your current session and try to improve where needed!</p>
-            </div>
-        </Column>
-        <Column Class="sn-home-intro-column-box" ColumnSize="ColumnSize.Is6">
-            <SmitenightBox />
-        </Column>
-    </Row>
-</Container>
+<div class="bubble-wrap">
+    <GodBubbles />
+    <Container Class="sn-home-intro-container">
+        <Row Class="sn-home-intro-row">
+            <Column Class="sn-home-intro-column-text" ColumnSize="ColumnSize.Is6">
+                <div class="sn-home-intro">
+                    <span>The only app to track your <span class="sn-home-intro-smite">SMITE</span> night!</span>
+                    <p>We wanted to track a single SMITE session, instead of digging through some boring old lifetime statistics. So we build <b>Smitenight.com</b> to do that for you! Enter your playername and start your smitenight!</p>
+                </div>
+            </Column>
+            <Column Class="sn-home-intro-column-box" ColumnSize="ColumnSize.Is6">
+                <SmitenightBox />
+            </Column>
+        </Row>
+    </Container>
+</div>
