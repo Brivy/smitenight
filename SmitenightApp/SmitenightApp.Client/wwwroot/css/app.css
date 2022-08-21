@@ -5,7 +5,7 @@
 
 body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    background: linear-gradient(65deg, rgba(255,255,255,0), rgba(0,0,0,0.2));
+    background: linear-gradient(65deg, rgba(255,255,255,0), rgba(0,0,0,0.1));
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
@@ -71,9 +71,9 @@ h1:focus {
     font-weight: 900;
 }
 
-.sn-bar-brand a:hover {
-    color: rgba(218, 189, 55,.9)
-}
+    .sn-bar-brand a:hover {
+        color: rgba(218, 189, 55,.9)
+    }
 
 /* Smitenight homepage */
 .sn-home-intro-container {
@@ -85,7 +85,6 @@ h1:focus {
     justify-content: space-evenly;
     align-items: center;
     align-content: center;
-    padding-bottom: 5rem;
 }
 
 .sn-home-intro-text {
@@ -115,6 +114,14 @@ h1:focus {
     text-shadow: 3px 3px black;
 }
 
+.sn-home-footer {
+    padding-top: 4rem;
+    padding-bottom: 1rem;
+    text-align: center;
+    color: #343a40;
+    opacity: 0.25;
+}
+
 /* Smitenight cards */
 .sn-home-card {
     color: white;
@@ -141,13 +148,13 @@ h1:focus {
     .sn-home-intro-text {
         padding-top: 1rem;
         padding-left: 2rem;
-        padding-right: 2rem;
+        box-sizing: border-box;
     }
 }
 
 @media screen and (min-width: 576px) {
     .sn-home-intro-text span {
-        font-size: 4.6rem;
+        font-size: 3.9rem;
     }
 }
 
