@@ -9,7 +9,7 @@ body {
     background-attachment: fixed;
     background-position: center;
     background-repeat: no-repeat;
-    height: 100vh;
+    height: 100%;
 }
 
 h1:focus {
@@ -85,6 +85,7 @@ h1:focus {
     justify-content: space-evenly;
     align-items: center;
     align-content: center;
+    overflow: hidden;
 }
 
 .sn-home-intro-text {
@@ -148,7 +149,7 @@ h1:focus {
     .sn-home-intro-text {
         padding-top: 1rem;
         padding-left: 2rem;
-        box-sizing: border-box;
+        padding-right: 2rem;
     }
 }
 
