@@ -42,7 +42,7 @@ h1:focus {
 }
 
 /* Loading blazor stuff */
-/*.blazor-loading-ui {
+.blazor-loading-ui {
     position: absolute;
     top: 15rem;
     width: 100%;
@@ -54,10 +54,10 @@ h1:focus {
     gap: 1rem;
     justify-content: center;
     align-items: center;
-}*/
+}
 
 /* Navigation bar */
-/*.sn-bar a {
+.sn-bar a {
     font-weight: 900;
 }
 
@@ -69,10 +69,10 @@ h1:focus {
 
 .sn-bar-brand a:hover {
     color: rgba(218, 189, 55,.9)
-}*/
+}
 
 /* Smitenight homepage */
-/*.sn-home-intro-container {
+.sn-home-intro-container {
     position: relative;
     min-height: 100%;
     display: flex;
@@ -116,24 +116,6 @@ h1:focus {
     padding-bottom: 1rem;
     text-align: center;
     opacity: 0.25;
-}*/
-
-/* Smitenight cards */
-.sn-home-card {
-    color: white;
-    background: #343a40 !important;
-    border-radius: 10px !important;
-    position: relative;
-}
-
-.sn-home-card-area {
-    padding-top: 3rem;
-    padding-bottom: 3rem;
-}
-
-.sn-home-card span {
-    font-size: 4rem;
-    font-weight: 900;
 }
 
 @media (min-width: 0) {
