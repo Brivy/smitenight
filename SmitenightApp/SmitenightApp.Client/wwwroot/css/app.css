@@ -1,4 +1,4 @@
-﻿/*html {
+﻿html {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
 }
 
@@ -6,7 +6,7 @@ body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
     background: linear-gradient(65deg, rgba(255,255,255,0), rgba(0,0,0,0.05));
     background-attachment: fixed;
-}*/
+}
 
 h1:focus {
     outline: none;
