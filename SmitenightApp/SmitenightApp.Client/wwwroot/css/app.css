@@ -135,11 +135,13 @@ h1:focus {
 
 @media screen and (min-width: 0) {
     .sn-home-intro-text span {
-        font-size: 4.2rem;
+        font-size: 3rem;
     }
 
     .sn-home-intro-text {
-        margin: 1rem;
+        padding-top: 1rem;
+        padding-left: 2rem;
+        padding-right: 2rem;
     }
 }
 
