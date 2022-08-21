@@ -1,4 +1,4 @@
-/*@keyframes godsAnimation {
+@keyframes godsAnimation {
     0% {
         top: 70%;
         opacity: 0;
@@ -63,4 +63,4 @@
         height: 512px;
         width: 380px;
     }
-}*/
+}
