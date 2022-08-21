@@ -1,8 +1,8 @@
 ﻿@inherits LayoutComponentBase
 
 <Layout>
-    <LayoutHeader Fixed>
-        <Bar Class="sn-bar" Breakpoint="Breakpoint.Desktop" Background="Background.Dark" ThemeContrast="ThemeContrast.Dark">
+    <LayoutHeader>
+        <Bar @bind-Visible="@_topBarVisible" Class="sn-bar" Breakpoint="Breakpoint.Tablet" Background="Background.Dark" ThemeContrast="ThemeContrast.Dark" Shadow="Shadow.Default">
             <Container>
                 <BarBrand Class="sn-bar-brand">
                     <BarItem>
