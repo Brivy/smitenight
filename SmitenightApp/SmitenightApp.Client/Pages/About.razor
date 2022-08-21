@@ -1,29 +1,24 @@
 ﻿@page "/about"
 
 <Container Class="sn-about-container">
-    <Row Class="sn-about-intro-row">
-        <Column Class="sn-about-intro-column-text" ColumnSize="ColumnSize.Is6">
-            <Card Class="sn-about-card">
-                <CardBody>
-                    <span>What is a <span class="sn-home-intro-smite">SMITE</span> night?</span>
-                    <Divider />
-                    <p>The idea behind a Smitenight is fairly simple. You <b class="sn-about-intro-start">start</b> your Smitenight and play a couple of matches. When you are done playing, you <b class="sn-about-intro-stop">stop</b> the Smitenight.</p>
-                    <p>From the moment you complete your Smitenight, we'll collect all the data surrounding the matches you played in that session. This data will then be compressed and summarized for you on <b>smitenight.com</b>.</p>
-                    <p>Sounds easy and fun right? So what are you waiting for? Start your SMITE night now!</p>
-                    <Divider />
-                    <p><i>Disclaimer: This is a BETA version of SMITE night, so things are subject to change. For example, while all statistics are saved to the database at this point, the functionality to display this is under construction.</i></p>
-                </CardBody>
-            </Card>
-        </Column>
-        <Column Class="sn-about-intro-column-box" ColumnSize="ColumnSize.Is6">
-            <div class="godSlider">
-                <img src="https://webcdn.hirezstudios.com/smite/god-skins/jormungandr_goose-chase.jpg" id="godSlide1" />
-                <img src="https://webcdn.hirezstudios.com/smite/god-skins/jormungandr_living-alloy.jpg" id="godSlide2" />
-                <img src="https://webcdn.hirezstudios.com/smite/god-skins/jormungandr_malworm.jpg" id="godSlide3" />
-                <img src="https://webcdn.hirezstudios.com/smite/god-skins/jormungandr_world-kitty.jpg" id="godSlide4" />
-                <img src="https://webcdn.hirezstudios.com/smite/god-skins/jormungandr_plushie.jpg" id="godSlide5" />
-                <p><i>5 out of 5 Jormungandr's recommend SMITE night to their friends!</i></p>
-            </div>
-        </Column>
-    </Row>
+    <Card Class="sn-about-card">
+        <CardBody>
+            <span>What is a <span class="sn-home-intro-smite">SMITE</span> night?</span>
+            <Divider />
+            <p>The idea behind a Smitenight is fairly simple. You <b class="sn-about-intro-start">start</b> your Smitenight and play a couple of matches. When you are done playing, you <b class="sn-about-intro-stop">stop</b> the Smitenight.</p>
+            <p>From the moment you complete your Smitenight, we'll collect all the data surrounding the matches you played in that session. This data will then be compressed and summarized for you on <b>smitenight.com</b>.</p>
+            <p>Sounds easy and fun right? So what are you waiting for? Start your SMITE night now!</p>
+            <Divider />
+            <p><i>Disclaimer: This is a BETA version of SMITE night, so things are subject to change. For example, while all statistics are saved to the database at this point, the functionality to display this is under construction.</i></p>
+        </CardBody>
+    </Card>
+    <div class="god-slider-div">
+        <div class="godSlider">
+            <img src="https://webcdn.hirezstudios.com/smite/god-skins/jormungandr_goose-chase.jpg" id="godSlide1" alt="Jormunganr Goose" />
+            <img src="https://webcdn.hirezstudios.com/smite/god-skins/jormungandr_living-alloy.jpg" id="godSlide2" alt="Jormunganr Metal" />
+            <img src="https://webcdn.hirezstudios.com/smite/god-skins/jormungandr_malworm.jpg" id="godSlide3" alt="Jormunganr Malworm" />
+            <img src="https://webcdn.hirezstudios.com/smite/god-skins/jormungandr_world-kitty.jpg" id="godSlide4" alt="Jormunganr Kitty" />
+            <img src="https://webcdn.hirezstudios.com/smite/god-skins/jormungandr_plushie.jpg" id="godSlide5" alt="Jormunganr Plushie" />
+        </div>
+    </div>
 </Container>
