@@ -91,7 +91,7 @@
     transform: translate3d(-110%,-40%,-200px);
 }
 
-@media screen and (min-width: 0) {
+@media (min-width: 0) {
     .sn-about-container span {
         font-size: 1.5rem;
     }
@@ -115,7 +115,7 @@
     }
 }
 
-@media screen and (min-width: 576px) {
+@media (min-width: 576px) {
     .sn-about-container span {
         font-size: 2rem;
     }
@@ -139,7 +139,7 @@
     }
 }
 
-@media screen and (min-width: 768px) {
+@media (min-width: 768px) {
     .sn-about-container span {
         font-size: 2rem;
     }
@@ -163,7 +163,7 @@
     }
 }
 
-@media screen and (min-width: 992px) {
+@media (min-width: 992px) {
     .sn-about-container span {
         font-size: 3rem;
     }
@@ -191,7 +191,7 @@
     }
 }
 
-@media screen and (min-width: 1200px) {
+@media (min-width: 1200px) {
     .sn-about-container span {
          font-size: 4rem;
     }

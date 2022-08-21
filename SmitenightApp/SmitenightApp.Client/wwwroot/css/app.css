@@ -41,9 +41,9 @@ h1:focus {
     color: white;
 }
 
-    .blazor-error-boundary::after {
-        content: "An error has occurred."
-    }
+.blazor-error-boundary::after {
+    content: "An error has occurred."
+}
 
 /* Loading blazor stuff */
 .blazor-loading-ui {
@@ -71,9 +71,9 @@ h1:focus {
     font-weight: 900;
 }
 
-    .sn-bar-brand a:hover {
-        color: rgba(218, 189, 55,.9)
-    }
+.sn-bar-brand a:hover {
+    color: rgba(218, 189, 55,.9)
+}
 
 /* Smitenight homepage */
 .sn-home-intro-container {
@@ -140,7 +140,7 @@ h1:focus {
     font-weight: 900;
 }
 
-@media screen and (min-width: 0) {
+@media (min-width: 0) {
     .sn-home-intro-text span {
         font-size: 3rem;
     }
@@ -152,25 +152,25 @@ h1:focus {
     }
 }
 
-@media screen and (min-width: 576px) {
+@media (min-width: 576px) {
     .sn-home-intro-text span {
         font-size: 3.9rem;
     }
 }
 
-@media screen and (min-width: 768px) {
+@media (min-width: 768px) {
     .sn-home-intro-text span {
         font-size: 3.8rem;
     }
 }
 
-@media screen and (min-width: 992px) {
+@media (min-width: 992px) {
     .sn-home-intro-text span {
         font-size: 4rem;
     }
 }
 
-@media screen and (min-width: 1200px) {
+@media (min-width: 1200px) {
     .sn-home-intro-text span {
         font-size: 4.6rem;
     }
