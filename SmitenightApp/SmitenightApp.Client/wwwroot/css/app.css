@@ -12,7 +12,7 @@ h1:focus {
     outline: none;
 }
 
-#blazor-error-ui {
+/*#blazor-error-ui {
     background: lightyellow;
     bottom: 0;
     box-shadow: 0 -1px 2px rgba(0, 0, 0, 0.2);
@@ -39,7 +39,7 @@ h1:focus {
 
 .blazor-error-boundary::after {
     content: "An error has occurred."
-}
+}*/
 
 /* Loading blazor stuff */
 .blazor-loading-ui {
@@ -136,7 +136,7 @@ h1:focus {
     font-weight: 900;
 }
 
-@media (min-width: 0) {
+/*@media (min-width: 0) {
     .sn-home-intro-text span {
         font-size: 3rem;
     }
@@ -171,3 +171,4 @@ h1:focus {
         font-size: 4.6rem;
     }
 }
+*/
