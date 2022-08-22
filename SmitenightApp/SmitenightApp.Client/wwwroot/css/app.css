@@ -1,15 +1,11 @@
 ﻿html {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    scroll-behavior: smooth;
 }
 
 body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    background: linear-gradient(65deg, rgba(255,255,255,0), rgba(0,0,0,0.2));
+    background: linear-gradient(65deg, rgba(255,255,255,0), rgba(0,0,0,0.1));
     background-attachment: fixed;
-    background-position: center;
-    background-repeat: no-repeat;
-    height: 100vh;
 }
 
 h1:focus {
@@ -41,9 +37,9 @@ h1:focus {
     color: white;
 }
 
-    .blazor-error-boundary::after {
-        content: "An error has occurred."
-    }
+.blazor-error-boundary::after {
+    content: "An error has occurred."
+}
 
 /* Loading blazor stuff */
 .blazor-loading-ui {
@@ -79,37 +75,35 @@ h1:focus {
 .sn-home-intro-container {
     position: relative;
     min-height: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    align-items: center;
+    align-content: center;
+    overflow: hidden;
 }
 
-.sn-home-intro-row {
-    position: absolute;
-    min-height: 100%;
-}
-
-.sn-home-intro-column-text {
-    padding-right: 1rem;
-}
-
-.sn-home-intro-column-box {
-    padding-left: 1rem;
-}
-
-.sn-home-intro {
+.sn-home-intro-text {
+    min-width: 400px;
+    flex: 1;
     color: #343a40;
     text-align: left;
     position: relative;
-    top: 35%;
-    transform: translateY(-35%);
 }
 
-.sn-home-intro span {
-    font-size: 4rem;
+.sn-home-intro-text span {
     font-weight: 900;
 }
 
-.sn-home-intro p {
+.sn-home-intro-text p {
     font-weight: bold;
     font-size: 1.1rem;
+}
+
+.sn-home-intro-card {
+    min-width: 400px;
+    flex: 1;
 }
 
 .sn-home-intro-smite {
@@ -117,22 +111,45 @@ h1:focus {
     text-shadow: 3px 3px black;
 }
 
-/* Smitenight cards */
-.sn-home-card {
-    color: white;
-    background: #343a40 !important;
-    border-radius: 10px !important;
-    position: relative;
-    top: 35%;
-    transform: translateY(-35%);
+.sn-home-footer {
+    margin-top: 5rem;
+    padding-bottom: 1rem;
+    text-align: center;
+    opacity: 0.25;
 }
 
-.sn-home-card-area {
-    padding-top: 3rem;
-    padding-bottom: 3rem;
+@media (min-width: 0) {
+    .sn-home-intro-text span {
+        font-size: 3rem;
+    }
+
+    .sn-home-intro-text {
+        padding-top: 1rem;
+        padding-left: 2rem;
+        padding-right: 2rem;
+    }
 }
 
-.sn-home-card span {
-    font-size: 4rem;
-    font-weight: 900;
+@media (min-width: 576px) {
+    .sn-home-intro-text span {
+        font-size: 3.9rem;
+    }
+}
+
+@media (min-width: 768px) {
+    .sn-home-intro-text span {
+        font-size: 3.8rem;
+    }
+}
+
+@media (min-width: 992px) {
+    .sn-home-intro-text span {
+        font-size: 4rem;
+    }
+}
+
+@media (min-width: 1200px) {
+    .sn-home-intro-text span {
+        font-size: 4.6rem;
+    }
 }

@@ -23,7 +23,7 @@ namespace SmitenightApp.Client.Components.Home
             var previousRandomLefts = new List<int>();
             foreach (var godCard in godSkinCollection)
             {
-                var randomLeft = random.Next(0, 80);
+                var randomLeft = random.Next(0, 75);
                 while (previousRandomLefts.Any(x => x - 2 <= randomLeft && x + 2 >= randomLeft))
                 {
                     randomLeft = random.Next(0, 70);

@@ -1,3 +1,4 @@
+using Azure.Identity;
 using SmitenightApp.CompositionRoot;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -8,6 +9,10 @@ builder.Services.AddRazorPages();
 builder.Services.ConfigureServices(builder.Configuration);
 
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
+
+builder.Configuration.AddAzureKeyVault(
+    new Uri($"https://{builder.Configuration["KeyVaultSettings:Url"]}.vault.azure.net/"),
+    new DefaultAzureCredential());
 
 var app = builder.Build();
 
