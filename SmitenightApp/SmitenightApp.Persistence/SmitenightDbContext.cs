@@ -41,6 +41,7 @@ namespace SmitenightApp.Persistence
         public DbSet<MatchDetail> MatchDetails => Set<MatchDetail>();
 
         public DbSet<Player> Players => Set<Player>();
+        public DbSet<PlayerNameAttempt> PlayerNameAttempts => Set<PlayerNameAttempt>();
 
         public DbSet<SmitenightMatch> SmitenightMatches => Set<SmitenightMatch>();
         public DbSet<Smitenight> Smitenights => Set<Smitenight>();

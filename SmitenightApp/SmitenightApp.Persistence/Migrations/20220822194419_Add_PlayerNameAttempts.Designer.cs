@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SmitenightApp.Persistence;
 
@@ -11,9 +12,10 @@ using SmitenightApp.Persistence;
 namespace SmitenightApp.Persistence.Migrations
 {
     [DbContext(typeof(SmitenightDbContext))]
-    partial class SmitenightDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220822194419_Add_PlayerNameAttempts")]
+    partial class Add_PlayerNameAttempts
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
