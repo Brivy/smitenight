@@ -1,11 +1,15 @@
 ﻿html {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+    scroll-behavior: smooth;
 }
 
 body {
     font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-    background: linear-gradient(65deg, rgba(255,255,255,0), rgba(0,0,0,0.05));
+    background: linear-gradient(65deg, rgba(255,255,255,0), rgba(0,0,0,0.1));
     background-attachment: fixed;
+    background-position: center;
+    background-repeat: no-repeat;
+    height: 100%;
 }
 
 h1:focus {
