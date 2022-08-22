@@ -1,28 +1,31 @@
 ﻿@inherits LayoutComponentBase
 
-<Layout Sider>
-    <Layout>
-        <LayoutHeader Fixed>
-            <Bar Class="sn-bar" Breakpoint="Breakpoint.Desktop" Background="Background.Dark" ThemeContrast="ThemeContrast.Dark">
-                <Container>
-                    <BarBrand Class="sn-bar-brand">
+<Layout>
+    <LayoutHeader>
+        <Bar @bind-Visible="@_topBarVisible" Class="sn-bar" Breakpoint="Breakpoint.Tablet" Background="Background.Dark" ThemeContrast="ThemeContrast.Dark" Shadow="Shadow.Default">
+            <Container>
+                <BarBrand Class="sn-bar-brand">
+                    <BarItem>
+                        <BarLink To="">Smitenight.com (BETA)</BarLink>
+                    </BarItem>
+                </BarBrand>
+                <BarToggler />
+                <BarMenu>
+                    <BarEnd>
                         <BarItem>
-                            <BarLink To="">Smitenight.com BETA</BarLink>
+                            <BarLink To="about">About</BarLink>
                         </BarItem>
-                    </BarBrand>
-                    <BarToggler />
-                    <BarMenu>
-                        <BarEnd>
-                            <BarItem>
-                                <BarLink To="about">About</BarLink>
-                            </BarItem>
-                        </BarEnd>
-                    </BarMenu>
-                </Container>
-            </Bar>
-        </LayoutHeader>
-        <LayoutContent>
-            @Body
-        </LayoutContent>
-    </Layout>
+                    </BarEnd>
+                </BarMenu>
+            </Container>
+        </Bar>
+    </LayoutHeader>
+    <LayoutContent>
+        @Body
+    </LayoutContent>
+    <LayoutFooter>
+        <Container Class="sn-home-footer">
+            Brivy - 2022
+        </Container>
+    </LayoutFooter>
 </Layout>

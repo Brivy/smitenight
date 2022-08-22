@@ -1,5 +1,3 @@
-#See https://aka.ms/containerfastmode to understand how Visual Studio uses this Dockerfile to build your images for faster debugging.
-
 FROM mcr.microsoft.com/dotnet/aspnet:6.0 AS base
 WORKDIR /app
 EXPOSE 80
@@ -7,23 +5,25 @@ EXPOSE 443
 
 FROM mcr.microsoft.com/dotnet/sdk:6.0 AS build
 WORKDIR /src
-COPY ["Smitenight/Smitenight.Server/Smitenight.Server.csproj", "Smitenight/Smitenight.Server/"]
-COPY ["Smitenight/Smitenight.CompositionRoot/Smitenight.CompositionRoot.csproj", "Smitenight/Smitenight.CompositionRoot/"]
-COPY ["Smitenight/Smitenight.Application/Smitenight.Application.csproj", "Smitenight/Smitenight.Application/"]
-COPY ["Smitenight/Smitenight.Abstractions.Infrastructure/Smitenight.Abstractions.Infrastructure.csproj", "Smitenight/Smitenight.Abstractions.Infrastructure/"]
-COPY ["Smitenight/Smitenight.Domain/Smitenight.Domain.csproj", "Smitenight/Smitenight.Domain/"]
-COPY ["Smitenight/Smitenight.Abstractions.Application/Smitenight.Abstractions.Application.csproj", "Smitenight/Smitenight.Abstractions.Application/"]
-COPY ["Smitenight/Smitenight.Infrastructure.Keyvault/Smitenight.Infrastructure.KeyVault.csproj", "Smitenight/Smitenight.Infrastructure.Keyvault/"]
-COPY ["Smitenight/Smitenight.Client/Smitenight.Client.csproj", "Smitenight/Smitenight.Client/"]
-RUN dotnet restore "Smitenight/Smitenight.Server/Smitenight.Server.csproj"
+COPY ["SmitenightApp/SmitenightApp.Server/SmitenightApp.Server.csproj", "SmitenightApp/SmitenightApp.Server/"]
+COPY ["SmitenightApp/SmitenightApp.Client/SmitenightApp.Client.csproj", "SmitenightApp/SmitenightApp.Client/"]
+COPY ["SmitenightApp/SmitenightApp.CompositionRoot/SmitenightApp.CompositionRoot.csproj", "SmitenightApp/SmitenightApp.CompositionRoot/"]
+COPY ["SmitenightApp/SmitenightApp.Application/SmitenightApp.Application.csproj", "SmitenightApp/SmitenightApp.Application/"]
+COPY ["SmitenightApp/SmitenightApp.Abstractions.Application/SmitenightApp.Abstractions.Application.csproj", "SmitenightApp/SmitenightApp.Abstractions.Application/"]
+COPY ["SmitenightApp/SmitenightApp.Domain/SmitenightApp.Domain.csproj", "SmitenightApp/SmitenightApp.Domain/"]
+COPY ["SmitenightApp/SmitenightApp.Abstractions.Infrastructure/SmitenightApp.Abstractions.Infrastructure.csproj", "SmitenightApp/SmitenightApp.Abstractions.Infrastructure/"]
+COPY ["SmitenightApp/SmitenightApp.Persistence/SmitenightApp.Persistence.csproj", "SmitenightApp/SmitenightApp.Persistence/"]
+COPY ["SmitenightApp/SmitenightApp.Infrastructure.Keyvault/SmitenightApp.Infrastructure.KeyVault.csproj", "SmitenightApp/SmitenightApp.Infrastructure.Keyvault/"]
+COPY ["SmitenightApp/SmitenightApp.Infrastructure.SmiteClient/SmitenightApp.Infrastructure.SmiteClient.csproj", "SmitenightApp/SmitenightApp.Infrastructure.SmiteClient/"]
+RUN dotnet restore "SmitenightApp/SmitenightApp.Server/SmitenightApp.Server.csproj"
 COPY . .
-WORKDIR "/src/Smitenight/Smitenight.Server"
-RUN dotnet build "Smitenight.Server.csproj" -c Release -o /app/build
+WORKDIR "/src/SmitenightApp/SmitenightApp.Server"
+RUN dotnet build "SmitenightApp.Server.csproj" -c Release -o /app/build
 
 FROM build AS publish
-RUN dotnet publish "Smitenight.Server.csproj" -c Release -o /app/publish
+RUN dotnet publish "SmitenightApp.Server.csproj" -c Release -o /app/publish /p:UseAppHost=false
 
 FROM base AS final
 WORKDIR /app
 COPY --from=publish /app/publish .
-ENTRYPOINT ["dotnet", "Smitenight.Server.dll"]
+ENTRYPOINT ["dotnet", "SmitenightApp.Server.dll"]
