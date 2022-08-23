@@ -1,6 +1,4 @@
-﻿using SmitenightApp.Domain.Exceptions;
-
-namespace SmitenightApp.Domain.Models.Items
+﻿namespace SmitenightApp.Domain.Models.Items
 {
     public class ItemDescription
     {
@@ -12,19 +10,8 @@ namespace SmitenightApp.Domain.Models.Items
 
         #region Navigation
 
-        private Item? _item;
-
-        public Item Item
-        {
-            get => _item ?? throw new NavigationPropertyNullException(nameof(Item));
-            set => _item = value;
-        }
+        public Item? Item { get; set; }
 
         #endregion
-
-        public ItemDescription()
-        {
-
-        }   
     }
 }

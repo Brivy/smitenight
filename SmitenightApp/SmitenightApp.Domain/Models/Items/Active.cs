@@ -1,5 +1,4 @@
 ﻿using SmitenightApp.Domain.Enums.Items;
-using SmitenightApp.Domain.Exceptions;
 using SmitenightApp.Domain.Interfaces;
 
 namespace SmitenightApp.Domain.Models.Items
@@ -22,20 +21,8 @@ namespace SmitenightApp.Domain.Models.Items
 
         #region Navigation
 
-        private Active? _rootActive;
-        private Active? _childActive;
-
-        public Active RootActive
-        {
-            get => _rootActive ?? throw new NavigationPropertyNullException(nameof(RootActive));
-            set => _rootActive = value;
-        }
-
-        public Active ChildActive
-        {
-            get => _childActive ?? throw new NavigationPropertyNullException(nameof(ChildActive));
-            set => _childActive = value;
-        }
+        public Active? RootActive { get; set; }
+        public Active? ChildActive { get; set; }
 
         public List<ActivePurchase> ActivePurchases { get; set; }
 

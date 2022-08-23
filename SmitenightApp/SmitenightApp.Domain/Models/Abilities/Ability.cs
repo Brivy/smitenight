@@ -1,5 +1,4 @@
 ﻿using SmitenightApp.Domain.Enums.Ability;
-using SmitenightApp.Domain.Exceptions;
 using SmitenightApp.Domain.Interfaces;
 using SmitenightApp.Domain.Models.Gods;
 
@@ -20,13 +19,7 @@ namespace SmitenightApp.Domain.Models.Abilities
 
         #region Navigation
 
-        private God? _god;
-
-        public God God
-        {
-            get => _god ?? throw new NavigationPropertyNullException(nameof(God));
-            set => _god = value;
-        }
+        public God? God { get; set; }
 
         public List<AbilityRank> AbilityRanks { get; set; }
         public List<AbilityTag> AbilityTags { get; set; }
