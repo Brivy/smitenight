@@ -3,8 +3,10 @@ using Microsoft.EntityFrameworkCore;
 using SmitenightApp.Abstractions.Application.Services.Builders;
 using SmitenightApp.Abstractions.Application.Services.Common;
 using SmitenightApp.Abstractions.Application.Services.Matches;
+using SmitenightApp.Abstractions.Application.Services.Players;
 using SmitenightApp.Abstractions.Application.Services.Smitenights;
 using SmitenightApp.Abstractions.Infrastructure.SmiteClient;
+using SmitenightApp.Application.Services.Players;
 using SmitenightApp.Domain.Clients.SmiteClient.Requests.PlayerRequests;
 using SmitenightApp.Domain.Clients.SmiteClient.Requests.RetrievePlayerRequests;
 using SmitenightApp.Domain.Constants.SmiteClient.Responses;
@@ -13,6 +15,7 @@ using SmitenightApp.Domain.Contracts.Smitenights;
 using SmitenightApp.Domain.Enums.StatusCodes;
 using SmitenightApp.Domain.Models.Smitenights;
 using SmitenightApp.Persistence;
+using SmitenightApp.Domain.Models.Players;
 
 namespace SmitenightApp.Application.Services.Smitenights
 {
@@ -22,6 +25,8 @@ namespace SmitenightApp.Application.Services.Smitenights
         private readonly IRetrievePlayerClient _retrievePlayerClient;
         private readonly IImportMatchService _importMatchService;
         private readonly ISmitenightBuilderService _smitenightBuilderService;
+        private readonly IPlayerService _playerService;
+        private readonly IPlayerNameAttemptService _playerNameAttemptService;
         private readonly IClock _clock;
         private readonly IMapper _mapper;
         private readonly SmitenightDbContext _dbContext;
@@ -31,6 +36,8 @@ namespace SmitenightApp.Application.Services.Smitenights
             IRetrievePlayerClient retrievePlayerClient,
             IImportMatchService importMatchService,
             ISmitenightBuilderService smitenightBuilderService,
+            IPlayerService playerService,
+            IPlayerNameAttemptService playerNameAttemptService,
             IClock clock,
             IMapper mapper,
             SmitenightDbContext dbContext)
@@ -39,6 +46,8 @@ namespace SmitenightApp.Application.Services.Smitenights
             _retrievePlayerClient = retrievePlayerClient;
             _importMatchService = importMatchService;
             _smitenightBuilderService = smitenightBuilderService;
+            _playerService = playerService;
+            _playerNameAttemptService = playerNameAttemptService;
             _clock = clock;
             _mapper = mapper;
             _dbContext = dbContext;
@@ -46,46 +55,19 @@ namespace SmitenightApp.Application.Services.Smitenights
 
         public async Task<ServerResponseDto<SmitenightDto>> StartSmitenightAsync(string playerName, string? pinCode, CancellationToken cancellationToken = default)
         {
-            var playerIdRequest = new PlayerIdByNameRequest(playerName);
-            var playerIdResponse = await _retrievePlayerClient.GetPlayerIdByPlayerNameAsync(playerIdRequest, cancellationToken);
-            if (playerIdResponse?.Response?.Any() != true)
+            var playerNameAlreadyTried = await _playerNameAttemptService.PlayerNameAlreadyTriedAsync(playerName, cancellationToken);
+            if (playerNameAlreadyTried)
             {
-                return new ServerResponseDto<SmitenightDto>(StatusCodeEnum.PlayerByPlayerNameNotFoundInSmite);
+                return new ServerResponseDto<SmitenightDto>(StatusCodeEnum.PlayerNameTriedWithinCooldownPeriod);
             }
 
-            var smitePlayer = playerIdResponse.Response.First();
-            if (smitePlayer.PrivacyFlag == ResponseConstants.Yes)
+            var existingPlayer = await _playerService.GetAlreadyExistingAsync(playerName, cancellationToken);
+            if (existingPlayer == null)
             {
-                return new ServerResponseDto<SmitenightDto>(StatusCodeEnum.PlayerHasPrivacyEnabled);
+                return await HandleNewPlayerSmiteNightAsync(playerName, pinCode, cancellationToken);
             }
 
-            Smitenight smitenight;
-            var playerEntity = await _dbContext.Players.AsNoTracking().Where(x => x.SmiteId == smitePlayer.PlayerId).SingleOrDefaultAsync(cancellationToken);
-            if (playerEntity == null)
-            {
-                var playerRequest = new PlayerWithoutPortalRequest(smitePlayer.PlayerId.ToString());
-                var player = await _retrievePlayerClient.GetPlayerWithoutPortalAsync(playerRequest, cancellationToken);
-                if (player?.Response?.Any() != true || player.Response.First().Id == ResponseConstants.AnonymousPlayerIntId)
-                {
-                    return new ServerResponseDto<SmitenightDto>(StatusCodeEnum.PlayerByPlayerIdNotFoundInSmite);
-                }
-
-                smitenight = _smitenightBuilderService.Build(player.Response.First(), pinCode);
-            }
-            else
-            {
-                var smitenightExists = await _dbContext.Smitenights.AnyAsync(x => x.PlayerId == playerEntity.Id && !x.EndDate.HasValue, cancellationToken);
-                if (smitenightExists)
-                {
-                    return new ServerResponseDto<SmitenightDto>(StatusCodeEnum.SmitenightAlreadyFound);
-                }
-
-                smitenight = _smitenightBuilderService.Build(playerEntity.Id, pinCode);
-            }
-
-            _dbContext.Add(smitenight);
-            await _dbContext.SaveChangesAsync(cancellationToken);
-            return new ServerResponseDto<SmitenightDto>(StatusCodeEnum.Success, _mapper.Map<SmitenightDto>(smitenight));
+            return await HandleExistingPlayerSmiteNightAsync(existingPlayer, pinCode, cancellationToken);
         }
 
         public async Task<ServerResponseDto<SmitenightDto>> EndSmitenightAsync(string playerName, string? pinCode, CancellationToken cancellationToken = default)
@@ -157,5 +139,73 @@ namespace SmitenightApp.Application.Services.Smitenights
             await _dbContext.SaveChangesAsync(cancellationToken);
             return new ServerResponseDto<SmitenightDto>(StatusCodeEnum.Success, _mapper.Map<SmitenightDto>(smitenight));
         }
+
+        #region Handle Smitenights
+
+        private async Task<ServerResponseDto<SmitenightDto>> HandleNewPlayerSmiteNightAsync(string playerName, string? pinCode, CancellationToken cancellationToken = default)
+        {
+            var playerIdRequest = new PlayerIdByNameRequest(playerName);
+            var playerIdResponse = await _retrievePlayerClient.GetPlayerIdByPlayerNameAsync(playerIdRequest, cancellationToken);
+            if (playerIdResponse?.Response?.Any() != true)
+            {
+                await _playerNameAttemptService.RegisterNotFoundPlayerNameAsync(playerName, cancellationToken);
+                return new ServerResponseDto<SmitenightDto>(StatusCodeEnum.PlayerByPlayerNameNotFoundInSmite);
+            }
+
+            var smitePlayer = playerIdResponse.Response.First();
+            if (smitePlayer.PrivacyFlag == ResponseConstants.Yes)
+            {
+                return new ServerResponseDto<SmitenightDto>(StatusCodeEnum.PlayerHasPrivacyEnabled);
+            }
+
+            Smitenight smitenight;
+            var playerEntity = await _dbContext.Players.AsNoTracking().Where(x => x.SmiteId == smitePlayer.PlayerId).SingleOrDefaultAsync(cancellationToken);
+            if (playerEntity == null)
+            {
+                var playerRequest = new PlayerWithoutPortalRequest(smitePlayer.PlayerId.ToString());
+                var player = await _retrievePlayerClient.GetPlayerWithoutPortalAsync(playerRequest, cancellationToken);
+                if (player?.Response?.Any() != true || player.Response.First().Id == ResponseConstants.AnonymousPlayerIntId)
+                {
+                    return new ServerResponseDto<SmitenightDto>(StatusCodeEnum.PlayerByPlayerIdNotFoundInSmite);
+                }
+
+                smitenight = _smitenightBuilderService.Build(player.Response.First(), pinCode);
+            }
+            else
+            {
+                var smitenightExists = await _dbContext.Smitenights.AnyAsync(x => x.PlayerId == playerEntity.Id && !x.EndDate.HasValue, cancellationToken);
+                if (smitenightExists)
+                {
+                    return new ServerResponseDto<SmitenightDto>(StatusCodeEnum.SmitenightAlreadyFound);
+                }
+
+                smitenight = _smitenightBuilderService.Build(playerEntity.Id, pinCode);
+            }
+
+            _dbContext.Add(smitenight);
+            await _dbContext.SaveChangesAsync(cancellationToken);
+            return new ServerResponseDto<SmitenightDto>(StatusCodeEnum.Success, _mapper.Map<SmitenightDto>(smitenight));
+        }
+
+        private async Task<ServerResponseDto<SmitenightDto>> HandleExistingPlayerSmiteNightAsync(Player existingPlayer, string? pinCode, CancellationToken cancellationToken = default)
+        {
+            if (existingPlayer.PrivacyEnabled)
+            {
+                return new ServerResponseDto<SmitenightDto>(StatusCodeEnum.PlayerHasPrivacyEnabled);
+            }
+
+            var smitenightExists = await _dbContext.Smitenights.AnyAsync(x => x.PlayerId == existingPlayer.Id && !x.EndDate.HasValue, cancellationToken);
+            if (smitenightExists)
+            {
+                return new ServerResponseDto<SmitenightDto>(StatusCodeEnum.SmitenightAlreadyFound);
+            }
+
+            var smitenight = _smitenightBuilderService.Build(existingPlayer.Id, pinCode);
+            _dbContext.Add(smitenight);
+            await _dbContext.SaveChangesAsync(cancellationToken);
+            return new ServerResponseDto<SmitenightDto>(StatusCodeEnum.Success, _mapper.Map<SmitenightDto>(smitenight));
+        }
+
+        #endregion
     }
 }

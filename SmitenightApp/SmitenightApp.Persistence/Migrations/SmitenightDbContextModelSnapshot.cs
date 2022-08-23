@@ -850,6 +850,9 @@ namespace SmitenightApp.Persistence.Migrations
                     b.Property<DateTime>("FirstTimeUsed")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateTime>("LastTimeUsed")
+                        .HasColumnType("datetime2");
+
                     b.Property<DateTime>("NextAttemptPossibleAt")
                         .HasColumnType("datetime2");
 
@@ -996,8 +999,7 @@ namespace SmitenightApp.Persistence.Migrations
                     b.HasOne("SmitenightApp.Domain.Models.Items.Active", "RootActive")
                         .WithMany()
                         .HasForeignKey("RootActiveId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("ChildActive");
 
@@ -1044,8 +1046,7 @@ namespace SmitenightApp.Persistence.Migrations
                     b.HasOne("SmitenightApp.Domain.Models.Items.Item", "RootItem")
                         .WithMany()
                         .HasForeignKey("RootItemId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.NoAction);
 
                     b.Navigation("ChildItem");
 

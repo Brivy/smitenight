@@ -4,12 +4,14 @@ using SmitenightApp.Abstractions.Application.Services.Common;
 using SmitenightApp.Abstractions.Application.Services.Gods;
 using SmitenightApp.Abstractions.Application.Services.Maintenance;
 using SmitenightApp.Abstractions.Application.Services.Matches;
+using SmitenightApp.Abstractions.Application.Services.Players;
 using SmitenightApp.Abstractions.Application.Services.Smitenights;
 using SmitenightApp.Application.Services.Builders;
 using SmitenightApp.Application.Services.Common;
 using SmitenightApp.Application.Services.Gods;
 using SmitenightApp.Application.Services.Maintenance;
 using SmitenightApp.Application.Services.Matches;
+using SmitenightApp.Application.Services.Players;
 using SmitenightApp.Application.Services.Smitenights;
 
 namespace SmitenightApp.Application
@@ -39,6 +41,10 @@ namespace SmitenightApp.Application
 
             // Matches services
             serviceCollection.AddScoped<IImportMatchService, ImportMatchService>();
+
+            // Player services
+            serviceCollection.AddScoped<IPlayerService, PlayerService>();
+            serviceCollection.AddScoped<IPlayerNameAttemptService, PlayerNameAttemptService>();
 
             // Smitenight services
             serviceCollection.AddScoped<ISmitenightService, SmitenightService>();

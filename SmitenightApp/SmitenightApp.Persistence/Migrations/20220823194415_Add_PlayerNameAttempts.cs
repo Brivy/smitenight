@@ -18,6 +18,7 @@ namespace SmitenightApp.Persistence.Migrations
                     PlayerName = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     Attempts = table.Column<int>(type: "int", nullable: false),
                     FirstTimeUsed = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastTimeUsed = table.Column<DateTime>(type: "datetime2", nullable: false),
                     NextAttemptPossibleAt = table.Column<DateTime>(type: "datetime2", nullable: false)
                 },
                 constraints: table =>
