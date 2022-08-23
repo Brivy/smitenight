@@ -9,6 +9,7 @@ namespace SmitenightApp.Server.Profiles
         public SmitenightProfile()
         {
             CreateMap<Smitenight, SmitenightDto>();
+            CreateMap<SmitenightMatch, SmitenightMatchDto>();
         }
     }
 }

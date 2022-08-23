@@ -1,10 +1,15 @@
+using System.Text.Json.Serialization;
 using Azure.Identity;
 using SmitenightApp.CompositionRoot;
 
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
-builder.Services.AddControllersWithViews();
+builder.Services.AddControllersWithViews().AddJsonOptions(options =>
+{
+    options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+});
+
 builder.Services.AddRazorPages();
 builder.Services.ConfigureServices(builder.Configuration);
 
