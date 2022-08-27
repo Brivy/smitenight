@@ -1,6 +1,4 @@
-﻿using SmitenightApp.Domain.Exceptions;
-
-namespace SmitenightApp.Domain.Models.Items
+﻿namespace SmitenightApp.Domain.Models.Items
 {
     public class ConsumableDescription
     {
@@ -12,19 +10,8 @@ namespace SmitenightApp.Domain.Models.Items
 
         #region Navigation
 
-        private Consumable? _consumable;
-
-        public Consumable Consumable
-        {
-            get => _consumable ?? throw new NavigationPropertyNullException(nameof(Consumable));
-            set => _consumable = value;
-        }
+        public Consumable? Consumable { get; set; }
 
         #endregion
-
-        public ConsumableDescription()
-        {
-
-        }   
     }
 }

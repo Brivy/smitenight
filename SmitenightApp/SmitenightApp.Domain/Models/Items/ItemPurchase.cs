@@ -1,5 +1,4 @@
 ﻿using SmitenightApp.Domain.Enums.Items;
-using SmitenightApp.Domain.Exceptions;
 using SmitenightApp.Domain.Interfaces;
 using SmitenightApp.Domain.Models.Matches;
 
@@ -15,26 +14,9 @@ namespace SmitenightApp.Domain.Models.Items
 
         #region Navigation
 
-        private Item? _item;
-        private MatchDetail? _matchDetail;
-
-        public Item Item
-        {
-            get => _item ?? throw new NavigationPropertyNullException(nameof(Item));
-            set => _item = value;
-        }
-
-        public MatchDetail MatchDetail
-        {
-            get => _matchDetail ?? throw new NavigationPropertyNullException(nameof(MatchDetail));
-            set => _matchDetail = value;
-        }
+        public Item? Item { get; set; }
+        public MatchDetail? MatchDetail { get; set; }
 
         #endregion
-
-        public ItemPurchase()
-        {
-
-        }
     }
 }

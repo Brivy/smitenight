@@ -12,6 +12,7 @@
         PlayerByPlayerIdNotFoundInSmite = 102,
         SmitenightAlreadyFound = 103,
         PlayerHistoryNotFoundInSmite = 104,
-        SmitenightNotFound = 105
+        SmitenightNotFound = 105,
+        PlayerNameTriedWithinCooldownPeriod = 106
     }
 }
