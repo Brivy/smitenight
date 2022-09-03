@@ -1,5 +1,4 @@
-﻿using SmitenightApp.Domain.Exceptions;
-using SmitenightApp.Domain.Interfaces;
+﻿using SmitenightApp.Domain.Interfaces;
 
 namespace SmitenightApp.Domain.Models.Gods
 {
@@ -13,19 +12,8 @@ namespace SmitenightApp.Domain.Models.Gods
 
         #region Navigation
 
-        private God? _god;
-
-        public God God
-        {
-            get => _god ?? throw new NavigationPropertyNullException(nameof(God));
-            set => _god = value;
-        }
+        public God? God { get; set; }
 
         #endregion
-
-        public BasicAttackDescription()
-        {
-
-        }
     }
 }

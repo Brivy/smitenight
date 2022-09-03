@@ -26,13 +26,13 @@ namespace SmitenightApp.Application.Services.Gods
             var random = new Random();
             var randomIds = new List<int>();
 
-            var totalSkins = await _dbContext.GodSkins.CountAsync(cancellationToken);
+            var totalSkins = await _dbContext.GodSkins.AsNoTracking().CountAsync(cancellationToken);
             for (var i = 0; i < totalSkinsForShow; i++)
             {
                 randomIds.Add(random.Next(1, totalSkins));
             }
 
-            var result = await _dbContext.GodSkins.Where(x => randomIds.Contains(x.Id)).ToListAsync(cancellationToken);
+            var result = await _dbContext.GodSkins.AsNoTracking().Where(x => randomIds.Contains(x.Id)).ToListAsync(cancellationToken);
             return new ServerResponseDto<List<GodSkinDto>>(StatusCodeEnum.Success, _mapper.Map<List<GodSkinDto>>(result));
         }
     }

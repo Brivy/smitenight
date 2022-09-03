@@ -1,5 +1,4 @@
-﻿using SmitenightApp.Domain.Exceptions;
-using SmitenightApp.Domain.Interfaces;
+﻿using SmitenightApp.Domain.Interfaces;
 
 namespace SmitenightApp.Domain.Models.Abilities
 {
@@ -13,19 +12,8 @@ namespace SmitenightApp.Domain.Models.Abilities
 
         #region Navigation
 
-        private Ability? _ability;
-
-        public Ability Ability
-        {
-            get => _ability ?? throw new NavigationPropertyNullException(nameof(Ability));
-            set => _ability = value;
-        }
+        public Ability? Ability { get; set; }
 
         #endregion
-
-        public AbilityTag()
-        {
-
-        }
     }
 }

@@ -8,6 +8,9 @@ namespace SmitenightApp.Server.Profiles
     {
         public GodProfile()
         {
+            CreateMap<BasicAttackDescription, BasicAttackDescriptionDto>();
+            CreateMap<God, GodDto>();
+            CreateMap<GodBan, GodBanDto>();
             CreateMap<GodSkin, GodSkinDto>();
         }
     }

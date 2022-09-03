@@ -1,6 +1,5 @@
 ﻿using SmitenightApp.Domain.Enums.Gods;
 using SmitenightApp.Domain.Enums.Matches;
-using SmitenightApp.Domain.Exceptions;
 using SmitenightApp.Domain.Models.Gods;
 using SmitenightApp.Domain.Models.Items;
 using SmitenightApp.Domain.Models.Players;
@@ -66,34 +65,10 @@ namespace SmitenightApp.Domain.Models.Matches
 
         #region Navigation
 
-        private God? _god;
-        private GodSkin? _godSkin;
-        private Match? _match;
-        private Player? _player;
-        
-        public God God
-        {
-            get => _god ?? throw new NavigationPropertyNullException(nameof(God));
-            set => _god = value;
-        }
-        
-        public GodSkin GodSkin
-        {
-            get => _godSkin ?? throw new NavigationPropertyNullException(nameof(GodSkin));
-            set => _godSkin = value;
-        }
-
-        public Match Match
-        {
-            get => _match ?? throw new NavigationPropertyNullException(nameof(Match));
-            set => _match = value;
-        }
-        
-        public Player? Player
-        {
-            get => _player ?? throw new NavigationPropertyNullException(nameof(Player));
-            set => _player = value;
-        }
+        public God? God { get; set; }
+        public GodSkin? GodSkin { get; set; }
+        public Match? Match { get; set; }
+        public Player? Player { get; set; }
 
         public List<ActivePurchase> ActivePurchases { get; set; }
         public List<ItemPurchase> ItemPurchases { get; set; }

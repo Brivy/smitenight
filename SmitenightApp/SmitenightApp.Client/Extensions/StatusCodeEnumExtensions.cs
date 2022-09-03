@@ -13,6 +13,7 @@ namespace SmitenightApp.Client.Extensions
             StatusCodeEnum.PlayerByPlayerIdNotFoundInSmite => ServerUserMessages.PlayerNotFoundInSmite,
             StatusCodeEnum.SmitenightAlreadyFound => ServerUserMessages.SmitenightAlreadyFound,
             StatusCodeEnum.SmitenightNotFound => ServerUserMessages.ActiveSmitenightNotFound,
+            StatusCodeEnum.PlayerNameTriedWithinCooldownPeriod => ServerUserMessages.PlayerNotFoundInSmite,
             _ => ServerUserMessages.UnknownError
         };
     }
