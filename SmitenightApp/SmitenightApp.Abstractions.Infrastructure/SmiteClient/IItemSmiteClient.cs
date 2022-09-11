@@ -1,14 +1,14 @@
-﻿using SmitenightApp.Domain.Clients.SmiteClient.Requests.ItemRequests;
-using SmitenightApp.Domain.Clients.SmiteClient.Responses;
+﻿using SmitenightApp.Domain.Clients.SmiteClient.Responses;
 using SmitenightApp.Domain.Clients.SmiteClient.Responses.ItemResponses;
+using SmitenightApp.Domain.Enums.SmiteClient;
 
 namespace SmitenightApp.Abstractions.Infrastructure.SmiteClient;
 
 public interface IItemSmiteClient
 {
     Task<SmiteClientListResponse<GodRecommendedItemsResponse>?> GetGodRecommendedItemsAsync(
-        GodRecommendedItemsRequest request, CancellationToken cancellationToken);
+        string sessionId, int godId, LanguageCodeEnum languageCode, CancellationToken cancellationToken);
 
     Task<SmiteClientListResponse<ItemsResponse>?> GetItemsAsync(
-        ItemsRequest request, CancellationToken cancellationToken);
+        string sessionId, LanguageCodeEnum languageCode, CancellationToken cancellationToken);
 }

@@ -27,8 +27,7 @@ namespace SmitenightApp.Application.Services.Maintenance
 
         public async Task MaintainAsync(CancellationToken cancellationToken = default)
         {
-            var godsRequest = new GodsRequest(LanguageCodeEnum.English);
-            var godsResponse = await _godSmiteClient.GetGodsAsync(godsRequest, cancellationToken);
+            var godsResponse = await _godSmiteClient.GetGodsAsync(LanguageCodeEnum.English, cancellationToken);
             if (godsResponse?.Response == null)
             {
                 return;

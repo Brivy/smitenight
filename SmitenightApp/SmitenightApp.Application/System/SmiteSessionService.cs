@@ -1,12 +1,12 @@
 ﻿using System.Collections.Concurrent;
 using Microsoft.Extensions.Caching.Memory;
+using SmitenightApp.Abstractions.Application.System;
 using SmitenightApp.Abstractions.Infrastructure.SmiteClient;
-using SmitenightApp.Abstractions.Infrastructure.System;
 using SmitenightApp.Domain.Clients.SmiteClient.Requests.SystemRequests;
 using SmitenightApp.Domain.Constants.Common;
 using SmitenightApp.Domain.Exceptions;
 
-namespace SmitenightApp.Infrastructure.SmiteClient.System
+namespace SmitenightApp.Application.System
 {
     public class SmiteSessionService : ISmiteSessionService
     {
