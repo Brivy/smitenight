@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.Extensions.Options;
+using SmitenightApp.Abstractions.Application.System;
 using SmitenightApp.Abstractions.Infrastructure.SmiteClient;
-using SmitenightApp.Abstractions.Infrastructure.System;
 using SmitenightApp.Domain.Clients.SmiteClient.Responses;
 using SmitenightApp.Domain.Clients.SmiteClient.Responses.OtherResponses;
 using SmitenightApp.Domain.Constants.SmiteClient;
@@ -22,18 +22,16 @@ namespace SmitenightApp.Infrastructure.SmiteClient.Clients
         {
         }
 
-        public async Task<SmiteClientListResponse<EsportProLeagueResponse>?> GetEsportProLeagueAsync(
-            string sessionId, CancellationToken cancellationToken)
+        public async Task<SmiteClientListResponse<EsportProLeagueResponse>?> GetEsportProLeagueAsync(CancellationToken cancellationToken = default)
         {
-            var request = new SmiteClientRequest(MethodNameConstants.EsportProLeagueMethod, sessionId);
+            var request = new SmiteClientRequest(MethodNameConstants.EsportProLeagueMethod);
             var result = await GetListAsync<EsportProLeagueResponseDto>(request, cancellationToken);
             return Mapper.Map<SmiteClientListResponse<EsportProLeagueResponse>>(result);
         }
 
-        public async Task<SmiteClientListResponse<MotdResponse>?> GetMotdAsync(
-            string sessionId, CancellationToken cancellationToken)
+        public async Task<SmiteClientListResponse<MotdResponse>?> GetMotdAsync(CancellationToken cancellationToken = default)
         {
-            var request = new SmiteClientRequest(MethodNameConstants.MotdMethod, sessionId);
+            var request = new SmiteClientRequest(MethodNameConstants.MotdMethod);
             var result = await GetListAsync<MotdResponseDto>(request, cancellationToken);
             return Mapper.Map<SmiteClientListResponse<MotdResponse>>(result);
         }

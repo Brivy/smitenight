@@ -4,7 +4,7 @@ using System.Security.Cryptography;
 using System.Text;
 using AutoMapper;
 using Microsoft.Extensions.Options;
-using SmitenightApp.Abstractions.Infrastructure.System;
+using SmitenightApp.Abstractions.Application.System;
 using SmitenightApp.Domain.Constants.Common;
 using SmitenightApp.Infrastructure.SmiteClient.Contracts;
 using SmitenightApp.Infrastructure.SmiteClient.Models;
@@ -50,7 +50,7 @@ namespace SmitenightApp.Infrastructure.SmiteClient.Clients
         {
             try
             {
-                var url = ConstructUrl(smiteClientRequest);
+                var url = await ConstructUrlAsync(smiteClientRequest, cancellationToken);
                 var request = new HttpRequestMessage(HttpMethod.Get, url);
                 var response = await _httpClient.SendAsync(request, cancellationToken);
                 return new SmiteClientResponseDto(response.StatusCode, response.ReasonPhrase);
@@ -66,7 +66,7 @@ namespace SmitenightApp.Infrastructure.SmiteClient.Clients
         {
             try
             {
-                var url = ConstructUrl(smiteClientRequest);
+                var url = await ConstructUrlAsync(smiteClientRequest, cancellationToken);
                 var request = new HttpRequestMessage(HttpMethod.Get, url);
                 var response = await _httpClient.SendAsync(request, cancellationToken);
 
@@ -91,7 +91,7 @@ namespace SmitenightApp.Infrastructure.SmiteClient.Clients
         {
             try
             {
-                var url = ConstructUrl(smiteClientRequest);
+                var url = await ConstructUrlAsync(smiteClientRequest, cancellationToken);
                 var request = new HttpRequestMessage(HttpMethod.Get, url);
                 var response = await _httpClient.SendAsync(request, cancellationToken);
 
@@ -131,7 +131,7 @@ namespace SmitenightApp.Infrastructure.SmiteClient.Clients
 
         #region Private functionality
 
-        private string ConstructUrl(SmiteClientRequest smiteClientRequest)
+        private async Task<string> ConstructUrlAsync(SmiteClientRequest smiteClientRequest, CancellationToken cancellationToken)
         {
             var smiteUrl = _smiteClientSettings.Url;
             if (smiteUrl == null)
@@ -139,7 +139,7 @@ namespace SmitenightApp.Infrastructure.SmiteClient.Clients
                 throw new NullReferenceException("Smite URL is not defined in the settings");
             }
 
-            var baseUrlPath = ConstructBaseUrlPath(smiteClientRequest);
+            var baseUrlPath = await ConstructBaseUrlPathAsync(smiteClientRequest, cancellationToken);
             return $"{smiteUrl}{baseUrlPath}{smiteClientRequest.UrlPath}";
         }
 
@@ -147,7 +147,7 @@ namespace SmitenightApp.Infrastructure.SmiteClient.Clients
         /// Constructs the base of the url path string needed for each request
         /// </summary>
         /// <returns></returns>
-        private string ConstructBaseUrlPath(SmiteClientRequest smiteClientRequest)
+        private async Task<string> ConstructBaseUrlPathAsync(SmiteClientRequest smiteClientRequest, CancellationToken cancellationToken)
         {
             var utcDateString = GetCurrentUtcDate();
             var baseUrlPath = new StringBuilder($"{smiteClientRequest.MethodName}Json/");
@@ -162,9 +162,10 @@ namespace SmitenightApp.Infrastructure.SmiteClient.Clients
                 baseUrlPath.Append($"{signature}/");
             }
 
-            if (!string.IsNullOrWhiteSpace(smiteClientRequest.SessionId))
+            if (smiteClientRequest.RequireSessionId && _smiteSessionService != null)
             {
-                baseUrlPath.Append($"{smiteClientRequest.SessionId}/");
+                var sessionId = await _smiteSessionService.GetSessionIdAsync(cancellationToken);
+                baseUrlPath.Append($"{sessionId}/");
             }
 
             if (!string.IsNullOrWhiteSpace(utcDateString))

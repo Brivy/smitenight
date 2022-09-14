@@ -6,11 +6,11 @@ namespace SmitenightApp.Abstractions.Infrastructure.SmiteClient;
 public interface ITeamClient
 {
     Task<SmiteClientListResponse<TeamDetailsResponse>?> GetTeamDetailsAsync(
-        string sessionId, int clanId, CancellationToken cancellationToken);
+        int clanId, CancellationToken cancellationToken = default);
 
     Task<SmiteClientListResponse<TeamPlayersResponse>?> GetTeamPlayersAsync(
-        string sessionId, int clanId, CancellationToken cancellationToken);
+        int clanId, CancellationToken cancellationToken = default);
 
     Task<SmiteClientListResponse<SearchTeamsResponse>?> SearchTeamsAsync(
-        string sessionId, string teamName, CancellationToken cancellationToken);
+        string teamName, CancellationToken cancellationToken = default);
 }

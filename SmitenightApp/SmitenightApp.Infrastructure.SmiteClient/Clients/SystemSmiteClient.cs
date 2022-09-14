@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.Extensions.Options;
+using SmitenightApp.Abstractions.Application.System;
 using SmitenightApp.Abstractions.Infrastructure.SmiteClient;
-using SmitenightApp.Abstractions.Infrastructure.System;
 using SmitenightApp.Domain.Clients.SmiteClient.Responses;
 using SmitenightApp.Domain.Clients.SmiteClient.Responses.SystemResponses;
 using SmitenightApp.Domain.Constants.SmiteClient;
@@ -22,34 +22,37 @@ namespace SmitenightApp.Infrastructure.SmiteClient.Clients
         {
         }
 
-        public async Task<SmiteClientResponse?> TestSmiteSessionAsync(
-            string sessionId, CancellationToken cancellationToken)
+        public async Task<SmiteClientResponse<CreateSmiteSessionResponse>?> CreateSmiteSessionAsync(CancellationToken cancellationToken = default)
         {
-            var request = new SmiteClientRequest(MethodNameConstants.TestSessionMethod, sessionId);
+            var request = new SmiteClientRequest(MethodNameConstants.CreateSessionMethod, false);
+            var result = await GetAsync<CreateSmiteSessionResponseDto>(request, cancellationToken);
+            return Mapper.Map<SmiteClientResponse<CreateSmiteSessionResponse>>(result);
+        }
+
+        public async Task<SmiteClientResponse?> TestSmiteSessionAsync(CancellationToken cancellationToken = default)
+        {
+            var request = new SmiteClientRequest(MethodNameConstants.TestSessionMethod);
             var result = await GetAsync(request, cancellationToken);
             return Mapper.Map<SmiteClientResponse>(result);
         }
 
-        public async Task<SmiteClientListResponse<DataUsedResponse>?> GetDataUsedAsync(
-            string sessionId, CancellationToken cancellationToken)
+        public async Task<SmiteClientListResponse<DataUsedResponse>?> GetDataUsedAsync(CancellationToken cancellationToken = default)
         {
-            var request = new SmiteClientRequest(MethodNameConstants.DataUsedMethod, sessionId);
+            var request = new SmiteClientRequest(MethodNameConstants.DataUsedMethod);
             var result = await GetListAsync<DataUsedResponseDto>(request, cancellationToken);
             return Mapper.Map<SmiteClientListResponse<DataUsedResponse>>(result);
         }
 
-        public async Task<SmiteClientListResponse<HirezServerStatusResponse>?> GetHirezServerStatusAsync(
-            string sessionId, CancellationToken cancellationToken)
+        public async Task<SmiteClientListResponse<HirezServerStatusResponse>?> GetHirezServerStatusAsync(CancellationToken cancellationToken = default)
         {
-            var request = new SmiteClientRequest(MethodNameConstants.HirezServerStatusMethod, sessionId);
+            var request = new SmiteClientRequest(MethodNameConstants.HirezServerStatusMethod);
             var result = await GetListAsync<HirezServerStatusResponseDto>(request, cancellationToken);
             return Mapper.Map<SmiteClientListResponse<HirezServerStatusResponse>>(result);
         }
 
-        public async Task<SmiteClientResponse<PatchInfoResponse>?> GetPatchInfoAsync(
-            string sessionId, CancellationToken cancellationToken)
+        public async Task<SmiteClientResponse<PatchInfoResponse>?> GetPatchInfoAsync(CancellationToken cancellationToken = default)
         {
-            var request = new SmiteClientRequest(MethodNameConstants.PatchInfoMethod, sessionId);
+            var request = new SmiteClientRequest(MethodNameConstants.PatchInfoMethod);
             var result = await GetAsync<PatchInfoResponseDto>(request, cancellationToken);
             return Mapper.Map<SmiteClientResponse<PatchInfoResponse>>(result);
         }

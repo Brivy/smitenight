@@ -1,8 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.Extensions.Options;
+using SmitenightApp.Abstractions.Application.System;
 using SmitenightApp.Abstractions.Infrastructure.SmiteClient;
-using SmitenightApp.Abstractions.Infrastructure.System;
-using SmitenightApp.Domain.Clients.SmiteClient.Requests.LeagueRequests;
 using SmitenightApp.Domain.Clients.SmiteClient.Responses;
 using SmitenightApp.Domain.Clients.SmiteClient.Responses.LeagueResponses;
 using SmitenightApp.Domain.Constants.SmiteClient;
@@ -24,20 +23,20 @@ namespace SmitenightApp.Infrastructure.SmiteClient.Clients
         {
         }
 
-        public async Task<SmiteClientListResponse<LeagueLeaderboardResponse>?> GetLeagueLeaderboardAsync(
-            string sessionId, GameModeQueueIdEnum gameModeQueueId, LeagueTierEnum leagueTier, int round, CancellationToken cancellationToken)
+        public async Task<SmiteClientListResponse<LeagueLeaderboardResponse>?> GetLeagueLeaderboardAsync(GameModeQueueIdEnum gameModeQueueId, 
+            LeagueTierEnum leagueTier, int round, CancellationToken cancellationToken = default)
         {
             var urlPath = ConstructUrlPath((int) gameModeQueueId, (int) leagueTier);
-            var request = new SmiteClientRequest(MethodNameConstants.LeagueLeaderbordMethod, sessionId, urlPath);
+            var request = new SmiteClientRequest(MethodNameConstants.LeagueLeaderbordMethod, urlPath);
             var result = await GetListAsync<LeagueLeaderboardResponseDto>(request, cancellationToken);
             return Mapper.Map<SmiteClientListResponse<LeagueLeaderboardResponse>>(result);
         }
 
-        public async Task<SmiteClientListResponse<LeagueSeasonsResponse>?> GetLeagueSeasonsAsync(
-            string sessionId, GameModeQueueIdEnum gameModeQueueId, CancellationToken cancellationToken)
+        public async Task<SmiteClientListResponse<LeagueSeasonsResponse>?> GetLeagueSeasonsAsync(GameModeQueueIdEnum gameModeQueueId, 
+            CancellationToken cancellationToken = default)
         {
             var urlPath = ConstructUrlPath((int) gameModeQueueId);
-            var request = new SmiteClientRequest(MethodNameConstants.LeagueSeasonsMethod, sessionId, urlPath);
+            var request = new SmiteClientRequest(MethodNameConstants.LeagueSeasonsMethod, urlPath);
             var result = await GetListAsync<LeagueSeasonsResponseDto>(request, cancellationToken);
             return Mapper.Map<SmiteClientListResponse<LeagueSeasonsResponse>>(result);
         }

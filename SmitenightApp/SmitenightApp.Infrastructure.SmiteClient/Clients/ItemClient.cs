@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.Extensions.Options;
+using SmitenightApp.Abstractions.Application.System;
 using SmitenightApp.Abstractions.Infrastructure.SmiteClient;
-using SmitenightApp.Abstractions.Infrastructure.System;
 using SmitenightApp.Domain.Clients.SmiteClient.Responses;
 using SmitenightApp.Domain.Clients.SmiteClient.Responses.ItemResponses;
 using SmitenightApp.Domain.Constants.SmiteClient;
@@ -23,20 +23,20 @@ namespace SmitenightApp.Infrastructure.SmiteClient.Clients
         {
         }
 
-        public async Task<SmiteClientListResponse<GodRecommendedItemsResponse>?> GetGodRecommendedItemsAsync(
-            string sessionId, int godId, LanguageCodeEnum languageCode, CancellationToken cancellationToken)
+        public async Task<SmiteClientListResponse<GodRecommendedItemsResponse>?> GetGodRecommendedItemsAsync(int godId, LanguageCodeEnum languageCode, 
+            CancellationToken cancellationToken = default)
         {
             var urlPath = ConstructUrlPath(godId, (int) languageCode);
-            var request = new SmiteClientRequest(MethodNameConstants.GodRecommendedItemsMethod, sessionId, urlPath);
+            var request = new SmiteClientRequest(MethodNameConstants.GodRecommendedItemsMethod, urlPath);
             var result = await GetListAsync<GodRecommendedItemsResponseDto>(request, cancellationToken);
             return Mapper.Map<SmiteClientListResponse<GodRecommendedItemsResponse>>(result);
         }
 
-        public async Task<SmiteClientListResponse<ItemsResponse>?> GetItemsAsync(
-            string sessionId, LanguageCodeEnum languageCode, CancellationToken cancellationToken)
+        public async Task<SmiteClientListResponse<ItemsResponse>?> GetItemsAsync(LanguageCodeEnum languageCode, 
+            CancellationToken cancellationToken = default)
         {
             var urlPath = ConstructUrlPath((int) languageCode);
-            var request = new SmiteClientRequest(MethodNameConstants.ItemsMethod, sessionId, urlPath);
+            var request = new SmiteClientRequest(MethodNameConstants.ItemsMethod, urlPath);
             var result = await GetListAsync<ItemsResponseDto>(request, cancellationToken);
             return Mapper.Map<SmiteClientListResponse<ItemsResponse>>(result);
         }

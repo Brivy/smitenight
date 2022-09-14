@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using SmitenightApp.Abstractions.Application.System;
 using SmitenightApp.Abstractions.Infrastructure.SmiteClient;
-using SmitenightApp.Abstractions.Infrastructure.System;
 using SmitenightApp.Infrastructure.SmiteClient.Clients;
 using SmitenightApp.Infrastructure.SmiteClient.Secrets;
 using SmitenightApp.Infrastructure.SmiteClient.Settings;

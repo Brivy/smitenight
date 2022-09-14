@@ -43,8 +43,7 @@ namespace SmitenightApp.Application.Services.Maintenance
             {
                 foreach (var god in godsResponse.Response)
                 {
-                    var godSkinsRequest = new GodSkinsRequest(god.Id, LanguageCodeEnum.English);
-                    var godSkinsResponse = await _godSmiteClient.GetGodSkinsAsync(godSkinsRequest, cancellationToken);
+                    var godSkinsResponse = await _godSmiteClient.GetGodSkinsAsync(god.Id, LanguageCodeEnum.English, cancellationToken);
                     var godSkins = godSkinsResponse?.Response ?? new List<GodSkinsResponse>();
 
                     await ProcessGodAsync(god, godSkins, cancellationToken);

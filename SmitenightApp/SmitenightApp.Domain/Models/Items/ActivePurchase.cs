@@ -14,8 +14,8 @@ namespace SmitenightApp.Domain.Models.Items
 
         #region Navigation
 
-        public Active Active { get; set; }
-        public MatchDetail MatchDetail { get; set; }
+        public Active? Active { get; set; }
+        public MatchDetail? MatchDetail { get; set; }
 
         #endregion
     }

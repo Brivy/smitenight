@@ -27,8 +27,7 @@ namespace SmitenightApp.Application.Services.Maintenance
 
         public async Task MaintainAsync(CancellationToken cancellationToken = default)
         {
-            var itemsRequest = new ItemsRequest(LanguageCodeEnum.English);
-            var itemsResponse = await _itemSmiteClient.GetItemsAsync(itemsRequest, cancellationToken);
+            var itemsResponse = await _itemSmiteClient.GetItemsAsync(LanguageCodeEnum.English, cancellationToken);
             if (itemsResponse?.Response == null)
             {
                 return;

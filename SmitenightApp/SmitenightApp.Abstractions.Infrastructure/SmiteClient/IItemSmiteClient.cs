@@ -7,8 +7,8 @@ namespace SmitenightApp.Abstractions.Infrastructure.SmiteClient;
 public interface IItemSmiteClient
 {
     Task<SmiteClientListResponse<GodRecommendedItemsResponse>?> GetGodRecommendedItemsAsync(
-        string sessionId, int godId, LanguageCodeEnum languageCode, CancellationToken cancellationToken);
+        int godId, LanguageCodeEnum languageCode, CancellationToken cancellationToken = default);
 
     Task<SmiteClientListResponse<ItemsResponse>?> GetItemsAsync(
-        string sessionId, LanguageCodeEnum languageCode, CancellationToken cancellationToken);
+        LanguageCodeEnum languageCode, CancellationToken cancellationToken = default);
 }

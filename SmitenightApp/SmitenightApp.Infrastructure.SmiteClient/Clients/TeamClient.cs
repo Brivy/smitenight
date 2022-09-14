@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.Extensions.Options;
+using SmitenightApp.Abstractions.Application.System;
 using SmitenightApp.Abstractions.Infrastructure.SmiteClient;
-using SmitenightApp.Abstractions.Infrastructure.System;
 using SmitenightApp.Domain.Clients.SmiteClient.Responses;
 using SmitenightApp.Domain.Clients.SmiteClient.Responses.TeamResponses;
 using SmitenightApp.Domain.Constants.SmiteClient;
@@ -22,29 +22,26 @@ namespace SmitenightApp.Infrastructure.SmiteClient.Clients
         {
         }
 
-        public async Task<SmiteClientListResponse<TeamDetailsResponse>?> GetTeamDetailsAsync(
-            string sessionId, int clanId, CancellationToken cancellationToken)
+        public async Task<SmiteClientListResponse<TeamDetailsResponse>?> GetTeamDetailsAsync(int clanId, CancellationToken cancellationToken = default)
         {
             var urlPath = ConstructUrlPath(clanId);
-            var request = new SmiteClientRequest(MethodNameConstants.TeamDetailsMethod, sessionId, urlPath);
+            var request = new SmiteClientRequest(MethodNameConstants.TeamDetailsMethod, urlPath);
             var result = await GetListAsync<TeamDetailsResponseDto>(request, cancellationToken);
             return Mapper.Map<SmiteClientListResponse<TeamDetailsResponse>>(result);
         }
 
-        public async Task<SmiteClientListResponse<TeamPlayersResponse>?> GetTeamPlayersAsync(
-            string sessionId, int clanId, CancellationToken cancellationToken)
+        public async Task<SmiteClientListResponse<TeamPlayersResponse>?> GetTeamPlayersAsync(int clanId, CancellationToken cancellationToken = default)
         {
             var urlPath = ConstructUrlPath(clanId);
-            var request = new SmiteClientRequest(MethodNameConstants.TeamPlayersMethod, sessionId, urlPath);
+            var request = new SmiteClientRequest(MethodNameConstants.TeamPlayersMethod, urlPath);
             var result = await GetListAsync<TeamPlayersResponseDto>(request, cancellationToken);
             return Mapper.Map<SmiteClientListResponse<TeamPlayersResponse>>(result);
         }
 
-        public async Task<SmiteClientListResponse<SearchTeamsResponse>?> SearchTeamsAsync(
-            string sessionId, string teamName, CancellationToken cancellationToken)
+        public async Task<SmiteClientListResponse<SearchTeamsResponse>?> SearchTeamsAsync(string teamName, CancellationToken cancellationToken = default)
         {
             var urlPath = ConstructUrlPath(teamName);
-            var request = new SmiteClientRequest(MethodNameConstants.SearchTeamsMethod, sessionId, urlPath);
+            var request = new SmiteClientRequest(MethodNameConstants.SearchTeamsMethod, urlPath);
             var result = await GetListAsync<SearchTeamsResponseDto>(request, cancellationToken);
             return Mapper.Map<SmiteClientListResponse<SearchTeamsResponse>>(result);
         }

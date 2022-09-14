@@ -49,8 +49,7 @@ namespace SmitenightApp.Application.Services.Matches
                 return existingMatch.Id;
             }
 
-            var matchDetailsRequest = new MatchDetailsRequest(smiteMatchId);
-            var matchDetailsResponse = await _matchInfoClient.GetMatchDetailsAsync(matchDetailsRequest, cancellationToken);
+            var matchDetailsResponse = await _matchInfoClient.GetMatchDetailsAsync(smiteMatchId, cancellationToken);
             if (matchDetailsResponse?.Response?.Any() != true)
             {
                 return null;
@@ -82,8 +81,7 @@ namespace SmitenightApp.Application.Services.Matches
                 }
             }
 
-            var matchDetailsBatchRequest = new MatchDetailsBatchRequest(smiteMatchIds);
-            var matchDetailsBatchResponse = await _matchInfoClient.GetMatchDetailsBatchAsync(matchDetailsBatchRequest, cancellationToken);
+            var matchDetailsBatchResponse = await _matchInfoClient.GetMatchDetailsBatchAsync(smiteMatchIds, cancellationToken);
             if (matchDetailsBatchResponse?.Response?.Any() != true)
             {
                 return matchIdList;
