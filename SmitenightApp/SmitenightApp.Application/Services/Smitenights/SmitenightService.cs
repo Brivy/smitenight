@@ -7,8 +7,7 @@ using SmitenightApp.Abstractions.Application.Services.Players;
 using SmitenightApp.Abstractions.Application.Services.Smitenights;
 using SmitenightApp.Abstractions.Infrastructure.SmiteClient;
 using SmitenightApp.Application.Services.Players;
-using SmitenightApp.Domain.Clients.SmiteClient.Requests.PlayerRequests;
-using SmitenightApp.Domain.Clients.SmiteClient.Requests.RetrievePlayerRequests;
+using SmitenightApp.Domain.Clients.PlayerClient;
 using SmitenightApp.Domain.Constants.SmiteClient.Responses;
 using SmitenightApp.Domain.Contracts.Common;
 using SmitenightApp.Domain.Contracts.Smitenights;
@@ -16,7 +15,6 @@ using SmitenightApp.Domain.Enums.StatusCodes;
 using SmitenightApp.Domain.Models.Smitenights;
 using SmitenightApp.Persistence;
 using SmitenightApp.Domain.Models.Players;
-using SmitenightApp.Domain.Clients.SmiteClient.Responses.PlayerResponses;
 
 namespace SmitenightApp.Application.Services.Smitenights
 {

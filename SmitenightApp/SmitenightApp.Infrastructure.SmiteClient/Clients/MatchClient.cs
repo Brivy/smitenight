@@ -2,8 +2,8 @@
 using Microsoft.Extensions.Options;
 using SmitenightApp.Abstractions.Application.System;
 using SmitenightApp.Abstractions.Infrastructure.SmiteClient;
-using SmitenightApp.Domain.Clients.SmiteClient.Responses;
-using SmitenightApp.Domain.Clients.SmiteClient.Responses.MatchResponses;
+using SmitenightApp.Domain.Clients.MatchClient;
+using SmitenightApp.Domain.Clients.SmiteClient;
 using SmitenightApp.Domain.Constants.SmiteClient;
 using SmitenightApp.Domain.Enums.SmiteClient;
 using SmitenightApp.Infrastructure.SmiteClient.Contracts.MatchResponses;

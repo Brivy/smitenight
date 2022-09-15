@@ -1,5 +1,5 @@
-﻿using SmitenightApp.Domain.Clients.SmiteClient.Responses;
-using SmitenightApp.Domain.Clients.SmiteClient.Responses.LeagueResponses;
+﻿using SmitenightApp.Domain.Clients.LeagueClient;
+using SmitenightApp.Domain.Clients.SmiteClient;
 using SmitenightApp.Domain.Enums.SmiteClient;
 
 namespace SmitenightApp.Abstractions.Infrastructure.SmiteClient

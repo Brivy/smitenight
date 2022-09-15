@@ -1,6 +1,6 @@
 ﻿using SmitenightApp.Abstractions.Application.Services.Builders;
 using SmitenightApp.Abstractions.Application.Services.Common;
-using SmitenightApp.Domain.Clients.SmiteClient.Responses.RetrievePlayerResponses;
+using SmitenightApp.Domain.Clients.RetrievePlayerClient;
 using SmitenightApp.Domain.Constants.SmiteClient.Responses;
 using SmitenightApp.Domain.Enums.SmiteClient;
 using SmitenightApp.Domain.Models.Players;

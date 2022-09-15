@@ -1,4 +1,4 @@
-﻿using SmitenightApp.Domain.Clients.SmiteClient.Responses.RetrievePlayerResponses;
+﻿using SmitenightApp.Domain.Clients.RetrievePlayerClient;
 using SmitenightApp.Domain.Models.Smitenights;
 
 namespace SmitenightApp.Abstractions.Application.Services.Builders;

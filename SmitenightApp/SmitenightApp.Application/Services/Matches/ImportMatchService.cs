@@ -2,8 +2,7 @@
 using SmitenightApp.Abstractions.Application.Services.Builders;
 using SmitenightApp.Abstractions.Application.Services.Matches;
 using SmitenightApp.Abstractions.Infrastructure.SmiteClient;
-using SmitenightApp.Domain.Clients.SmiteClient.Requests.MatchRequests;
-using SmitenightApp.Domain.Clients.SmiteClient.Responses.MatchResponses;
+using SmitenightApp.Domain.Clients.MatchClient;
 using SmitenightApp.Domain.Constants.SmiteClient.Responses;
 using SmitenightApp.Domain.Models.Matches;
 using SmitenightApp.Persistence;

@@ -2,8 +2,7 @@
 using SmitenightApp.Abstractions.Application.Services.Builders;
 using SmitenightApp.Abstractions.Application.Services.Maintenance;
 using SmitenightApp.Abstractions.Infrastructure.SmiteClient;
-using SmitenightApp.Domain.Clients.SmiteClient.Requests.ItemRequests;
-using SmitenightApp.Domain.Clients.SmiteClient.Responses.ItemResponses;
+using SmitenightApp.Domain.Clients.ItemClient;
 using SmitenightApp.Domain.Constants.SmiteClient.Responses;
 using SmitenightApp.Domain.Enums.SmiteClient;
 using SmitenightApp.Persistence;
