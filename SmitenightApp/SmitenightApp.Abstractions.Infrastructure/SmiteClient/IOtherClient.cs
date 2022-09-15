@@ -1,14 +1,13 @@
-﻿using SmitenightApp.Domain.Clients.SmiteClient.Requests.OtherRequests;
-using SmitenightApp.Domain.Clients.SmiteClient.Responses;
-using SmitenightApp.Domain.Clients.SmiteClient.Responses.OtherResponses;
+﻿using SmitenightApp.Domain.Clients.OtherClient;
+using SmitenightApp.Domain.Clients.SmiteClient;
 
 namespace SmitenightApp.Abstractions.Infrastructure.SmiteClient;
 
 public interface IOtherClient
 {
     Task<SmiteClientListResponse<EsportProLeagueResponse>?> GetEsportProLeagueAsync(
-        EsportProLeagueRequest request, CancellationToken cancellationToken);
+        CancellationToken cancellationToken = default);
 
     Task<SmiteClientListResponse<MotdResponse>?> GetMotdAsync(
-        MotdRequest request, CancellationToken cancellationToken);
+        CancellationToken cancellationToken = default);
 }

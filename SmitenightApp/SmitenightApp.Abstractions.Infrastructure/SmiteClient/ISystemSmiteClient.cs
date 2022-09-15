@@ -1,20 +1,19 @@
-﻿using SmitenightApp.Domain.Clients.SmiteClient.Requests.SystemRequests;
-using SmitenightApp.Domain.Clients.SmiteClient.Responses;
-using SmitenightApp.Domain.Clients.SmiteClient.Responses.SystemResponses;
+﻿using SmitenightApp.Domain.Clients.SmiteClient;
+using SmitenightApp.Domain.Clients.SystemClient;
 
 namespace SmitenightApp.Abstractions.Infrastructure.SmiteClient;
 
 public interface ISystemSmiteClient
 {
     Task<SmiteClientResponse?> TestSmiteSessionAsync(
-        TestSmiteSessionRequest request, CancellationToken cancellationToken);
+        CancellationToken cancellationToken = default);
 
     Task<SmiteClientListResponse<DataUsedResponse>?> GetDataUsedAsync(
-        DataUsedRequest request, CancellationToken cancellationToken);
+        CancellationToken cancellationToken = default);
 
     Task<SmiteClientListResponse<HirezServerStatusResponse>?> GetHirezServerStatusAsync(
-        HirezServerStatusRequest request, CancellationToken cancellationToken);
+        CancellationToken cancellationToken = default);
 
     Task<SmiteClientResponse<PatchInfoResponse>?> GetPatchInfoAsync(
-        PatchInfoRequest request, CancellationToken cancellationToken);
+        CancellationToken cancellationToken = default);
 }

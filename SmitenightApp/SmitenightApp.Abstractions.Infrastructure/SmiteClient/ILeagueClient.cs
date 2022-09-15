@@ -1,15 +1,15 @@
-﻿using SmitenightApp.Domain.Clients.SmiteClient.Requests.LeagueRequests;
-using SmitenightApp.Domain.Clients.SmiteClient.Responses;
-using SmitenightApp.Domain.Clients.SmiteClient.Responses.LeagueResponses;
+﻿using SmitenightApp.Domain.Clients.LeagueClient;
+using SmitenightApp.Domain.Clients.SmiteClient;
+using SmitenightApp.Domain.Enums.SmiteClient;
 
 namespace SmitenightApp.Abstractions.Infrastructure.SmiteClient
 {
     public interface ILeagueClient
     {
         Task<SmiteClientListResponse<LeagueLeaderboardResponse>?> GetLeagueLeaderboardAsync(
-            LeagueLeaderboardRequest request, CancellationToken cancellationToken);
+            GameModeQueueIdEnum gameModeQueueId, LeagueTierEnum leagueTier, int round, CancellationToken cancellationToken = default);
 
         Task<SmiteClientListResponse<LeagueSeasonsResponse>?> GetLeagueSeasonsAsync(
-            LeagueSeasonsRequest request, CancellationToken cancellationToken);
+            GameModeQueueIdEnum gameModeQueueId, CancellationToken cancellationToken = default);
     }
 }

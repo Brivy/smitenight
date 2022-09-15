@@ -1,11 +1,9 @@
-﻿using SmitenightApp.Domain.Clients.SmiteClient.Requests.SystemRequests;
-using SmitenightApp.Domain.Clients.SmiteClient.Responses;
-using SmitenightApp.Domain.Clients.SmiteClient.Responses.SystemResponses;
+﻿using SmitenightApp.Domain.Clients.SmiteClient;
+using SmitenightApp.Domain.Clients.SystemClient;
 
 namespace SmitenightApp.Abstractions.Infrastructure.SmiteClient;
 
 public interface ISessionClient
 {
-    Task<SmiteClientResponse<CreateSmiteSessionResponse>?> CreateSmiteSessionAsync(
-        CreateSmiteSessionRequest request, CancellationToken cancellationToken);
+    Task<SmiteClientResponse<CreateSmiteSessionResponse>?> CreateSmiteSessionAsync(CancellationToken cancellationToken = default);
 }

@@ -1,26 +1,26 @@
-﻿using SmitenightApp.Domain.Clients.SmiteClient.Requests.MatchRequests;
-using SmitenightApp.Domain.Clients.SmiteClient.Responses;
-using SmitenightApp.Domain.Clients.SmiteClient.Responses.MatchResponses;
+﻿using SmitenightApp.Domain.Clients.MatchClient;
+using SmitenightApp.Domain.Clients.SmiteClient;
+using SmitenightApp.Domain.Enums.SmiteClient;
 
 namespace SmitenightApp.Abstractions.Infrastructure.SmiteClient;
 
 public interface IMatchInfoClient
 {
     Task<SmiteClientListResponse<DemoDetailsResponse>?> GetDemoDetailsAsync(
-        DemoDetailsRequest request, CancellationToken cancellationToken);
+        int matchId, CancellationToken cancellationToken = default);
 
     Task<SmiteClientListResponse<MatchDetailsResponse>?> GetMatchDetailsAsync(
-        MatchDetailsRequest request, CancellationToken cancellationToken);
+        int matchId, CancellationToken cancellationToken = default);
 
     Task<SmiteClientListResponse<MatchDetailsResponse>?> GetMatchDetailsBatchAsync(
-        MatchDetailsBatchRequest request, CancellationToken cancellationToken);
+        List<int> matchIds, CancellationToken cancellationToken = default);
 
     Task<SmiteClientListResponse<MatchIdsByQueueResponse>?> GetMatchIdsByQueueAsync(
-        MatchIdsByQueueRequest request, CancellationToken cancellationToken);
+        GameModeQueueIdEnum gameModeQueueId, int matchIdDate, int matchIdHour, CancellationToken cancellationToken = default);
 
     Task<SmiteClientListResponse<MatchPlayersDetailsResponse>?> GetMatchPlayerDetailsAsync(
-        MatchPlayersDetailsRequest request, CancellationToken cancellationToken);
+        int matchId, CancellationToken cancellationToken = default);
 
     Task<SmiteClientListResponse<TopMatchesResponse>?> GetTopMatchesAsync(
-        TopMatchesRequest request, CancellationToken cancellationToken);
+        CancellationToken cancellationToken = default);
 }

@@ -1,20 +1,20 @@
-﻿using SmitenightApp.Domain.Clients.SmiteClient.Requests.GodRequests;
-using SmitenightApp.Domain.Clients.SmiteClient.Responses;
-using SmitenightApp.Domain.Clients.SmiteClient.Responses.GodResponses;
+﻿using SmitenightApp.Domain.Clients.GodClient;
+using SmitenightApp.Domain.Clients.SmiteClient;
+using SmitenightApp.Domain.Enums.SmiteClient;
 
 namespace SmitenightApp.Abstractions.Infrastructure.SmiteClient;
 
 public interface IGodSmiteClient
 {
     Task<SmiteClientListResponse<GodsResponse>?> GetGodsAsync(
-        GodsRequest request, CancellationToken cancellationToken);
+        LanguageCodeEnum languageCode, CancellationToken cancellationToken = default);
 
     Task<SmiteClientListResponse<GodLeaderbordResponse>?> GetGodLeaderbordAsync(
-        GodLeaderboardRequest request, CancellationToken cancellationToken);
+        int godId, GameModeQueueIdEnum gameModeQueueId, CancellationToken cancellationToken = default);
 
     Task<SmiteClientListResponse<GodAltAbilitiesResponse>?> GetGodAltAbilitiesAsync(
-        GodAltAbilitiesRequest request, CancellationToken cancellationToken);
+        CancellationToken cancellationToken = default);
 
     Task<SmiteClientListResponse<GodSkinsResponse>?> GetGodSkinsAsync(
-        GodSkinsRequest request, CancellationToken cancellationToken);
+        int godId, LanguageCodeEnum languageCode, CancellationToken cancellationToken = default);
 }

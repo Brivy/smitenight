@@ -1,8 +1,7 @@
 ﻿using System.Collections.Concurrent;
-using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Caching.Distributed;
+using SmitenightApp.Abstractions.Application.System;
 using SmitenightApp.Abstractions.Infrastructure.SmiteClient;
-using SmitenightApp.Abstractions.Infrastructure.System;
-using SmitenightApp.Domain.Clients.SmiteClient.Requests.SystemRequests;
 using SmitenightApp.Domain.Constants.Common;
 using SmitenightApp.Domain.Exceptions;
 
@@ -11,15 +10,15 @@ namespace SmitenightApp.Infrastructure.SmiteClient.System
     public class SmiteSessionService : ISmiteSessionService
     {
         private readonly ISessionClient _sessionClient;
-        private readonly IMemoryCache _memoryCache;
+        private readonly IDistributedCache _distributedCache;
 
         private readonly ConcurrentDictionary<object, SemaphoreSlim> _locks;
 
         public SmiteSessionService(ISessionClient sessionClient,
-            IMemoryCache memoryCache)
+            IDistributedCache distributedCache)
         {
             _sessionClient = sessionClient;
-            _memoryCache = memoryCache;
+            _distributedCache = distributedCache;
             _locks = new ConcurrentDictionary<object, SemaphoreSlim>();
         }
 
@@ -31,7 +30,8 @@ namespace SmitenightApp.Infrastructure.SmiteClient.System
         /// <returns></returns>
         public async Task<string> GetSessionIdAsync(CancellationToken cancellationToken = default)
         {
-            if (_memoryCache.TryGetValue(CacheKeys.SessionId, out string sessionId))
+            var sessionId = await _distributedCache.GetStringAsync(CacheKeys.SessionId, cancellationToken);
+            if (!string.IsNullOrWhiteSpace(sessionId))
             {
                 return sessionId;
             }
@@ -41,10 +41,10 @@ namespace SmitenightApp.Infrastructure.SmiteClient.System
 
             try
             {
-                if (!_memoryCache.TryGetValue(CacheKeys.SessionId, out sessionId))
+                sessionId = await _distributedCache.GetStringAsync(CacheKeys.SessionId, cancellationToken);
+                if (string.IsNullOrWhiteSpace(sessionId))
                 {
-                    var sessionRequest = new CreateSmiteSessionRequest();
-                    var sessionResponse = await _sessionClient.CreateSmiteSessionAsync(sessionRequest, cancellationToken);
+                    var sessionResponse = await _sessionClient.CreateSmiteSessionAsync(cancellationToken);
                     if (sessionResponse?.Response == null)
                     {
                         throw new SessionCouldNotBeCreatedException();
@@ -52,8 +52,8 @@ namespace SmitenightApp.Infrastructure.SmiteClient.System
 
                     // While session IDs are valid for 15 minutes, we set it to 10 minutes because we don't want any failures on long running processes
                     sessionId = sessionResponse.Response.SessionId;
-                    var cacheOptions = new MemoryCacheEntryOptions { AbsoluteExpiration = DateTime.Now.AddMinutes(10) };
-                    _memoryCache.Set(CacheKeys.SessionId, sessionId, cacheOptions);
+                    var cacheOptions = new DistributedCacheEntryOptions { AbsoluteExpiration = DateTime.Now.AddMinutes(10) };
+                    await _distributedCache.SetStringAsync(CacheKeys.SessionId, sessionId, cacheOptions, cancellationToken);
                 }
             }
             finally

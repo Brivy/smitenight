@@ -1,5 +1,5 @@
 ﻿using SmitenightApp.Abstractions.Application.Services.Builders;
-using SmitenightApp.Domain.Clients.SmiteClient.Responses.GodResponses;
+using SmitenightApp.Domain.Clients.GodClient;
 using SmitenightApp.Domain.Constants.SmiteClient.Responses;
 using SmitenightApp.Domain.Enums.Ability;
 using SmitenightApp.Domain.Enums.Gods;

@@ -2,8 +2,7 @@
 using SmitenightApp.Abstractions.Application.Services.Builders;
 using SmitenightApp.Abstractions.Application.Services.Maintenance;
 using SmitenightApp.Abstractions.Infrastructure.SmiteClient;
-using SmitenightApp.Domain.Clients.SmiteClient.Requests.ItemRequests;
-using SmitenightApp.Domain.Clients.SmiteClient.Responses.ItemResponses;
+using SmitenightApp.Domain.Clients.ItemClient;
 using SmitenightApp.Domain.Constants.SmiteClient.Responses;
 using SmitenightApp.Domain.Enums.SmiteClient;
 using SmitenightApp.Persistence;
@@ -27,8 +26,7 @@ namespace SmitenightApp.Application.Services.Maintenance
 
         public async Task MaintainAsync(CancellationToken cancellationToken = default)
         {
-            var itemsRequest = new ItemsRequest(LanguageCodeEnum.English);
-            var itemsResponse = await _itemSmiteClient.GetItemsAsync(itemsRequest, cancellationToken);
+            var itemsResponse = await _itemSmiteClient.GetItemsAsync(LanguageCodeEnum.English, cancellationToken);
             if (itemsResponse?.Response == null)
             {
                 return;

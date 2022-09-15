@@ -1,4 +1,4 @@
-﻿namespace SmitenightApp.Abstractions.Infrastructure.System;
+﻿namespace SmitenightApp.Abstractions.Application.System;
 
 public interface ISmiteSessionService
 {

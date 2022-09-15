@@ -1,23 +1,23 @@
-﻿using SmitenightApp.Domain.Clients.SmiteClient.Requests.RetrievePlayerRequests;
-using SmitenightApp.Domain.Clients.SmiteClient.Responses;
-using SmitenightApp.Domain.Clients.SmiteClient.Responses.RetrievePlayerResponses;
+﻿using SmitenightApp.Domain.Clients.RetrievePlayerClient;
+using SmitenightApp.Domain.Clients.SmiteClient;
+using SmitenightApp.Domain.Enums.SmiteClient;
 
 namespace SmitenightApp.Abstractions.Infrastructure.SmiteClient;
 
 public interface IRetrievePlayerClient
 {
     Task<SmiteClientListResponse<PlayerResponse>?> GetPlayerAsync(
-        PlayerRequest request, CancellationToken cancellationToken);
+        string playerId, PortalTypeEnum portalType, CancellationToken cancellationToken = default);
 
     Task<SmiteClientListResponse<PlayerResponse>?> GetPlayerWithoutPortalAsync(
-        PlayerWithoutPortalRequest request, CancellationToken cancellationToken);
+        string playerName, CancellationToken cancellationToken = default);
 
     Task<SmiteClientListResponse<PlayerIdResponse>?> GetPlayerIdByPlayerNameAsync(
-        PlayerIdByNameRequest request, CancellationToken cancellationToken);
+        string playerName, CancellationToken cancellationToken = default);
 
     Task<SmiteClientListResponse<PlayerIdResponse>?> GetPlayerIdByPortalUserAsync(
-        PlayerIdByPortalUserRequest request, CancellationToken cancellationToken);
+        PortalTypeEnum portalType, string portalUserId, CancellationToken cancellationToken = default);
 
     Task<SmiteClientListResponse<PlayerIdResponse>?> GetPlayerIdByGamerTagAsync(
-        PlayerIdByGamerTagRequest request, CancellationToken cancellationToken);
+        PortalTypeEnum portalType, string gamerTag, CancellationToken cancellationToken = default);
 }

@@ -7,8 +7,7 @@ using SmitenightApp.Abstractions.Application.Services.Players;
 using SmitenightApp.Abstractions.Application.Services.Smitenights;
 using SmitenightApp.Abstractions.Infrastructure.SmiteClient;
 using SmitenightApp.Application.Services.Players;
-using SmitenightApp.Domain.Clients.SmiteClient.Requests.PlayerRequests;
-using SmitenightApp.Domain.Clients.SmiteClient.Requests.RetrievePlayerRequests;
+using SmitenightApp.Domain.Clients.PlayerClient;
 using SmitenightApp.Domain.Constants.SmiteClient.Responses;
 using SmitenightApp.Domain.Contracts.Common;
 using SmitenightApp.Domain.Contracts.Smitenights;
@@ -16,7 +15,6 @@ using SmitenightApp.Domain.Enums.StatusCodes;
 using SmitenightApp.Domain.Models.Smitenights;
 using SmitenightApp.Persistence;
 using SmitenightApp.Domain.Models.Players;
-using SmitenightApp.Domain.Clients.SmiteClient.Responses.PlayerResponses;
 
 namespace SmitenightApp.Application.Services.Smitenights
 {
@@ -79,8 +77,7 @@ namespace SmitenightApp.Application.Services.Smitenights
                 return new ServerResponseDto<SmitenightDto>(StatusCodeEnum.SmitenightNotFound);
             }
 
-            var playerHistoryRequest = new MatchHistoryRequest(smiteIdFromPlayerWithSmitenight.Value.ToString());
-            var playerHistoryResponse = await _playerInfoClient.GetMatchHistoryAsync(playerHistoryRequest, cancellationToken);
+            var playerHistoryResponse = await _playerInfoClient.GetMatchHistoryAsync(smiteIdFromPlayerWithSmitenight.Value.ToString(), cancellationToken);
             if (playerHistoryResponse?.Response?.Any() != true)
             {
                 return new ServerResponseDto<SmitenightDto>(StatusCodeEnum.PlayerHistoryNotFoundInSmite);
@@ -105,8 +102,7 @@ namespace SmitenightApp.Application.Services.Smitenights
 
         private async Task<ServerResponseDto<SmitenightDto>> HandleNewPlayerSmiteNightAsync(string playerName, string? pinCode, CancellationToken cancellationToken = default)
         {
-            var playerIdRequest = new PlayerIdByNameRequest(playerName);
-            var playerIdResponse = await _retrievePlayerClient.GetPlayerIdByPlayerNameAsync(playerIdRequest, cancellationToken);
+            var playerIdResponse = await _retrievePlayerClient.GetPlayerIdByPlayerNameAsync(playerName, cancellationToken);
             if (playerIdResponse?.Response?.Any() != true)
             {
                 await _playerNameAttemptService.RegisterNotFoundPlayerNameAsync(playerName, cancellationToken);
@@ -123,8 +119,7 @@ namespace SmitenightApp.Application.Services.Smitenights
             var playerEntity = await GetPlayerWithSmitenightQueryAsync(smitePlayer.PlayerId, cancellationToken);
             if (playerEntity == null)
             {
-                var playerRequest = new PlayerWithoutPortalRequest(smitePlayer.PlayerId.ToString());
-                var player = await _retrievePlayerClient.GetPlayerWithoutPortalAsync(playerRequest, cancellationToken);
+                var player = await _retrievePlayerClient.GetPlayerWithoutPortalAsync(smitePlayer.PlayerId.ToString(), cancellationToken);
                 if (player?.Response?.Any() != true || player.Response.First().Id == ResponseConstants.AnonymousPlayerIntId)
                 {
                     return new ServerResponseDto<SmitenightDto>(StatusCodeEnum.PlayerByPlayerIdNotFoundInSmite);

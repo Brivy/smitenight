@@ -1,17 +1,16 @@
-﻿using SmitenightApp.Domain.Clients.SmiteClient.Requests.TeamRequests;
-using SmitenightApp.Domain.Clients.SmiteClient.Responses;
-using SmitenightApp.Domain.Clients.SmiteClient.Responses.TeamResponses;
+﻿using SmitenightApp.Domain.Clients.SmiteClient;
+using SmitenightApp.Domain.Clients.TeamClient;
 
 namespace SmitenightApp.Abstractions.Infrastructure.SmiteClient;
 
 public interface ITeamClient
 {
     Task<SmiteClientListResponse<TeamDetailsResponse>?> GetTeamDetailsAsync(
-        TeamDetailsRequest request, CancellationToken cancellationToken);
+        int clanId, CancellationToken cancellationToken = default);
 
     Task<SmiteClientListResponse<TeamPlayersResponse>?> GetTeamPlayersAsync(
-        TeamPlayersRequest request, CancellationToken cancellationToken);
+        int clanId, CancellationToken cancellationToken = default);
 
     Task<SmiteClientListResponse<SearchTeamsResponse>?> SearchTeamsAsync(
-        SearchTeamsRequest request, CancellationToken cancellationToken);
+        string teamName, CancellationToken cancellationToken = default);
 }

@@ -2,8 +2,7 @@
 using SmitenightApp.Abstractions.Application.Services.Builders;
 using SmitenightApp.Abstractions.Application.Services.Maintenance;
 using SmitenightApp.Abstractions.Infrastructure.SmiteClient;
-using SmitenightApp.Domain.Clients.SmiteClient.Requests.GodRequests;
-using SmitenightApp.Domain.Clients.SmiteClient.Responses.GodResponses;
+using SmitenightApp.Domain.Clients.GodClient;
 using SmitenightApp.Domain.Enums.SmiteClient;
 using SmitenightApp.Persistence;
 
@@ -27,8 +26,7 @@ namespace SmitenightApp.Application.Services.Maintenance
 
         public async Task MaintainAsync(CancellationToken cancellationToken = default)
         {
-            var godsRequest = new GodsRequest(LanguageCodeEnum.English);
-            var godsResponse = await _godSmiteClient.GetGodsAsync(godsRequest, cancellationToken);
+            var godsResponse = await _godSmiteClient.GetGodsAsync(LanguageCodeEnum.English, cancellationToken);
             if (godsResponse?.Response == null)
             {
                 return;
@@ -44,8 +42,7 @@ namespace SmitenightApp.Application.Services.Maintenance
             {
                 foreach (var god in godsResponse.Response)
                 {
-                    var godSkinsRequest = new GodSkinsRequest(god.Id, LanguageCodeEnum.English);
-                    var godSkinsResponse = await _godSmiteClient.GetGodSkinsAsync(godSkinsRequest, cancellationToken);
+                    var godSkinsResponse = await _godSmiteClient.GetGodSkinsAsync(god.Id, LanguageCodeEnum.English, cancellationToken);
                     var godSkins = godSkinsResponse?.Response ?? new List<GodSkinsResponse>();
 
                     await ProcessGodAsync(god, godSkins, cancellationToken);

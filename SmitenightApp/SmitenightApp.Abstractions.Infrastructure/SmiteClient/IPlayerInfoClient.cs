@@ -1,29 +1,29 @@
-﻿using SmitenightApp.Domain.Clients.SmiteClient.Requests.PlayerRequests;
-using SmitenightApp.Domain.Clients.SmiteClient.Responses;
-using SmitenightApp.Domain.Clients.SmiteClient.Responses.PlayerResponses;
+﻿using SmitenightApp.Domain.Clients.PlayerClient;
+using SmitenightApp.Domain.Clients.SmiteClient;
+using SmitenightApp.Domain.Enums.SmiteClient;
 
 namespace SmitenightApp.Abstractions.Infrastructure.SmiteClient;
 
 public interface IPlayerInfoClient
 {
     Task<SmiteClientListResponse<FriendsResponse>?> GetFriendsAsync(
-        FriendsRequest request, CancellationToken cancellationToken);
+        string playerId, CancellationToken cancellationToken = default);
 
     Task<SmiteClientListResponse<GodRanksResponse>?> GetGodRanksAsync(
-        GodRanksRequest request, CancellationToken cancellationToken);
+        string playerId, CancellationToken cancellationToken = default);
 
     Task<SmiteClientResponse<PlayerAchievementsResponse>?> GetPlayerAchievementsAsync(
-        PlayerAchievementsRequest request, CancellationToken cancellationToken);
+        int playerId, CancellationToken cancellationToken = default);
 
     Task<SmiteClientListResponse<PlayerStatusResponse>?> GetPlayerStatusAsync(
-        PlayerStatusRequest request, CancellationToken cancellationToken);
+        string playerId, CancellationToken cancellationToken = default);
 
     Task<SmiteClientListResponse<MatchHistoryResponse>?> GetMatchHistoryAsync(
-        MatchHistoryRequest request, CancellationToken cancellationToken);
+        string playerId, CancellationToken cancellationToken = default);
 
     Task<SmiteClientListResponse<QueueStatsResponse>?> GetQueueStatsAsync(
-        QueueStatsRequest request, CancellationToken cancellationToken);
+        string playerId, GameModeQueueIdEnum gameModeQueueId, CancellationToken cancellationToken = default);
 
     Task<SmiteClientListResponse<SearchPlayersResponse>?> SearchPlayersAsync(
-        SearchPlayersRequest request, CancellationToken cancellationToken);
+        string playerId, CancellationToken cancellationToken = default);
 }

@@ -1,4 +1,4 @@
-﻿using SmitenightApp.Domain.Clients.SmiteClient.Responses.GodResponses;
+﻿using SmitenightApp.Domain.Clients.GodClient;
 using SmitenightApp.Domain.Models.Gods;
 
 namespace SmitenightApp.Abstractions.Application.Services.Builders;
