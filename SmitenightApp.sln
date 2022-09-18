@@ -37,7 +37,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmitenightApp.Persistence",
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Persistence", "Persistence", "{7E178BB9-3D2D-4DC0-907D-EBD87C20E963}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmitenightApp.Infrastructure.RedisCache", "SmitenightApp\SmitenightApp.Infrastructure.DistributedCache\SmitenightApp.Infrastructure.RedisCache.csproj", "{17E93969-A823-4635-A77C-0DDEFC54E022}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmitenightApp.Infrastructure.RedisCache", "SmitenightApp\SmitenightApp.Infrastructure.RedisCache\SmitenightApp.Infrastructure.RedisCache.csproj", "{B8B58E74-E981-4216-806A-DFCF9FB38A27}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -85,10 +85,10 @@ Global
 		{FDE35ACD-FBBF-490D-B54E-1DDC0667967C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{FDE35ACD-FBBF-490D-B54E-1DDC0667967C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{FDE35ACD-FBBF-490D-B54E-1DDC0667967C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{17E93969-A823-4635-A77C-0DDEFC54E022}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{17E93969-A823-4635-A77C-0DDEFC54E022}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{17E93969-A823-4635-A77C-0DDEFC54E022}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{17E93969-A823-4635-A77C-0DDEFC54E022}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B8B58E74-E981-4216-806A-DFCF9FB38A27}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B8B58E74-E981-4216-806A-DFCF9FB38A27}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B8B58E74-E981-4216-806A-DFCF9FB38A27}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B8B58E74-E981-4216-806A-DFCF9FB38A27}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -105,7 +105,7 @@ Global
 		{4E33A2EE-D5AF-4511-BE18-F977798D0D19} = {24F27201-F7B8-4A52-82B5-61D4C21B0257}
 		{CCBF1D99-D526-441C-9ADD-1B07C640FD92} = {6F508BDC-34B8-410D-B4BC-857DBF833318}
 		{FDE35ACD-FBBF-490D-B54E-1DDC0667967C} = {7E178BB9-3D2D-4DC0-907D-EBD87C20E963}
-		{17E93969-A823-4635-A77C-0DDEFC54E022} = {6F508BDC-34B8-410D-B4BC-857DBF833318}
+		{B8B58E74-E981-4216-806A-DFCF9FB38A27} = {6F508BDC-34B8-410D-B4BC-857DBF833318}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3C8D7E88-4284-4074-85EF-6F7EA1429EE4}

@@ -2,7 +2,6 @@ using System.Text.Json.Serialization;
 using SmitenightApp.CompositionRoot;
 // ReSharper disable once RedundantUsingDirective
 using Azure.Identity;
-using SmitenightApp.Server.Secrets;
 
 var builder = WebApplication.CreateBuilder(args);
 
