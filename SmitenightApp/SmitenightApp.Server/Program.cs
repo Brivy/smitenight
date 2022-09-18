@@ -21,12 +21,6 @@ builder.Configuration.AddAzureKeyVault(
     new DefaultAzureCredential());
 #endif
 
-builder.Services.AddStackExchangeRedisCache(options =>
-{
-    options.Configuration = builder.Configuration[$"{nameof(RedisSecrets)}:{nameof(RedisSecrets.ConnectionString)}"];
-    options.InstanceName = "SmitenightRedis";
-});
-
 builder.Services.ConfigureServices(builder.Configuration);
 
 var app = builder.Build();
