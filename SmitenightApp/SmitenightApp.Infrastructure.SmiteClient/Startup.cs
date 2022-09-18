@@ -1,11 +1,9 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using SmitenightApp.Abstractions.Application.System;
 using SmitenightApp.Abstractions.Infrastructure.SmiteClient;
 using SmitenightApp.Infrastructure.SmiteClient.Clients;
 using SmitenightApp.Infrastructure.SmiteClient.Secrets;
 using SmitenightApp.Infrastructure.SmiteClient.Settings;
-using SmitenightApp.Infrastructure.SmiteClient.System;
 
 namespace SmitenightApp.Infrastructure.SmiteClient
 {
@@ -21,18 +19,14 @@ namespace SmitenightApp.Infrastructure.SmiteClient
                 .Bind(configuration.GetSection(nameof(SmiteClientSettings)));
 
             serviceCollection.AddHttpClient<ISystemSmiteClient, SystemSmiteClient>();
-            serviceCollection.AddHttpClient<IGodSmiteClient, GodClient>();
-            serviceCollection.AddHttpClient<IItemSmiteClient, ItemClient>();
-            serviceCollection.AddHttpClient<IRetrievePlayerClient, RetrievePlayerClient>();
-            serviceCollection.AddHttpClient<IPlayerInfoClient, PlayerClient>();
-            serviceCollection.AddHttpClient<IMatchInfoClient, MatchClient>();
-            serviceCollection.AddHttpClient<ILeagueClient, LeagueClient>();
-            serviceCollection.AddHttpClient<ITeamClient, TeamClient>();
-            serviceCollection.AddHttpClient<IOtherClient, OtherClient>();
-            serviceCollection.AddHttpClient<ISessionClient, SessionClient>();
-
-            // System services
-            serviceCollection.AddScoped<ISmiteSessionService, SmiteSessionService>();
+            serviceCollection.AddHttpClient<IGodSmiteClient, GodSmiteClient>();
+            serviceCollection.AddHttpClient<IItemSmiteClient, ItemSmiteClient>();
+            serviceCollection.AddHttpClient<IRetrievePlayerSmiteClient, RetrievePlayerSmiteClient>();
+            serviceCollection.AddHttpClient<IPlayerSmiteClient, PlayerSmiteClient>();
+            serviceCollection.AddHttpClient<IMatchSmiteClient, MatchSmiteClient>();
+            serviceCollection.AddHttpClient<ILeagueSmiteClient, LeagueSmiteClient>();
+            serviceCollection.AddHttpClient<ITeamSmiteClient, TeamSmiteClient>();
+            serviceCollection.AddHttpClient<IOtherSmiteClient, OtherSmiteSmiteClient>();
         }
     }
 }

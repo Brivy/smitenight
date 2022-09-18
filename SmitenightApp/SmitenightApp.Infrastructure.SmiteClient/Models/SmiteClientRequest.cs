@@ -3,20 +3,25 @@
     public record SmiteClientRequest
     {
         public string MethodName { get; }
+        public string? SessionId { get; }
         public string? UrlPath { get; }
-        public bool RequireSessionId { get; }
 
-        public SmiteClientRequest(string methodName, bool requiresSessionId = true)
+        public SmiteClientRequest(string methodName)
         {
             MethodName = methodName;
-            RequireSessionId = requiresSessionId;
         }
 
-        public SmiteClientRequest(string methodName, string urlPath, bool requiresSessionId = true)
+        public SmiteClientRequest(string methodName, string sessionId)
         {
             MethodName = methodName;
+            SessionId = sessionId;
+        }
+
+        public SmiteClientRequest(string methodName, string sessionId, string urlPath)
+        {
+            MethodName = methodName;
+            SessionId = sessionId;
             UrlPath = urlPath;
-            RequireSessionId = requiresSessionId;
         }
     }
 }

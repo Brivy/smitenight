@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SmitenightApp.Abstractions.Application.Facades.SmiteClient;
 using SmitenightApp.Abstractions.Application.Services.Builders;
 using SmitenightApp.Abstractions.Application.Services.Maintenance;
-using SmitenightApp.Abstractions.Infrastructure.SmiteClient;
 using SmitenightApp.Domain.Clients.GodClient;
 using SmitenightApp.Domain.Enums.SmiteClient;
 using SmitenightApp.Persistence;
@@ -11,12 +11,12 @@ namespace SmitenightApp.Application.Services.Maintenance
     public class MaintainGodsService : IMaintainGodsService
     {
         private readonly IGodBuilderService _godBuilderService;
-        private readonly IGodSmiteClient _godSmiteClient;
+        private readonly IGodSmiteClientFacade _godSmiteClient;
         private readonly SmitenightDbContext _dbContext;
 
         public MaintainGodsService(
             IGodBuilderService godBuilderService,
-            IGodSmiteClient godSmiteClient,
+            IGodSmiteClientFacade godSmiteClient,
             SmitenightDbContext dbContext)
         {
             _godBuilderService = godBuilderService;
