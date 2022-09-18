@@ -1,23 +1,23 @@
 ﻿using System.Collections.Concurrent;
 using Microsoft.Extensions.Caching.Distributed;
-using SmitenightApp.Abstractions.Application.System;
+using SmitenightApp.Abstractions.Application.Services.Cache;
 using SmitenightApp.Abstractions.Infrastructure.SmiteClient;
 using SmitenightApp.Domain.Constants.Common;
 using SmitenightApp.Domain.Exceptions;
 
-namespace SmitenightApp.Infrastructure.SmiteClient.System
+namespace SmitenightApp.Application.Services.Cache
 {
-    public class SmiteSessionService : ISmiteSessionService
+    public class SmiteSessionCacheService : ISmiteSessionCacheService
     {
-        private readonly ISessionClient _sessionClient;
+        private readonly ISystemSmiteClient _systemSmiteClient;
         private readonly IDistributedCache _distributedCache;
 
         private readonly ConcurrentDictionary<object, SemaphoreSlim> _locks;
 
-        public SmiteSessionService(ISessionClient sessionClient,
+        public SmiteSessionCacheService(ISystemSmiteClient systemSmiteClient,
             IDistributedCache distributedCache)
         {
-            _sessionClient = sessionClient;
+            _systemSmiteClient = systemSmiteClient;
             _distributedCache = distributedCache;
             _locks = new ConcurrentDictionary<object, SemaphoreSlim>();
         }
@@ -44,7 +44,7 @@ namespace SmitenightApp.Infrastructure.SmiteClient.System
                 sessionId = await _distributedCache.GetStringAsync(CacheKeys.SessionId, cancellationToken);
                 if (string.IsNullOrWhiteSpace(sessionId))
                 {
-                    var sessionResponse = await _sessionClient.CreateSmiteSessionAsync(cancellationToken);
+                    var sessionResponse = await _systemSmiteClient.CreateSmiteSessionAsync(cancellationToken);
                     if (sessionResponse?.Response == null)
                     {
                         throw new SessionCouldNotBeCreatedException();

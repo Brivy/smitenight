@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using Microsoft.Extensions.Options;
-using SmitenightApp.Abstractions.Application.System;
 using SmitenightApp.Abstractions.Infrastructure.SmiteClient;
 using SmitenightApp.Domain.Clients.OtherClient;
 using SmitenightApp.Domain.Clients.SmiteClient;
@@ -12,26 +11,27 @@ using SmitenightApp.Infrastructure.SmiteClient.Settings;
 
 namespace SmitenightApp.Infrastructure.SmiteClient.Clients
 {
-    public class OtherClient : SmiteClient, IOtherClient
+    public class OtherSmiteSmiteClient : SmiteClient, IOtherSmiteClient
     {
-        public OtherClient(HttpClient httpClient,
-            ISmiteSessionService smiteSessionService,
+        public OtherSmiteSmiteClient(HttpClient httpClient,
             IOptions<SmiteClientSettings> smiteClientSettings,
             IOptions<SmiteClientSecrets> smiteClientSecrets,
-            IMapper mapper) : base(httpClient, smiteSessionService, smiteClientSettings, smiteClientSecrets, mapper)
+            IMapper mapper) : base(httpClient, smiteClientSettings, smiteClientSecrets, mapper)
         {
         }
 
-        public async Task<SmiteClientListResponse<EsportProLeagueResponse>?> GetEsportProLeagueAsync(CancellationToken cancellationToken = default)
+        public async Task<SmiteClientListResponse<EsportProLeagueResponse>?> GetEsportProLeagueAsync(
+            string sessionId, CancellationToken cancellationToken = default)
         {
-            var request = new SmiteClientRequest(MethodNameConstants.EsportProLeagueMethod);
+            var request = new SmiteClientRequest(MethodNameConstants.EsportProLeagueMethod, sessionId);
             var result = await GetListAsync<EsportProLeagueResponseDto>(request, cancellationToken);
             return Mapper.Map<SmiteClientListResponse<EsportProLeagueResponse>>(result);
         }
 
-        public async Task<SmiteClientListResponse<MotdResponse>?> GetMotdAsync(CancellationToken cancellationToken = default)
+        public async Task<SmiteClientListResponse<MotdResponse>?> GetMotdAsync(
+            string sessionId, CancellationToken cancellationToken = default)
         {
-            var request = new SmiteClientRequest(MethodNameConstants.MotdMethod);
+            var request = new SmiteClientRequest(MethodNameConstants.MotdMethod, sessionId);
             var result = await GetListAsync<MotdResponseDto>(request, cancellationToken);
             return Mapper.Map<SmiteClientListResponse<MotdResponse>>(result);
         }

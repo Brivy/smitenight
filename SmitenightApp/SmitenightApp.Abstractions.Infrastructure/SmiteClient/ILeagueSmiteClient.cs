@@ -4,12 +4,12 @@ using SmitenightApp.Domain.Enums.SmiteClient;
 
 namespace SmitenightApp.Abstractions.Infrastructure.SmiteClient
 {
-    public interface ILeagueClient
+    public interface ILeagueSmiteClient
     {
         Task<SmiteClientListResponse<LeagueLeaderboardResponse>?> GetLeagueLeaderboardAsync(
-            GameModeQueueIdEnum gameModeQueueId, LeagueTierEnum leagueTier, int round, CancellationToken cancellationToken = default);
+            string sessionId, GameModeQueueIdEnum gameModeQueueId, LeagueTierEnum leagueTier, int round, CancellationToken cancellationToken = default);
 
         Task<SmiteClientListResponse<LeagueSeasonsResponse>?> GetLeagueSeasonsAsync(
-            GameModeQueueIdEnum gameModeQueueId, CancellationToken cancellationToken = default);
+            string sessionId, GameModeQueueIdEnum gameModeQueueId, CancellationToken cancellationToken = default);
     }
 }

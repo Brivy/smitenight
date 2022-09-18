@@ -4,20 +4,20 @@ using SmitenightApp.Domain.Enums.SmiteClient;
 
 namespace SmitenightApp.Abstractions.Infrastructure.SmiteClient;
 
-public interface IRetrievePlayerClient
+public interface IRetrievePlayerSmiteClient
 {
     Task<SmiteClientListResponse<PlayerResponse>?> GetPlayerAsync(
-        string playerId, PortalTypeEnum portalType, CancellationToken cancellationToken = default);
+        string sessionId, string playerId, PortalTypeEnum portalType, CancellationToken cancellationToken = default);
 
     Task<SmiteClientListResponse<PlayerResponse>?> GetPlayerWithoutPortalAsync(
-        string playerName, CancellationToken cancellationToken = default);
+        string sessionId, string playerName, CancellationToken cancellationToken = default);
 
     Task<SmiteClientListResponse<PlayerIdResponse>?> GetPlayerIdByPlayerNameAsync(
-        string playerName, CancellationToken cancellationToken = default);
+        string sessionId, string playerName, CancellationToken cancellationToken = default);
 
     Task<SmiteClientListResponse<PlayerIdResponse>?> GetPlayerIdByPortalUserAsync(
-        PortalTypeEnum portalType, string portalUserId, CancellationToken cancellationToken = default);
+        string sessionId, PortalTypeEnum portalType, string portalUserId, CancellationToken cancellationToken = default);
 
     Task<SmiteClientListResponse<PlayerIdResponse>?> GetPlayerIdByGamerTagAsync(
-        PortalTypeEnum portalType, string gamerTag, CancellationToken cancellationToken = default);
+        string sessionId, PortalTypeEnum portalType, string gamerTag, CancellationToken cancellationToken = default);
 }

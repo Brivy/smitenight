@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
+using SmitenightApp.Abstractions.Application.Facades.SmiteClient;
 using SmitenightApp.Abstractions.Application.Services.Builders;
 using SmitenightApp.Abstractions.Application.Services.Maintenance;
-using SmitenightApp.Abstractions.Infrastructure.SmiteClient;
 using SmitenightApp.Domain.Clients.ItemClient;
 using SmitenightApp.Domain.Constants.SmiteClient.Responses;
 using SmitenightApp.Domain.Enums.SmiteClient;
@@ -12,11 +12,11 @@ namespace SmitenightApp.Application.Services.Maintenance
     public class MaintainItemsService : IMaintainItemsService
     {
         private readonly SmitenightDbContext _dbContext;
-        private readonly IItemSmiteClient _itemSmiteClient;
+        private readonly IItemSmiteClientFacade _itemSmiteClient;
         private readonly IItemBuilderService _itemBuilderService;
 
         public MaintainItemsService(SmitenightDbContext dbContext,
-            IItemSmiteClient itemSmiteClient,
+            IItemSmiteClientFacade itemSmiteClient,
             IItemBuilderService itemBuilderService)
         {
             _dbContext = dbContext;
@@ -93,7 +93,7 @@ namespace SmitenightApp.Application.Services.Maintenance
                 .Include(x => x.RootItem)
                 .Include(x => x.ChildItem)
                 .SingleOrDefaultAsync(x => x.SmiteId == item.ItemId, cancellationToken);
-            
+
             if (existingItemEntity == null)
             {
                 _dbContext.Items.Add(itemEntity);
