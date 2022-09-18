@@ -2,7 +2,6 @@ using System.Text.Json.Serialization;
 using SmitenightApp.CompositionRoot;
 // ReSharper disable once RedundantUsingDirective
 using Azure.Identity;
-using SmitenightApp.Server.Secrets;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -20,12 +19,6 @@ builder.Configuration.AddAzureKeyVault(
     new Uri($"https://{builder.Configuration["KeyVaultSettings:Url"]}.vault.azure.net/"),
     new DefaultAzureCredential());
 #endif
-
-builder.Services.AddStackExchangeRedisCache(options =>
-{
-    options.Configuration = builder.Configuration[$"{nameof(RedisSecrets)}:{nameof(RedisSecrets.ConnectionString)}"];
-    options.InstanceName = "SmitenightRedis";
-});
 
 builder.Services.ConfigureServices(builder.Configuration);
 

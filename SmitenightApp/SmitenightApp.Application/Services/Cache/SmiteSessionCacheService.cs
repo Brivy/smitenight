@@ -1,7 +1,9 @@
 ﻿using System.Collections.Concurrent;
 using Microsoft.Extensions.Caching.Distributed;
 using SmitenightApp.Abstractions.Application.Services.Cache;
+using SmitenightApp.Abstractions.Infrastructure.RedisCache.Providers;
 using SmitenightApp.Abstractions.Infrastructure.SmiteClient;
+using SmitenightApp.Domain.Cache;
 using SmitenightApp.Domain.Constants.Common;
 using SmitenightApp.Domain.Exceptions;
 
@@ -10,15 +12,16 @@ namespace SmitenightApp.Application.Services.Cache
     public class SmiteSessionCacheService : ISmiteSessionCacheService
     {
         private readonly ISystemSmiteClient _systemSmiteClient;
-        private readonly IDistributedCache _distributedCache;
+        private readonly IRedisCacheProvider _redisCacheProvider;
 
         private readonly ConcurrentDictionary<object, SemaphoreSlim> _locks;
 
-        public SmiteSessionCacheService(ISystemSmiteClient systemSmiteClient,
-            IDistributedCache distributedCache)
+        public SmiteSessionCacheService(
+            ISystemSmiteClient systemSmiteClient,
+            IRedisCacheProvider redisCacheProvider)
         {
             _systemSmiteClient = systemSmiteClient;
-            _distributedCache = distributedCache;
+            _redisCacheProvider = redisCacheProvider;
             _locks = new ConcurrentDictionary<object, SemaphoreSlim>();
         }
 
@@ -30,19 +33,21 @@ namespace SmitenightApp.Application.Services.Cache
         /// <returns></returns>
         public async Task<string> GetSessionIdAsync(CancellationToken cancellationToken = default)
         {
-            var sessionId = await _distributedCache.GetStringAsync(CacheKeys.SessionId, cancellationToken);
-            if (!string.IsNullOrWhiteSpace(sessionId))
+            var cacheKey = _redisCacheProvider.GenerateCacheKey(CacheKeys.SmiteSessionCacheKey);
+            var smiteSessionCacheItem = await _redisCacheProvider.GetAsync<SmiteSessionCacheItem>(cacheKey, cancellationToken);
+            if (!string.IsNullOrWhiteSpace(smiteSessionCacheItem?.SessionId))
             {
-                return sessionId;
+                return smiteSessionCacheItem.SessionId;
             }
 
-            var sessionLock = _locks.GetOrAdd(CacheKeys.SessionId, x => new SemaphoreSlim(1, 1));
+            var sessionLock = _locks.GetOrAdd(cacheKey, x => new SemaphoreSlim(1, 1));
             await sessionLock.WaitAsync(cancellationToken);
 
             try
             {
-                sessionId = await _distributedCache.GetStringAsync(CacheKeys.SessionId, cancellationToken);
-                if (string.IsNullOrWhiteSpace(sessionId))
+                // Verify if this is a thread that waited and can now find a smite session
+                smiteSessionCacheItem = await _redisCacheProvider.GetAsync<SmiteSessionCacheItem>(cacheKey, cancellationToken);
+                if (string.IsNullOrWhiteSpace(smiteSessionCacheItem?.SessionId))
                 {
                     var sessionResponse = await _systemSmiteClient.CreateSmiteSessionAsync(cancellationToken);
                     if (sessionResponse?.Response == null)
@@ -51,9 +56,9 @@ namespace SmitenightApp.Application.Services.Cache
                     }
 
                     // While session IDs are valid for 15 minutes, we set it to 10 minutes because we don't want any failures on long running processes
-                    sessionId = sessionResponse.Response.SessionId;
+                    smiteSessionCacheItem = new SmiteSessionCacheItem { SessionId = sessionResponse.Response.SessionId };
                     var cacheOptions = new DistributedCacheEntryOptions { AbsoluteExpiration = DateTime.Now.AddMinutes(10) };
-                    await _distributedCache.SetStringAsync(CacheKeys.SessionId, sessionId, cacheOptions, cancellationToken);
+                    await _redisCacheProvider.SetAsync(cacheKey, smiteSessionCacheItem, cacheOptions, cancellationToken);
                 }
             }
             finally
@@ -61,7 +66,7 @@ namespace SmitenightApp.Application.Services.Cache
                 sessionLock.Release();
             }
 
-            return sessionId;
+            return smiteSessionCacheItem.SessionId;
         }
     }
 }

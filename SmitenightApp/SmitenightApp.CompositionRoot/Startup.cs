@@ -9,6 +9,7 @@ namespace SmitenightApp.CompositionRoot
         {
             Application.Startup.ConfigureServices(serviceCollection);
             Infrastructure.KeyVault.Startup.ConfigureServices(serviceCollection, configuration);
+            Infrastructure.RedisCache.Startup.ConfigureServices(serviceCollection, configuration);
             Infrastructure.SmiteClient.Startup.ConfigureServices(serviceCollection, configuration);
             Persistence.Startup.ConfigureServices(serviceCollection, configuration);
         }
