@@ -37,6 +37,10 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Persistence", "Persistence"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmitenightApp.Infrastructure.RedisCache", "SmitenightApp\SmitenightApp.Infrastructure.RedisCache\SmitenightApp.Infrastructure.RedisCache.csproj", "{B8B58E74-E981-4216-806A-DFCF9FB38A27}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Functions", "Functions", "{23CB3313-CAB4-4A26-B9D3-E4673DDC7E9E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SmitenightApp.Function.StopSmitenight", "SmitenightApp\SmitenightApp.Function.StopSmitenight\SmitenightApp.Function.StopSmitenight.csproj", "{7B49A7CD-1932-4472-8743-5F04D0EB652A}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -83,6 +87,10 @@ Global
 		{B8B58E74-E981-4216-806A-DFCF9FB38A27}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B8B58E74-E981-4216-806A-DFCF9FB38A27}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B8B58E74-E981-4216-806A-DFCF9FB38A27}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B49A7CD-1932-4472-8743-5F04D0EB652A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B49A7CD-1932-4472-8743-5F04D0EB652A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B49A7CD-1932-4472-8743-5F04D0EB652A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B49A7CD-1932-4472-8743-5F04D0EB652A}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -99,6 +107,7 @@ Global
 		{CCBF1D99-D526-441C-9ADD-1B07C640FD92} = {6F508BDC-34B8-410D-B4BC-857DBF833318}
 		{FDE35ACD-FBBF-490D-B54E-1DDC0667967C} = {7E178BB9-3D2D-4DC0-907D-EBD87C20E963}
 		{B8B58E74-E981-4216-806A-DFCF9FB38A27} = {6F508BDC-34B8-410D-B4BC-857DBF833318}
+		{7B49A7CD-1932-4472-8743-5F04D0EB652A} = {23CB3313-CAB4-4A26-B9D3-E4673DDC7E9E}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3C8D7E88-4284-4074-85EF-6F7EA1429EE4}

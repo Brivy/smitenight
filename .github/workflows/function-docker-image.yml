@@ -1,8 +1,8 @@
-name: Linux Container .NET 6.0 Workflow
+name: Deploy DotNet project to function app with a Linux environment
 
 on:
   push:
-    branches: [ main ]
+    branches: [ main, test_function ]
 
 jobs:
   build-and-deploy:
@@ -24,14 +24,14 @@ jobs:
         username: ${{ secrets.REGISTRY_USERNAME }}
         password: ${{ secrets.REGISTRY_PASSWORD }}
     - run: |
-        docker build -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/smitenight:${{ github.sha }} -f ./SmitenightApp/SmitenightApp.Server/Dockerfile .
-        docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/smitenight:${{ github.sha }}
+        docker build -t ${{ secrets.REGISTRY_LOGIN_SERVER }}/stopsmitenight:${{ github.sha }} -f ./SmitenightApp/SmitenightApp.Function.StopSmitenight/Dockerfile .
+        docker push ${{ secrets.REGISTRY_LOGIN_SERVER }}/stopsmitenight:${{ github.sha }}
 
-    - name: 'Deploy to Azure WebApps'
-      uses: azure/webapps-deploy@v2
+    - name: 'Deploy to Azure Functions'
+      uses: Azure/functions-container-action@v1
       with:
-        app-name: 'app-smitenight-dev-001'
-        images: '${{ secrets.REGISTRY_LOGIN_SERVER }}/smitenight:${{ github.sha }}'
+        app-name: 'func-stopsmitenight-dev-001'
+        image: '${{ secrets.REGISTRY_LOGIN_SERVER }}/stopsmitenight:${{ github.sha }}'
 
     - name: 'Azure logout'
       run: |

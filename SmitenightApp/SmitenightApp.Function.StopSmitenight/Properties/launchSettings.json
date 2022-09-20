@@ -1,0 +1,14 @@
+{
+  "profiles": {
+    "SmitenightApp.Function.StopSmitenight": {
+      "commandName": "Project",
+      "commandLineArgs": "--port 7233"
+    },
+    "Docker": {
+      "commandName": "Docker",
+      "launchUrl": "{Scheme}://{ServiceHost}:{ServicePort}",
+      "httpPort": 32074,
+      "useSSL": false
+    }
+  }
+}
