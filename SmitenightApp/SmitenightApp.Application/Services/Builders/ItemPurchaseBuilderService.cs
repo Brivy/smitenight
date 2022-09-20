@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using SmitenightApp.Abstractions.Application.Services.Builders;
-using SmitenightApp.Domain.Clients.SmiteClient.Responses.MatchResponses;
+using SmitenightApp.Domain.Clients.MatchClient;
 using SmitenightApp.Domain.Constants.SmiteClient.Responses;
 using SmitenightApp.Domain.Enums.Items;
 using SmitenightApp.Domain.Models.Items;

@@ -1,5 +1,5 @@
 ﻿using SmitenightApp.Abstractions.Application.Services.Builders;
-using SmitenightApp.Domain.Clients.SmiteClient.Responses.ItemResponses;
+using SmitenightApp.Domain.Clients.ItemClient;
 using SmitenightApp.Domain.Constants.SmiteClient.Responses;
 using SmitenightApp.Domain.Enums.Items;
 using SmitenightApp.Domain.Models.Items;

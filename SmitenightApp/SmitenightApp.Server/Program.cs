@@ -12,8 +12,6 @@ builder.Services.AddControllersWithViews().AddJsonOptions(options =>
 });
 
 builder.Services.AddRazorPages();
-builder.Services.ConfigureServices(builder.Configuration);
-
 builder.Services.AddAutoMapper(typeof(Program).Assembly);
 
 #if !DEBUG
@@ -21,6 +19,8 @@ builder.Configuration.AddAzureKeyVault(
     new Uri($"https://{builder.Configuration["KeyVaultSettings:Url"]}.vault.azure.net/"),
     new DefaultAzureCredential());
 #endif
+
+builder.Services.ConfigureServices(builder.Configuration);
 
 var app = builder.Build();
 

@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using SmitenightApp.Domain.Clients.SmiteClient.Responses.ItemResponses;
+using SmitenightApp.Domain.Clients.ItemClient;
 using SmitenightApp.Infrastructure.SmiteClient.Contracts.ItemResponses;
 
 namespace SmitenightApp.Infrastructure.SmiteClient.Profiles

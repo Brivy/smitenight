@@ -12,7 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SmitenightApp.Application\SmitenightApp.Application.csproj" />
-    <ProjectReference Include="..\SmitenightApp.Infrastructure.Keyvault\SmitenightApp.Infrastructure.KeyVault.csproj" />
+    <ProjectReference Include="..\SmitenightApp.Infrastructure.RedisCache\SmitenightApp.Infrastructure.RedisCache.csproj" />
     <ProjectReference Include="..\SmitenightApp.Infrastructure.SmiteClient\SmitenightApp.Infrastructure.SmiteClient.csproj" />
     <ProjectReference Include="..\SmitenightApp.Persistence\SmitenightApp.Persistence.csproj" />
   </ItemGroup>

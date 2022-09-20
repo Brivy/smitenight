@@ -1,4 +1,4 @@
-﻿using SmitenightApp.Domain.Clients.SmiteClient.Responses.ItemResponses;
+﻿using SmitenightApp.Domain.Clients.ItemClient;
 using SmitenightApp.Domain.Models.Items;
 
 namespace SmitenightApp.Abstractions.Application.Services.Builders;
