@@ -13,7 +13,7 @@ COPY ["SmitenightApp/SmitenightApp.Abstractions.Application/SmitenightApp.Abstra
 COPY ["SmitenightApp/SmitenightApp.Domain/SmitenightApp.Domain.csproj", "SmitenightApp/SmitenightApp.Domain/"]
 COPY ["SmitenightApp/SmitenightApp.Abstractions.Infrastructure/SmitenightApp.Abstractions.Infrastructure.csproj", "SmitenightApp/SmitenightApp.Abstractions.Infrastructure/"]
 COPY ["SmitenightApp/SmitenightApp.Persistence/SmitenightApp.Persistence.csproj", "SmitenightApp/SmitenightApp.Persistence/"]
-COPY ["SmitenightApp/SmitenightApp.Infrastructure.Keyvault/SmitenightApp.Infrastructure.KeyVault.csproj", "SmitenightApp/SmitenightApp.Infrastructure.Keyvault/"]
+COPY ["SmitenightApp/SmitenightApp.Infrastructure.RedisCache/SmitenightApp.Infrastructure.RedisCache.csproj", "SmitenightApp/SmitenightApp.Infrastructure.RedisCache/"]
 COPY ["SmitenightApp/SmitenightApp.Infrastructure.SmiteClient/SmitenightApp.Infrastructure.SmiteClient.csproj", "SmitenightApp/SmitenightApp.Infrastructure.SmiteClient/"]
 RUN dotnet restore "SmitenightApp/SmitenightApp.Server/SmitenightApp.Server.csproj"
 COPY . .
