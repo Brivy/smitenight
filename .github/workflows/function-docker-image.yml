@@ -2,7 +2,7 @@ name: Azure function Container Workflow
 
 on:
   push:
-    branches: [ main, test_function ]
+    branches: [ main ]
 
 jobs:
   build-and-deploy:
