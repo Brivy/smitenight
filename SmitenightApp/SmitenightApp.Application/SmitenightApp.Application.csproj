@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFramework>net6.0</TargetFramework>
+    <TargetFramework>net7.0</TargetFramework>
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
   </PropertyGroup>
@@ -13,7 +13,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SmitenightApp.Abstractions.Application\SmitenightApp.Abstractions.Application.csproj" />
-    <ProjectReference Include="..\SmitenightApp.Abstractions.Infrastructure\SmitenightApp.Abstractions.Infrastructure.csproj" />
+    <ProjectReference Include="..\SmitenightApp.Infrastructure.RedisCache\SmitenightApp.Infrastructure.RedisCache.csproj" />
+    <ProjectReference Include="..\SmitenightApp.Infrastructure.SmiteClient\SmitenightApp.Infrastructure.SmiteClient.csproj" />
     <ProjectReference Include="..\SmitenightApp.Persistence\SmitenightApp.Persistence.csproj" />
   </ItemGroup>
 

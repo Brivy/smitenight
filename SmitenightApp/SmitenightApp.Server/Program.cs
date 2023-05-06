@@ -1,7 +1,8 @@
 using System.Text.Json.Serialization;
-using SmitenightApp.CompositionRoot;
-// ReSharper disable once RedundantUsingDirective
+
+#if !DEBUG
 using Azure.Identity;
+#endif
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -19,8 +20,6 @@ builder.Configuration.AddAzureKeyVault(
     new Uri($"https://{builder.Configuration["KeyVaultSettings:Url"]}.vault.azure.net/"),
     new DefaultAzureCredential());
 #endif
-
-builder.Services.ConfigureServices(builder.Configuration);
 
 var app = builder.Build();
 

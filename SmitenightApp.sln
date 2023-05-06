@@ -9,8 +9,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmitenightApp.Client", "Smi
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{3EC7ED06-3F77-44BF-A4FC-D11760B0D950}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{24F27201-F7B8-4A52-82B5-61D4C21B0257}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{7F2D8975-C5A5-47DE-84C8-DB3A7F634764}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmitenightApp.Application", "SmitenightApp\SmitenightApp.Application\SmitenightApp.Application.csproj", "{6BC07B7D-3138-4A1A-ACD4-63CC3C79589F}"
@@ -26,8 +24,6 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmitenightApp.Abstractions.Infrastructure", "SmitenightApp\SmitenightApp.Abstractions.Infrastructure\SmitenightApp.Abstractions.Infrastructure.csproj", "{C9D39FCD-30E4-443C-94B4-F3183302821F}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmitenightApp.Abstractions.Application", "SmitenightApp\SmitenightApp.Abstractions.Application\SmitenightApp.Abstractions.Application.csproj", "{E51F3E9A-ED37-4E51-93BA-24EC097F8B37}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmitenightApp.CompositionRoot", "SmitenightApp\SmitenightApp.CompositionRoot\SmitenightApp.CompositionRoot.csproj", "{4E33A2EE-D5AF-4511-BE18-F977798D0D19}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SmitenightApp.Infrastructure.SmiteClient", "SmitenightApp\SmitenightApp.Infrastructure.SmiteClient\SmitenightApp.Infrastructure.SmiteClient.csproj", "{CCBF1D99-D526-441C-9ADD-1B07C640FD92}"
 EndProject
@@ -67,10 +63,6 @@ Global
 		{E51F3E9A-ED37-4E51-93BA-24EC097F8B37}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E51F3E9A-ED37-4E51-93BA-24EC097F8B37}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E51F3E9A-ED37-4E51-93BA-24EC097F8B37}.Release|Any CPU.Build.0 = Release|Any CPU
-		{4E33A2EE-D5AF-4511-BE18-F977798D0D19}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{4E33A2EE-D5AF-4511-BE18-F977798D0D19}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{4E33A2EE-D5AF-4511-BE18-F977798D0D19}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{4E33A2EE-D5AF-4511-BE18-F977798D0D19}.Release|Any CPU.Build.0 = Release|Any CPU
 		{CCBF1D99-D526-441C-9ADD-1B07C640FD92}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{CCBF1D99-D526-441C-9ADD-1B07C640FD92}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CCBF1D99-D526-441C-9ADD-1B07C640FD92}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -95,7 +87,6 @@ Global
 		{DADF39D7-C33D-4F13-A1E3-31EA64BAE343} = {7F2D8975-C5A5-47DE-84C8-DB3A7F634764}
 		{C9D39FCD-30E4-443C-94B4-F3183302821F} = {DADF39D7-C33D-4F13-A1E3-31EA64BAE343}
 		{E51F3E9A-ED37-4E51-93BA-24EC097F8B37} = {DADF39D7-C33D-4F13-A1E3-31EA64BAE343}
-		{4E33A2EE-D5AF-4511-BE18-F977798D0D19} = {24F27201-F7B8-4A52-82B5-61D4C21B0257}
 		{CCBF1D99-D526-441C-9ADD-1B07C640FD92} = {6F508BDC-34B8-410D-B4BC-857DBF833318}
 		{FDE35ACD-FBBF-490D-B54E-1DDC0667967C} = {7E178BB9-3D2D-4DC0-907D-EBD87C20E963}
 		{B8B58E74-E981-4216-806A-DFCF9FB38A27} = {6F508BDC-34B8-410D-B4BC-857DBF833318}
