@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using Smitenight.Domain.Models.Clients.SmiteClient;
-using Smitenight.Providers.SmiteProvider.HiRez.Contracts;
+using Smitenight.Providers.SmiteProvider.Contracts.Models;
+using Smitenight.Providers.SmiteProvider.HiRez.Responses;
 
 namespace Smitenight.Providers.SmiteProvider.HiRez.Profiles
 {

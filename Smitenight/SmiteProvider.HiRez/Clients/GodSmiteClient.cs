@@ -1,59 +1,55 @@
 ﻿using AutoMapper;
-using Microsoft.Extensions.Options;
 using Smitenight.Domain.Models.Clients.GodClient;
-using Smitenight.Domain.Models.Clients.SmiteClient;
 using Smitenight.Domain.Models.Constants.SmiteClient;
 using Smitenight.Domain.Models.Enums.SmiteClient;
-using Smitenight.Providers.SmiteProvider.Contracts.SmiteClient;
-using Smitenight.Providers.SmiteProvider.HiRez.Contracts.GodResponses;
-using Smitenight.Providers.SmiteProvider.HiRez.Models;
-using Smitenight.Providers.SmiteProvider.HiRez.Secrets;
-using Smitenight.Providers.SmiteProvider.HiRez.Settings;
+using Smitenight.Providers.SmiteProvider.Contracts.Clients;
+using Smitenight.Providers.SmiteProvider.HiRez.Responses.GodClient;
+using Smitenight.Providers.SmiteProvider.HiRez.Services;
 
 namespace Smitenight.Providers.SmiteProvider.HiRez.Clients
 {
     public class GodSmiteClient : SmiteClient, IGodSmiteClient
     {
+        private readonly ISmiteClientUrlService _smiteClientUrlService;
+        private readonly IMapper _mapper;
+
         public GodSmiteClient(HttpClient httpClient,
-            IOptions<SmiteClientSettings> smiteClientSettings,
-            IOptions<SmiteClientSecrets> smiteClientSecrets,
-            IMapper mapper) : base(httpClient, smiteClientSettings, smiteClientSecrets, mapper)
+            ISmiteClientUrlService smiteClientUrlService,
+            IMapper mapper) : base(httpClient)
         {
+            _smiteClientUrlService = smiteClientUrlService;
+            _mapper = mapper;
         }
 
-        public async Task<SmiteClientListResponse<GodsResponse>?> GetGodsAsync(
-            string sessionId, LanguageCodeEnum languageCode, CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<God>> GetGodsAsync(LanguageCodeEnum languageCode, CancellationToken cancellationToken = default)
         {
-            var urlPath = ConstructUrlPath((int)languageCode);
-            var request = new SmiteClientRequest(MethodNameConstants.GodsMethod, sessionId, urlPath);
-            var result = await GetListAsync<GodsResponseDto>(request, cancellationToken);
-            return Mapper.Map<SmiteClientListResponse<GodsResponse>>(result);
+            var urlPath = _smiteClientUrlService.ConstructUrlPath((int)languageCode);
+            var url = await _smiteClientUrlService.ConstructUrlAsync(MethodNameConstants.GodsMethod, urlPath, cancellationToken);
+            var result = await GetAsync<IEnumerable<GodsResponseDto>>(url, cancellationToken);
+            return _mapper.Map<IEnumerable<God>>(result);
         }
 
-        public async Task<SmiteClientListResponse<GodLeaderbordResponse>?> GetGodLeaderbordAsync(
-            string sessionId, int godId, GameModeQueueIdEnum gameModeQueueId, CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<GodLeaderbord>> GetGodLeaderbordAsync(int godId, GameModeQueueIdEnum gameModeQueueId, CancellationToken cancellationToken = default)
         {
-            var urlPath = ConstructUrlPath(godId, (int)gameModeQueueId);
-            var request = new SmiteClientRequest(MethodNameConstants.GodLeaderboardMethod, sessionId, urlPath);
-            var result = await GetListAsync<GodLeaderbordResponseDto>(request, cancellationToken);
-            return Mapper.Map<SmiteClientListResponse<GodLeaderbordResponse>>(result);
+            var urlPath = _smiteClientUrlService.ConstructUrlPath(godId, (int)gameModeQueueId);
+            var url = await _smiteClientUrlService.ConstructUrlAsync(MethodNameConstants.GodLeaderboardMethod, urlPath, cancellationToken);
+            var result = await GetAsync<IEnumerable<GodLeaderbordResponseDto>>(url, cancellationToken);
+            return _mapper.Map<IEnumerable<GodLeaderbord>>(result);
         }
 
-        public async Task<SmiteClientListResponse<GodAltAbilitiesResponse>?> GetGodAltAbilitiesAsync(
-            string sessionId, CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<GodAltAbility>> GetGodAltAbilitiesAsync(CancellationToken cancellationToken = default)
         {
-            var request = new SmiteClientRequest(MethodNameConstants.GodAltAbilitiesMethod, sessionId);
-            var result = await GetListAsync<GodAltAbilitiesResponseDto>(request, cancellationToken);
-            return Mapper.Map<SmiteClientListResponse<GodAltAbilitiesResponse>>(result);
+            var url = await _smiteClientUrlService.ConstructUrlAsync(MethodNameConstants.GodAltAbilitiesMethod, cancellationToken);
+            var result = await GetAsync<IEnumerable<GodAltAbilitiesResponseDto>>(url, cancellationToken);
+            return _mapper.Map<IEnumerable<GodAltAbility>>(result);
         }
 
-        public async Task<SmiteClientListResponse<GodSkinsResponse>?> GetGodSkinsAsync(
-            string sessionId, int godId, LanguageCodeEnum languageCode, CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<GodSkin>> GetGodSkinsAsync(int godId, LanguageCodeEnum languageCode, CancellationToken cancellationToken = default)
         {
-            var urlPath = ConstructUrlPath(godId, (int)languageCode);
-            var request = new SmiteClientRequest(MethodNameConstants.GodSkinsMethod, sessionId, urlPath);
-            var result = await GetListAsync<GodSkinsResponseDto>(request, cancellationToken);
-            return Mapper.Map<SmiteClientListResponse<GodSkinsResponse>>(result);
+            var urlPath = _smiteClientUrlService.ConstructUrlPath(godId, (int)languageCode);
+            var url = await _smiteClientUrlService.ConstructUrlAsync(MethodNameConstants.GodSkinsMethod, urlPath, cancellationToken);
+            var result = await GetAsync<IEnumerable<GodSkinsResponseDto>>(url, cancellationToken);
+            return _mapper.Map<IEnumerable<GodSkin>>(result);
         }
     }
 }

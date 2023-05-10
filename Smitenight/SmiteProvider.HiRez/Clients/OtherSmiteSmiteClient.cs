@@ -1,39 +1,37 @@
 ﻿using AutoMapper;
-using Microsoft.Extensions.Options;
 using Smitenight.Domain.Models.Clients.OtherClient;
-using Smitenight.Domain.Models.Clients.SmiteClient;
 using Smitenight.Domain.Models.Constants.SmiteClient;
-using Smitenight.Providers.SmiteProvider.Contracts.SmiteClient;
-using Smitenight.Providers.SmiteProvider.HiRez.Contracts.OtherResponses;
-using Smitenight.Providers.SmiteProvider.HiRez.Models;
-using Smitenight.Providers.SmiteProvider.HiRez.Secrets;
-using Smitenight.Providers.SmiteProvider.HiRez.Settings;
+using Smitenight.Providers.SmiteProvider.Contracts.Clients;
+using Smitenight.Providers.SmiteProvider.HiRez.Responses.OtherClient;
+using Smitenight.Providers.SmiteProvider.HiRez.Services;
 
 namespace Smitenight.Providers.SmiteProvider.HiRez.Clients
 {
     public class OtherSmiteSmiteClient : SmiteClient, IOtherSmiteClient
     {
+        private readonly ISmiteClientUrlService _smiteClientUrlService;
+        private readonly IMapper _mapper;
+
         public OtherSmiteSmiteClient(HttpClient httpClient,
-            IOptions<SmiteClientSettings> smiteClientSettings,
-            IOptions<SmiteClientSecrets> smiteClientSecrets,
-            IMapper mapper) : base(httpClient, smiteClientSettings, smiteClientSecrets, mapper)
+            ISmiteClientUrlService smiteClientUrlService,
+            IMapper mapper) : base(httpClient)
         {
+            _smiteClientUrlService = smiteClientUrlService;
+            _mapper = mapper;
         }
 
-        public async Task<SmiteClientListResponse<EsportProLeagueResponse>?> GetEsportProLeagueAsync(
-            string sessionId, CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<EsportProLeague>> GetEsportProLeagueAsync(CancellationToken cancellationToken = default)
         {
-            var request = new SmiteClientRequest(MethodNameConstants.EsportProLeagueMethod, sessionId);
-            var result = await GetListAsync<EsportProLeagueResponseDto>(request, cancellationToken);
-            return Mapper.Map<SmiteClientListResponse<EsportProLeagueResponse>>(result);
+            var url = await _smiteClientUrlService.ConstructUrlAsync(MethodNameConstants.EsportProLeagueMethod, cancellationToken);
+            var result = await GetAsync<IEnumerable<EsportProLeagueResponseDto>>(url, cancellationToken);
+            return _mapper.Map<IEnumerable<EsportProLeague>>(result);
         }
 
-        public async Task<SmiteClientListResponse<MotdResponse>?> GetMotdAsync(
-            string sessionId, CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<Motd>> GetMotdAsync(CancellationToken cancellationToken = default)
         {
-            var request = new SmiteClientRequest(MethodNameConstants.MotdMethod, sessionId);
-            var result = await GetListAsync<MotdResponseDto>(request, cancellationToken);
-            return Mapper.Map<SmiteClientListResponse<MotdResponse>>(result);
+            var url = await _smiteClientUrlService.ConstructUrlAsync(MethodNameConstants.MotdMethod, cancellationToken);
+            var result = await GetAsync<IEnumerable<MotdResponseDto>>(url, cancellationToken);
+            return _mapper.Map<IEnumerable<Motd>>(result);
         }
     }
 }

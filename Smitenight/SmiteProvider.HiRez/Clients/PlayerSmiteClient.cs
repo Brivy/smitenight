@@ -1,87 +1,80 @@
 ﻿using AutoMapper;
-using Microsoft.Extensions.Options;
 using Smitenight.Domain.Models.Clients.PlayerClient;
-using Smitenight.Domain.Models.Clients.SmiteClient;
 using Smitenight.Domain.Models.Constants.SmiteClient;
 using Smitenight.Domain.Models.Enums.SmiteClient;
-using Smitenight.Providers.SmiteProvider.Contracts.SmiteClient;
-using Smitenight.Providers.SmiteProvider.HiRez.Contracts.PlayerResponses;
-using Smitenight.Providers.SmiteProvider.HiRez.Models;
-using Smitenight.Providers.SmiteProvider.HiRez.Secrets;
-using Smitenight.Providers.SmiteProvider.HiRez.Settings;
+using Smitenight.Providers.SmiteProvider.Contracts.Clients;
+using Smitenight.Providers.SmiteProvider.HiRez.Responses.PlayerClient;
+using Smitenight.Providers.SmiteProvider.HiRez.Services;
 
 namespace Smitenight.Providers.SmiteProvider.HiRez.Clients
 {
     public class PlayerSmiteClient : SmiteClient, IPlayerSmiteClient
     {
+        private readonly ISmiteClientUrlService _smiteClientUrlService;
+        private readonly IMapper _mapper;
+
         public PlayerSmiteClient(HttpClient httpClient,
-            IOptions<SmiteClientSettings> smiteClientSettings,
-            IOptions<SmiteClientSecrets> smiteClientSecrets,
-            IMapper mapper) : base(httpClient, smiteClientSettings, smiteClientSecrets, mapper)
+            ISmiteClientUrlService smiteClientUrlService,
+            IMapper mapper) : base(httpClient)
         {
+            _smiteClientUrlService = smiteClientUrlService;
+            _mapper = mapper;
         }
 
-        public async Task<SmiteClientListResponse<FriendsResponse>?> GetFriendsAsync(
-            string sessionId, string playerId, CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<Friend>> GetFriendsAsync(string playerId, CancellationToken cancellationToken = default)
         {
-            var urlPath = ConstructUrlPath(playerId);
-            var request = new SmiteClientRequest(MethodNameConstants.FriendsMethod, sessionId, urlPath);
-            var result = await GetListAsync<FriendsResponseDto>(request, cancellationToken);
-            return Mapper.Map<SmiteClientListResponse<FriendsResponse>>(result);
+            var urlPath = _smiteClientUrlService.ConstructUrlPath(playerId);
+            var url = await _smiteClientUrlService.ConstructUrlAsync(MethodNameConstants.FriendsMethod, urlPath, cancellationToken);
+            var result = await GetAsync<IEnumerable<FriendsResponseDto>>(url, cancellationToken);
+            return _mapper.Map<IEnumerable<Friend>>(result);
         }
 
-        public async Task<SmiteClientListResponse<GodRanksResponse>?> GetGodRanksAsync(
-            string sessionId, string playerId, CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<GodRank>> GetGodRanksAsync(string playerId, CancellationToken cancellationToken = default)
         {
-            var urlPath = ConstructUrlPath(playerId);
-            var request = new SmiteClientRequest(MethodNameConstants.GodRanksMethod, sessionId, urlPath);
-            var result = await GetListAsync<GodRanksResponseDto>(request, cancellationToken);
-            return Mapper.Map<SmiteClientListResponse<GodRanksResponse>>(result);
+            var urlPath = _smiteClientUrlService.ConstructUrlPath(playerId);
+            var url = await _smiteClientUrlService.ConstructUrlAsync(MethodNameConstants.GodRanksMethod, urlPath, cancellationToken);
+            var result = await GetAsync<IEnumerable<GodRanksResponseDto>>(url, cancellationToken);
+            return _mapper.Map<IEnumerable<GodRank>>(result);
         }
 
-        public async Task<SmiteClientResponse<PlayerAchievementsResponse>?> GetPlayerAchievementsAsync(
-            string sessionId, int playerId, CancellationToken cancellationToken = default)
+        public async Task<PlayerAchievement> GetPlayerAchievementsAsync(int playerId, CancellationToken cancellationToken = default)
         {
-            var urlPath = ConstructUrlPath(playerId);
-            var request = new SmiteClientRequest(MethodNameConstants.PlayerAchievementsMethod, sessionId, urlPath);
-            var result = await GetAsync<PlayerAchievementsResponseDto>(request, cancellationToken);
-            return Mapper.Map<SmiteClientResponse<PlayerAchievementsResponse>>(result);
+            var urlPath = _smiteClientUrlService.ConstructUrlPath(playerId);
+            var url = await _smiteClientUrlService.ConstructUrlAsync(MethodNameConstants.PlayerAchievementsMethod, urlPath, cancellationToken);
+            var result = await GetAsync<PlayerAchievementsResponseDto>(url, cancellationToken);
+            return _mapper.Map<PlayerAchievement>(result);
         }
 
-        public async Task<SmiteClientListResponse<PlayerStatusResponse>?> GetPlayerStatusAsync(
-            string sessionId, string playerId, CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<PlayerStatus>> GetPlayerStatusAsync(string playerId, CancellationToken cancellationToken = default)
         {
-            var urlPath = ConstructUrlPath(playerId);
-            var request = new SmiteClientRequest(MethodNameConstants.PlayerStatusMethod, sessionId, urlPath);
-            var result = await GetListAsync<PlayerStatusResponseDto>(request, cancellationToken);
-            return Mapper.Map<SmiteClientListResponse<PlayerStatusResponse>>(result);
+            var urlPath = _smiteClientUrlService.ConstructUrlPath(playerId);
+            var url = await _smiteClientUrlService.ConstructUrlAsync(MethodNameConstants.PlayerStatusMethod, urlPath, cancellationToken);
+            var result = await GetAsync<IEnumerable<PlayerStatusResponseDto>>(url, cancellationToken);
+            return _mapper.Map<IEnumerable<PlayerStatus>>(result);
         }
 
-        public async Task<SmiteClientListResponse<MatchHistoryResponse>?> GetMatchHistoryAsync(
-            string sessionId, string playerId, CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<MatchHistory>> GetMatchHistoryAsync(string playerId, CancellationToken cancellationToken = default)
         {
-            var urlPath = ConstructUrlPath(playerId);
-            var request = new SmiteClientRequest(MethodNameConstants.MatchHistoryMethod, sessionId, urlPath);
-            var result = await GetListAsync<MatchHistoryResponseDto>(request, cancellationToken);
-            return Mapper.Map<SmiteClientListResponse<MatchHistoryResponse>>(result);
+            var urlPath = _smiteClientUrlService.ConstructUrlPath(playerId);
+            var url = await _smiteClientUrlService.ConstructUrlAsync(MethodNameConstants.MatchHistoryMethod, urlPath, cancellationToken);
+            var result = await GetAsync<IEnumerable<MatchHistoryResponseDto>>(url, cancellationToken);
+            return _mapper.Map<IEnumerable<MatchHistory>>(result);
         }
 
-        public async Task<SmiteClientListResponse<QueueStatsResponse>?> GetQueueStatsAsync(
-            string sessionId, string playerId, GameModeQueueIdEnum gameModeQueueId, CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<QueueStats>> GetQueueStatsAsync(string playerId, GameModeQueueIdEnum gameModeQueueId, CancellationToken cancellationToken = default)
         {
-            var urlPath = ConstructUrlPath(playerId, (int)gameModeQueueId);
-            var request = new SmiteClientRequest(MethodNameConstants.QueueStatsMethod, sessionId, urlPath);
-            var result = await GetListAsync<QueueStatsResponseDto>(request, cancellationToken);
-            return Mapper.Map<SmiteClientListResponse<QueueStatsResponse>>(result);
+            var urlPath = _smiteClientUrlService.ConstructUrlPath(playerId, (int)gameModeQueueId);
+            var url = await _smiteClientUrlService.ConstructUrlAsync(MethodNameConstants.QueueStatsMethod, urlPath, cancellationToken);
+            var result = await GetAsync<IEnumerable<QueueStatsResponseDto>>(url, cancellationToken);
+            return _mapper.Map<IEnumerable<QueueStats>>(result);
         }
 
-        public async Task<SmiteClientListResponse<SearchPlayersResponse>?> SearchPlayersAsync(
-            string sessionId, string playerId, CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<SearchPlayer>> SearchPlayersAsync(string playerId, CancellationToken cancellationToken = default)
         {
-            var urlPath = ConstructUrlPath(playerId);
-            var request = new SmiteClientRequest(MethodNameConstants.SearchPlayersMethod, sessionId, urlPath);
-            var result = await GetListAsync<SearchPlayersResponseDto>(request, cancellationToken);
-            return Mapper.Map<SmiteClientListResponse<SearchPlayersResponse>>(result);
+            var urlPath = _smiteClientUrlService.ConstructUrlPath(playerId);
+            var url = await _smiteClientUrlService.ConstructUrlAsync(MethodNameConstants.SearchPlayersMethod, urlPath, cancellationToken);
+            var result = await GetAsync<IEnumerable<SearchPlayersResponseDto>>(url, cancellationToken);
+            return _mapper.Map<IEnumerable<SearchPlayer>>(result);
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Smitenight.Domain.Models.Clients.LeagueClient;
-using Smitenight.Providers.SmiteProvider.HiRez.Contracts.LeagueResponses;
+using Smitenight.Providers.SmiteProvider.HiRez.Responses.LeagueClient;
 
 namespace Smitenight.Providers.SmiteProvider.HiRez.Profiles
 {
@@ -8,8 +8,8 @@ namespace Smitenight.Providers.SmiteProvider.HiRez.Profiles
     {
         public LeagueClientProfile()
         {
-            CreateMap<LeagueLeaderboardResponseDto, LeagueLeaderboardResponse>();
-            CreateMap<LeagueSeasonsResponseDto, LeagueSeasonsResponse>();
+            CreateMap<LeagueLeaderboardResponseDto, LeagueLeaderboard>();
+            CreateMap<LeagueSeasonsResponseDto, LeagueSeason>();
         }
     }
 }

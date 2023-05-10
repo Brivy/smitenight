@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Smitenight.Domain.Models.Clients.TeamClient;
-using Smitenight.Providers.SmiteProvider.HiRez.Contracts.TeamResponses;
+using Smitenight.Providers.SmiteProvider.HiRez.Responses.TeamClient;
 
 namespace Smitenight.Providers.SmiteProvider.HiRez.Profiles
 {
@@ -8,9 +8,9 @@ namespace Smitenight.Providers.SmiteProvider.HiRez.Profiles
     {
         public TeamClientProfile()
         {
-            CreateMap<TeamDetailsResponseDto, TeamDetailsResponse>();
-            CreateMap<TeamPlayersResponseDto, TeamPlayersResponse>();
-            CreateMap<SearchTeamsResponseDto, SearchTeamsResponse>();
+            CreateMap<TeamDetailsResponseDto, TeamDetails>();
+            CreateMap<TeamPlayersResponseDto, TeamPlayer>();
+            CreateMap<SearchTeamsResponseDto, SearchTeams>();
         }
     }
 }

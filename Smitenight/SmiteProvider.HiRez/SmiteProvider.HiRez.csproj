@@ -16,6 +16,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\Cache.Redis\Cache.Redis.csproj" />
 	  <ProjectReference Include="..\DependencyInjection.Common\DependencyInjection.Common.csproj" />
 	  <ProjectReference Include="..\SmiteProvider.Contracts\SmiteProvider.Contracts.csproj" />
 	</ItemGroup>

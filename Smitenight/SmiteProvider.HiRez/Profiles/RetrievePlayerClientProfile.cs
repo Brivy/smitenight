@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Smitenight.Domain.Models.Clients.RetrievePlayerClient;
-using Smitenight.Providers.SmiteProvider.HiRez.Contracts.RetrievePlayerResponses;
+using Smitenight.Providers.SmiteProvider.HiRez.Responses.RetrievePlayerClient;
 
 namespace Smitenight.Providers.SmiteProvider.HiRez.Profiles
 {
@@ -8,8 +8,9 @@ namespace Smitenight.Providers.SmiteProvider.HiRez.Profiles
     {
         public RetrievePlayerClientProfile()
         {
-            CreateMap<PlayerIdResponseDto, PlayerIdResponse>();
-            CreateMap<PlayerResponseDto, PlayerResponse>();
+            CreateMap<PlayerIdResponseDto, PlayerId>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.PlayerId));
+            CreateMap<PlayerResponseDto, Player>();
 
             #region Subobjects of PlayerResponseDto
 

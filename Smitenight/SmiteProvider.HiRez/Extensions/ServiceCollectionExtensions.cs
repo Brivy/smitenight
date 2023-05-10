@@ -1,8 +1,10 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Smitenight.Providers.SmiteProvider.Contracts.SmiteClient;
+using Smitenight.Application.Blazor.Business.Services.Cache;
+using Smitenight.Providers.SmiteProvider.Contracts.Clients;
 using Smitenight.Providers.SmiteProvider.HiRez.Clients;
 using Smitenight.Providers.SmiteProvider.HiRez.Secrets;
+using Smitenight.Providers.SmiteProvider.HiRez.Services;
 using Smitenight.Providers.SmiteProvider.HiRez.Settings;
 using Smitenight.Utilities.DependencyInjection.Common.Extensions;
 
@@ -28,6 +30,10 @@ namespace Smitenight.Providers.SmiteProvider.HiRez.Extensions
             services.AddHttpClient<ILeagueSmiteClient, LeagueSmiteClient>();
             services.AddHttpClient<ITeamSmiteClient, TeamSmiteClient>();
             services.AddHttpClient<IOtherSmiteClient, OtherSmiteSmiteClient>();
+
+            services
+                .AddScoped<ISmiteSessionCacheService, SmiteSessionCacheService>()
+                .AddScoped<ISmiteClientUrlService, SmiteClientUrlService>();
         }
     }
 }

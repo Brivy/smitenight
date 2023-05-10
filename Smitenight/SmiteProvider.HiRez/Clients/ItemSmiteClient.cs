@@ -1,42 +1,40 @@
 ﻿using AutoMapper;
-using Microsoft.Extensions.Options;
 using Smitenight.Domain.Models.Clients.ItemClient;
-using Smitenight.Domain.Models.Clients.SmiteClient;
 using Smitenight.Domain.Models.Constants.SmiteClient;
 using Smitenight.Domain.Models.Enums.SmiteClient;
-using Smitenight.Providers.SmiteProvider.Contracts.SmiteClient;
-using Smitenight.Providers.SmiteProvider.HiRez.Contracts.ItemResponses;
-using Smitenight.Providers.SmiteProvider.HiRez.Models;
-using Smitenight.Providers.SmiteProvider.HiRez.Secrets;
-using Smitenight.Providers.SmiteProvider.HiRez.Settings;
+using Smitenight.Providers.SmiteProvider.Contracts.Clients;
+using Smitenight.Providers.SmiteProvider.HiRez.Responses.ItemClient;
+using Smitenight.Providers.SmiteProvider.HiRez.Services;
 
 namespace Smitenight.Providers.SmiteProvider.HiRez.Clients
 {
     public class ItemSmiteClient : SmiteClient, IItemSmiteClient
     {
+        private readonly ISmiteClientUrlService _smiteClientUrlService;
+        private readonly IMapper _mapper;
+
         public ItemSmiteClient(HttpClient httpClient,
-            IOptions<SmiteClientSettings> smiteClientSettings,
-            IOptions<SmiteClientSecrets> smiteClientSecrets,
-            IMapper mapper) : base(httpClient, smiteClientSettings, smiteClientSecrets, mapper)
+            ISmiteClientUrlService smiteClientUrlService,
+            IMapper mapper) : base(httpClient)
         {
+            _smiteClientUrlService = smiteClientUrlService;
+            _mapper = mapper;
         }
 
-        public async Task<SmiteClientListResponse<GodRecommendedItemsResponse>?> GetGodRecommendedItemsAsync(
-            string sessionId, int godId, LanguageCodeEnum languageCode, CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<GodRecommendedItem>> GetGodRecommendedItemsAsync(int godId, LanguageCodeEnum languageCode, CancellationToken cancellationToken = default)
         {
-            var urlPath = ConstructUrlPath(godId, (int)languageCode);
-            var request = new SmiteClientRequest(MethodNameConstants.GodRecommendedItemsMethod, sessionId, urlPath);
-            var result = await GetListAsync<GodRecommendedItemsResponseDto>(request, cancellationToken);
-            return Mapper.Map<SmiteClientListResponse<GodRecommendedItemsResponse>>(result);
+            var urlPath = _smiteClientUrlService.ConstructUrlPath(godId, (int)languageCode);
+            var url = await _smiteClientUrlService.ConstructUrlAsync(MethodNameConstants.GodRecommendedItemsMethod, urlPath, cancellationToken);
+            var result = await GetAsync<IEnumerable<GodRecommendedItemsResponseDto>>(url, cancellationToken);
+            return _mapper.Map<IEnumerable<GodRecommendedItem>>(result);
         }
 
-        public async Task<SmiteClientListResponse<ItemsResponse>?> GetItemsAsync(
-            string sessionId, LanguageCodeEnum languageCode, CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<Item>> GetItemsAsync(LanguageCodeEnum languageCode, CancellationToken cancellationToken = default)
         {
-            var urlPath = ConstructUrlPath((int)languageCode);
-            var request = new SmiteClientRequest(MethodNameConstants.ItemsMethod, sessionId, urlPath);
-            var result = await GetListAsync<ItemsResponseDto>(request, cancellationToken);
-            return Mapper.Map<SmiteClientListResponse<ItemsResponse>>(result);
+            var urlPath = _smiteClientUrlService.ConstructUrlPath((int)languageCode);
+            var url = await _smiteClientUrlService.ConstructUrlAsync(MethodNameConstants.ItemsMethod, urlPath, cancellationToken);
+            var result = await GetAsync<IEnumerable<ItemsResponseDto>>(url, cancellationToken);
+            return _mapper.Map<IEnumerable<Item>>(result);
         }
     }
 }

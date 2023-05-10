@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Smitenight.Domain.Models.Clients.ItemClient;
-using Smitenight.Providers.SmiteProvider.HiRez.Contracts.ItemResponses;
+using Smitenight.Providers.SmiteProvider.HiRez.Responses.ItemClient;
 
 namespace Smitenight.Providers.SmiteProvider.HiRez.Profiles
 {
@@ -8,8 +8,8 @@ namespace Smitenight.Providers.SmiteProvider.HiRez.Profiles
     {
         public ItemClientProfile()
         {
-            CreateMap<GodRecommendedItemsResponseDto, GodRecommendedItemsResponse>();
-            CreateMap<ItemsResponseDto, ItemsResponse>();
+            CreateMap<GodRecommendedItemsResponseDto, GodRecommendedItem>();
+            CreateMap<ItemsResponseDto, Item>();
 
             #region Subobjects of ItemResponse
 

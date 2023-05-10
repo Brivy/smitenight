@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Smitenight.Domain.Models.Clients.PlayerClient;
-using Smitenight.Providers.SmiteProvider.HiRez.Contracts.PlayerResponses;
+using Smitenight.Providers.SmiteProvider.HiRez.Responses.PlayerClient;
 
 namespace Smitenight.Providers.SmiteProvider.HiRez.Profiles
 {
@@ -8,13 +8,13 @@ namespace Smitenight.Providers.SmiteProvider.HiRez.Profiles
     {
         public PlayerClientProfile()
         {
-            CreateMap<FriendsResponseDto, FriendsResponse>();
-            CreateMap<GodRanksResponseDto, GodRanksResponse>();
-            CreateMap<MatchHistoryResponseDto, MatchHistoryResponse>();
-            CreateMap<PlayerAchievementsResponseDto, PlayerAchievementsResponse>();
-            CreateMap<PlayerStatusResponseDto, PlayerStatusResponse>();
-            CreateMap<QueueStatsResponseDto, QueueStatsResponse>();
-            CreateMap<SearchPlayersResponseDto, SearchPlayersResponse>();
+            CreateMap<FriendsResponseDto, Friend>();
+            CreateMap<GodRanksResponseDto, GodRank>();
+            CreateMap<MatchHistoryResponseDto, MatchHistory>();
+            CreateMap<PlayerAchievementsResponseDto, PlayerAchievement>();
+            CreateMap<PlayerStatusResponseDto, PlayerStatus>();
+            CreateMap<QueueStatsResponseDto, QueueStats>();
+            CreateMap<SearchPlayersResponseDto, SearchPlayer>();
         }
     }
 }

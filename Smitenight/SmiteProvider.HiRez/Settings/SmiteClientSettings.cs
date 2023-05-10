@@ -1,7 +1,10 @@
-﻿namespace Smitenight.Providers.SmiteProvider.HiRez.Settings
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Smitenight.Providers.SmiteProvider.HiRez.Settings
 {
     public class SmiteClientSettings
     {
-        public string? Url { get; set; }
+        [Required]
+        public string Url { get; set; } = null!;
     }
 }

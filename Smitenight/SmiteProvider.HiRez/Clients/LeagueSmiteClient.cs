@@ -1,42 +1,40 @@
 ﻿using AutoMapper;
-using Microsoft.Extensions.Options;
 using Smitenight.Domain.Models.Clients.LeagueClient;
-using Smitenight.Domain.Models.Clients.SmiteClient;
 using Smitenight.Domain.Models.Constants.SmiteClient;
 using Smitenight.Domain.Models.Enums.SmiteClient;
-using Smitenight.Providers.SmiteProvider.Contracts.SmiteClient;
-using Smitenight.Providers.SmiteProvider.HiRez.Contracts.LeagueResponses;
-using Smitenight.Providers.SmiteProvider.HiRez.Models;
-using Smitenight.Providers.SmiteProvider.HiRez.Secrets;
-using Smitenight.Providers.SmiteProvider.HiRez.Settings;
+using Smitenight.Providers.SmiteProvider.Contracts.Clients;
+using Smitenight.Providers.SmiteProvider.HiRez.Responses.LeagueClient;
+using Smitenight.Providers.SmiteProvider.HiRez.Services;
 
 namespace Smitenight.Providers.SmiteProvider.HiRez.Clients
 {
     public class LeagueSmiteClient : SmiteClient, ILeagueSmiteClient
     {
+        private readonly ISmiteClientUrlService _smiteClientUrlService;
+        private readonly IMapper _mapper;
+
         public LeagueSmiteClient(HttpClient httpClient,
-            IOptions<SmiteClientSettings> smiteClientSettings,
-            IOptions<SmiteClientSecrets> smiteClientSecrets,
-            IMapper mapper) : base(httpClient, smiteClientSettings, smiteClientSecrets, mapper)
+            ISmiteClientUrlService smiteClientUrlService,
+            IMapper mapper) : base(httpClient)
         {
+            _smiteClientUrlService = smiteClientUrlService;
+            _mapper = mapper;
         }
 
-        public async Task<SmiteClientListResponse<LeagueLeaderboardResponse>?> GetLeagueLeaderboardAsync(
-            string sessionId, GameModeQueueIdEnum gameModeQueueId, LeagueTierEnum leagueTier, int round, CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<LeagueLeaderboard>> GetLeagueLeaderboardAsync(GameModeQueueIdEnum gameModeQueueId, LeagueTierEnum leagueTier, int round, CancellationToken cancellationToken = default)
         {
-            var urlPath = ConstructUrlPath((int)gameModeQueueId, (int)leagueTier);
-            var request = new SmiteClientRequest(MethodNameConstants.LeagueLeaderbordMethod, sessionId, urlPath);
-            var result = await GetListAsync<LeagueLeaderboardResponseDto>(request, cancellationToken);
-            return Mapper.Map<SmiteClientListResponse<LeagueLeaderboardResponse>>(result);
+            var urlPath = _smiteClientUrlService.ConstructUrlPath((int)gameModeQueueId, (int)leagueTier);
+            var url = await _smiteClientUrlService.ConstructUrlAsync(MethodNameConstants.LeagueLeaderbordMethod, urlPath, cancellationToken);
+            var result = await GetAsync<IEnumerable<LeagueLeaderboardResponseDto>>(url, cancellationToken);
+            return _mapper.Map<IEnumerable<LeagueLeaderboard>>(result);
         }
 
-        public async Task<SmiteClientListResponse<LeagueSeasonsResponse>?> GetLeagueSeasonsAsync(
-            string sessionId, GameModeQueueIdEnum gameModeQueueId, CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<LeagueSeason>> GetLeagueSeasonsAsync(GameModeQueueIdEnum gameModeQueueId, CancellationToken cancellationToken = default)
         {
-            var urlPath = ConstructUrlPath((int)gameModeQueueId);
-            var request = new SmiteClientRequest(MethodNameConstants.LeagueSeasonsMethod, sessionId, urlPath);
-            var result = await GetListAsync<LeagueSeasonsResponseDto>(request, cancellationToken);
-            return Mapper.Map<SmiteClientListResponse<LeagueSeasonsResponse>>(result);
+            var urlPath = _smiteClientUrlService.ConstructUrlPath((int)gameModeQueueId);
+            var url = await _smiteClientUrlService.ConstructUrlAsync(MethodNameConstants.LeagueSeasonsMethod, urlPath, cancellationToken);
+            var result = await GetAsync<IEnumerable<LeagueSeasonsResponseDto>>(url, cancellationToken);
+            return _mapper.Map<IEnumerable<LeagueSeason>>(result);
         }
     }
 }
