@@ -5,7 +5,7 @@ namespace Smitenight.Providers.SmiteProvider.Contracts.Clients;
 
 public interface IItemSmiteClient
 {
-    Task<IEnumerable<GodRecommendedItem>> GetGodRecommendedItemsAsync(int godId, LanguageCodeEnum languageCode, CancellationToken cancellationToken = default);
+    Task<IEnumerable<GodRecommendedItemDto>> GetGodRecommendedItemsAsync(int godId, LanguageCodeEnum languageCode, CancellationToken cancellationToken = default);
 
-    Task<IEnumerable<Item>> GetItemsAsync(LanguageCodeEnum languageCode, CancellationToken cancellationToken = default);
+    Task<IEnumerable<ItemDto>> GetItemsAsync(LanguageCodeEnum languageCode, CancellationToken cancellationToken = default);
 }

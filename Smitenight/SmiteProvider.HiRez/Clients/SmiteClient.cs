@@ -1,4 +1,5 @@
 ﻿using Smitenight.Providers.SmiteProvider.Contracts.Exceptions;
+using Smitenight.Providers.SmiteProvider.HiRez.Exceptions;
 using System.Net;
 using System.Net.Http.Json;
 using System.Text.Json;

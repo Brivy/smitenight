@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Smitenight.Domain.Models.Clients.MatchClient;
-using Smitenight.Providers.SmiteProvider.HiRez.Responses.MatchClient;
+using Smitenight.Providers.SmiteProvider.HiRez.Models.MatchClient;
 
 namespace Smitenight.Providers.SmiteProvider.HiRez.Profiles
 {
@@ -8,11 +8,11 @@ namespace Smitenight.Providers.SmiteProvider.HiRez.Profiles
     {
         public MatchClientProfile()
         {
-            CreateMap<DemoDetailsResponseDto, DemoDetails>();
-            CreateMap<MatchDetailsResponseDto, MatchDetails>();
-            CreateMap<MatchIdsByQueueResponseDto, MatchIdsByQueue>();
-            CreateMap<MatchPlayersDetailsResponseDto, MatchPlayersDetails>();
-            CreateMap<TopMatchesResponseDto, TopMatch>();
+            CreateMap<DemoDetails, DemoDetailsDto>();
+            CreateMap<MatchDetails, MatchDetailsDto>();
+            CreateMap<MatchIdsByQueue, MatchIdsByQueueDto>();
+            CreateMap<MatchPlayersDetails, MatchPlayersDetailsDto>();
+            CreateMap<TopMatch, TopMatchDto>();
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Options;
-using Smitenight.Application.Blazor.Business.Services.Cache;
 using Smitenight.Domain.Models.Constants.Common;
 using Smitenight.Domain.Models.Constants.SmiteClient;
+using Smitenight.Providers.SmiteProvider.HiRez.Cache;
 using Smitenight.Providers.SmiteProvider.HiRez.Secrets;
 using Smitenight.Providers.SmiteProvider.HiRez.Settings;
 using System.Security.Cryptography;

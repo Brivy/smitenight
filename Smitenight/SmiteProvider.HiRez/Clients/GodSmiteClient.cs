@@ -3,7 +3,7 @@ using Smitenight.Domain.Models.Clients.GodClient;
 using Smitenight.Domain.Models.Constants.SmiteClient;
 using Smitenight.Domain.Models.Enums.SmiteClient;
 using Smitenight.Providers.SmiteProvider.Contracts.Clients;
-using Smitenight.Providers.SmiteProvider.HiRez.Responses.GodClient;
+using Smitenight.Providers.SmiteProvider.HiRez.Models.GodClient;
 using Smitenight.Providers.SmiteProvider.HiRez.Services;
 
 namespace Smitenight.Providers.SmiteProvider.HiRez.Clients
@@ -21,35 +21,35 @@ namespace Smitenight.Providers.SmiteProvider.HiRez.Clients
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<God>> GetGodsAsync(LanguageCodeEnum languageCode, CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<Domain.Models.Clients.GodClient.GodDto>> GetGodsAsync(LanguageCodeEnum languageCode, CancellationToken cancellationToken = default)
         {
             var urlPath = _smiteClientUrlService.ConstructUrlPath((int)languageCode);
             var url = await _smiteClientUrlService.ConstructUrlAsync(MethodNameConstants.GodsMethod, urlPath, cancellationToken);
-            var result = await GetAsync<IEnumerable<GodsResponseDto>>(url, cancellationToken);
-            return _mapper.Map<IEnumerable<God>>(result);
+            var result = await GetAsync<IEnumerable<Models.GodClient.God>>(url, cancellationToken);
+            return _mapper.Map<IEnumerable<Domain.Models.Clients.GodClient.GodDto>>(result);
         }
 
-        public async Task<IEnumerable<GodLeaderbord>> GetGodLeaderbordAsync(int godId, GameModeQueueIdEnum gameModeQueueId, CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<Domain.Models.Clients.GodClient.GodLeaderbordDto>> GetGodLeaderbordAsync(int godId, GameModeQueueIdEnum gameModeQueueId, CancellationToken cancellationToken = default)
         {
             var urlPath = _smiteClientUrlService.ConstructUrlPath(godId, (int)gameModeQueueId);
             var url = await _smiteClientUrlService.ConstructUrlAsync(MethodNameConstants.GodLeaderboardMethod, urlPath, cancellationToken);
-            var result = await GetAsync<IEnumerable<GodLeaderbordResponseDto>>(url, cancellationToken);
-            return _mapper.Map<IEnumerable<GodLeaderbord>>(result);
+            var result = await GetAsync<IEnumerable<Models.GodClient.GodLeaderbord>>(url, cancellationToken);
+            return _mapper.Map<IEnumerable<Domain.Models.Clients.GodClient.GodLeaderbordDto>>(result);
         }
 
-        public async Task<IEnumerable<GodAltAbility>> GetGodAltAbilitiesAsync(CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<Domain.Models.Clients.GodClient.GodAltAbilityDto>> GetGodAltAbilitiesAsync(CancellationToken cancellationToken = default)
         {
             var url = await _smiteClientUrlService.ConstructUrlAsync(MethodNameConstants.GodAltAbilitiesMethod, cancellationToken);
-            var result = await GetAsync<IEnumerable<GodAltAbilitiesResponseDto>>(url, cancellationToken);
-            return _mapper.Map<IEnumerable<GodAltAbility>>(result);
+            var result = await GetAsync<IEnumerable<Models.GodClient.GodAltAbility>>(url, cancellationToken);
+            return _mapper.Map<IEnumerable<Domain.Models.Clients.GodClient.GodAltAbilityDto>>(result);
         }
 
-        public async Task<IEnumerable<GodSkin>> GetGodSkinsAsync(int godId, LanguageCodeEnum languageCode, CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<Domain.Models.Clients.GodClient.GodSkinDto>> GetGodSkinsAsync(int godId, LanguageCodeEnum languageCode, CancellationToken cancellationToken = default)
         {
             var urlPath = _smiteClientUrlService.ConstructUrlPath(godId, (int)languageCode);
             var url = await _smiteClientUrlService.ConstructUrlAsync(MethodNameConstants.GodSkinsMethod, urlPath, cancellationToken);
-            var result = await GetAsync<IEnumerable<GodSkinsResponseDto>>(url, cancellationToken);
-            return _mapper.Map<IEnumerable<GodSkin>>(result);
+            var result = await GetAsync<IEnumerable<Models.GodClient.GodSkin>>(url, cancellationToken);
+            return _mapper.Map<IEnumerable<Domain.Models.Clients.GodClient.GodSkinDto>>(result);
         }
     }
 }

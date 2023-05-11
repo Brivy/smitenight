@@ -2,7 +2,7 @@
 using Smitenight.Domain.Models.Clients.OtherClient;
 using Smitenight.Domain.Models.Constants.SmiteClient;
 using Smitenight.Providers.SmiteProvider.Contracts.Clients;
-using Smitenight.Providers.SmiteProvider.HiRez.Responses.OtherClient;
+using Smitenight.Providers.SmiteProvider.HiRez.Models.OtherClient;
 using Smitenight.Providers.SmiteProvider.HiRez.Services;
 
 namespace Smitenight.Providers.SmiteProvider.HiRez.Clients
@@ -20,18 +20,18 @@ namespace Smitenight.Providers.SmiteProvider.HiRez.Clients
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<EsportProLeague>> GetEsportProLeagueAsync(CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<EsportProLeagueDto>> GetEsportProLeagueAsync(CancellationToken cancellationToken = default)
         {
             var url = await _smiteClientUrlService.ConstructUrlAsync(MethodNameConstants.EsportProLeagueMethod, cancellationToken);
-            var result = await GetAsync<IEnumerable<EsportProLeagueResponseDto>>(url, cancellationToken);
-            return _mapper.Map<IEnumerable<EsportProLeague>>(result);
+            var result = await GetAsync<IEnumerable<EsportProLeague>>(url, cancellationToken);
+            return _mapper.Map<IEnumerable<EsportProLeagueDto>>(result);
         }
 
-        public async Task<IEnumerable<Motd>> GetMotdAsync(CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<MotdDto>> GetMotdAsync(CancellationToken cancellationToken = default)
         {
             var url = await _smiteClientUrlService.ConstructUrlAsync(MethodNameConstants.MotdMethod, cancellationToken);
-            var result = await GetAsync<IEnumerable<MotdResponseDto>>(url, cancellationToken);
-            return _mapper.Map<IEnumerable<Motd>>(result);
+            var result = await GetAsync<IEnumerable<Motd>>(url, cancellationToken);
+            return _mapper.Map<IEnumerable<MotdDto>>(result);
         }
     }
 }

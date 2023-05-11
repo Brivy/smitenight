@@ -4,7 +4,7 @@ namespace Smitenight.Providers.SmiteProvider.Contracts.Clients;
 
 public interface IOtherSmiteClient
 {
-    Task<IEnumerable<EsportProLeague>?> GetEsportProLeagueAsync(CancellationToken cancellationToken = default);
+    Task<IEnumerable<EsportProLeagueDto>?> GetEsportProLeagueAsync(CancellationToken cancellationToken = default);
 
-    Task<IEnumerable<Motd>?> GetMotdAsync(CancellationToken cancellationToken = default);
+    Task<IEnumerable<MotdDto>?> GetMotdAsync(CancellationToken cancellationToken = default);
 }

@@ -1,11 +1,10 @@
 ﻿using Microsoft.Extensions.Caching.Distributed;
-using Smitenight.Domain.Models.Cache;
 using Smitenight.Domain.Models.Constants.Common;
 using Smitenight.Providers.SmiteProvider.Contracts.Clients;
 using Smitenight.Utilities.Cache.Contracts.Providers;
 using System.Collections.Concurrent;
 
-namespace Smitenight.Application.Blazor.Business.Services.Cache
+namespace Smitenight.Providers.SmiteProvider.HiRez.Cache
 {
     public class SmiteSessionCacheService : ISmiteSessionCacheService
     {

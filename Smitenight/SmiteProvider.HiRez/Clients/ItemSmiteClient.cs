@@ -3,7 +3,7 @@ using Smitenight.Domain.Models.Clients.ItemClient;
 using Smitenight.Domain.Models.Constants.SmiteClient;
 using Smitenight.Domain.Models.Enums.SmiteClient;
 using Smitenight.Providers.SmiteProvider.Contracts.Clients;
-using Smitenight.Providers.SmiteProvider.HiRez.Responses.ItemClient;
+using Smitenight.Providers.SmiteProvider.HiRez.Models.ItemClient;
 using Smitenight.Providers.SmiteProvider.HiRez.Services;
 
 namespace Smitenight.Providers.SmiteProvider.HiRez.Clients
@@ -21,20 +21,20 @@ namespace Smitenight.Providers.SmiteProvider.HiRez.Clients
             _mapper = mapper;
         }
 
-        public async Task<IEnumerable<GodRecommendedItem>> GetGodRecommendedItemsAsync(int godId, LanguageCodeEnum languageCode, CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<GodRecommendedItemDto>> GetGodRecommendedItemsAsync(int godId, LanguageCodeEnum languageCode, CancellationToken cancellationToken = default)
         {
             var urlPath = _smiteClientUrlService.ConstructUrlPath(godId, (int)languageCode);
             var url = await _smiteClientUrlService.ConstructUrlAsync(MethodNameConstants.GodRecommendedItemsMethod, urlPath, cancellationToken);
-            var result = await GetAsync<IEnumerable<GodRecommendedItemsResponseDto>>(url, cancellationToken);
-            return _mapper.Map<IEnumerable<GodRecommendedItem>>(result);
+            var result = await GetAsync<IEnumerable<GodRecommendedItem>>(url, cancellationToken);
+            return _mapper.Map<IEnumerable<GodRecommendedItemDto>>(result);
         }
 
-        public async Task<IEnumerable<Item>> GetItemsAsync(LanguageCodeEnum languageCode, CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<ItemDto>> GetItemsAsync(LanguageCodeEnum languageCode, CancellationToken cancellationToken = default)
         {
             var urlPath = _smiteClientUrlService.ConstructUrlPath((int)languageCode);
             var url = await _smiteClientUrlService.ConstructUrlAsync(MethodNameConstants.ItemsMethod, urlPath, cancellationToken);
-            var result = await GetAsync<IEnumerable<ItemsResponseDto>>(url, cancellationToken);
-            return _mapper.Map<IEnumerable<Item>>(result);
+            var result = await GetAsync<IEnumerable<Item>>(url, cancellationToken);
+            return _mapper.Map<IEnumerable<ItemDto>>(result);
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿using System.Runtime.Serialization;
 
-namespace Smitenight.Providers.SmiteProvider.Contracts.Exceptions
+namespace Smitenight.Providers.SmiteProvider.HiRez.Exceptions
 {
     [Serializable]
     public class SmiteClientInvalidResponseException : Exception

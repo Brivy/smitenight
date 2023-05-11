@@ -5,17 +5,17 @@ namespace Smitenight.Providers.SmiteProvider.Contracts.Clients;
 
 public interface IPlayerSmiteClient
 {
-    Task<IEnumerable<Friend>> GetFriendsAsync(string playerId, CancellationToken cancellationToken = default);
+    Task<IEnumerable<FriendDto>> GetFriendsAsync(string playerId, CancellationToken cancellationToken = default);
 
-    Task<IEnumerable<GodRank>> GetGodRanksAsync(string playerId, CancellationToken cancellationToken = default);
+    Task<IEnumerable<GodRankDto>> GetGodRanksAsync(string playerId, CancellationToken cancellationToken = default);
 
-    Task<PlayerAchievement> GetPlayerAchievementsAsync(int playerId, CancellationToken cancellationToken = default);
+    Task<PlayerAchievementDto> GetPlayerAchievementsAsync(int playerId, CancellationToken cancellationToken = default);
 
-    Task<IEnumerable<PlayerStatus>> GetPlayerStatusAsync(string playerId, CancellationToken cancellationToken = default);
+    Task<IEnumerable<PlayerStatusDto>> GetPlayerStatusAsync(string playerId, CancellationToken cancellationToken = default);
 
-    Task<IEnumerable<MatchHistory>> GetMatchHistoryAsync(string playerId, CancellationToken cancellationToken = default);
+    Task<IEnumerable<MatchHistoryDto>> GetMatchHistoryAsync(string playerId, CancellationToken cancellationToken = default);
 
-    Task<IEnumerable<QueueStats>> GetQueueStatsAsync(string playerId, GameModeQueueIdEnum gameModeQueueId, CancellationToken cancellationToken = default);
+    Task<IEnumerable<QueueStatsDto>> GetQueueStatsAsync(string playerId, GameModeQueueIdEnum gameModeQueueId, CancellationToken cancellationToken = default);
 
-    Task<IEnumerable<SearchPlayer>> SearchPlayersAsync(string playerId, CancellationToken cancellationToken = default);
+    Task<IEnumerable<SearchPlayerDto>> SearchPlayersAsync(string playerId, CancellationToken cancellationToken = default);
 }

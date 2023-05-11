@@ -1,4 +1,4 @@
-﻿namespace Smitenight.Application.Blazor.Business.Services.Cache
+﻿namespace Smitenight.Providers.SmiteProvider.HiRez.Cache
 {
     public interface ISmiteSessionCacheService
     {

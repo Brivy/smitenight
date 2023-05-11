@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Smitenight.Domain.Models.Clients.GodClient;
-using Smitenight.Providers.SmiteProvider.HiRez.Responses.GodClient;
+using Smitenight.Providers.SmiteProvider.HiRez.Models.GodClient;
 
 namespace Smitenight.Providers.SmiteProvider.HiRez.Profiles
 {
@@ -8,10 +8,10 @@ namespace Smitenight.Providers.SmiteProvider.HiRez.Profiles
     {
         public GodClientProfile()
         {
-            CreateMap<GodAltAbilitiesResponseDto, GodAltAbility>();
-            CreateMap<GodLeaderbordResponseDto, GodLeaderbord>();
-            CreateMap<GodsResponseDto, God>();
-            CreateMap<GodSkinsResponseDto, GodSkin>();
+            CreateMap<GodAltAbility, GodAltAbilityDto>();
+            CreateMap<GodLeaderbord, GodLeaderbordDto>();
+            CreateMap<God, GodDto>();
+            CreateMap<GodSkin, GodSkinDto>();
 
             #region Subobjects of GodsResponse
 

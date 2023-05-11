@@ -5,11 +5,11 @@ namespace Smitenight.Providers.SmiteProvider.Contracts.Clients;
 
 public interface IGodSmiteClient
 {
-    Task<IEnumerable<God>> GetGodsAsync(LanguageCodeEnum languageCode, CancellationToken cancellationToken = default);
+    Task<IEnumerable<GodDto>> GetGodsAsync(LanguageCodeEnum languageCode, CancellationToken cancellationToken = default);
 
-    Task<IEnumerable<GodLeaderbord>> GetGodLeaderbordAsync(int godId, GameModeQueueIdEnum gameModeQueueId, CancellationToken cancellationToken = default);
+    Task<IEnumerable<GodLeaderbordDto>> GetGodLeaderbordAsync(int godId, GameModeQueueIdEnum gameModeQueueId, CancellationToken cancellationToken = default);
 
-    Task<IEnumerable<GodAltAbility>> GetGodAltAbilitiesAsync(CancellationToken cancellationToken = default);
+    Task<IEnumerable<GodAltAbilityDto>> GetGodAltAbilitiesAsync(CancellationToken cancellationToken = default);
 
-    Task<IEnumerable<GodSkin>> GetGodSkinsAsync(int godId, LanguageCodeEnum languageCode, CancellationToken cancellationToken = default);
+    Task<IEnumerable<GodSkinDto>> GetGodSkinsAsync(int godId, LanguageCodeEnum languageCode, CancellationToken cancellationToken = default);
 }

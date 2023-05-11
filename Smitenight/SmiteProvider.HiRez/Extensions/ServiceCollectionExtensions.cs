@@ -1,7 +1,7 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Smitenight.Application.Blazor.Business.Services.Cache;
 using Smitenight.Providers.SmiteProvider.Contracts.Clients;
+using Smitenight.Providers.SmiteProvider.HiRez.Cache;
 using Smitenight.Providers.SmiteProvider.HiRez.Clients;
 using Smitenight.Providers.SmiteProvider.HiRez.Secrets;
 using Smitenight.Providers.SmiteProvider.HiRez.Services;
