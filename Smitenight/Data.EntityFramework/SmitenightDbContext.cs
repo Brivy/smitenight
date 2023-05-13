@@ -25,7 +25,6 @@ namespace Smitenight.Persistence.Data.EntityFramework
         public DbSet<Active> Actives => Set<Active>();
         public DbSet<ActivePurchase> ActivePurchases => Set<ActivePurchase>();
         public DbSet<Consumable> Consumables => Set<Consumable>();
-        public DbSet<ConsumableDescription> ConsumableDescriptions => Set<ConsumableDescription>();
         public DbSet<Item> Items => Set<Item>();
         public DbSet<ItemDescription> ItemDescriptions => Set<ItemDescription>();
         public DbSet<ItemPurchase> ItemPurchases => Set<ItemPurchase>();

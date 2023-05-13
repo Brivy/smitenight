@@ -2,5 +2,6 @@
 
 public interface IMaintainSmitenight
 {
-    Task MaintainAsync(CancellationToken cancellationToken = default);
+    Task MaintainGodsAsync(CancellationToken cancellationToken = default);
+    Task MaintainItemsAsync(CancellationToken cancellationToken = default);
 }

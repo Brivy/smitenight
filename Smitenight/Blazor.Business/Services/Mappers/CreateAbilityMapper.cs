@@ -11,7 +11,7 @@ namespace Smitenight.Application.Blazor.Business.Services.Mappers
         {
             return new CreateAbilityDto
             {
-                AbilityType = AbilityTypeEnum.Primary,
+                AbilityType = AbilityType.Primary,
                 Cooldown = !string.IsNullOrWhiteSpace(ability.Description.ItemDescription.Cooldown) ? ability.Description.ItemDescription.Cooldown : null,
                 Cost = !string.IsNullOrWhiteSpace(ability.Description.ItemDescription.Cost) ? ability.Description.ItemDescription.Cost : null,
                 Description = ability.Description.ItemDescription.Description,

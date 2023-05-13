@@ -1,10 +1,8 @@
-﻿namespace Smitenight.Persistence.Data.EntityFramework.Entities
+﻿namespace Smitenight.Persistence.Data.Contracts.Models
 {
-    public class Consumable
+    public record CreateConsumableDto
     {
-        public int Id { get; set; }
         public int SmiteId { get; set; }
-
         public bool Enabled { get; set; }
         public string Name { get; set; } = null!;
         public string? Description { get; set; }

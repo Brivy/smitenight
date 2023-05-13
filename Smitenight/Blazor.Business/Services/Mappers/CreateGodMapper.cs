@@ -40,31 +40,31 @@ namespace Smitenight.Application.Blazor.Business.Services.Mappers
                 PhysicalProtection = god.PhysicalProtection,
                 PhysicalProtectionPerLevel = god.PhysicalProtectionPerLevel,
                 Pros = god.Pros,
-                Role = ConvertToGodRoleEnum(god.Roles),
+                Role = ConvertToGodRole(god.Roles),
                 SmiteId = god.Id,
                 Speed = god.Speed,
                 Title = god.Title,
-                Type = ConvertToGodTypeEnum(god.Type)
+                Type = ConvertToGodType(god.Type)
             };
         }
 
-        private GodRoleEnum ConvertToGodRoleEnum(string godRoles) => godRoles switch
+        private static GodRole ConvertToGodRole(string godRoles) => godRoles switch
         {
-            GodConstants.WarriorRole => GodRoleEnum.Warrior,
-            GodConstants.MageRole => GodRoleEnum.Mage,
-            GodConstants.HunterRole => GodRoleEnum.Hunter,
-            GodConstants.AssassinRole => GodRoleEnum.Assassin,
-            GodConstants.GuardianRole => GodRoleEnum.Guardian,
-            _ => GodRoleEnum.Unknown
+            GodConstants.WarriorRole => GodRole.Warrior,
+            GodConstants.MageRole => GodRole.Mage,
+            GodConstants.HunterRole => GodRole.Hunter,
+            GodConstants.AssassinRole => GodRole.Assassin,
+            GodConstants.GuardianRole => GodRole.Guardian,
+            _ => GodRole.Unknown
         };
 
-        private GodTypeEnum ConvertToGodTypeEnum(string godType) => godType switch
+        private static GodType ConvertToGodType(string godType) => godType switch
         {
-            GodConstants.MeleePhysicalType => GodTypeEnum.MeleePhysical,
-            GodConstants.MeleeMagicalType => GodTypeEnum.MeleeMagical,
-            GodConstants.RangedPhysicalType => GodTypeEnum.RangedPhysical,
-            GodConstants.RangedMagicalType => GodTypeEnum.RangedMagical,
-            _ => GodTypeEnum.Unknown
+            GodConstants.MeleePhysicalType => GodType.MeleePhysical,
+            GodConstants.MeleeMagicalType => GodType.MeleeMagical,
+            GodConstants.RangedPhysicalType => GodType.RangedPhysical,
+            GodConstants.RangedMagicalType => GodType.RangedMagical,
+            _ => GodType.Unknown
         };
     }
 }

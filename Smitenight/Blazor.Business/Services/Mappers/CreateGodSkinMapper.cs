@@ -14,7 +14,7 @@ namespace Smitenight.Application.Blazor.Business.Services.Mappers
             {
                 GodSkinUrl = !string.IsNullOrWhiteSpace(godSkin.GodSkinUrl) ? godSkin.GodSkinUrl : null,
                 Name = godSkin.SkinName,
-                Obtainability = ConvertToGodSkinsObtainabilityEnum(godSkin.Obtainability),
+                Obtainability = ConvertToGodSkinsObtainability(godSkin.Obtainability),
                 PriceFavor = godSkin.PriceFavor,
                 PriceGems = godSkin.PriceGems,
                 SecondarySmiteId = godSkin.SkinId2,
@@ -22,13 +22,13 @@ namespace Smitenight.Application.Blazor.Business.Services.Mappers
             };
         }
 
-        private GodSkinsObtainabilityEnum ConvertToGodSkinsObtainabilityEnum(string obtainability) => obtainability switch
+        private static GodSkinsObtainability ConvertToGodSkinsObtainability(string obtainability) => obtainability switch
         {
-            GodConstants.NormalObtainability => GodSkinsObtainabilityEnum.Normal,
-            GodConstants.CrossoverObtainability => GodSkinsObtainabilityEnum.Crossover,
-            GodConstants.LimitedObtainability => GodSkinsObtainabilityEnum.Limited,
-            GodConstants.ExclusiveObtainability => GodSkinsObtainabilityEnum.Exclusive,
-            _ => GodSkinsObtainabilityEnum.Unknown
+            GodConstants.NormalObtainability => GodSkinsObtainability.Normal,
+            GodConstants.CrossoverObtainability => GodSkinsObtainability.Crossover,
+            GodConstants.LimitedObtainability => GodSkinsObtainability.Limited,
+            GodConstants.ExclusiveObtainability => GodSkinsObtainability.Exclusive,
+            _ => GodSkinsObtainability.Unknown
         };
     }
 }
