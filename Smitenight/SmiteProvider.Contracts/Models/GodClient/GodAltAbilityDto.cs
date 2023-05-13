@@ -1,4 +1,4 @@
-﻿namespace Smitenight.Domain.Models.Clients.GodClient
+﻿namespace Smitenight.Providers.SmiteProvider.Contracts.Models.GodClient
 {
     public record class GodAltAbilityDto(
         string AltName,

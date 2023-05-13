@@ -1,4 +1,4 @@
-﻿namespace Smitenight.Domain.Models.Clients.LeagueClient
+﻿namespace Smitenight.Providers.SmiteProvider.Contracts.Models.LeagueClient
 {
     public record class LeagueSeasonDto
     (

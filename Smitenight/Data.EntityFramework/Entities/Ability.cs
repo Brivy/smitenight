@@ -1,4 +1,4 @@
-﻿using Smitenight.Domain.Models.Enums.Ability;
+﻿using Smitenight.Persistence.Data.Contracts.Enums;
 
 namespace Smitenight.Persistence.Data.EntityFramework.Entities
 {
@@ -13,7 +13,7 @@ namespace Smitenight.Persistence.Data.EntityFramework.Entities
         public string Description { get; set; } = null!;
         public string Summary { get; set; } = null!;
         public string Url { get; set; } = null!;
-        public AbilityTypeEnum AbilityType { get; set; }
+        public AbilityType AbilityType { get; set; }
 
         #region Navigation
 

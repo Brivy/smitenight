@@ -1,7 +1,7 @@
-﻿namespace Smitenight.Domain.Models.Clients.RetrievePlayerClient
+﻿namespace Smitenight.Providers.SmiteProvider.Contracts.Models.RetrievePlayerClient
 {
     public record class PlayerIdDto(
-        int Id,
+        int PlayerId,
         string Portal,
         string PortalId,
         string PrivacyFlag,

@@ -1,5 +1,5 @@
-﻿using Microsoft.Extensions.Options;
-using Smitenight.Domain.Models.Constants.Common;
+﻿using Clock.Common.Constants;
+using Microsoft.Extensions.Options;
 using Smitenight.Domain.Models.Constants.SmiteClient;
 using Smitenight.Providers.SmiteProvider.HiRez.Cache;
 using Smitenight.Providers.SmiteProvider.HiRez.Secrets;
@@ -89,5 +89,4 @@ namespace Smitenight.Providers.SmiteProvider.HiRez.Services
         private static string GetCurrentUtcDate() =>
             DateTime.UtcNow.ToString(DateTimeFormats.SessionIdFormat);
     }
-}
 }

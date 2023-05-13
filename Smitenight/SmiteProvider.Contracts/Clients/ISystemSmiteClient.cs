@@ -1,4 +1,4 @@
-﻿using Smitenight.Domain.Models.Clients.SystemClient;
+﻿using Smitenight.Providers.SmiteProvider.Contracts.Models.SystemClient;
 
 namespace Smitenight.Providers.SmiteProvider.Contracts.Clients;
 

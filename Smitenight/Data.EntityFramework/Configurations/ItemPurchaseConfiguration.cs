@@ -11,7 +11,7 @@ namespace Smitenight.Persistence.Data.EntityFramework.Configurations
             builder.ToTable("ItemPurchases");
 
             builder.HasKey(x => x.Id);
-            builder.Property(x => x.ItemPurchaseOrder).IsRequired();
+            builder.Property(x => x.PurchaseOrder).IsRequired();
 
             builder.HasOne(x => x.Item)
                 .WithMany(x => x.ItemPurchases)

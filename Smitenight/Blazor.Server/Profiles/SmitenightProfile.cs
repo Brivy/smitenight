@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Smitenight.Domain.Models.Contracts.Smitenights;
-using Smitenight.Domain.Models.Models.Smitenights;
+using Smitenight.Persistence.Data.EntityFramework.Entities;
 
 namespace Smitenight.Presentation.Blazor.Server.Profiles
 {
@@ -8,7 +8,7 @@ namespace Smitenight.Presentation.Blazor.Server.Profiles
     {
         public SmitenightProfile()
         {
-            CreateMap<Domain.Models.Models.Smitenights.Smitenight, SmitenightDto>();
+            CreateMap<Persistence.Data.EntityFramework.Entities.Smitenight, SmitenightDto>();
             CreateMap<SmitenightMatch, SmitenightMatchDto>();
         }
     }

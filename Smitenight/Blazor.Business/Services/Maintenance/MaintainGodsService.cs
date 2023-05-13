@@ -1,99 +1,80 @@
-﻿using Microsoft.EntityFrameworkCore;
-using Smitenight.Application.Blazor.Business.Contracts.Facades.SmiteClient;
-using Smitenight.Application.Blazor.Business.Contracts.Services.Builders;
-using Smitenight.Application.Blazor.Business.Contracts.Services.Maintenance;
-using Smitenight.Domain.Models.Clients.GodClient;
-using Smitenight.Domain.Models.Enums.SmiteClient;
-using Smitenight.Persistence.Data.EntityFramework;
+﻿using Smitenight.Application.Blazor.Business.Contracts.Services.Maintenance;
+using Smitenight.Persistence.Data.Contracts.Models;
+using Smitenight.Persistence.Data.Contracts.Repositories;
+using Smitenight.Providers.SmiteProvider.Contracts.Models.GodClient;
+using Smitenight.Utilities.Mapper.Common.Services;
 
 namespace Smitenight.Application.Blazor.Business.Services.Maintenance
 {
     public class MaintainGodsService : IMaintainGodsService
     {
-        private readonly IGodBuilderService _godBuilderService;
-        private readonly IGodSmiteClientFacade _godSmiteClient;
-        private readonly SmitenightDbContext _dbContext;
+        private readonly IMaintainGodsRepository _maintainGodsRepository;
+        private readonly IMapperService _mapperService;
 
         public MaintainGodsService(
-            IGodBuilderService godBuilderService,
-            IGodSmiteClientFacade godSmiteClient,
-            SmitenightDbContext dbContext)
+            IMaintainGodsRepository maintainGodsRepository,
+            IMapperService mapperService)
         {
-            _godBuilderService = godBuilderService;
-            _godSmiteClient = godSmiteClient;
-            _dbContext = dbContext;
+            _maintainGodsRepository = maintainGodsRepository;
+            _mapperService = mapperService;
         }
 
-        public async Task MaintainAsync(CancellationToken cancellationToken = default)
+        public Task<int> CreateGodAsync(GodDto god, CancellationToken cancellationToken = default)
         {
-            var godsResponse = await _godSmiteClient.GetGodsAsync(LanguageCodeEnum.English, cancellationToken);
-            if (godsResponse?.Response == null)
-            {
-                return;
-            }
-
-            if (cancellationToken.IsCancellationRequested)
-            {
-                return;
-            }
-
-            await using var transaction = await _dbContext.Database.BeginTransactionAsync(cancellationToken);
-            try
-            {
-                foreach (var god in godsResponse.Response)
-                {
-                    var godSkinsResponse = await _godSmiteClient.GetGodSkinsAsync(god.Id, LanguageCodeEnum.English, cancellationToken);
-                    var godSkins = godSkinsResponse?.Response ?? new List<GodSkinsResponse>();
-
-                    await ProcessGodAsync(god, godSkins, cancellationToken);
-                }
-
-                await _dbContext.SaveChangesAsync(cancellationToken);
-                await transaction.CommitAsync(cancellationToken);
-            }
-            catch (Exception e)
-            {
-                Console.WriteLine(e);
-            }
+            var createGod = _mapperService.Map<GodDto, CreateGodDto>(god);
+            return _maintainGodsRepository.CreateGodAsync(createGod, cancellationToken);
         }
 
-        #region Processing
-
-        private async Task ProcessGodAsync(GodsResponse god, List<GodSkinsResponse> godSkins, CancellationToken cancellationToken = default)
+        public Task CreateAbility(int createdGodId, AbilityDetailsDto ability, CancellationToken cancellationToken = default)
         {
-            var godEntity = _godBuilderService.Build(god, godSkins);
-            var existingGodEntity = await _dbContext.Gods.AsNoTracking()
-                .Include(x => x.Abilities)
-                .Include(x => x.GodSkins)
-                .SingleOrDefaultAsync(x => x.SmiteId == god.Id, cancellationToken);
-
-            if (existingGodEntity == null)
-            {
-                _dbContext.Gods.Add(godEntity);
-            }
-            else
-            {
-                var abilityIds = existingGodEntity.Abilities.Select(x => x.Id).ToList();
-                _dbContext.BasicAttackDescriptions.RemoveRange(await _dbContext.BasicAttackDescriptions.Where(x => x.GodId == existingGodEntity.Id).ToListAsync(cancellationToken));
-                _dbContext.AbilityRanks.RemoveRange(await _dbContext.AbilityRanks.Where(x => abilityIds.Contains(x.AbilityId)).ToListAsync(cancellationToken));
-                _dbContext.AbilityTags.RemoveRange(await _dbContext.AbilityTags.Where(x => abilityIds.Contains(x.AbilityId)).ToListAsync(cancellationToken));
-
-                godEntity.Id = existingGodEntity.Id;
-                godEntity.Abilities.ForEach(ability =>
-                {
-                    ability.Id = existingGodEntity.Abilities.Single(x => x.AbilityType == ability.AbilityType).Id;
-                });
-
-                // Possible to have a new skin that doesn't have both the Ids in the existing God entity
-                godEntity.GodSkins.ForEach(godSkin =>
-                {
-                    godSkin.Id = existingGodEntity.GodSkins.SingleOrDefault(x => x.SmiteId == godSkin.SmiteId && x.SecondarySmiteId == godSkin.SecondarySmiteId)?.Id ?? 0;
-                });
-
-                _dbContext.Gods.Update(godEntity);
-            }
+            var createdAbility = _mapperService.Map<AbilityDetailsDto, CreateAbilityDto>(ability);
+            var createdAbilityRanks = CreateAbilityRanks(ability.Description.ItemDescription.RankItems);
+            var createdAbilityTags = CreateAbilityTags(ability.Description.ItemDescription.MenuItems);
+            return _maintainGodsRepository.CreateAbilityAsync(createdGodId, createdAbility, createdAbilityTags, createdAbilityRanks, cancellationToken);
         }
 
-        #endregion
+        public Task CreateBasicAttackDescriptionsAsync(int createdGodId, IEnumerable<BasicAttackItemDto> basicAttacks, CancellationToken cancellationToken = default)
+        {
+            var createdBasicAttackDescriptions = new List<CreateBasicAttackDescriptionDto>();
+            foreach (var basicAttack in basicAttacks)
+            {
+                createdBasicAttackDescriptions.Add(_mapperService.Map<BasicAttackItemDto, CreateBasicAttackDescriptionDto>(basicAttack));
+            }
+
+            return _maintainGodsRepository.CreateBasicAttackAsync(createdGodId, createdBasicAttackDescriptions, cancellationToken);
+        }
+
+        public Task CreateGodSkinsAsync(int createdGodId, IEnumerable<GodSkinDto> godSkins, CancellationToken cancellationToken = default)
+        {
+            var createdGodSkin = new List<CreateGodSkinDto>();
+            foreach (var godSkin in godSkins)
+            {
+                createdGodSkin.Add(_mapperService.Map<GodSkinDto, CreateGodSkinDto>(godSkin));
+            }
+
+            return _maintainGodsRepository.CreateGodSkinsAsync(createdGodId, createdGodSkin, cancellationToken);
+        }
+
+        private IEnumerable<CreateAbilityRankDto> CreateAbilityRanks(IEnumerable<RankItemDto> abilityRanks)
+        {
+            var createdAbilityRanks = new List<CreateAbilityRankDto>();
+            foreach (var abilityRank in abilityRanks)
+            {
+                createdAbilityRanks.Add(_mapperService.Map<RankItemDto, CreateAbilityRankDto>(abilityRank));
+            }
+
+            return createdAbilityRanks;
+        }
+
+        private IEnumerable<CreateAbilityTagDto> CreateAbilityTags(IEnumerable<MenuItemDto> abilityTags)
+        {
+            var createdAbilityTags = new List<CreateAbilityTagDto>();
+            foreach (var abilityTag in abilityTags)
+            {
+                createdAbilityTags.Add(_mapperService.Map<MenuItemDto, CreateAbilityTagDto>(abilityTag));
+            }
+
+            return createdAbilityTags;
+        }
     }
 }

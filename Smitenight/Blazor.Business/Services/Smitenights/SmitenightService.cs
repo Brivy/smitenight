@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Smitenight.Application.Blazor.Business.Contracts.Enums;
 using Smitenight.Application.Blazor.Business.Contracts.Facades.SmiteClient;
 using Smitenight.Application.Blazor.Business.Contracts.Services.Builders;
 using Smitenight.Application.Blazor.Business.Contracts.Services.Common;
@@ -7,13 +8,12 @@ using Smitenight.Application.Blazor.Business.Contracts.Services.Matches;
 using Smitenight.Application.Blazor.Business.Contracts.Services.Players;
 using Smitenight.Application.Blazor.Business.Contracts.Services.Smitenights;
 using Smitenight.Domain.Models.Clients.PlayerClient;
-using Smitenight.Domain.Models.Constants.SmiteClient.Responses;
 using Smitenight.Domain.Models.Contracts.Common;
 using Smitenight.Domain.Models.Contracts.Smitenights;
-using Smitenight.Domain.Models.Enums.StatusCodes;
-using Smitenight.Domain.Models.Models.Players;
 using Smitenight.Domain.Models.Models.Smitenights;
 using Smitenight.Persistence.Data.EntityFramework;
+using Smitenight.Persistence.Data.EntityFramework.Entities;
+using Smitenight.Providers.SmiteProvider.Contracts.Constants;
 
 namespace Smitenight.Application.Blazor.Business.Services.Smitenights
 {
@@ -109,17 +109,17 @@ namespace Smitenight.Application.Blazor.Business.Services.Smitenights
             }
 
             var smitePlayer = playerIdResponse.Response.First();
-            if (smitePlayer.PrivacyFlag == ResponseConstants.Yes)
+            if (smitePlayer.PrivacyFlag == SmiteConstants.Yes)
             {
                 return new ServerResponseDto<SmitenightDto>(StatusCodeEnum.PlayerHasPrivacyEnabled);
             }
 
-            Domain.Models.Models.Smitenights.Smitenight smitenight;
+            Persistence.Data.EntityFramework.Entities.Smitenight smitenight;
             var playerEntity = await GetPlayerWithSmitenightQueryAsync(smitePlayer.PlayerId, cancellationToken);
             if (playerEntity == null)
             {
                 var player = await _retrievePlayerSmiteClient.GetPlayerWithoutPortalAsync(smitePlayer.PlayerId.ToString(), cancellationToken);
-                if (player?.Response?.Any() != true || player.Response.First().Id == ResponseConstants.AnonymousPlayerIntId)
+                if (player?.Response?.Any() != true || player.Response.First().Id == SmiteConstants.AnonymousPlayerIntId)
                 {
                     return new ServerResponseDto<SmitenightDto>(StatusCodeEnum.PlayerByPlayerIdNotFoundInSmite);
                 }
@@ -178,7 +178,7 @@ namespace Smitenight.Application.Blazor.Business.Services.Smitenights
                 .Where(x => x.SmiteId == smiteId)
                 .SingleOrDefaultAsync(cancellationToken);
 
-        private async Task<Domain.Models.Models.Smitenights.Smitenight> GetLatestSmitenightFromPlayerAsync(int smiteId, CancellationToken cancellationToken = default) =>
+        private async Task<Persistence.Data.EntityFramework.Entities.Smitenight> GetLatestSmitenightFromPlayerAsync(int smiteId, CancellationToken cancellationToken = default) =>
             await _dbContext.Smitenights
                 .Where(x => x.Player != null && x.Player.SmiteId == smiteId)
                 .OrderByDescending(x => x.Id)

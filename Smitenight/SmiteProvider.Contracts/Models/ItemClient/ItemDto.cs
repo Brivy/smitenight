@@ -1,4 +1,4 @@
-﻿namespace Smitenight.Domain.Models.Clients.ItemClient
+﻿namespace Smitenight.Providers.SmiteProvider.Contracts.Models.ItemClient
 {
     public record class ItemDto
     (
@@ -7,7 +7,7 @@
         string DeviceName,
         string Glyph,
         int IconId,
-        ItemDescription ItemDescription,
+        ItemDescriptionDto ItemDescription,
         int ItemId,
         int ItemTier,
         int Price,
@@ -20,14 +20,14 @@
         object RetMsg
     );
 
-    public record class ItemDescription
+    public record class ItemDescriptionDto
     (
         string? Description,
-        MenuItem[] MenuItems,
+        MenuItemDto[] MenuItems,
         string? SecondaryDescription
     );
 
-    public record class MenuItem
+    public record class MenuItemDto
     (
         string Description,
         string Value

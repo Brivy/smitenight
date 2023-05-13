@@ -1,4 +1,4 @@
-﻿using Smitenight.Domain.Models.Enums.Items;
+﻿using Smitenight.Persistence.Data.Contracts.Enums;
 
 namespace Smitenight.Persistence.Data.EntityFramework.Entities
 {
@@ -8,7 +8,7 @@ namespace Smitenight.Persistence.Data.EntityFramework.Entities
         public int ActiveId { get; set; }
         public int MatchDetailId { get; set; }
 
-        public ActivePurchaseOrderEnum ActivePurchaseOrder { get; set; }
+        public ActivePurchaseOrder ActivePurchaseOrder { get; set; }
 
         #region Navigation
 

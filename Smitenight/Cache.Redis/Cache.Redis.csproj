@@ -17,7 +17,6 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\Cache.Contracts\Cache.Contracts.csproj" />
-	  <ProjectReference Include="..\DependencyInjection.Common\DependencyInjection.Common.csproj" />
 	</ItemGroup>
 
 </Project>

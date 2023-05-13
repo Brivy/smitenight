@@ -1,5 +1,5 @@
-﻿using Smitenight.Domain.Models.Clients.PlayerClient;
-using Smitenight.Domain.Models.Enums.SmiteClient;
+﻿using Smitenight.Providers.SmiteProvider.Contracts.Enums;
+using Smitenight.Providers.SmiteProvider.Contracts.Models.PlayerClient;
 
 namespace Smitenight.Providers.SmiteProvider.Contracts.Clients;
 
@@ -15,7 +15,7 @@ public interface IPlayerSmiteClient
 
     Task<IEnumerable<MatchHistoryDto>> GetMatchHistoryAsync(string playerId, CancellationToken cancellationToken = default);
 
-    Task<IEnumerable<QueueStatsDto>> GetQueueStatsAsync(string playerId, GameModeQueueIdEnum gameModeQueueId, CancellationToken cancellationToken = default);
+    Task<IEnumerable<QueueStatsDto>> GetQueueStatsAsync(string playerId, GameModeQueue gameModeQueue, CancellationToken cancellationToken = default);
 
     Task<IEnumerable<SearchPlayerDto>> SearchPlayersAsync(string playerId, CancellationToken cancellationToken = default);
 }

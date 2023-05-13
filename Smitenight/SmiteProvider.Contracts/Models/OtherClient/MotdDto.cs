@@ -1,4 +1,4 @@
-﻿namespace Smitenight.Domain.Models.Clients.OtherClient
+﻿namespace Smitenight.Providers.SmiteProvider.Contracts.Models.OtherClient
 {
     public record class MotdDto
     (

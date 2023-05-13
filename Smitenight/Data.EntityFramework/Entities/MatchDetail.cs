@@ -1,5 +1,4 @@
-﻿using Smitenight.Domain.Models.Enums.Gods;
-using Smitenight.Domain.Models.Enums.Matches;
+﻿using Smitenight.Persistence.Data.Contracts.Enums;
 
 namespace Smitenight.Persistence.Data.EntityFramework.Entities
 {
@@ -47,14 +46,14 @@ namespace Smitenight.Persistence.Data.EntityFramework.Entities
         public int ObjectiveAssists { get; set; }
 
         public int DistanceTraveled { get; set; }
-        public GodRoleEnum GodRole { get; set; }
+        public GodRole GodRole { get; set; }
         public int GoldEarned { get; set; }
         public int GoldEarnedPerMinute { get; set; }
         public int HealingDone { get; set; }
         public int HealingDoneToBots { get; set; }
         public int HealingDoneToSelf { get; set; }
         public int LevelReached { get; set; }
-        public MatchTeamEnum MatchTeam { get; set; }
+        public MatchTeam MatchTeam { get; set; }
         public bool Surrendered { get; set; }
         public int TotalTimeDead { get; set; }
         public int WardsPlaced { get; set; }

@@ -1,4 +1,4 @@
-﻿using Smitenight.Domain.Models.Enums.Gods;
+﻿using Smitenight.Persistence.Data.Contracts.Enums;
 
 namespace Smitenight.Persistence.Data.EntityFramework.Entities
 {
@@ -34,10 +34,10 @@ namespace Smitenight.Persistence.Data.EntityFramework.Entities
         public float PhysicalProtection { get; set; }
         public float PhysicalProtectionPerLevel { get; set; }
         public string Pros { get; set; } = null!;
-        public GodRoleEnum Role { get; set; }
+        public GodRole Role { get; set; }
         public int Speed { get; set; }
         public string Title { get; set; } = null!;
-        public GodTypeEnum Type { get; set; }
+        public GodType Type { get; set; }
 
         #region Navigation
 

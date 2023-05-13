@@ -1,8 +1,8 @@
 ﻿using Smitenight.Application.Blazor.Business.Contracts.Services.Builders;
 using Smitenight.Domain.Models.Clients.ItemClient;
-using Smitenight.Domain.Models.Constants.SmiteClient.Responses;
-using Smitenight.Domain.Models.Enums.Items;
-using Smitenight.Domain.Models.Models.Items;
+using Smitenight.Persistence.Data.Contracts.Enums;
+using Smitenight.Persistence.Data.EntityFramework.Entities;
+using Smitenight.Providers.SmiteProvider.Contracts.Constants;
 
 namespace Smitenight.Application.Blazor.Business.Services.Builders
 {
@@ -12,10 +12,10 @@ namespace Smitenight.Application.Blazor.Business.Services.Builders
         {
             return new Item
             {
-                Enabled = itemResponse.ActiveFlag == ResponseConstants.Yes,
+                Enabled = itemResponse.ActiveFlag == SmiteConstants.Yes,
                 Description = !string.IsNullOrWhiteSpace(itemResponse.ItemDescription.Description) ? itemResponse.ItemDescription.Description : null,
                 Name = itemResponse.DeviceName,
-                Glyph = itemResponse.Glyph == ResponseConstants.Yes,
+                Glyph = itemResponse.Glyph == SmiteConstants.Yes,
                 ItemIconUrl = itemResponse.ItemIconUrl,
                 ItemTier = ConvertToItemTierEnum(itemResponse.ItemTier),
                 Price = itemResponse.Price,
@@ -36,7 +36,7 @@ namespace Smitenight.Application.Blazor.Business.Services.Builders
         {
             return new Consumable
             {
-                Enabled = consumableResponse.ActiveFlag == ResponseConstants.Yes,
+                Enabled = consumableResponse.ActiveFlag == SmiteConstants.Yes,
                 Description = !string.IsNullOrWhiteSpace(consumableResponse.ItemDescription.Description) ? consumableResponse.ItemDescription.Description : null,
                 Name = consumableResponse.DeviceName,
                 ItemIconUrl = consumableResponse.ItemIconUrl,
@@ -56,7 +56,7 @@ namespace Smitenight.Application.Blazor.Business.Services.Builders
         {
             return new Active
             {
-                Enabled = activeResponse.ActiveFlag == ResponseConstants.Yes,
+                Enabled = activeResponse.ActiveFlag == SmiteConstants.Yes,
                 Description = !string.IsNullOrWhiteSpace(activeResponse.ItemDescription.Description) ? activeResponse.ItemDescription.Description : null,
                 Name = activeResponse.DeviceName,
                 ItemIconUrl = activeResponse.ItemIconUrl,

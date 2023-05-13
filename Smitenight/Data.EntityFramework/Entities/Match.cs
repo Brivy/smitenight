@@ -1,4 +1,4 @@
-﻿using Smitenight.Domain.Models.Enums.SmiteClient;
+﻿using Smitenight.Persistence.Data.Contracts.Enums;
 
 namespace Smitenight.Persistence.Data.EntityFramework.Entities
 {
@@ -8,7 +8,7 @@ namespace Smitenight.Persistence.Data.EntityFramework.Entities
         public int SmiteId { get; set; }
 
         public string GameMap { get; set; } = null!;
-        public GameModeQueueIdEnum GameModeQueue { get; set; }
+        public GameModeQueue GameModeQueue { get; set; }
         public int MatchDuration { get; set; }
         public int? TeamOneScore { get; set; }
         public int? TeamTwoScore { get; set; }

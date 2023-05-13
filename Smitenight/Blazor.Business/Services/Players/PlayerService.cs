@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Smitenight.Application.Blazor.Business.Contracts.Services.Players;
-using Smitenight.Domain.Models.Models.Players;
 using Smitenight.Persistence.Data.EntityFramework;
+using Smitenight.Persistence.Data.EntityFramework.Entities;
 
 namespace Smitenight.Application.Blazor.Business.Services.Players
 {

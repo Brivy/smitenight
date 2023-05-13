@@ -1,4 +1,4 @@
-﻿namespace Smitenight.Domain.Models.Clients.ItemClient
+﻿namespace Smitenight.Providers.SmiteProvider.Contracts.Models.ItemClient
 {
     public record class GodRecommendedItemDto
     (

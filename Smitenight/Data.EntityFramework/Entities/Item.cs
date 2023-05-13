@@ -1,4 +1,4 @@
-﻿using Smitenight.Domain.Models.Enums.Items;
+﻿using Smitenight.Persistence.Data.Contracts.Enums;
 
 namespace Smitenight.Persistence.Data.EntityFramework.Entities
 {
@@ -13,9 +13,9 @@ namespace Smitenight.Persistence.Data.EntityFramework.Entities
         public string Name { get; set; } = null!;
         public string? Description { get; set; }
         public bool Glyph { get; set; }
-        public ItemTierEnum ItemTier { get; set; }
+        public ItemTier ItemTier { get; set; }
         public int Price { get; set; }
-        public RestrictedRolesEnum RestrictedRoles { get; set; }
+        public RestrictedRoles RestrictedRoles { get; set; }
         public string? SecondaryDescription { get; set; }
         public string? ShortDescription { get; set; }
         public bool StartingItem { get; set; }

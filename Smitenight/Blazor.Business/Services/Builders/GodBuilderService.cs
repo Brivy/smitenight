@@ -1,10 +1,8 @@
-﻿using Smitenight.Application.Blazor.Business.Contracts.Services.Builders;
-using Smitenight.Domain.Models.Clients.GodClient;
-using Smitenight.Domain.Models.Constants.SmiteClient.Responses;
-using Smitenight.Domain.Models.Enums.Ability;
-using Smitenight.Domain.Models.Enums.Gods;
-using Smitenight.Domain.Models.Models.Abilities;
-using Smitenight.Domain.Models.Models.Gods;
+﻿using Smitenight.Application.Blazor.Business.Constants;
+using Smitenight.Application.Blazor.Business.Contracts.Services.Builders;
+using Smitenight.Persistence.Data.Contracts.Enums;
+using Smitenight.Persistence.Data.EntityFramework.Entities;
+using Smitenight.Providers.SmiteProvider.Contracts.Constants;
 
 namespace Smitenight.Application.Blazor.Business.Services.Builders
 {
@@ -22,14 +20,14 @@ namespace Smitenight.Application.Blazor.Business.Services.Builders
             {
                 AttackSpeed = godResponse.AttackSpeed,
                 AttackSpeedPerLevel = godResponse.AttackSpeedPerLevel,
-                AutoBanned = godResponse.AutoBanned == ResponseConstants.Yes,
+                AutoBanned = godResponse.AutoBanned == SmiteConstants.Yes,
                 GodCardUrl = godResponse.GodCardUrl,
                 GodIconUrl = godResponse.GodIconUrl,
                 Health = godResponse.Health,
                 HealthPerFive = godResponse.HealthPerFive,
                 HealthPerLevel = godResponse.HealthPerLevel,
                 Hp5PerLevel = godResponse.Hp5PerLevel,
-                LatestGod = godResponse.LatestGod == ResponseConstants.Yes,
+                LatestGod = godResponse.LatestGod == SmiteConstants.Yes,
                 Lore = godResponse.Lore,
                 MagicProtection = godResponse.MagicProtection,
                 MagicProtectionPerLevel = godResponse.MagicProtectionPerLevel,
@@ -40,7 +38,7 @@ namespace Smitenight.Application.Blazor.Business.Services.Builders
                 ManaPerLevel = godResponse.ManaPerLevel,
                 Mp5PerLevel = godResponse.Mp5PerLevel,
                 Name = godResponse.Name,
-                OnFreeRotation = godResponse.OnFreeRotation == ResponseConstants.Yes,
+                OnFreeRotation = godResponse.OnFreeRotation == SmiteConstants.Yes,
                 Pantheon = godResponse.Pantheon,
                 PhysicalPower = godResponse.PhysicalPower,
                 PhysicalPowerPerLevel = godResponse.PhysicalPowerPerLevel,
@@ -182,11 +180,11 @@ namespace Smitenight.Application.Blazor.Business.Services.Builders
         /// <returns></returns>
         private GodRoleEnum ConvertToGodRoleEnum(string godRoles) => godRoles switch
         {
-            GodResponseConstants.WarriorRole => GodRoleEnum.Warrior,
-            GodResponseConstants.MageRole => GodRoleEnum.Mage,
-            GodResponseConstants.HunterRole => GodRoleEnum.Hunter,
-            GodResponseConstants.AssassinRole => GodRoleEnum.Assassin,
-            GodResponseConstants.GuardianRole => GodRoleEnum.Guardian,
+            GodConstants.WarriorRole => GodRoleEnum.Warrior,
+            GodConstants.MageRole => GodRoleEnum.Mage,
+            GodConstants.HunterRole => GodRoleEnum.Hunter,
+            GodConstants.AssassinRole => GodRoleEnum.Assassin,
+            GodConstants.GuardianRole => GodRoleEnum.Guardian,
             _ => GodRoleEnum.Unknown
         };
 
@@ -197,10 +195,10 @@ namespace Smitenight.Application.Blazor.Business.Services.Builders
         /// <returns></returns>
         private GodTypeEnum ConvertToGodTypeEnum(string godType) => godType switch
         {
-            GodResponseConstants.MeleePhysicalType => GodTypeEnum.MeleePhysical,
-            GodResponseConstants.MeleeMagicalType => GodTypeEnum.MeleeMagical,
-            GodResponseConstants.RangedPhysicalType => GodTypeEnum.RangedPhysical,
-            GodResponseConstants.RangedMagicalType => GodTypeEnum.RangedMagical,
+            GodConstants.MeleePhysicalType => GodTypeEnum.MeleePhysical,
+            GodConstants.MeleeMagicalType => GodTypeEnum.MeleeMagical,
+            GodConstants.RangedPhysicalType => GodTypeEnum.RangedPhysical,
+            GodConstants.RangedMagicalType => GodTypeEnum.RangedMagical,
             _ => GodTypeEnum.Unknown
         };
 
@@ -211,10 +209,10 @@ namespace Smitenight.Application.Blazor.Business.Services.Builders
         /// <returns></returns>
         private GodSkinsObtainabilityEnum ConvertToGodSkinsObtainabilityEnum(string obtainability) => obtainability switch
         {
-            GodResponseConstants.NormalObtainability => GodSkinsObtainabilityEnum.Normal,
-            GodResponseConstants.CrossoverObtainability => GodSkinsObtainabilityEnum.Crossover,
-            GodResponseConstants.LimitedObtainability => GodSkinsObtainabilityEnum.Limited,
-            GodResponseConstants.ExclusiveObtainability => GodSkinsObtainabilityEnum.Exclusive,
+            GodConstants.NormalObtainability => GodSkinsObtainabilityEnum.Normal,
+            GodConstants.CrossoverObtainability => GodSkinsObtainabilityEnum.Crossover,
+            GodConstants.LimitedObtainability => GodSkinsObtainabilityEnum.Limited,
+            GodConstants.ExclusiveObtainability => GodSkinsObtainabilityEnum.Exclusive,
             _ => GodSkinsObtainabilityEnum.Unknown
         };
 

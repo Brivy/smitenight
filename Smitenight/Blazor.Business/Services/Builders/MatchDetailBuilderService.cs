@@ -1,10 +1,10 @@
-﻿using Smitenight.Application.Blazor.Business.Contracts.Services.Builders;
+﻿using Smitenight.Application.Blazor.Business.Constants;
+using Smitenight.Application.Blazor.Business.Contracts.Services.Builders;
 using Smitenight.Domain.Models.Clients.MatchClient;
-using Smitenight.Domain.Models.Constants.SmiteClient.Responses;
-using Smitenight.Domain.Models.Enums.Gods;
-using Smitenight.Domain.Models.Enums.Matches;
 using Smitenight.Domain.Models.Extensions;
-using Smitenight.Domain.Models.Models.Matches;
+using Smitenight.Persistence.Data.Contracts.Enums;
+using Smitenight.Persistence.Data.EntityFramework.Entities;
+using Smitenight.Providers.SmiteProvider.Contracts.Constants;
 
 namespace Smitenight.Application.Blazor.Business.Services.Builders
 {
@@ -51,13 +51,13 @@ namespace Smitenight.Application.Blazor.Business.Services.Builders
                 SiegeJuggernautKills = matchDetailsResponse.KillsSiegeJuggernaut,
                 SingleKills = matchDetailsResponse.KillsSingle,
                 Surrendered = matchDetailsResponse.Surrendered.ConvertToBool(),
-                TeamId = matchDetailsResponse.TeamId != ResponseConstants.EmptyResponse ? matchDetailsResponse.TeamId : null,
+                TeamId = matchDetailsResponse.TeamId != SmiteConstants.EmptyResponse ? matchDetailsResponse.TeamId : null,
                 TotalTimeDead = matchDetailsResponse.TimeDeadSeconds,
                 TowerKills = matchDetailsResponse.TowersDestroyed,
                 TripleKills = matchDetailsResponse.KillsTriple,
                 WardsPlaced = matchDetailsResponse.WardsPlaced,
                 WildJuggernautKills = matchDetailsResponse.KillsWildJuggernaut,
-                Winner = matchDetailsResponse.WinStatus == MatchResponseConstants.WinnerStatus
+                Winner = matchDetailsResponse.WinStatus == MatchConstants.WinnerStatus
             };
         }
 
@@ -68,11 +68,11 @@ namespace Smitenight.Application.Blazor.Business.Services.Builders
         /// <returns></returns>
         private GodRoleEnum ConvertToGodRoleEnum(string godRoles) => godRoles switch
         {
-            GodResponseConstants.WarriorRole => GodRoleEnum.Warrior,
-            GodResponseConstants.MageRole => GodRoleEnum.Mage,
-            GodResponseConstants.HunterRole => GodRoleEnum.Hunter,
-            GodResponseConstants.AssassinRole => GodRoleEnum.Assassin,
-            GodResponseConstants.GuardianRole => GodRoleEnum.Guardian,
+            GodConstants.WarriorRole => GodRoleEnum.Warrior,
+            GodConstants.MageRole => GodRoleEnum.Mage,
+            GodConstants.HunterRole => GodRoleEnum.Hunter,
+            GodConstants.AssassinRole => GodRoleEnum.Assassin,
+            GodConstants.GuardianRole => GodRoleEnum.Guardian,
             _ => GodRoleEnum.Unknown
         };
 
@@ -83,8 +83,8 @@ namespace Smitenight.Application.Blazor.Business.Services.Builders
         /// <returns></returns>
         private MatchTeamEnum ConvertToMatchTeamEnum(int matchTeamId) => matchTeamId switch
         {
-            MatchResponseConstants.MatchTeamOne => MatchTeamEnum.TeamOne,
-            MatchResponseConstants.MatchTeamTwo => MatchTeamEnum.TeamTwo,
+            MatchConstants.MatchTeamOne => MatchTeamEnum.TeamOne,
+            MatchConstants.MatchTeamTwo => MatchTeamEnum.TeamTwo,
             _ => MatchTeamEnum.Unknown
         };
     }

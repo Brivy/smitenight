@@ -1,9 +1,9 @@
 ﻿using Smitenight.Application.Blazor.Business.Contracts.Services.Builders;
 using Smitenight.Application.Blazor.Business.Contracts.Services.Common;
 using Smitenight.Domain.Models.Clients.RetrievePlayerClient;
-using Smitenight.Domain.Models.Constants.SmiteClient.Responses;
-using Smitenight.Domain.Models.Enums.SmiteClient;
 using Smitenight.Domain.Models.Models.Players;
+using Smitenight.Persistence.Data.Contracts.Enums;
+using Smitenight.Providers.SmiteProvider.Contracts.Constants;
 
 namespace Smitenight.Application.Blazor.Business.Services.Builders
 {
@@ -16,7 +16,7 @@ namespace Smitenight.Application.Blazor.Business.Services.Builders
             _clock = clock;
         }
 
-        public Domain.Models.Models.Smitenights.Smitenight Build(PlayerResponse playerResponse, string? pinCode)
+        public Persistence.Data.EntityFramework.Entities.Smitenight Build(PlayerResponse playerResponse, string? pinCode)
         {
             return new Domain.Models.Models.Smitenights.Smitenight
             {
@@ -36,7 +36,7 @@ namespace Smitenight.Application.Blazor.Business.Services.Builders
             };
         }
 
-        public Domain.Models.Models.Smitenights.Smitenight Build(int playerId, string? pinCode)
+        public Persistence.Data.EntityFramework.Entities.Smitenight Build(int playerId, string? pinCode)
         {
             return new Domain.Models.Models.Smitenights.Smitenight
             {
@@ -50,13 +50,13 @@ namespace Smitenight.Application.Blazor.Business.Services.Builders
 
         public PortalTypeEnum ConvertToPortalTypeEnum(string platform) => platform switch
         {
-            PlayerResponseConstants.HirezPortal => PortalTypeEnum.Hirez,
-            PlayerResponseConstants.SteamPortal => PortalTypeEnum.Steam,
-            PlayerResponseConstants.Ps4Portal => PortalTypeEnum.Ps4,
-            PlayerResponseConstants.XboxPortal => PortalTypeEnum.Xbox,
-            PlayerResponseConstants.SwitchPortal => PortalTypeEnum.Switch,
-            PlayerResponseConstants.DiscordPortal => PortalTypeEnum.Discord,
-            PlayerResponseConstants.EpicPortal => PortalTypeEnum.Epic,
+            PlayerConstants.HirezPortal => PortalTypeEnum.Hirez,
+            PlayerConstants.SteamPortal => PortalTypeEnum.Steam,
+            PlayerConstants.Ps4Portal => PortalTypeEnum.Ps4,
+            PlayerConstants.XboxPortal => PortalTypeEnum.Xbox,
+            PlayerConstants.SwitchPortal => PortalTypeEnum.Switch,
+            PlayerConstants.DiscordPortal => PortalTypeEnum.Discord,
+            PlayerConstants.EpicPortal => PortalTypeEnum.Epic,
             _ => PortalTypeEnum.Unknown
         };
 

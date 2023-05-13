@@ -14,11 +14,11 @@ namespace Smitenight.Providers.SmiteProvider.HiRez.Models.GodClient
         [JsonPropertyName("AbilityId3")] public int AbilityId3 { get; set; }
         [JsonPropertyName("AbilityId4")] public int AbilityId4 { get; set; }
         [JsonPropertyName("AbilityId5")] public int AbilityId5 { get; set; }
-        [JsonPropertyName("Ability_1")] public AbilityDetails1Dto? AbilityDetails1 { get; set; }
-        [JsonPropertyName("Ability_2")] public AbilityDetails2Dto? AbilityDetails2 { get; set; }
-        [JsonPropertyName("Ability_3")] public AbilityDetails3Dto? AbilityDetails3 { get; set; }
-        [JsonPropertyName("Ability_4")] public AbilityDetails4Dto? AbilityDetails4 { get; set; }
-        [JsonPropertyName("Ability_5")] public AbilityDetails5Dto? AbilityDetails5 { get; set; }
+        [JsonPropertyName("Ability_1")] public AbilityDetails? AbilityDetails1 { get; set; }
+        [JsonPropertyName("Ability_2")] public AbilityDetails? AbilityDetails2 { get; set; }
+        [JsonPropertyName("Ability_3")] public AbilityDetails? AbilityDetails3 { get; set; }
+        [JsonPropertyName("Ability_4")] public AbilityDetails? AbilityDetails4 { get; set; }
+        [JsonPropertyName("Ability_5")] public AbilityDetails? AbilityDetails5 { get; set; }
         [JsonPropertyName("AttackSpeed")] public float AttackSpeed { get; set; }
         [JsonPropertyName("AttackSpeedPerLevel")] public float AttackSpeedPerLevel { get; set; }
         [JsonPropertyName("AutoBanned")] public string? AutoBanned { get; set; }
@@ -48,12 +48,12 @@ namespace Smitenight.Providers.SmiteProvider.HiRez.Models.GodClient
         [JsonPropertyName("Speed")] public int Speed { get; set; }
         [JsonPropertyName("Title")] public string? Title { get; set; }
         [JsonPropertyName("Type")] public string? Type { get; set; }
-        [JsonPropertyName("abilityDescription1")] public AbilityDescription1Dto? AbilityDescription1 { get; set; }
-        [JsonPropertyName("abilityDescription2")] public AbilityDescription2Dto? AbilityDescription2 { get; set; }
-        [JsonPropertyName("abilityDescription3")] public AbilityDescription3Dto? AbilityDescription3 { get; set; }
-        [JsonPropertyName("abilityDescription4")] public AbilityDescription4Dto? AbilityDescription4 { get; set; }
-        [JsonPropertyName("abilityDescription5")] public AbilityDescription5Dto? AbilityDescription5 { get; set; }
-        [JsonPropertyName("basicAttack")] public BasicAttackDto? BasicAttack { get; set; }
+        [JsonPropertyName("abilityDescription1")] public AbilityDescription? AbilityDescription1 { get; set; }
+        [JsonPropertyName("abilityDescription2")] public AbilityDescription? AbilityDescription2 { get; set; }
+        [JsonPropertyName("abilityDescription3")] public AbilityDescription? AbilityDescription3 { get; set; }
+        [JsonPropertyName("abilityDescription4")] public AbilityDescription? AbilityDescription4 { get; set; }
+        [JsonPropertyName("abilityDescription5")] public AbilityDescription? AbilityDescription5 { get; set; }
+        [JsonPropertyName("basicAttack")] public BasicAttack? BasicAttack { get; set; }
         [JsonPropertyName("godAbility1_URL")] public string? GodAbility1Url { get; set; }
         [JsonPropertyName("godAbility2_URL")] public string? GodAbility2Url { get; set; }
         [JsonPropertyName("godAbility3_URL")] public string? GodAbility3Url { get; set; }
@@ -66,321 +66,60 @@ namespace Smitenight.Providers.SmiteProvider.HiRez.Models.GodClient
         [JsonPropertyName("ret_msg")] public string? RetMsg { get; set; }
     }
 
-    public record class AbilityDetails1Dto
+    public record class AbilityDetails
     {
-        [JsonPropertyName("Description")] public DescriptionDto? Description { get; set; }
+        [JsonPropertyName("Description")] public Description? Description { get; set; }
         [JsonPropertyName("Id")] public int Id { get; set; }
         [JsonPropertyName("Summary")] public string? Summary { get; set; }
         [JsonPropertyName("URL")] public string? Url { get; set; }
     }
 
-    public record class DescriptionDto
+    public record class Description
     {
-        [JsonPropertyName("itemDescription")] public ItemDescriptionDto? ItemDescription { get; set; }
+        [JsonPropertyName("itemDescription")] public ItemDescription? ItemDescription { get; set; }
     }
 
-    public record class ItemDescriptionDto
-    {
-        [JsonPropertyName("cooldown")] public string? Cooldown { get; set; }
-        [JsonPropertyName("cost")] public string? Cost { get; set; }
-        [JsonPropertyName("description")] public string? Description { get; set; }
-        [JsonPropertyName("menuitems")] public MenuItemDto[]? MenuItems { get; set; }
-        [JsonPropertyName("rankitems")] public RankItemDto[]? RankItems { get; set; }
-    }
-
-    public record class MenuItemDto
-    {
-        [JsonPropertyName("description")] public string? Description { get; set; }
-        [JsonPropertyName("value")] public string? Value { get; set; }
-    }
-
-    public record class RankItemDto
-    {
-        [JsonPropertyName("description")] public string? Description { get; set; }
-        [JsonPropertyName("value")] public string? Value { get; set; }
-    }
-
-    public record class AbilityDetails2Dto
-    {
-        [JsonPropertyName("Description")] public Description1Dto? Description { get; set; }
-        [JsonPropertyName("Id")] public int Id { get; set; }
-        [JsonPropertyName("Summary")] public string? Summary { get; set; }
-        [JsonPropertyName("URL")] public string? Url { get; set; }
-    }
-
-    public record class Description1Dto
-    {
-        [JsonPropertyName("itemDescription")] public ItemDescription1Dto? ItemDescription { get; set; }
-    }
-
-    public record class ItemDescription1Dto
+    public record class ItemDescription
     {
         [JsonPropertyName("cooldown")] public string? Cooldown { get; set; }
         [JsonPropertyName("cost")] public string? Cost { get; set; }
         [JsonPropertyName("description")] public string? Description { get; set; }
-        [JsonPropertyName("menuitems")] public MenuItem1Dto[]? MenuItems { get; set; }
-        [JsonPropertyName("rankitems")] public RankItem1Dto[]? RankItems { get; set; }
+        [JsonPropertyName("menuitems")] public MenuItem[]? MenuItems { get; set; }
+        [JsonPropertyName("rankitems")] public RankItem[]? RankItems { get; set; }
     }
 
-    public record class MenuItem1Dto
+    public record class MenuItem
     {
         [JsonPropertyName("description")] public string? Description { get; set; }
         [JsonPropertyName("value")] public string? Value { get; set; }
     }
 
-    public record class RankItem1Dto
+    public record class RankItem
     {
         [JsonPropertyName("description")] public string? Description { get; set; }
         [JsonPropertyName("value")] public string? Value { get; set; }
     }
 
-    public record class AbilityDetails3Dto
+    public record class AbilityDescription
     {
-        [JsonPropertyName("Description")] public Description2Dto? Description { get; set; }
-        [JsonPropertyName("Id")] public int Id { get; set; }
-        [JsonPropertyName("Summary")] public string? Summary { get; set; }
-        [JsonPropertyName("URL")] public string? Url { get; set; }
+        [JsonPropertyName("itemDescription")] public ItemDescription? ItemDescription { get; set; }
     }
 
-    public record class Description2Dto
+    public record class BasicAttack
     {
-        [JsonPropertyName("itemDescription")] public ItemDescription2Dto? ItemDescription { get; set; }
+        [JsonPropertyName("itemDescription")] public ItemDescription? ItemDescription { get; set; }
     }
 
-    public record class ItemDescription2Dto
+    public record class BasicAttackDescription
     {
         [JsonPropertyName("cooldown")] public string? Cooldown { get; set; }
         [JsonPropertyName("cost")] public string? Cost { get; set; }
         [JsonPropertyName("description")] public string? Description { get; set; }
-        [JsonPropertyName("menuitems")] public MenuItem2Dto[]? MenuItems { get; set; }
-        [JsonPropertyName("rankitems")] public RankItem2Dto[]? RankItems { get; set; }
+        [JsonPropertyName("menuitems")] public BasicAttackItem[]? MenuItems { get; set; }
+        [JsonPropertyName("rankitems")] public RankItem[]? RankItems { get; set; }
     }
 
-    public record class MenuItem2Dto
-    {
-        [JsonPropertyName("description")] public string? Description { get; set; }
-        [JsonPropertyName("value")] public string? Value { get; set; }
-    }
-
-    public record class RankItem2Dto
-    {
-        [JsonPropertyName("description")] public string? Description { get; set; }
-        [JsonPropertyName("value")] public string? Value { get; set; }
-    }
-
-    public record class AbilityDetails4Dto
-    {
-        [JsonPropertyName("Description")] public Description3Dto? Description { get; set; }
-        [JsonPropertyName("Id")] public int Id { get; set; }
-        [JsonPropertyName("Summary")] public string? Summary { get; set; }
-        [JsonPropertyName("URL")] public string? Url { get; set; }
-    }
-
-    public record class Description3Dto
-    {
-        [JsonPropertyName("itemDescription")] public ItemDescription3Dto? ItemDescription { get; set; }
-    }
-
-    public record class ItemDescription3Dto
-    {
-        [JsonPropertyName("cooldown")] public string? Cooldown { get; set; }
-        [JsonPropertyName("cost")] public string? Cost { get; set; }
-        [JsonPropertyName("description")] public string? Description { get; set; }
-        [JsonPropertyName("menuitems")] public MenuItem3Dto[]? MenuItems { get; set; }
-        [JsonPropertyName("rankitems")] public RankItem3Dto[]? RankItems { get; set; }
-    }
-
-    public record class MenuItem3Dto
-    {
-        [JsonPropertyName("description")] public string? Description { get; set; }
-        [JsonPropertyName("value")] public string? Value { get; set; }
-    }
-
-    public record class RankItem3Dto
-    {
-        [JsonPropertyName("description")] public string? Description { get; set; }
-        [JsonPropertyName("value")] public string? Value { get; set; }
-    }
-
-    public record class AbilityDetails5Dto
-    {
-        [JsonPropertyName("Description")] public Description4Dto? Description { get; set; }
-        [JsonPropertyName("Id")] public int Id { get; set; }
-        [JsonPropertyName("Summary")] public string? Summary { get; set; }
-        [JsonPropertyName("URL")] public string? Url { get; set; }
-    }
-
-    public record class Description4Dto
-    {
-        [JsonPropertyName("itemDescription")] public ItemDescription4Dto? ItemDescription { get; set; }
-    }
-
-    public record class ItemDescription4Dto
-    {
-        [JsonPropertyName("cooldown")] public string? Cooldown { get; set; }
-        [JsonPropertyName("cost")] public string? Cost { get; set; }
-        [JsonPropertyName("description")] public string? Description { get; set; }
-        [JsonPropertyName("menuitems")] public MenuItem4Dto[]? MenuItems { get; set; }
-        [JsonPropertyName("rankitems")] public RankItem4Dto[]? RankItems { get; set; }
-    }
-
-    public record class MenuItem4Dto
-    {
-        [JsonPropertyName("description")] public string? Description { get; set; }
-        [JsonPropertyName("value")] public string? Value { get; set; }
-    }
-
-    public record class RankItem4Dto
-    {
-        [JsonPropertyName("description")] public string? Description { get; set; }
-        [JsonPropertyName("value")] public string? Value { get; set; }
-    }
-
-    public record class AbilityDescription1Dto
-    {
-        [JsonPropertyName("itemDescription")] public ItemDescription5Dto? ItemDescription { get; set; }
-    }
-
-    public record class ItemDescription5Dto
-    {
-        [JsonPropertyName("cooldown")] public string? Cooldown { get; set; }
-        [JsonPropertyName("cost")] public string? Cost { get; set; }
-        [JsonPropertyName("description")] public string? Description { get; set; }
-        [JsonPropertyName("menuitems")] public MenuItem5Dto[]? MenuItems { get; set; }
-        [JsonPropertyName("rankitems")] public RankItem5Dto[]? RankItems { get; set; }
-    }
-
-    public record class MenuItem5Dto
-    {
-        [JsonPropertyName("description")] public string? Description { get; set; }
-        [JsonPropertyName("value")] public string? Value { get; set; }
-    }
-
-    public record class RankItem5Dto
-    {
-        [JsonPropertyName("description")] public string? Description { get; set; }
-        [JsonPropertyName("value")] public string? Value { get; set; }
-    }
-
-    public record class AbilityDescription2Dto
-    {
-        [JsonPropertyName("itemDescription")] public ItemDescription6Dto? ItemDescription { get; set; }
-    }
-
-    public record class ItemDescription6Dto
-    {
-        [JsonPropertyName("cooldown")] public string? Cooldown { get; set; }
-        [JsonPropertyName("cost")] public string? Cost { get; set; }
-        [JsonPropertyName("description")] public string? Description { get; set; }
-        [JsonPropertyName("menuitems")] public MenuItem6Dto[]? MenuItems { get; set; }
-        [JsonPropertyName("rankitems")] public RankItem6Dto[]? RankItems { get; set; }
-    }
-
-    public record class MenuItem6Dto
-    {
-        [JsonPropertyName("description")] public string? Description { get; set; }
-        [JsonPropertyName("value")] public string? Value { get; set; }
-    }
-
-    public record class RankItem6Dto
-    {
-        [JsonPropertyName("description")] public string? Description { get; set; }
-        [JsonPropertyName("value")] public string? Value { get; set; }
-    }
-
-    public record class AbilityDescription3Dto
-    {
-        [JsonPropertyName("itemDescription")] public ItemDescription7Dto? ItemDescription { get; set; }
-    }
-
-    public record class ItemDescription7Dto
-    {
-        [JsonPropertyName("cooldown")] public string? Cooldown { get; set; }
-        [JsonPropertyName("cost")] public string? Cost { get; set; }
-        [JsonPropertyName("description")] public string? Description { get; set; }
-        [JsonPropertyName("menuitems")] public MenuItem7Dto[]? MenuItems { get; set; }
-        [JsonPropertyName("rankitems")] public RankItem7Dto[]? RankItems { get; set; }
-    }
-
-    public record class MenuItem7Dto
-    {
-        [JsonPropertyName("description")] public string? Description { get; set; }
-        [JsonPropertyName("value")] public string? Value { get; set; }
-    }
-
-    public record class RankItem7Dto
-    {
-        [JsonPropertyName("description")] public string? Description { get; set; }
-        [JsonPropertyName("value")] public string? Value { get; set; }
-    }
-
-    public record class AbilityDescription4Dto
-    {
-        [JsonPropertyName("itemDescription")] public ItemDescription8Dto? ItemDescription { get; set; }
-    }
-
-    public record class ItemDescription8Dto
-    {
-        [JsonPropertyName("cooldown")] public string? Cooldown { get; set; }
-        [JsonPropertyName("cost")] public string? Cost { get; set; }
-        [JsonPropertyName("description")] public string? Description { get; set; }
-        [JsonPropertyName("menuitems")] public MenuItem8Dto[]? MenuItems { get; set; }
-        [JsonPropertyName("rankitems")] public RankItem8Dto[]? RankItems { get; set; }
-    }
-
-    public record class MenuItem8Dto
-    {
-        [JsonPropertyName("description")] public string? Description { get; set; }
-        [JsonPropertyName("value")] public string? Value { get; set; }
-    }
-
-    public record class RankItem8Dto
-    {
-        [JsonPropertyName("description")] public string? Description { get; set; }
-        [JsonPropertyName("value")] public string? Value { get; set; }
-    }
-
-    public record class AbilityDescription5Dto
-    {
-        [JsonPropertyName("itemDescription")] public ItemDescription9Dto? ItemDescription { get; set; }
-    }
-
-    public record class ItemDescription9Dto
-    {
-        [JsonPropertyName("cooldown")] public string? Cooldown { get; set; }
-        [JsonPropertyName("cost")] public string? Cost { get; set; }
-        [JsonPropertyName("description")] public string? Description { get; set; }
-        [JsonPropertyName("menuitems")] public MenuItem9Dto[]? MenuItems { get; set; }
-        [JsonPropertyName("rankitems")] public RankItem9Dto[]? RankItems { get; set; }
-    }
-
-    public record class MenuItem9Dto
-    {
-        [JsonPropertyName("description")] public string? Description { get; set; }
-        [JsonPropertyName("value")] public string? Value { get; set; }
-    }
-
-    public record class RankItem9Dto
-    {
-        [JsonPropertyName("description")] public string? Description { get; set; }
-        [JsonPropertyName("value")] public string? Value { get; set; }
-    }
-
-    public record class BasicAttackDto
-    {
-        [JsonPropertyName("itemDescription")] public ItemDescription10Dto? ItemDescription { get; set; }
-    }
-
-    public record class ItemDescription10Dto
-    {
-        [JsonPropertyName("cooldown")] public string? Cooldown { get; set; }
-        [JsonPropertyName("cost")] public string? Cost { get; set; }
-        [JsonPropertyName("description")] public string? Description { get; set; }
-        [JsonPropertyName("menuitems")] public MenuItem10Dto[]? MenuItems { get; set; }
-        [JsonPropertyName("rankitems")] public object[]? RankItems { get; set; }
-    }
-
-    public record class MenuItem10Dto
+    public record class BasicAttackItem
     {
         [JsonPropertyName("description")] public string? Description { get; set; }
         [JsonPropertyName("value")] public string? Value { get; set; }

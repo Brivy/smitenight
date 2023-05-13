@@ -1,4 +1,4 @@
-﻿namespace Smitenight.Domain.Models.Clients.TeamClient
+﻿namespace Smitenight.Providers.SmiteProvider.Contracts.Models.TeamClient
 {
     public record class TeamDetailsDto
     (

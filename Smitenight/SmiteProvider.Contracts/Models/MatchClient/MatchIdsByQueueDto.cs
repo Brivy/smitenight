@@ -1,4 +1,4 @@
-﻿namespace Smitenight.Domain.Models.Clients.MatchClient
+﻿namespace Smitenight.Providers.SmiteProvider.Contracts.Models.MatchClient
 {
     public record class MatchIdsByQueueDto
     (

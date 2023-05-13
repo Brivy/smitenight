@@ -1,4 +1,4 @@
-﻿namespace Smitenight.Domain.Models.Clients.SystemClient
+﻿namespace Smitenight.Providers.SmiteProvider.Contracts.Models.SystemClient
 {
     public record class CreateSmiteSessionDto(
         string RetMsg,

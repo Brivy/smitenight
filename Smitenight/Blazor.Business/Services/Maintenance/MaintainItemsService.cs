@@ -3,9 +3,9 @@ using Smitenight.Application.Blazor.Business.Contracts.Facades.SmiteClient;
 using Smitenight.Application.Blazor.Business.Contracts.Services.Builders;
 using Smitenight.Application.Blazor.Business.Contracts.Services.Maintenance;
 using Smitenight.Domain.Models.Clients.ItemClient;
-using Smitenight.Domain.Models.Constants.SmiteClient.Responses;
-using Smitenight.Domain.Models.Enums.SmiteClient;
 using Smitenight.Persistence.Data.EntityFramework;
+using Smitenight.Providers.SmiteProvider.Contracts.Enums;
+using Smitenight.Providers.SmiteProvider.HiRez.Constants;
 
 namespace Smitenight.Application.Blazor.Business.Services.Maintenance
 {

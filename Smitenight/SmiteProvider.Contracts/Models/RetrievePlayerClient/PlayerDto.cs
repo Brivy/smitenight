@@ -1,4 +1,4 @@
-﻿namespace Smitenight.Domain.Models.Clients.RetrievePlayerClient
+﻿namespace Smitenight.Providers.SmiteProvider.Contracts.Models.RetrievePlayerClient
 {
     public record class PlayerDto
     (
@@ -23,12 +23,12 @@
         float RankStatDuelController,
         float RankStatJoust,
         float RankStatJoustController,
-        RankedConquest RankedConquest,
-        RankedConquestController RankedConquestController,
-        RankedDuel RankedDuel,
-        RankedDuelController RankedDuelController,
-        RankedJoust RankedJoust,
-        RankedJoustController RankedJoustController,
+        RankedDetailsDto RankedConquest,
+        RankedDetailsDto RankedConquestController,
+        RankedDetailsDto RankedDuel,
+        RankedDetailsDto RankedDuelController,
+        RankedDetailsDto RankedJoust,
+        RankedDetailsDto RankedJoustController,
         string Region,
         int TeamId,
         string TeamName,
@@ -43,112 +43,7 @@
         object RetMsg
     );
 
-    public record class RankedConquest
-    (
-        int Leaves,
-        int Losses,
-        string Name,
-        int Points,
-        int PrevRank,
-        int Rank,
-        float RankStat,
-        object RankStatConquest,
-        object RankStatJoust,
-        int RankVariance,
-        int Round,
-        int Season,
-        int Tier,
-        int Trend,
-        int Wins,
-        object PlayerId,
-        object RetMsg
-    );
-
-    public record class RankedConquestController
-    (
-        int Leaves,
-        int Losses,
-        string Name,
-        int Points,
-        int PrevRank,
-        int Rank,
-        float RankStat,
-        object RankStatConquest,
-        object RankStatJoust,
-        int RankVariance,
-        int Round,
-        int Season,
-        int Tier,
-        int Trend,
-        int Wins,
-        object PlayerId,
-        object RetMsg
-    );
-
-    public record class RankedDuel
-    (
-        int Leaves,
-        int Losses,
-        string Name,
-        int Points,
-        int PrevRank,
-        int Rank,
-        float RankStat,
-        object RankStatConquest,
-        object RankStatJoust,
-        int RankVariance,
-        int Round,
-        int Season,
-        int Tier,
-        int Trend,
-        int Wins,
-        object PlayerId,
-        object RetMsg
-    );
-
-    public record class RankedDuelController
-    (
-        int Leaves,
-        int Losses,
-        string Name,
-        int Points,
-        int PrevRank,
-        int Rank,
-        float RankStat,
-        object RankStatConquest,
-        object RankStatJoust,
-        int RankVariance,
-        int Round,
-        int Season,
-        int Tier,
-        int Trend,
-        int Wins,
-        object PlayerId,
-        object RetMsg
-    );
-
-    public record class RankedJoust
-    (
-        int Leaves,
-        int Losses,
-        string Name,
-        int Points,
-        int PrevRank,
-        int Rank,
-        float RankStat,
-        object RankStatConquest,
-        object RankStatJoust,
-        int RankVariance,
-        int Round,
-        int Season,
-        int Tier,
-        int Trend,
-        int Wins,
-        object PlayerId,
-        object RetMsg
-    );
-
-    public record class RankedJoustController
+    public record class RankedDetailsDto
     (
         int Leaves,
         int Losses,

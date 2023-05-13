@@ -1,9 +1,9 @@
 ﻿using AutoMapper;
 using Microsoft.EntityFrameworkCore;
+using Smitenight.Application.Blazor.Business.Contracts.Enums;
 using Smitenight.Application.Blazor.Business.Contracts.Services.Gods;
 using Smitenight.Domain.Models.Contracts.Common;
 using Smitenight.Domain.Models.Contracts.Gods;
-using Smitenight.Domain.Models.Enums.StatusCodes;
 using Smitenight.Persistence.Data.EntityFramework;
 
 namespace Smitenight.Application.Blazor.Business.Services.Gods

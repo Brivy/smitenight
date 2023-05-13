@@ -3,9 +3,9 @@ using Smitenight.Application.Blazor.Business.Contracts.Facades.SmiteClient;
 using Smitenight.Application.Blazor.Business.Contracts.Services.Builders;
 using Smitenight.Application.Blazor.Business.Contracts.Services.Matches;
 using Smitenight.Domain.Models.Clients.MatchClient;
-using Smitenight.Domain.Models.Constants.SmiteClient.Responses;
-using Smitenight.Domain.Models.Models.Matches;
 using Smitenight.Persistence.Data.EntityFramework;
+using Smitenight.Persistence.Data.EntityFramework.Entities;
+using Smitenight.Providers.SmiteProvider.Contracts.Constants;
 
 namespace Smitenight.Application.Blazor.Business.Services.Matches
 {
@@ -117,15 +117,15 @@ namespace Smitenight.Application.Blazor.Business.Services.Matches
 
                     // Attach the given god
                     var god = await _dbContext.Gods.AsNoTracking().Include(x => x.GodSkins).SingleOrDefaultAsync(x => x.SmiteId == matchDetails.GodId, cancellationToken);
-                    matchDetailsEntity.GodId = god?.Id ?? MatchResponseConstants.DefaultGodId;
-                    matchDetailsEntity.GodSkinId = god?.GodSkins.SingleOrDefault(x => x.SmiteId == matchDetails.SkinId || x.SecondarySmiteId == matchDetails.SkinId)?.Id ?? MatchResponseConstants.DefaultGodSkinId;
+                    matchDetailsEntity.GodId = god?.Id ?? MatchConstants.DefaultGodId;
+                    matchDetailsEntity.GodSkinId = god?.GodSkins.SingleOrDefault(x => x.SmiteId == matchDetails.SkinId || x.SecondarySmiteId == matchDetails.SkinId)?.Id ?? MatchConstants.DefaultGodSkinId;
 
                     // Attach purchased active and item entities
                     matchDetailsEntity.ActivePurchases = await _activePurchaseBuilderService.BuildAsync(matchDetails, cancellationToken);
                     matchDetailsEntity.ItemPurchases = await _itemPurchaseBuilderService.BuildAsync(matchDetails, cancellationToken);
 
                     // Attach player (and update if already exists)
-                    if (!string.IsNullOrWhiteSpace(matchDetails.PlayerId) && matchDetails.PlayerId != ResponseConstants.AnonymousPlayerStringId)
+                    if (!string.IsNullOrWhiteSpace(matchDetails.PlayerId) && matchDetails.PlayerId != SmiteConstants.AnonymousPlayerStringId)
                     {
                         await ProcessPlayerAsync(matchDetails, matchDetailsEntity, cancellationToken);
                     }

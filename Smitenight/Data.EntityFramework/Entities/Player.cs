@@ -1,4 +1,4 @@
-﻿using Smitenight.Domain.Models.Enums.SmiteClient;
+﻿using Smitenight.Persistence.Data.Contracts.Enums;
 
 namespace Smitenight.Persistence.Data.EntityFramework.Entities
 {
@@ -14,7 +14,7 @@ namespace Smitenight.Persistence.Data.EntityFramework.Entities
         public int Level { get; set; }
         public int MasteryLevel { get; set; }
         public string? PlayerName { get; set; }
-        public PortalTypeEnum? PortalType { get; set; }
+        public PortalType? PortalType { get; set; }
         public bool PrivacyEnabled { get; set; }
 
         #region Navigation

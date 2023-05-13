@@ -16,8 +16,6 @@ namespace Smitenight.Providers.SmiteProvider.HiRez.Extensions
         {
             services.Configure<SmiteClientSecrets>(configuration.GetSection(nameof(SmiteClientSecrets)));
 
-            services.AddAutoMapper(typeof(ServiceCollectionExtensions).Assembly);
-
             var section = configuration.GetSection(nameof(SmiteClientSettings));
             services.AddOptionsWithValidation<SmiteClientSettings>(section);
 

@@ -1,4 +1,4 @@
-﻿using Smitenight.Domain.Models.Enums.Gods;
+﻿using Smitenight.Persistence.Data.Contracts.Enums;
 
 namespace Smitenight.Persistence.Data.EntityFramework.Entities
 {
@@ -11,7 +11,7 @@ namespace Smitenight.Persistence.Data.EntityFramework.Entities
 
         public string? GodSkinUrl { get; set; }
         public string Name { get; set; } = null!;
-        public GodSkinsObtainabilityEnum Obtainability { get; set; }
+        public GodSkinsObtainability Obtainability { get; set; }
         public int PriceFavor { get; set; }
         public int PriceGems { get; set; }
 

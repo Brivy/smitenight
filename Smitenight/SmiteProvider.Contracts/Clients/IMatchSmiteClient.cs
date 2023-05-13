@@ -1,5 +1,5 @@
-﻿using Smitenight.Domain.Models.Clients.MatchClient;
-using Smitenight.Domain.Models.Enums.SmiteClient;
+﻿using Smitenight.Providers.SmiteProvider.Contracts.Enums;
+using Smitenight.Providers.SmiteProvider.Contracts.Models.MatchClient;
 
 namespace Smitenight.Providers.SmiteProvider.Contracts.Clients;
 
@@ -11,7 +11,7 @@ public interface IMatchSmiteClient
 
     Task<IEnumerable<MatchDetailsDto>> GetMatchDetailsBatchAsync(List<int> matchIds, CancellationToken cancellationToken = default);
 
-    Task<IEnumerable<MatchIdsByQueueDto>> GetMatchIdsByQueueAsync(GameModeQueueIdEnum gameModeQueueId, int matchIdDate, int matchIdHour, CancellationToken cancellationToken = default);
+    Task<IEnumerable<MatchIdsByQueueDto>> GetMatchIdsByQueueAsync(GameModeQueue gameModeQueue, int matchIdDate, int matchIdHour, CancellationToken cancellationToken = default);
 
     Task<IEnumerable<MatchPlayersDetailsDto>> GetMatchPlayerDetailsAsync(int matchId, CancellationToken cancellationToken = default);
 

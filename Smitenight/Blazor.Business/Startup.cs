@@ -10,13 +10,13 @@ using Smitenight.Application.Blazor.Business.Contracts.Services.Players;
 using Smitenight.Application.Blazor.Business.Contracts.Services.Smitenights;
 using Smitenight.Application.Blazor.Business.Facades.SmiteClient;
 using Smitenight.Application.Blazor.Business.Services.Builders;
-using Smitenight.Application.Blazor.Business.Services.Cache;
 using Smitenight.Application.Blazor.Business.Services.Common;
 using Smitenight.Application.Blazor.Business.Services.Gods;
 using Smitenight.Application.Blazor.Business.Services.Maintenance;
 using Smitenight.Application.Blazor.Business.Services.Matches;
 using Smitenight.Application.Blazor.Business.Services.Players;
 using Smitenight.Application.Blazor.Business.Services.Smitenights;
+using Smitenight.Providers.SmiteProvider.HiRez.Cache;
 
 namespace Smitenight.Application.Blazor.Business
 {

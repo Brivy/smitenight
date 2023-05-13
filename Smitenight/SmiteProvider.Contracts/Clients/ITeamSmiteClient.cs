@@ -1,4 +1,4 @@
-﻿using Smitenight.Domain.Models.Clients.TeamClient;
+﻿using Smitenight.Providers.SmiteProvider.Contracts.Models.TeamClient;
 
 namespace Smitenight.Providers.SmiteProvider.Contracts.Clients;
 

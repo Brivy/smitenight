@@ -1,7 +1,7 @@
 ﻿using Smitenight.Application.Blazor.Business.Contracts.Services.Builders;
 using Smitenight.Domain.Models.Clients.MatchClient;
-using Smitenight.Domain.Models.Enums.SmiteClient;
-using Smitenight.Domain.Models.Models.Players;
+using Smitenight.Persistence.Data.Contracts.Enums;
+using Smitenight.Persistence.Data.EntityFramework.Entities;
 
 namespace Smitenight.Application.Blazor.Business.Services.Builders
 {

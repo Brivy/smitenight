@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using Smitenight.Domain.Models.Contracts.Abilities;
-using Smitenight.Domain.Models.Models.Abilities;
+using Smitenight.Persistence.Data.EntityFramework.Entities;
 
 namespace Smitenight.Presentation.Blazor.Server.Profiles
 {

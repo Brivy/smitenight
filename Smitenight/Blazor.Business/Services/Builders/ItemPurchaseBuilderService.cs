@@ -1,10 +1,10 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Smitenight.Application.Blazor.Business.Contracts.Services.Builders;
 using Smitenight.Domain.Models.Clients.MatchClient;
-using Smitenight.Domain.Models.Constants.SmiteClient.Responses;
-using Smitenight.Domain.Models.Enums.Items;
-using Smitenight.Domain.Models.Models.Items;
+using Smitenight.Persistence.Data.Contracts.Enums;
 using Smitenight.Persistence.Data.EntityFramework;
+using Smitenight.Persistence.Data.EntityFramework.Entities;
+using Smitenight.Providers.SmiteProvider.Contracts.Constants;
 
 namespace Smitenight.Application.Blazor.Business.Services.Builders
 {
@@ -21,36 +21,36 @@ namespace Smitenight.Application.Blazor.Business.Services.Builders
         {
             var itemPurchases = new List<ItemPurchase>();
             var itemIdList = new List<int> { matchDetailsResponse.ItemId1, matchDetailsResponse.ItemId2, matchDetailsResponse.ItemId3, matchDetailsResponse.ItemId4, matchDetailsResponse.ItemId5, matchDetailsResponse.ItemId6 };
-            itemIdList.RemoveAll(x => x == ResponseConstants.EmptyResponse);
+            itemIdList.RemoveAll(x => x == SmiteConstants.EmptyResponse);
             if (!itemIdList.Any())
             {
                 return itemPurchases;
             }
 
             var items = await _dbContext.Items.AsNoTracking().Where(x => itemIdList.Contains(x.SmiteId)).ToListAsync(cancellationToken);
-            if (matchDetailsResponse.ItemId1 != ResponseConstants.EmptyResponse)
+            if (matchDetailsResponse.ItemId1 != SmiteConstants.EmptyResponse)
             {
-                itemPurchases.Add(new ItemPurchase { ItemId = items.SingleOrDefault(x => x.SmiteId == matchDetailsResponse.ItemId1)?.Id ?? MatchResponseConstants.DefaultItemId, ItemPurchaseOrder = ItemPurchaseOrderEnum.FirstItem });
+                itemPurchases.Add(new ItemPurchase { ItemId = items.SingleOrDefault(x => x.SmiteId == matchDetailsResponse.ItemId1)?.Id ?? MatchConstants.DefaultItemId, ItemPurchaseOrder = ItemPurchaseOrderEnum.FirstItem });
             }
-            if (matchDetailsResponse.ItemId2 != ResponseConstants.EmptyResponse)
+            if (matchDetailsResponse.ItemId2 != SmiteConstants.EmptyResponse)
             {
-                itemPurchases.Add(new ItemPurchase { ItemId = items.SingleOrDefault(x => x.SmiteId == matchDetailsResponse.ItemId2)?.Id ?? MatchResponseConstants.DefaultItemId, ItemPurchaseOrder = ItemPurchaseOrderEnum.SecondItem });
+                itemPurchases.Add(new ItemPurchase { ItemId = items.SingleOrDefault(x => x.SmiteId == matchDetailsResponse.ItemId2)?.Id ?? MatchConstants.DefaultItemId, ItemPurchaseOrder = ItemPurchaseOrderEnum.SecondItem });
             }
-            if (matchDetailsResponse.ItemId3 != ResponseConstants.EmptyResponse)
+            if (matchDetailsResponse.ItemId3 != SmiteConstants.EmptyResponse)
             {
-                itemPurchases.Add(new ItemPurchase { ItemId = items.SingleOrDefault(x => x.SmiteId == matchDetailsResponse.ItemId3)?.Id ?? MatchResponseConstants.DefaultItemId, ItemPurchaseOrder = ItemPurchaseOrderEnum.ThirdItem });
+                itemPurchases.Add(new ItemPurchase { ItemId = items.SingleOrDefault(x => x.SmiteId == matchDetailsResponse.ItemId3)?.Id ?? MatchConstants.DefaultItemId, ItemPurchaseOrder = ItemPurchaseOrderEnum.ThirdItem });
             }
-            if (matchDetailsResponse.ItemId4 != ResponseConstants.EmptyResponse)
+            if (matchDetailsResponse.ItemId4 != SmiteConstants.EmptyResponse)
             {
-                itemPurchases.Add(new ItemPurchase { ItemId = items.SingleOrDefault(x => x.SmiteId == matchDetailsResponse.ItemId4)?.Id ?? MatchResponseConstants.DefaultItemId, ItemPurchaseOrder = ItemPurchaseOrderEnum.FourthItem });
+                itemPurchases.Add(new ItemPurchase { ItemId = items.SingleOrDefault(x => x.SmiteId == matchDetailsResponse.ItemId4)?.Id ?? MatchConstants.DefaultItemId, ItemPurchaseOrder = ItemPurchaseOrderEnum.FourthItem });
             }
-            if (matchDetailsResponse.ItemId5 != ResponseConstants.EmptyResponse)
+            if (matchDetailsResponse.ItemId5 != SmiteConstants.EmptyResponse)
             {
-                itemPurchases.Add(new ItemPurchase { ItemId = items.SingleOrDefault(x => x.SmiteId == matchDetailsResponse.ItemId5)?.Id ?? MatchResponseConstants.DefaultItemId, ItemPurchaseOrder = ItemPurchaseOrderEnum.FifthItem });
+                itemPurchases.Add(new ItemPurchase { ItemId = items.SingleOrDefault(x => x.SmiteId == matchDetailsResponse.ItemId5)?.Id ?? MatchConstants.DefaultItemId, ItemPurchaseOrder = ItemPurchaseOrderEnum.FifthItem });
             }
-            if (matchDetailsResponse.ItemId6 != ResponseConstants.EmptyResponse)
+            if (matchDetailsResponse.ItemId6 != SmiteConstants.EmptyResponse)
             {
-                itemPurchases.Add(new ItemPurchase { ItemId = items.SingleOrDefault(x => x.SmiteId == matchDetailsResponse.ItemId6)?.Id ?? MatchResponseConstants.DefaultItemId, ItemPurchaseOrder = ItemPurchaseOrderEnum.SixthItem });
+                itemPurchases.Add(new ItemPurchase { ItemId = items.SingleOrDefault(x => x.SmiteId == matchDetailsResponse.ItemId6)?.Id ?? MatchConstants.DefaultItemId, ItemPurchaseOrder = ItemPurchaseOrderEnum.SixthItem });
             }
 
             return itemPurchases;

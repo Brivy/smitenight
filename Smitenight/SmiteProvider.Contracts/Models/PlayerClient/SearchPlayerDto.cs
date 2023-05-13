@@ -1,4 +1,4 @@
-﻿namespace Smitenight.Domain.Models.Clients.PlayerClient
+﻿namespace Smitenight.Providers.SmiteProvider.Contracts.Models.PlayerClient
 {
     public record class SearchPlayerDto
     (

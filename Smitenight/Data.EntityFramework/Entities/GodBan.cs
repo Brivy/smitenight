@@ -1,4 +1,4 @@
-﻿using Smitenight.Domain.Models.Enums.Gods;
+﻿using Smitenight.Persistence.Data.Contracts.Enums;
 
 namespace Smitenight.Persistence.Data.EntityFramework.Entities
 {
@@ -8,7 +8,7 @@ namespace Smitenight.Persistence.Data.EntityFramework.Entities
         public int GodId { get; set; }
         public int MatchId { get; set; }
 
-        public GodBanOrderEnum GodBanOrder { get; set; }
+        public GodBanOrder GodBanOrder { get; set; }
 
         #region Navigation
 

@@ -1,24 +1,24 @@
-﻿using AutoMapper;
-using Smitenight.Domain.Models.Clients.MatchClient;
-using Smitenight.Domain.Models.Constants.SmiteClient;
-using Smitenight.Domain.Models.Enums.SmiteClient;
+﻿using Smitenight.Domain.Models.Constants.SmiteClient;
 using Smitenight.Providers.SmiteProvider.Contracts.Clients;
+using Smitenight.Providers.SmiteProvider.Contracts.Enums;
+using Smitenight.Providers.SmiteProvider.Contracts.Models.MatchClient;
 using Smitenight.Providers.SmiteProvider.HiRez.Models.MatchClient;
 using Smitenight.Providers.SmiteProvider.HiRez.Services;
+using Smitenight.Utilities.Mapper.Common.Services;
 
 namespace Smitenight.Providers.SmiteProvider.HiRez.Clients
 {
     public class MatchSmiteClient : SmiteClient, IMatchSmiteClient
     {
         private readonly ISmiteClientUrlService _smiteClientUrlService;
-        private readonly IMapper _mapper;
+        private readonly IMapperService _mapperService;
 
         public MatchSmiteClient(HttpClient httpClient,
             ISmiteClientUrlService smiteClientUrlService,
-            IMapper mapper) : base(httpClient)
+            IMapperService mapperService) : base(httpClient)
         {
             _smiteClientUrlService = smiteClientUrlService;
-            _mapper = mapper;
+            _mapperService = mapperService;
         }
 
         public async Task<IEnumerable<DemoDetailsDto>> GetDemoDetailsAsync(int matchId, CancellationToken cancellationToken = default)
@@ -26,7 +26,7 @@ namespace Smitenight.Providers.SmiteProvider.HiRez.Clients
             var urlPath = _smiteClientUrlService.ConstructUrlPath(matchId);
             var url = await _smiteClientUrlService.ConstructUrlAsync(MethodNameConstants.DemoDetailsMethod, urlPath, cancellationToken);
             var result = await GetAsync<IEnumerable<DemoDetails>>(url, cancellationToken);
-            return _mapper.Map<IEnumerable<DemoDetailsDto>>(result);
+            return _mapperService.Map<IEnumerable<DemoDetails>, IEnumerable<DemoDetailsDto>>(result);
         }
 
         public async Task<IEnumerable<MatchDetailsDto>> GetMatchDetailsAsync(int matchId, CancellationToken cancellationToken = default)
@@ -34,7 +34,7 @@ namespace Smitenight.Providers.SmiteProvider.HiRez.Clients
             var urlPath = _smiteClientUrlService.ConstructUrlPath(matchId);
             var url = await _smiteClientUrlService.ConstructUrlAsync(MethodNameConstants.MatchDetailsMethod, urlPath, cancellationToken);
             var result = await GetAsync<IEnumerable<MatchDetails>>(url, cancellationToken);
-            return _mapper.Map<IEnumerable<MatchDetailsDto>>(result);
+            return _mapperService.Map<IEnumerable<MatchDetails>, IEnumerable<MatchDetailsDto>>(result);
         }
 
         public async Task<IEnumerable<MatchDetailsDto>> GetMatchDetailsBatchAsync(List<int> matchIds, CancellationToken cancellationToken = default)
@@ -42,15 +42,15 @@ namespace Smitenight.Providers.SmiteProvider.HiRez.Clients
             var urlPath = _smiteClientUrlService.ConstructUrlPath(string.Join(',', matchIds));
             var url = await _smiteClientUrlService.ConstructUrlAsync(MethodNameConstants.MatchDetailsBatchMethod, urlPath, cancellationToken);
             var result = await GetAsync<IEnumerable<MatchDetails>>(url, cancellationToken);
-            return _mapper.Map<IEnumerable<MatchDetailsDto>>(result);
+            return _mapperService.Map<IEnumerable<MatchDetails>, IEnumerable<MatchDetailsDto>>(result);
         }
 
-        public async Task<IEnumerable<MatchIdsByQueueDto>> GetMatchIdsByQueueAsync(GameModeQueueIdEnum gameModeQueueId, int matchIdDate, int matchIdHour, CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<MatchIdsByQueueDto>> GetMatchIdsByQueueAsync(GameModeQueue gameModeQueue, int matchIdDate, int matchIdHour, CancellationToken cancellationToken = default)
         {
-            var urlPath = _smiteClientUrlService.ConstructUrlPath((int)gameModeQueueId, matchIdDate, matchIdHour);
+            var urlPath = _smiteClientUrlService.ConstructUrlPath((int)gameModeQueue, matchIdDate, matchIdHour);
             var url = await _smiteClientUrlService.ConstructUrlAsync(MethodNameConstants.MatchIdsByQueueMethod, urlPath, cancellationToken);
             var result = await GetAsync<IEnumerable<MatchIdsByQueue>>(url, cancellationToken);
-            return _mapper.Map<IEnumerable<MatchIdsByQueueDto>>(result);
+            return _mapperService.Map<IEnumerable<MatchIdsByQueue>, IEnumerable<MatchIdsByQueueDto>>(result);
         }
 
         public async Task<IEnumerable<MatchPlayersDetailsDto>> GetMatchPlayerDetailsAsync(int matchId, CancellationToken cancellationToken = default)
@@ -58,14 +58,14 @@ namespace Smitenight.Providers.SmiteProvider.HiRez.Clients
             var urlPath = _smiteClientUrlService.ConstructUrlPath(matchId);
             var url = await _smiteClientUrlService.ConstructUrlAsync(MethodNameConstants.MatchPlayerDetailsMethod, urlPath, cancellationToken);
             var result = await GetAsync<IEnumerable<MatchPlayersDetails>>(url, cancellationToken);
-            return _mapper.Map<IEnumerable<MatchPlayersDetailsDto>>(result);
+            return _mapperService.Map<IEnumerable<MatchPlayersDetails>, IEnumerable<MatchPlayersDetailsDto>>(result);
         }
 
         public async Task<IEnumerable<TopMatchDto>> GetTopMatchesAsync(CancellationToken cancellationToken = default)
         {
             var url = await _smiteClientUrlService.ConstructUrlAsync(MethodNameConstants.TopMatchesMethod, cancellationToken);
             var result = await GetAsync<IEnumerable<TopMatch>>(url, cancellationToken);
-            return _mapper.Map<IEnumerable<TopMatchDto>>(result);
+            return _mapperService.Map<IEnumerable<TopMatch>, IEnumerable<TopMatchDto>>(result);
         }
     }
 }
