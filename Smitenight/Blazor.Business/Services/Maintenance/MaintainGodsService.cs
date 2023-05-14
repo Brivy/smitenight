@@ -19,6 +19,11 @@ namespace Smitenight.Application.Blazor.Business.Services.Maintenance
             _mapperService = mapperService;
         }
 
+        public Task<IEnumerable<GodChecksumsDto>> GetGodChecksumsAsync(CancellationToken cancellationToken = default)
+        {
+            return _maintainGodsRepository.GetGodChecksumsAsync(cancellationToken);
+        }
+
         public Task<int> CreateGodAsync(GodDto god, CancellationToken cancellationToken = default)
         {
             var createGod = _mapperService.Map<GodDto, CreateGodDto>(god);
@@ -31,6 +36,11 @@ namespace Smitenight.Application.Blazor.Business.Services.Maintenance
             var createdAbilityRanks = CreateAbilityRanks(ability.Description.ItemDescription.RankItems);
             var createdAbilityTags = CreateAbilityTags(ability.Description.ItemDescription.MenuItems);
             return _maintainGodsRepository.CreateAbilityAsync(createdGodId, createdAbility, createdAbilityTags, createdAbilityRanks, cancellationToken);
+        }
+
+        public Task UpdateGodRelationAsync(int createGodId, IEnumerable<int> abilityIds, CancellationToken cancellationToken = default)
+        {
+            return _maintainGodsRepository.UpdateGodRelationAsync(createGodId, abilityIds, cancellationToken);
         }
 
         public Task CreateBasicAttackDescriptionsAsync(int createdGodId, IEnumerable<BasicAttackItemDto> basicAttacks, CancellationToken cancellationToken = default)

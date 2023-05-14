@@ -9,6 +9,7 @@ namespace Smitenight.Persistence.Data.EntityFramework.Entities
         public int? RootItemId { get; set; }
         public int? ChildItemId { get; set; }
 
+        public string Checksum { get; set; } = null!;
         public bool Enabled { get; set; }
         public string Name { get; set; } = null!;
         public string? Description { get; set; }

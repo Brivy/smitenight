@@ -5,6 +5,7 @@
         public int Id { get; set; }
         public int GodId { get; set; }
 
+        public string Checksum { get; set; } = null!;
         public string Description { get; set; } = null!;
         public string Value { get; set; } = null!;
 

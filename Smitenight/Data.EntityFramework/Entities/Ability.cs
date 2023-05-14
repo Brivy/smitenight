@@ -8,6 +8,7 @@ namespace Smitenight.Persistence.Data.EntityFramework.Entities
         public int GodId { get; set; }
         public int SmiteId { get; set; }
 
+        public string Checksum { get; set; } = null!;
         public string? Cooldown { get; set; }
         public string? Cost { get; set; }
         public string Description { get; set; } = null!;

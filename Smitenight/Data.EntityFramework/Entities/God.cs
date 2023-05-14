@@ -7,6 +7,7 @@ namespace Smitenight.Persistence.Data.EntityFramework.Entities
         public int Id { get; set; }
         public int SmiteId { get; set; }
 
+        public string Checksum { get; set; } = null!;
         public float AttackSpeed { get; set; }
         public float AttackSpeedPerLevel { get; set; }
         public bool AutoBanned { get; set; }
