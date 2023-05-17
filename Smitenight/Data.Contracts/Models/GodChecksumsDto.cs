@@ -11,6 +11,7 @@
         public string Ability3Checksum { get; set; } = null!;
         public string Ability4Checksum { get; set; } = null!;
         public string Ability5Checksum { get; set; } = null!;
-        public string BasicAttackDescriptionChecksum { get; set; } = null!;
+        public string BasicAttackChecksum { get; set; } = null!;
+        public IEnumerable<string> GodSkinChecksums { get; set; } = new List<string>();
     }
 }

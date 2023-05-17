@@ -30,20 +30,20 @@ namespace Smitenight.Application.Blazor.Business.Services.Maintenance
             return _maintainGodsRepository.CreateGodAsync(createGod, cancellationToken);
         }
 
-        public Task CreateAbility(int createdGodId, AbilityDetailsDto ability, CancellationToken cancellationToken = default)
+        public Task CreateAbility(int godId, AbilityDetailsDto ability, CancellationToken cancellationToken = default)
         {
             var createdAbility = _mapperService.Map<AbilityDetailsDto, CreateAbilityDto>(ability);
             var createdAbilityRanks = CreateAbilityRanks(ability.Description.ItemDescription.RankItems);
             var createdAbilityTags = CreateAbilityTags(ability.Description.ItemDescription.MenuItems);
-            return _maintainGodsRepository.CreateAbilityAsync(createdGodId, createdAbility, createdAbilityTags, createdAbilityRanks, cancellationToken);
+            return _maintainGodsRepository.CreateAbilityAsync(godId, createdAbility, createdAbilityTags, createdAbilityRanks, cancellationToken);
         }
 
-        public Task UpdateGodRelationAsync(int createGodId, IEnumerable<int> abilityIds, CancellationToken cancellationToken = default)
+        public Task UpdateAbilityRelationAsync(int godId, IEnumerable<int> abilityIds, CancellationToken cancellationToken = default)
         {
-            return _maintainGodsRepository.UpdateGodRelationAsync(createGodId, abilityIds, cancellationToken);
+            return _maintainGodsRepository.UpdateGodRelationAsync(godId, abilityIds, cancellationToken);
         }
 
-        public Task CreateBasicAttackDescriptionsAsync(int createdGodId, IEnumerable<BasicAttackItemDto> basicAttacks, CancellationToken cancellationToken = default)
+        public Task CreateBasicAttacksAsync(int createdGodId, IEnumerable<BasicAttackItemDto> basicAttacks, CancellationToken cancellationToken = default)
         {
             var createdBasicAttackDescriptions = new List<CreateBasicAttackDescriptionDto>();
             foreach (var basicAttack in basicAttacks)
@@ -54,15 +54,20 @@ namespace Smitenight.Application.Blazor.Business.Services.Maintenance
             return _maintainGodsRepository.CreateBasicAttackAsync(createdGodId, createdBasicAttackDescriptions, cancellationToken);
         }
 
-        public Task CreateGodSkinsAsync(int createdGodId, IEnumerable<GodSkinDto> godSkins, CancellationToken cancellationToken = default)
+        public Task UpdateBasicAttackRelationAsync(int godId, CancellationToken cancellation = default)
         {
-            var createdGodSkin = new List<CreateGodSkinDto>();
-            foreach (var godSkin in godSkins)
-            {
-                createdGodSkin.Add(_mapperService.Map<GodSkinDto, CreateGodSkinDto>(godSkin));
-            }
+            return _maintainGodsRepository.UpdateBasicAttackRelationAsync(godId, cancellation);
+        }
 
-            return _maintainGodsRepository.CreateGodSkinsAsync(createdGodId, createdGodSkin, cancellationToken);
+        public Task CreateGodSkinAsync(int godId, GodSkinDto godSkin, CancellationToken cancellationToken = default)
+        {
+            var createdGodSkin = _mapperService.Map<GodSkinDto, CreateGodSkinDto>(godSkin);
+            return _maintainGodsRepository.CreateGodSkinAsync(godId, createdGodSkin, cancellationToken);
+        }
+
+        public Task UpdateGodSkinRelationAsync(int godId, IEnumerable<int> godSkinIds, CancellationToken cancellation = default)
+        {
+            return _maintainGodsRepository.UpdateBasicAttackRelationAsync(godId, cancellation);
         }
 
         private IEnumerable<CreateAbilityRankDto> CreateAbilityRanks(IEnumerable<RankItemDto> abilityRanks)

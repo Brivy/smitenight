@@ -72,55 +72,75 @@ namespace Smitenight.Application.Blazor.Business.Services.Maintenance
             var gods = await _godSmiteClient.GetGodsAsync(LanguageCode.English, cancellationToken);
             if (cancellationToken.IsCancellationRequested) return;
 
-            try
+            foreach (var god in gods)
             {
-                foreach (var god in gods)
+
+                var checksums = godChecksumsList.SingleOrDefault(x => x.GodSmiteId == god.Id);
+                if (checksums == null)
                 {
+                    await CreateNewGodAsync(god, cancellationToken);
+                    continue;
+                }
 
-                    var checksums = godChecksumsList.SingleOrDefault(x => x.GodSmiteId == god.Id);
-                    if (checksums == null)
-                    {
-                        await CreateNewGodAsync(god, cancellationToken);
-                        continue;
-                    }
+                var createdGodId = checksums.GodId;
+                var godUpdated = IsChecksumDifferent(checksums.GodChecksum, god);
+                if (godUpdated)
+                {
+                    createdGodId = await _maintainGodsService.CreateGodAsync(god, cancellationToken);
+                }
 
-                    var godUpdated = false;
-                    var createdGodId = checksums.GodId;
-                    if (IsChecksumDifferent(checksums.GodChecksum, god))
+                // Checksum every ability and create a new one if it's different
+                var abilityDetails = new List<AbilityDetailsDto> { god.AbilityDetails1, god.AbilityDetails2, god.AbilityDetails3, god.AbilityDetails4, god.AbilityDetails5 };
+                var abilityChecksums = new List<string> { checksums.Ability1Checksum, checksums.Ability2Checksum, checksums.Ability3Checksum, checksums.Ability4Checksum, checksums.Ability5Checksum };
+                var abilityIds = new List<int> { god.AbilityId1, god.AbilityId2, god.AbilityId3, god.AbilityId4, god.AbilityId5 };
+                for (var i = 0; i < abilityDetails.Count; i++)
+                {
+                    if (IsChecksumDifferent(abilityChecksums[i], abilityDetails[i]))
                     {
-                        createdGodId = await _maintainGodsService.CreateGodAsync(god, cancellationToken);
-                        godUpdated = true;
-                    }
-
-                    // Checksum every ability and create a new one if it's different
-                    var abilityDetails = new List<AbilityDetailsDto> { god.AbilityDetails1, god.AbilityDetails2, god.AbilityDetails3, god.AbilityDetails4, god.AbilityDetails5 };
-                    var abilityChecksums = new List<string> { checksums.Ability1Checksum, checksums.Ability2Checksum, checksums.Ability3Checksum, checksums.Ability4Checksum, checksums.Ability5Checksum };
-                    var abilityIds = new List<int> { god.AbilityId1, god.AbilityId2, god.AbilityId3, god.AbilityId4, god.AbilityId5 };
-                    for (var i = 0; i < abilityDetails.Count; i++)
-                    {
-                        if (IsChecksumDifferent(abilityChecksums[i], abilityDetails[i]))
-                        {
-                            await _maintainGodsService.CreateAbility(createdGodId, abilityDetails[i], cancellationToken);
-                            abilityIds.Remove(abilityIds[i]);
-                        }
-                    }
-
-                    // TODO: figure this one out
-                    if (IsChecksumDifferent(checksums.BasicAttackDescriptionChecksum, god.BasicAttack.ItemDescription.MenuItems))
-                    {
-                        await _maintainGodsService.CreateBasicAttackDescriptionsAsync(createdGodId, god.BasicAttack.ItemDescription.MenuItems, cancellationToken);
-                    }
-
-                    // Update the remaining abilities if the god was updated
-                    if (godUpdated && abilityIds.Any())
-                    {
-                        await _maintainGodsService.UpdateGodRelationAsync(createdGodId, abilityIds, cancellationToken);
+                        await _maintainGodsService.CreateAbility(createdGodId, abilityDetails[i], cancellationToken);
+                        abilityIds.Remove(abilityIds[i]);
                     }
                 }
-            }
-            catch (Exception e)
-            {
-                _logger.LogError(e, "Maintaining gods ended up in an exception");
+
+                var basicAttackUpdated = IsChecksumDifferent(checksums.BasicAttackChecksum, god.BasicAttack.ItemDescription.MenuItems);
+                if (basicAttackUpdated)
+                {
+                    await _maintainGodsService.CreateBasicAttacksAsync(createdGodId, god.BasicAttack.ItemDescription.MenuItems, cancellationToken);
+                }
+
+                var updateableGodSkins = new List<int>();
+                var godSkins = await _godSmiteClient.GetGodSkinsAsync(god.Id, LanguageCode.English, cancellationToken);
+                foreach (var godSkin in godSkins)
+                {
+                    var skinChecksum = _maintenanceService.CalculateChecksum(godSkin);
+                    if (checksums.GodSkinChecksums.Any(x => x != skinChecksum))
+                    {
+                        await _maintainGodsService.CreateGodSkinAsync(createdGodId, godSkin, cancellationToken);
+                    }
+                    else if (godUpdated)
+                    {
+                        updateableGodSkins.Add(godSkin.SkinId1);
+                    }
+                }
+
+                // Update the remaining abilities if the god was updated
+                if (godUpdated)
+                {
+                    if (abilityIds.Any())
+                    {
+                        await _maintainGodsService.UpdateAbilityRelationAsync(createdGodId, abilityIds, cancellationToken);
+                    }
+
+                    if (basicAttackUpdated)
+                    {
+                        await _maintainGodsService.UpdateBasicAttackRelationAsync(createdGodId, cancellationToken);
+                    }
+
+                    if (updateableGodSkins.Any())
+                    {
+                        await _maintainGodsService.UpdateGodSkinRelationAsync(createdGodId, updateableGodSkins, cancellationToken);
+                    }
+                }
             }
         }
 
@@ -138,7 +158,7 @@ namespace Smitenight.Application.Blazor.Business.Services.Maintenance
             await _maintainGodsService.CreateAbility(createdGodId, god.AbilityDetails3, cancellationToken);
             await _maintainGodsService.CreateAbility(createdGodId, god.AbilityDetails4, cancellationToken);
             await _maintainGodsService.CreateAbility(createdGodId, god.AbilityDetails5, cancellationToken);
-            await _maintainGodsService.CreateBasicAttackDescriptionsAsync(createdGodId, god.BasicAttack.ItemDescription.MenuItems, cancellationToken);
+            await _maintainGodsService.CreateBasicAttacksAsync(createdGodId, god.BasicAttack.ItemDescription.MenuItems, cancellationToken);
 
             var godSkins = await _godSmiteClient.GetGodSkinsAsync(god.Id, LanguageCode.English, cancellationToken);
             await _maintainGodsService.CreateGodSkinsAsync(createdGodId, godSkins, cancellationToken);
