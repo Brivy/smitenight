@@ -1,5 +1,4 @@
-﻿using Microsoft.Extensions.Logging;
-using Smitenight.Application.Blazor.Business.Contracts.Services.Maintenance;
+﻿using Smitenight.Application.Blazor.Business.Contracts.Services.Maintenance;
 using Smitenight.Providers.SmiteProvider.Contracts.Clients;
 using Smitenight.Providers.SmiteProvider.Contracts.Constants;
 using Smitenight.Providers.SmiteProvider.Contracts.Enums;
@@ -13,65 +12,53 @@ namespace Smitenight.Application.Blazor.Business.Services.Maintenance
         private readonly IMaintainGodsService _maintainGodsService;
         private readonly IItemSmiteClient _itemSmiteClient;
         private readonly IGodSmiteClient _godSmiteClient;
-        private readonly ILogger<MaintainSmitenight> _logger;
 
         public MaintainSmitenight(
             IMaintainItemsService maintainItemsService,
             IMaintainGodsService maintainGodsService,
             IItemSmiteClient itemSmiteClient,
-            IGodSmiteClient godSmiteClient,
-            ILogger<MaintainSmitenight> logger)
+            IGodSmiteClient godSmiteClient)
         {
             _maintainItemsService = maintainItemsService;
             _maintainGodsService = maintainGodsService;
             _itemSmiteClient = itemSmiteClient;
             _godSmiteClient = godSmiteClient;
-            _logger = logger;
         }
 
         public async Task MaintainItemsAsync(CancellationToken cancellationToken = default)
         {
+            var itemChecksums = await _maintainItemsService.GetItemChecksumsAsync(cancellationToken);
             var items = await _itemSmiteClient.GetItemsAsync(LanguageCode.English, cancellationToken);
             if (cancellationToken.IsCancellationRequested) return;
 
-            try
+            foreach (var item in items)
             {
-                foreach (var item in items)
+                var checksum = itemChecksums.SingleOrDefault(x => x.SmiteItemId == item.ItemId);
+                if (checksum == null)
                 {
-                    switch (item.Type)
-                    {
-                        case ItemConstants.ItemType:
-                            await _maintainItemsService.CreateItemAsync(item, cancellationToken);
-                            break;
-                        case ItemConstants.ConsumableItemType:
-                            await _maintainItemsService.CreateConsumableAsync(item, cancellationToken);
-                            break;
-                        case ItemConstants.ActiveItemType:
-                            await _maintainItemsService.CreateActiveAsync(item, cancellationToken);
-                            break;
-                    }
+                    await _maintainItemsService.CreateItemAsync(item, cancellationToken);
                 }
+                else
+                {
+                    await _maintainItemsService.MaintainItemAsync(item, checksum.Checksum, cancellationToken);
+                }
+            }
 
-                var sortedItems = items.Where(x => x.Type == ItemConstants.ItemType).ToList();
-                var sortedActives = items.Where(x => x.Type == ItemConstants.ActiveItemType).ToList();
-                await _maintainItemsService.LinkItemsAsync(sortedItems, cancellationToken);
-                await _maintainItemsService.LinkActivesAsync(sortedActives, cancellationToken);
-            }
-            catch (Exception e)
-            {
-                _logger.LogError(e, "Maintaining items ended up in an exception");
-            }
+            var sortedItems = items.Where(x => x.Type == ItemConstants.ItemType).ToList();
+            var sortedActives = items.Where(x => x.Type == ItemConstants.ActiveItemType).ToList();
+            await _maintainItemsService.LinkItemsAsync(sortedItems, cancellationToken);
+            await _maintainItemsService.LinkActivesAsync(sortedActives, cancellationToken);
         }
 
         public async Task MaintainGodsAsync(CancellationToken cancellationToken = default)
         {
-            var godChecksumsList = await _maintainGodsService.GetGodChecksumsAsync(cancellationToken);
+            var godChecksums = await _maintainGodsService.GetGodChecksumsAsync(cancellationToken);
             var gods = await _godSmiteClient.GetGodsAsync(LanguageCode.English, cancellationToken);
             if (cancellationToken.IsCancellationRequested) return;
 
             foreach (var god in gods)
             {
-                var checksums = godChecksumsList.SingleOrDefault(x => x.GodSmiteId == god.Id);
+                var checksums = godChecksums.SingleOrDefault(x => x.SmiteGodId == god.Id);
                 if (checksums == null)
                 {
                     await CreateNewGodAsync(god, cancellationToken);
@@ -91,7 +78,7 @@ namespace Smitenight.Application.Blazor.Business.Services.Maintenance
             }
         }
 
-        public async Task CreateNewGodAsync(GodDto god, CancellationToken cancellationToken = default)
+        private async Task CreateNewGodAsync(GodDto god, CancellationToken cancellationToken = default)
         {
             var createdGodId = await _maintainGodsService.CreateGodAsync(god, cancellationToken);
             await _maintainGodsService.CreateAbility(createdGodId, god.AbilityDetails1, cancellationToken);

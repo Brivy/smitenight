@@ -1,4 +1,5 @@
-﻿using Smitenight.Persistence.Data.Contracts.Enums;
+﻿using Smitenight.Application.Blazor.Business.Services.Checksums;
+using Smitenight.Persistence.Data.Contracts.Enums;
 using Smitenight.Persistence.Data.Contracts.Models;
 using Smitenight.Providers.SmiteProvider.Contracts.Constants;
 using Smitenight.Providers.SmiteProvider.Contracts.Models.ItemClient;
@@ -8,10 +9,19 @@ namespace Smitenight.Application.Blazor.Business.Services.Mappers
 {
     public class CreateItemMapper : Mapper<ItemDto, CreateItemDto>
     {
+        private readonly IChecksumService _checksumService;
+
+        public CreateItemMapper(IChecksumService checksumService)
+        {
+            _checksumService = checksumService;
+        }
+
         public override CreateItemDto Map(ItemDto item)
         {
+            var checksum = _checksumService.CalculateChecksum(item);
             return new CreateItemDto
             {
+                Checksum = checksum,
                 Enabled = item.ActiveFlag == SmiteConstants.Yes,
                 Description = !string.IsNullOrWhiteSpace(item.ItemDescription.Description) ? item.ItemDescription.Description : null,
                 Name = item.DeviceName,

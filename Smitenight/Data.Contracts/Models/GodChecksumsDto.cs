@@ -3,7 +3,7 @@
     public class GodChecksumsDto
     {
         public int GodId { get; set; }
-        public int GodSmiteId { get; set; }
+        public int SmiteGodId { get; set; }
 
         public string GodChecksum { get; set; } = null!;
         public string Ability1Checksum { get; set; } = null!;

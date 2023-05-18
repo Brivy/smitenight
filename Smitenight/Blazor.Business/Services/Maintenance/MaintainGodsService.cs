@@ -8,18 +8,15 @@ namespace Smitenight.Application.Blazor.Business.Services.Maintenance
 {
     public class MaintainGodsService : IMaintainGodsService
     {
-        private readonly IMaintenanceService _maintenanceService;
         private readonly IMaintainGodsRepository _maintainGodsRepository;
         private readonly IChecksumService _checksumService;
         private readonly IMapperService _mapperService;
 
         public MaintainGodsService(
-            IMaintenanceService maintenanceService,
             IMaintainGodsRepository maintainGodsRepository,
             IChecksumService checksumService,
             IMapperService mapperService)
         {
-            _maintenanceService = maintenanceService;
             _maintainGodsRepository = maintainGodsRepository;
             _checksumService = checksumService;
             _mapperService = mapperService;
@@ -82,7 +79,7 @@ namespace Smitenight.Application.Blazor.Business.Services.Maintenance
         {
             foreach (var godSkin in godSkins)
             {
-                var skinChecksum = _maintenanceService.CalculateChecksum(godSkin);
+                var skinChecksum = _checksumService.CalculateChecksum(godSkin);
                 if (checksums.Any(x => x != skinChecksum))
                 {
                     await CreateGodSkinAsync(godId, godSkin, cancellationToken);
