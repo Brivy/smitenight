@@ -11,7 +11,6 @@ namespace Smitenight.Application.Blazor.Business.Services.Maintenance
     {
         private readonly IMaintainItemsService _maintainItemsService;
         private readonly IMaintainGodsService _maintainGodsService;
-        private readonly IMaintenanceService _maintenanceService;
         private readonly IItemSmiteClient _itemSmiteClient;
         private readonly IGodSmiteClient _godSmiteClient;
         private readonly ILogger<MaintainSmitenight> _logger;
@@ -19,14 +18,12 @@ namespace Smitenight.Application.Blazor.Business.Services.Maintenance
         public MaintainSmitenight(
             IMaintainItemsService maintainItemsService,
             IMaintainGodsService maintainGodsService,
-            IMaintenanceService maintenanceService,
             IItemSmiteClient itemSmiteClient,
             IGodSmiteClient godSmiteClient,
             ILogger<MaintainSmitenight> logger)
         {
             _maintainItemsService = maintainItemsService;
             _maintainGodsService = maintainGodsService;
-            _maintenanceService = maintenanceService;
             _itemSmiteClient = itemSmiteClient;
             _godSmiteClient = godSmiteClient;
             _logger = logger;
@@ -74,7 +71,6 @@ namespace Smitenight.Application.Blazor.Business.Services.Maintenance
 
             foreach (var god in gods)
             {
-
                 var checksums = godChecksumsList.SingleOrDefault(x => x.GodSmiteId == god.Id);
                 if (checksums == null)
                 {
@@ -82,73 +78,18 @@ namespace Smitenight.Application.Blazor.Business.Services.Maintenance
                     continue;
                 }
 
-                var createdGodId = checksums.GodId;
-                var godUpdated = IsChecksumDifferent(checksums.GodChecksum, god);
-                if (godUpdated)
-                {
-                    createdGodId = await _maintainGodsService.CreateGodAsync(god, cancellationToken);
-                }
+                var newGodId = await _maintainGodsService.MaintainGodAsync(god, checksums.GodChecksum, cancellationToken);
+                var godUpdated = newGodId.HasValue;
+                var godId = newGodId ?? checksums.GodId;
 
-                // Checksum every ability and create a new one if it's different
-                var abilityDetails = new List<AbilityDetailsDto> { god.AbilityDetails1, god.AbilityDetails2, god.AbilityDetails3, god.AbilityDetails4, god.AbilityDetails5 };
-                var abilityChecksums = new List<string> { checksums.Ability1Checksum, checksums.Ability2Checksum, checksums.Ability3Checksum, checksums.Ability4Checksum, checksums.Ability5Checksum };
-                var abilityIds = new List<int> { god.AbilityId1, god.AbilityId2, god.AbilityId3, god.AbilityId4, god.AbilityId5 };
-                for (var i = 0; i < abilityDetails.Count; i++)
-                {
-                    if (IsChecksumDifferent(abilityChecksums[i], abilityDetails[i]))
-                    {
-                        await _maintainGodsService.CreateAbility(createdGodId, abilityDetails[i], cancellationToken);
-                        abilityIds.Remove(abilityIds[i]);
-                    }
-                }
+                var abilityDictionary = new Dictionary<string, AbilityDetailsDto> { { checksums.Ability1Checksum, god.AbilityDetails1 }, { checksums.Ability2Checksum, god.AbilityDetails2 }, { checksums.Ability3Checksum, god.AbilityDetails3 }, { checksums.Ability4Checksum, god.AbilityDetails4 }, { checksums.Ability5Checksum, god.AbilityDetails5 } };
+                await _maintainGodsService.MaintainAbilitiesAsync(godId, godUpdated, abilityDictionary, cancellationToken);
+                await _maintainGodsService.MaintainBasicAttacksAsync(godId, godUpdated, god.BasicAttack.ItemDescription.MenuItems, checksums.BasicAttackChecksum, cancellationToken);
 
-                var basicAttackUpdated = IsChecksumDifferent(checksums.BasicAttackChecksum, god.BasicAttack.ItemDescription.MenuItems);
-                if (basicAttackUpdated)
-                {
-                    await _maintainGodsService.CreateBasicAttacksAsync(createdGodId, god.BasicAttack.ItemDescription.MenuItems, cancellationToken);
-                }
-
-                var updateableGodSkins = new List<int>();
                 var godSkins = await _godSmiteClient.GetGodSkinsAsync(god.Id, LanguageCode.English, cancellationToken);
-                foreach (var godSkin in godSkins)
-                {
-                    var skinChecksum = _maintenanceService.CalculateChecksum(godSkin);
-                    if (checksums.GodSkinChecksums.Any(x => x != skinChecksum))
-                    {
-                        await _maintainGodsService.CreateGodSkinAsync(createdGodId, godSkin, cancellationToken);
-                    }
-                    else if (godUpdated)
-                    {
-                        updateableGodSkins.Add(godSkin.SkinId1);
-                    }
-                }
-
-                // Update the remaining abilities if the god was updated
-                if (godUpdated)
-                {
-                    if (abilityIds.Any())
-                    {
-                        await _maintainGodsService.UpdateAbilityRelationAsync(createdGodId, abilityIds, cancellationToken);
-                    }
-
-                    if (basicAttackUpdated)
-                    {
-                        await _maintainGodsService.UpdateBasicAttackRelationAsync(createdGodId, cancellationToken);
-                    }
-
-                    if (updateableGodSkins.Any())
-                    {
-                        await _maintainGodsService.UpdateGodSkinRelationAsync(createdGodId, updateableGodSkins, cancellationToken);
-                    }
-                }
+                await _maintainGodsService.MaintainGodSkinsAsync(godId, godUpdated, godSkins, checksums.GodSkinChecksums, cancellationToken);
             }
         }
-
-        private bool IsChecksumDifferent<TCompare>(string checksum, TCompare comparisonObject)
-        {
-            return checksum != _maintenanceService.CalculateChecksum(comparisonObject);
-        }
-
 
         public async Task CreateNewGodAsync(GodDto god, CancellationToken cancellationToken = default)
         {
@@ -161,7 +102,10 @@ namespace Smitenight.Application.Blazor.Business.Services.Maintenance
             await _maintainGodsService.CreateBasicAttacksAsync(createdGodId, god.BasicAttack.ItemDescription.MenuItems, cancellationToken);
 
             var godSkins = await _godSmiteClient.GetGodSkinsAsync(god.Id, LanguageCode.English, cancellationToken);
-            await _maintainGodsService.CreateGodSkinsAsync(createdGodId, godSkins, cancellationToken);
+            foreach (var godSkin in godSkins)
+            {
+                await _maintainGodsService.CreateGodSkinAsync(createdGodId, godSkin, cancellationToken);
+            }
         }
     }
 }

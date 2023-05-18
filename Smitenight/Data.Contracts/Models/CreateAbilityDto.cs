@@ -5,6 +5,7 @@ namespace Smitenight.Persistence.Data.Contracts.Models
     public record CreateAbilityDto
     {
         public int SmiteId { get; set; }
+        public string Checksum { get; set; } = null!;
         public string? Cooldown { get; set; }
         public string? Cost { get; set; }
         public string Description { get; set; } = null!;

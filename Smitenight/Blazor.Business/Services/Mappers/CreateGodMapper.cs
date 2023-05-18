@@ -1,4 +1,5 @@
 ﻿using Smitenight.Application.Blazor.Business.Constants;
+using Smitenight.Application.Blazor.Business.Services.Checksums;
 using Smitenight.Persistence.Data.Contracts.Enums;
 using Smitenight.Persistence.Data.Contracts.Models;
 using Smitenight.Providers.SmiteProvider.Contracts.Constants;
@@ -9,10 +10,35 @@ namespace Smitenight.Application.Blazor.Business.Services.Mappers
 {
     public class CreateGodMapper : Mapper<GodDto, CreateGodDto>
     {
+        private readonly IChecksumService _checksumService;
+
+        public CreateGodMapper(IChecksumService checksumService)
+        {
+            _checksumService = checksumService;
+        }
+
         public override CreateGodDto Map(GodDto god)
         {
+            // Make sure that we create a clean checksum of an smite god without the abilities interfering
+            var strippedGod = god with
+            {
+                AbilityDetails1 = null!,
+                AbilityDetails2 = null!,
+                AbilityDetails3 = null!,
+                AbilityDetails4 = null!,
+                AbilityDetails5 = null!,
+                AbilityDescription1 = null!,
+                AbilityDescription2 = null!,
+                AbilityDescription3 = null!,
+                AbilityDescription4 = null!,
+                AbilityDescription5 = null!,
+                BasicAttack = null!,
+            };
+
+            var checksum = _checksumService.CalculateChecksum(strippedGod);
             return new CreateGodDto
             {
+                Checksum = checksum,
                 AttackSpeed = god.AttackSpeed,
                 AttackSpeedPerLevel = god.AttackSpeedPerLevel,
                 AutoBanned = god.AutoBanned == SmiteConstants.Yes,

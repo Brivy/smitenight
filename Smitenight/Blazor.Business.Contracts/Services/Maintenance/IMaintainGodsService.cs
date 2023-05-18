@@ -1,17 +1,18 @@
 ﻿using Smitenight.Persistence.Data.Contracts.Models;
 using Smitenight.Providers.SmiteProvider.Contracts.Models.GodClient;
 
-namespace Smitenight.Application.Blazor.Business.Contracts.Services.Maintenance
+namespace Smitenight.Application.Blazor.Business.Services.Maintenance
 {
     public interface IMaintainGodsService
     {
-        Task<IEnumerable<GodChecksumsDto>> GetGodChecksumsAsync(CancellationToken cancellationToken = default);
-        Task CreateAbility(int createdGodId, AbilityDetailsDto ability, CancellationToken cancellationToken = default);
-        Task UpdateAbilityRelationAsync(int createGodId, IEnumerable<int> abilityIds, CancellationToken cancellationToken = default);
-        Task CreateBasicAttacksAsync(int createdGodId, IEnumerable<BasicAttackItemDto> basicAttacks, CancellationToken cancellationToken = default);
-        Task UpdateBasicAttackRelationAsync(int godId, CancellationToken cancellation = default);
+        Task CreateAbility(int godId, AbilityDetailsDto ability, CancellationToken cancellationToken = default);
+        Task CreateBasicAttacksAsync(int godId, IEnumerable<BasicAttackItemDto> basicAttacks, CancellationToken cancellationToken = default);
         Task<int> CreateGodAsync(GodDto god, CancellationToken cancellationToken = default);
-        Task CreateGodSkinAsync(int createdGodId, GodSkinDto godSkin, CancellationToken cancellationToken = default);
-        Task UpdateGodSkinRelationAsync(int godId, IEnumerable<int> godSkinIds, CancellationToken cancellation = default);
+        Task CreateGodSkinAsync(int godId, GodSkinDto godSkin, CancellationToken cancellationToken = default);
+        Task<IEnumerable<GodChecksumsDto>> GetGodChecksumsAsync(CancellationToken cancellationToken = default);
+        Task MaintainAbilitiesAsync(int godId, bool godUpdated, Dictionary<string, AbilityDetailsDto> abilityChecksums, CancellationToken cancellationToken = default);
+        Task MaintainBasicAttacksAsync(int godId, bool godUpdated, IEnumerable<BasicAttackItemDto> basicAttacks, string checksum, CancellationToken cancellationToken = default);
+        Task<int?> MaintainGodAsync(GodDto god, string checksum, CancellationToken cancellationToken = default);
+        Task MaintainGodSkinsAsync(int godId, bool godUpdated, IEnumerable<GodSkinDto> godSkins, IEnumerable<string> checksums, CancellationToken cancellationToken = default);
     }
 }

@@ -2,9 +2,9 @@
 using System.Text;
 using System.Text.Json;
 
-namespace Smitenight.Application.Blazor.Business.Services.Maintenance
+namespace Smitenight.Application.Blazor.Business.Services.Checksums
 {
-    public class MaintenanceService : IMaintenanceService
+    public class ChecksumService : IChecksumService
     {
         public string CalculateChecksum<T>(T @object)
         {
@@ -19,5 +19,9 @@ namespace Smitenight.Application.Blazor.Business.Services.Maintenance
             return builder.ToString();
         }
 
+        public bool IsChecksumDifferent<TCompare>(string checksum, TCompare comparisonObject)
+        {
+            return checksum != CalculateChecksum(comparisonObject);
+        }
     }
 }

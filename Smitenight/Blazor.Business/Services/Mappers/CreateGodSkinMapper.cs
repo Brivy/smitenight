@@ -1,4 +1,5 @@
 ﻿using Smitenight.Application.Blazor.Business.Constants;
+using Smitenight.Application.Blazor.Business.Services.Checksums;
 using Smitenight.Persistence.Data.Contracts.Enums;
 using Smitenight.Persistence.Data.Contracts.Models;
 using Smitenight.Providers.SmiteProvider.Contracts.Models.GodClient;
@@ -8,10 +9,19 @@ namespace Smitenight.Application.Blazor.Business.Services.Mappers
 {
     public class CreateGodSkinMapper : Mapper<GodSkinDto, CreateGodSkinDto>
     {
+        private readonly IChecksumService _checksumService;
+
+        public CreateGodSkinMapper(IChecksumService checksumService)
+        {
+            _checksumService = checksumService;
+        }
+
         public override CreateGodSkinDto Map(GodSkinDto godSkin)
         {
+            var checksum = _checksumService.CalculateChecksum(godSkin);
             return new CreateGodSkinDto
             {
+                Checksum = checksum,
                 GodSkinUrl = !string.IsNullOrWhiteSpace(godSkin.GodSkinUrl) ? godSkin.GodSkinUrl : null,
                 Name = godSkin.SkinName,
                 Obtainability = ConvertToGodSkinsObtainability(godSkin.Obtainability),

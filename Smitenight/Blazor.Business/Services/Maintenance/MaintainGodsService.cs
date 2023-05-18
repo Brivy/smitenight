@@ -1,4 +1,4 @@
-﻿using Smitenight.Application.Blazor.Business.Contracts.Services.Maintenance;
+﻿using Smitenight.Application.Blazor.Business.Services.Checksums;
 using Smitenight.Persistence.Data.Contracts.Models;
 using Smitenight.Persistence.Data.Contracts.Repositories;
 using Smitenight.Providers.SmiteProvider.Contracts.Models.GodClient;
@@ -8,15 +8,90 @@ namespace Smitenight.Application.Blazor.Business.Services.Maintenance
 {
     public class MaintainGodsService : IMaintainGodsService
     {
+        private readonly IMaintenanceService _maintenanceService;
         private readonly IMaintainGodsRepository _maintainGodsRepository;
+        private readonly IChecksumService _checksumService;
         private readonly IMapperService _mapperService;
 
         public MaintainGodsService(
+            IMaintenanceService maintenanceService,
             IMaintainGodsRepository maintainGodsRepository,
+            IChecksumService checksumService,
             IMapperService mapperService)
         {
+            _maintenanceService = maintenanceService;
             _maintainGodsRepository = maintainGodsRepository;
+            _checksumService = checksumService;
             _mapperService = mapperService;
+        }
+
+        public async Task<int?> MaintainGodAsync(GodDto god, string checksum, CancellationToken cancellationToken = default)
+        {
+            // Make sure that we create a clean checksum of an smite god without the abilities interfering
+            var strippedGod = god with
+            {
+                AbilityDetails1 = null!,
+                AbilityDetails2 = null!,
+                AbilityDetails3 = null!,
+                AbilityDetails4 = null!,
+                AbilityDetails5 = null!,
+                AbilityDescription1 = null!,
+                AbilityDescription2 = null!,
+                AbilityDescription3 = null!,
+                AbilityDescription4 = null!,
+                AbilityDescription5 = null!,
+                BasicAttack = null!,
+            };
+
+            if (!_checksumService.IsChecksumDifferent(checksum, strippedGod))
+            {
+                return null;
+            }
+
+            return await CreateGodAsync(god, cancellationToken);
+        }
+
+        public async Task MaintainAbilitiesAsync(int godId, bool godUpdated, Dictionary<string, AbilityDetailsDto> abilityChecksums, CancellationToken cancellationToken = default)
+        {
+            foreach (var abilityChecksum in abilityChecksums)
+            {
+                if (_checksumService.IsChecksumDifferent(abilityChecksum.Key, abilityChecksum.Value))
+                {
+                    await CreateAbility(godId, abilityChecksum.Value, cancellationToken);
+                }
+                else if (godUpdated)
+                {
+                    await _maintainGodsRepository.UpdateAbilityRelationAsync(godId, abilityChecksum.Value.Id, cancellationToken);
+                }
+            }
+        }
+
+        public async Task MaintainBasicAttacksAsync(int godId, bool godUpdated, IEnumerable<BasicAttackItemDto> basicAttacks, string checksum, CancellationToken cancellationToken = default)
+        {
+            if (_checksumService.IsChecksumDifferent(checksum, basicAttacks))
+            {
+                await CreateBasicAttacksAsync(godId, basicAttacks, cancellationToken);
+            }
+            else if (godUpdated)
+            {
+                await _maintainGodsRepository.UpdateBasicAttackRelationAsync(godId, cancellationToken);
+            }
+        }
+
+        public async Task MaintainGodSkinsAsync(int godId, bool godUpdated, IEnumerable<GodSkinDto> godSkins, IEnumerable<string> checksums, CancellationToken cancellationToken = default)
+        {
+            foreach (var godSkin in godSkins)
+            {
+                var skinChecksum = _maintenanceService.CalculateChecksum(godSkin);
+                if (checksums.Any(x => x != skinChecksum))
+                {
+                    await CreateGodSkinAsync(godId, godSkin, cancellationToken);
+                }
+                else if (godUpdated)
+                {
+                    await _maintainGodsRepository.UpdateGodSkinRelationAsync(godId, godSkin.SkinId1, godSkin.SkinId2, cancellationToken);
+                }
+            }
         }
 
         public Task<IEnumerable<GodChecksumsDto>> GetGodChecksumsAsync(CancellationToken cancellationToken = default)
@@ -38,12 +113,7 @@ namespace Smitenight.Application.Blazor.Business.Services.Maintenance
             return _maintainGodsRepository.CreateAbilityAsync(godId, createdAbility, createdAbilityTags, createdAbilityRanks, cancellationToken);
         }
 
-        public Task UpdateAbilityRelationAsync(int godId, IEnumerable<int> abilityIds, CancellationToken cancellationToken = default)
-        {
-            return _maintainGodsRepository.UpdateGodRelationAsync(godId, abilityIds, cancellationToken);
-        }
-
-        public Task CreateBasicAttacksAsync(int createdGodId, IEnumerable<BasicAttackItemDto> basicAttacks, CancellationToken cancellationToken = default)
+        public Task CreateBasicAttacksAsync(int godId, IEnumerable<BasicAttackItemDto> basicAttacks, CancellationToken cancellationToken = default)
         {
             var createdBasicAttackDescriptions = new List<CreateBasicAttackDescriptionDto>();
             foreach (var basicAttack in basicAttacks)
@@ -51,23 +121,13 @@ namespace Smitenight.Application.Blazor.Business.Services.Maintenance
                 createdBasicAttackDescriptions.Add(_mapperService.Map<BasicAttackItemDto, CreateBasicAttackDescriptionDto>(basicAttack));
             }
 
-            return _maintainGodsRepository.CreateBasicAttackAsync(createdGodId, createdBasicAttackDescriptions, cancellationToken);
-        }
-
-        public Task UpdateBasicAttackRelationAsync(int godId, CancellationToken cancellation = default)
-        {
-            return _maintainGodsRepository.UpdateBasicAttackRelationAsync(godId, cancellation);
+            return _maintainGodsRepository.CreateBasicAttackAsync(godId, createdBasicAttackDescriptions, cancellationToken);
         }
 
         public Task CreateGodSkinAsync(int godId, GodSkinDto godSkin, CancellationToken cancellationToken = default)
         {
             var createdGodSkin = _mapperService.Map<GodSkinDto, CreateGodSkinDto>(godSkin);
             return _maintainGodsRepository.CreateGodSkinAsync(godId, createdGodSkin, cancellationToken);
-        }
-
-        public Task UpdateGodSkinRelationAsync(int godId, IEnumerable<int> godSkinIds, CancellationToken cancellation = default)
-        {
-            return _maintainGodsRepository.UpdateBasicAttackRelationAsync(godId, cancellation);
         }
 
         private IEnumerable<CreateAbilityRankDto> CreateAbilityRanks(IEnumerable<RankItemDto> abilityRanks)

@@ -5,6 +5,7 @@ namespace Smitenight.Persistence.Data.Contracts.Models
     public record CreateGodDto
     {
         public int SmiteId { get; set; }
+        public string Checksum { get; set; } = null!;
         public float AttackSpeed { get; set; }
         public float AttackSpeedPerLevel { get; set; }
         public bool AutoBanned { get; set; }
