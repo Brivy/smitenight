@@ -53,12 +53,12 @@ namespace Smitenight.Providers.SmiteProvider.HiRez.Clients
             return _mapperService.Map<IEnumerable<MatchIdsByQueue>, IEnumerable<MatchIdsByQueueDto>>(result);
         }
 
-        public async Task<IEnumerable<MatchPlayersDetailsDto>> GetMatchPlayerDetailsAsync(int matchId, CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<MatchPlayerDetailsDto>> GetMatchPlayerDetailsAsync(int matchId, CancellationToken cancellationToken = default)
         {
             var urlPath = _smiteClientUrlService.ConstructUrlPath(matchId);
             var url = await _smiteClientUrlService.ConstructUrlAsync(MethodNameConstants.MatchPlayerDetailsMethod, urlPath, cancellationToken);
-            var result = await GetAsync<IEnumerable<MatchPlayersDetails>>(url, cancellationToken);
-            return _mapperService.Map<IEnumerable<MatchPlayersDetails>, IEnumerable<MatchPlayersDetailsDto>>(result);
+            var result = await GetAsync<IEnumerable<MatchPlayerDetails>>(url, cancellationToken);
+            return _mapperService.Map<IEnumerable<MatchPlayerDetails>, IEnumerable<MatchPlayerDetailsDto>>(result);
         }
 
         public async Task<IEnumerable<TopMatchDto>> GetTopMatchesAsync(CancellationToken cancellationToken = default)

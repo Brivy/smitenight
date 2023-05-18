@@ -29,12 +29,12 @@ namespace Smitenight.Providers.SmiteProvider.HiRez.Clients
             return _mapperService.Map<IEnumerable<God>, IEnumerable<GodDto>>(result);
         }
 
-        public async Task<IEnumerable<GodLeaderbordDto>> GetGodLeaderbordAsync(int godId, GameModeQueue gameModeQueue, CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<GodLeaderboardDto>> GetGodLeaderboardAsync(int godId, GameModeQueue gameModeQueue, CancellationToken cancellationToken = default)
         {
             var urlPath = _smiteClientUrlService.ConstructUrlPath(godId, (int)gameModeQueue);
             var url = await _smiteClientUrlService.ConstructUrlAsync(MethodNameConstants.GodLeaderboardMethod, urlPath, cancellationToken);
-            var result = await GetAsync<IEnumerable<GodLeaderbord>>(url, cancellationToken);
-            return _mapperService.Map<IEnumerable<GodLeaderbord>, IEnumerable<GodLeaderbordDto>>(result);
+            var result = await GetAsync<IEnumerable<GodLeaderboard>>(url, cancellationToken);
+            return _mapperService.Map<IEnumerable<GodLeaderboard>, IEnumerable<GodLeaderboardDto>>(result);
         }
 
         public async Task<IEnumerable<GodAltAbilityDto>> GetGodAltAbilitiesAsync(CancellationToken cancellationToken = default)

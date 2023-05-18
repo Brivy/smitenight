@@ -7,7 +7,7 @@ public interface IGodSmiteClient
 {
     Task<IEnumerable<GodDto>> GetGodsAsync(LanguageCode languageCode, CancellationToken cancellationToken = default);
 
-    Task<IEnumerable<GodLeaderbordDto>> GetGodLeaderbordAsync(int godId, GameModeQueue gameModeQueue, CancellationToken cancellationToken = default);
+    Task<IEnumerable<GodLeaderboardDto>> GetGodLeaderboardAsync(int godId, GameModeQueue gameModeQueue, CancellationToken cancellationToken = default);
 
     Task<IEnumerable<GodAltAbilityDto>> GetGodAltAbilitiesAsync(CancellationToken cancellationToken = default);
 

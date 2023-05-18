@@ -2,7 +2,7 @@
 
 namespace Smitenight.Providers.SmiteProvider.HiRez.Models.MatchClient
 {
-    public record class MatchPlayersDetails
+    public record class MatchPlayerDetails
     {
         [JsonPropertyName("Account_Gods_Played")] public int AccountGodsPlayed { get; init; }
         [JsonPropertyName("Account_Level")] public int AccountLevel { get; init; }

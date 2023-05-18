@@ -1,12 +1,12 @@
 ﻿namespace Smitenight.Providers.SmiteProvider.Contracts.Models.TeamClient
 {
     public record class TeamPlayerDto
-    (
-        int AccountLevel,
-        string? JoinedDatetime,
-        string? LastLoginDatetime,
-        string? Name,
-        string? PlayerId,
-        string? RetMsg
-    );
+    {
+        public int AccountLevel { get; init; }
+        public string JoinedDatetime { get; init; } = null!;
+        public string LastLoginDatetime { get; init; } = null!;
+        public string Name { get; init; } = null!;
+        public string PlayerId { get; init; } = null!;
+        public string? RetMsg { get; init; }
+    }
 }

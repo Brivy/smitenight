@@ -1,28 +1,28 @@
 ﻿namespace Smitenight.Providers.SmiteProvider.Contracts.Models.MatchClient
 {
     public record class DemoDetailsDto
-    (
-        int BanId1,
-        int BanId2,
-        int BanId3,
-        int BanId4,
-        string EntryDatetime,
-        int Match,
-        int MatchTime,
-        int OfflineSpectators,
-        string Queue,
-        int RealtimeSpectators,
-        string RecordingEnded,
-        string RecordingStarted,
-        int Team1AvgLevel,
-        int Team1Gold,
-        int Team1Kills,
-        int Team1Score,
-        int Team2AvgLevel,
-        int Team2Gold,
-        int Team2Kills,
-        int Team2Score,
-        int WinningTeam,
-        object RetMsg
-    );
+    {
+        public int BanId1 { get; init; }
+        public int BanId2 { get; init; }
+        public int BanId3 { get; init; }
+        public int BanId4 { get; init; }
+        public string EntryDatetime { get; init; } = null!;
+        public int Match { get; init; }
+        public int MatchTime { get; init; }
+        public int OfflineSpectators { get; init; }
+        public string Queue { get; init; } = null!;
+        public int RealtimeSpectators { get; init; }
+        public string RecordingEnded { get; init; } = null!;
+        public string RecordingStarted { get; init; } = null!;
+        public int Team1AvgLevel { get; init; }
+        public int Team1Gold { get; init; }
+        public int Team1Kills { get; init; }
+        public int Team1Score { get; init; }
+        public int Team2AvgLevel { get; init; }
+        public int Team2Gold { get; init; }
+        public int Team2Kills { get; init; }
+        public int Team2Score { get; init; }
+        public int WinningTeam { get; init; }
+        public string? RetMsg { get; init; }
+    }
 }

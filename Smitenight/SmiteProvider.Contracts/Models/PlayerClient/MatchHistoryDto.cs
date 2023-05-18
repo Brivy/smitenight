@@ -1,92 +1,92 @@
 ﻿namespace Smitenight.Providers.SmiteProvider.Contracts.Models.PlayerClient
 {
     public record class MatchHistoryDto
-    (
-        int ActiveId1,
-        int ActiveId2,
-        string Active1,
-        string Active2,
-        object Active3,
-        int Assists,
-        string Ban1,
-        string Ban10,
-        int Ban10Id,
-        string Ban11,
-        int Ban11Id,
-        string Ban12,
-        int Ban12Id,
-        int Ban1Id,
-        string Ban2,
-        int Ban2Id,
-        string Ban3,
-        int Ban3Id,
-        string Ban4,
-        int Ban4Id,
-        string Ban5,
-        int Ban5Id,
-        string Ban6,
-        int Ban6Id,
-        string Ban7,
-        int Ban7Id,
-        string Ban8,
-        int Ban8Id,
-        string Ban9,
-        int Ban9Id,
-        int Creeps,
-        int Damage,
-        int DamageBot,
-        int DamageDoneInHand,
-        int DamageMitigated,
-        int DamageStructure,
-        int DamageTaken,
-        int DamageTakenMagical,
-        int DamageTakenPhysical,
-        int Deaths,
-        int DistanceTraveled,
-        string FirstBanSide,
-        string God,
-        int GodId,
-        int Gold,
-        int Healing,
-        int HealingBot,
-        int HealingPlayerSelf,
-        int ItemId1,
-        int ItemId2,
-        int ItemId3,
-        int ItemId4,
-        int ItemId5,
-        int ItemId6,
-        string Item1,
-        string Item2,
-        string Item3,
-        string Item4,
-        string Item5,
-        string Item6,
-        int KillingSpree,
-        int Kills,
-        int Level,
-        string MapGame,
-        int Match,
-        int MatchQueueId,
-        string MatchTime,
-        int Minutes,
-        int MultiKillMax,
-        int ObjectiveAssists,
-        string Queue,
-        string Region,
-        string Role,
-        string Skin,
-        int SkinId,
-        int Surrendered,
-        int TaskForce,
-        int Team1Score,
-        int Team2Score,
-        int TimeInMatchSeconds,
-        int WardsPlaced,
-        string WinStatus,
-        int WinningTaskForce,
-        int PlayerId,
-        string PlayerName,
-        object RetMsg
-    );
+    {
+        public int ActiveId1 { get; init; }
+        public int ActiveId2 { get; init; }
+        public string Active1 { get; init; } = null!;
+        public string Active2 { get; init; } = null!;
+        public object Active3 { get; init; }
+        public int Assists { get; init; }
+        public string Ban1 { get; init; } = null!;
+        public string Ban10 { get; init; } = null!;
+        public int Ban10Id { get; init; }
+        public string Ban11 { get; init; } = null!;
+        public int Ban11Id { get; init; }
+        public string Ban12 { get; init; } = null!;
+        public int Ban12Id { get; init; }
+        public int Ban1Id { get; init; }
+        public string Ban2 { get; init; } = null!;
+        public int Ban2Id { get; init; }
+        public string Ban3 { get; init; } = null!;
+        public int Ban3Id { get; init; }
+        public string Ban4 { get; init; } = null!;
+        public int Ban4Id { get; init; }
+        public string Ban5 { get; init; } = null!;
+        public int Ban5Id { get; init; }
+        public string Ban6 { get; init; } = null!;
+        public int Ban6Id { get; init; }
+        public string Ban7 { get; init; } = null!;
+        public int Ban7Id { get; init; }
+        public string Ban8 { get; init; } = null!;
+        public int Ban8Id { get; init; }
+        public string Ban9 { get; init; } = null!;
+        public int Ban9Id { get; init; }
+        public int Creeps { get; init; }
+        public int Damage { get; init; }
+        public int DamageBot { get; init; }
+        public int DamageDoneInHand { get; init; }
+        public int DamageMitigated { get; init; }
+        public int DamageStructure { get; init; }
+        public int DamageTaken { get; init; }
+        public int DamageTakenMagical { get; init; }
+        public int DamageTakenPhysical { get; init; }
+        public int Deaths { get; init; }
+        public int DistanceTraveled { get; init; }
+        public string FirstBanSide { get; init; } = null!;
+        public string God { get; init; } = null!;
+        public int GodId { get; init; }
+        public int Gold { get; init; }
+        public int Healing { get; init; }
+        public int HealingBot { get; init; }
+        public int HealingPlayerSelf { get; init; }
+        public int ItemId1 { get; init; }
+        public int ItemId2 { get; init; }
+        public int ItemId3 { get; init; }
+        public int ItemId4 { get; init; }
+        public int ItemId5 { get; init; }
+        public int ItemId6 { get; init; }
+        public string Item1 { get; init; } = null!;
+        public string Item2 { get; init; } = null!;
+        public string Item3 { get; init; } = null!;
+        public string Item4 { get; init; } = null!;
+        public string Item5 { get; init; } = null!;
+        public string Item6 { get; init; } = null!;
+        public int KillingSpree { get; init; }
+        public int Kills { get; init; }
+        public int Level { get; init; }
+        public string MapGame { get; init; } = null!;
+        public int Match { get; init; }
+        public int MatchQueueId { get; init; }
+        public string MatchTime { get; init; } = null!;
+        public int Minutes { get; init; }
+        public int MultiKillMax { get; init; }
+        public int ObjectiveAssists { get; init; }
+        public string Queue { get; init; } = null!;
+        public string Region { get; init; } = null!;
+        public string Role { get; init; } = null!;
+        public string Skin { get; init; } = null!;
+        public int SkinId { get; init; }
+        public int Surrendered { get; init; }
+        public int TaskForce { get; init; }
+        public int Team1Score { get; init; }
+        public int Team2Score { get; init; }
+        public int TimeInMatchSeconds { get; init; }
+        public int WardsPlaced { get; init; }
+        public string WinStatus { get; init; } = null!;
+        public int WinningTaskForce { get; init; }
+        public int PlayerId { get; init; }
+        public string PlayerName { get; init; } = null!;
+        public string? RetMsg { get; init; }
+    }
 }

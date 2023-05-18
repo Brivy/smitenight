@@ -4,8 +4,8 @@ namespace Smitenight.Utilities.Mapper.Common.Services
 {
     public interface IMapperService
     {
-        IMapper<TInput, TOutput> GetMapper<TInput, TOutput>();
+        IMapper<TSource, TDestination> GetMapper<TSource, TDestination>();
 
-        TOutput Map<TInput, TOutput>(TInput input);
+        TDestination Map<TSource, TDestination>(TSource source);
     }
 }

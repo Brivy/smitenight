@@ -13,7 +13,7 @@ public interface IMatchSmiteClient
 
     Task<IEnumerable<MatchIdsByQueueDto>> GetMatchIdsByQueueAsync(GameModeQueue gameModeQueue, int matchIdDate, int matchIdHour, CancellationToken cancellationToken = default);
 
-    Task<IEnumerable<MatchPlayersDetailsDto>> GetMatchPlayerDetailsAsync(int matchId, CancellationToken cancellationToken = default);
+    Task<IEnumerable<MatchPlayerDetailsDto>> GetMatchPlayerDetailsAsync(int matchId, CancellationToken cancellationToken = default);
 
     Task<IEnumerable<TopMatchDto>> GetTopMatchesAsync(CancellationToken cancellationToken = default);
 }

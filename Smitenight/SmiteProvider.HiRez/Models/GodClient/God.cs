@@ -14,11 +14,11 @@ namespace Smitenight.Providers.SmiteProvider.HiRez.Models.GodClient
         [JsonPropertyName("AbilityId3")] public int AbilityId3 { get; set; }
         [JsonPropertyName("AbilityId4")] public int AbilityId4 { get; set; }
         [JsonPropertyName("AbilityId5")] public int AbilityId5 { get; set; }
-        [JsonPropertyName("Ability_1")] public AbilityDetails? AbilityDetails1 { get; set; }
-        [JsonPropertyName("Ability_2")] public AbilityDetails? AbilityDetails2 { get; set; }
-        [JsonPropertyName("Ability_3")] public AbilityDetails? AbilityDetails3 { get; set; }
-        [JsonPropertyName("Ability_4")] public AbilityDetails? AbilityDetails4 { get; set; }
-        [JsonPropertyName("Ability_5")] public AbilityDetails? AbilityDetails5 { get; set; }
+        [JsonPropertyName("Ability_1")] public AbilityDetails AbilityDetails1 { get; set; } = null!;
+        [JsonPropertyName("Ability_2")] public AbilityDetails AbilityDetails2 { get; set; } = null!;
+        [JsonPropertyName("Ability_3")] public AbilityDetails AbilityDetails3 { get; set; } = null!;
+        [JsonPropertyName("Ability_4")] public AbilityDetails AbilityDetails4 { get; set; } = null!;
+        [JsonPropertyName("Ability_5")] public AbilityDetails AbilityDetails5 { get; set; } = null!;
         [JsonPropertyName("AttackSpeed")] public float AttackSpeed { get; set; }
         [JsonPropertyName("AttackSpeedPerLevel")] public float AttackSpeedPerLevel { get; set; }
         [JsonPropertyName("AutoBanned")] public string? AutoBanned { get; set; }
@@ -48,12 +48,12 @@ namespace Smitenight.Providers.SmiteProvider.HiRez.Models.GodClient
         [JsonPropertyName("Speed")] public int Speed { get; set; }
         [JsonPropertyName("Title")] public string? Title { get; set; }
         [JsonPropertyName("Type")] public string? Type { get; set; }
-        [JsonPropertyName("abilityDescription1")] public AbilityDescription? AbilityDescription1 { get; set; }
-        [JsonPropertyName("abilityDescription2")] public AbilityDescription? AbilityDescription2 { get; set; }
-        [JsonPropertyName("abilityDescription3")] public AbilityDescription? AbilityDescription3 { get; set; }
-        [JsonPropertyName("abilityDescription4")] public AbilityDescription? AbilityDescription4 { get; set; }
-        [JsonPropertyName("abilityDescription5")] public AbilityDescription? AbilityDescription5 { get; set; }
-        [JsonPropertyName("basicAttack")] public BasicAttack? BasicAttack { get; set; }
+        [JsonPropertyName("abilityDescription1")] public AbilityDescription AbilityDescription1 { get; set; } = null!;
+        [JsonPropertyName("abilityDescription2")] public AbilityDescription AbilityDescription2 { get; set; } = null!;
+        [JsonPropertyName("abilityDescription3")] public AbilityDescription AbilityDescription3 { get; set; } = null!;
+        [JsonPropertyName("abilityDescription4")] public AbilityDescription AbilityDescription4 { get; set; } = null!;
+        [JsonPropertyName("abilityDescription5")] public AbilityDescription AbilityDescription5 { get; set; } = null!;
+        [JsonPropertyName("basicAttack")] public BasicAttack BasicAttack { get; set; } = null!;
         [JsonPropertyName("godAbility1_URL")] public string? GodAbility1Url { get; set; }
         [JsonPropertyName("godAbility2_URL")] public string? GodAbility2Url { get; set; }
         [JsonPropertyName("godAbility3_URL")] public string? GodAbility3Url { get; set; }

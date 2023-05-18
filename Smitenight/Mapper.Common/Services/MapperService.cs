@@ -11,20 +11,26 @@ namespace Smitenight.Utilities.Mapper.Common.Services
             _mappers = mappers.ToDictionary(m => (m.InputType, m.OutputType));
         }
 
-        public IMapper<TInput, TOutput> GetMapper<TInput, TOutput>()
+        public IMapper<TSource, TDestination> GetMapper<TSource, TDestination>()
         {
-            if (_mappers.TryGetValue((typeof(TInput), typeof(TOutput)), out var mapper))
+            if (_mappers.TryGetValue((typeof(TSource), typeof(TDestination)), out var mapper))
             {
-                return (IMapper<TInput, TOutput>)mapper;
+                return (IMapper<TSource, TDestination>)mapper;
             }
 
-            throw new InvalidOperationException($"No mapper found for {typeof(TInput).Name} to {typeof(TOutput).Name}");
+            throw new InvalidOperationException($"No mapper found for {typeof(TSource).Name} to {typeof(TDestination).Name}");
         }
 
-        public TOutput Map<TInput, TOutput>(TInput input)
+        // TODO: Make mapping IEnumerables possible
+        public TDestination Map<TSource, TDestination>(TSource source)
         {
-            var mapper = GetMapper<TInput, TOutput>();
-            return mapper.Map(input);
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            var mapper = GetMapper<TSource, TDestination>();
+            return mapper.Map(source);
         }
     }
 }

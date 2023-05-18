@@ -2,7 +2,7 @@
 
 namespace Smitenight.Providers.SmiteProvider.HiRez.Models.GodClient
 {
-    public record class GodLeaderbord
+    public record class GodLeaderboard
     {
         [JsonPropertyName("god_id")] public string? GodId { get; set; }
         [JsonPropertyName("losses")] public string? Losses { get; set; }

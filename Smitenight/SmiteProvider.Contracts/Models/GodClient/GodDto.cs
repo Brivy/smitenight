@@ -1,118 +1,125 @@
 ﻿namespace Smitenight.Providers.SmiteProvider.Contracts.Models.GodClient
 {
-    public record class GodDto(
-        string Ability1,
-        string Ability2,
-        string Ability3,
-        string Ability4,
-        string Ability5,
-        int AbilityId1,
-        int AbilityId2,
-        int AbilityId3,
-        int AbilityId4,
-        int AbilityId5,
-        AbilityDetailsDto AbilityDetails1,
-        AbilityDetailsDto AbilityDetails2,
-        AbilityDetailsDto AbilityDetails3,
-        AbilityDetailsDto AbilityDetails4,
-        AbilityDetailsDto AbilityDetails5,
-        float AttackSpeed,
-        float AttackSpeedPerLevel,
-        string AutoBanned,
-        string Cons,
-        float Hp5PerLevel,
-        int Health,
-        int HealthPerFive,
-        int HealthPerLevel,
-        string Lore,
-        float Mp5PerLevel,
-        float MagicProtection,
-        float MagicProtectionPerLevel,
-        int MagicalPower,
-        float MagicalPowerPerLevel,
-        int Mana,
-        float ManaPerFive,
-        int ManaPerLevel,
-        string Name,
-        string OnFreeRotation,
-        string Pantheon,
-        int PhysicalPower,
-        float PhysicalPowerPerLevel,
-        float PhysicalProtection,
-        float PhysicalProtectionPerLevel,
-        string Pros,
-        string Roles,
-        int Speed,
-        string Title,
-        string Type,
-        AbilityDescriptionDto AbilityDescription1,
-        AbilityDescriptionDto AbilityDescription2,
-        AbilityDescriptionDto AbilityDescription3,
-        AbilityDescriptionDto AbilityDescription4,
-        AbilityDescriptionDto AbilityDescription5,
-        BasicAttackDto BasicAttack,
-        string GodAbility1Url,
-        string GodAbility2Url,
-        string GodAbility3Url,
-        string GodAbility4Url,
-        string GodAbility5Url,
-        string GodCardUrl,
-        string GodIconUrl,
-        int Id,
-        string LatestGod,
-        object RetMsg
-     );
+    public record class GodDto
+    {
+        public string Ability1 { get; init; } = null!;
+        public string Ability2 { get; init; } = null!;
+        public string Ability3 { get; init; } = null!;
+        public string Ability4 { get; init; } = null!;
+        public string Ability5 { get; init; } = null!;
+        public int AbilityId1 { get; init; }
+        public int AbilityId2 { get; init; }
+        public int AbilityId3 { get; init; }
+        public int AbilityId4 { get; init; }
+        public int AbilityId5 { get; init; }
+        public AbilityDetailsDto AbilityDetails1 { get; init; } = null!;
+        public AbilityDetailsDto AbilityDetails2 { get; init; } = null!;
+        public AbilityDetailsDto AbilityDetails3 { get; init; } = null!;
+        public AbilityDetailsDto AbilityDetails4 { get; init; } = null!;
+        public AbilityDetailsDto AbilityDetails5 { get; init; } = null!;
+        public float AttackSpeed { get; init; }
+        public float AttackSpeedPerLevel { get; init; }
+        public string AutoBanned { get; init; } = null!;
+        public string Cons { get; init; } = null!;
+        public float Hp5PerLevel { get; init; }
+        public int Health { get; init; }
+        public int HealthPerFive { get; init; }
+        public int HealthPerLevel { get; init; }
+        public string Lore { get; init; } = null!;
+        public float Mp5PerLevel { get; init; }
+        public float MagicProtection { get; init; }
+        public float MagicProtectionPerLevel { get; init; }
+        public int MagicalPower { get; init; }
+        public float MagicalPowerPerLevel { get; init; }
+        public int Mana { get; init; }
+        public float ManaPerFive { get; init; }
+        public int ManaPerLevel { get; init; }
+        public string Name { get; init; } = null!;
+        public string OnFreeRotation { get; init; } = null!;
+        public string Pantheon { get; init; } = null!;
+        public int PhysicalPower { get; init; }
+        public float PhysicalPowerPerLevel { get; init; }
+        public float PhysicalProtection { get; init; }
+        public float PhysicalProtectionPerLevel { get; init; }
+        public string Pros { get; init; } = null!;
+        public string Roles { get; init; } = null!;
+        public int Speed { get; init; }
+        public string Title { get; init; } = null!;
+        public string Type { get; init; } = null!;
+        public AbilityDescriptionDto AbilityDescription1 { get; init; } = null!;
+        public AbilityDescriptionDto AbilityDescription2 { get; init; } = null!;
+        public AbilityDescriptionDto AbilityDescription3 { get; init; } = null!;
+        public AbilityDescriptionDto AbilityDescription4 { get; init; } = null!;
+        public AbilityDescriptionDto AbilityDescription5 { get; init; } = null!;
+        public BasicAttackDto BasicAttack { get; init; }
+        public string GodAbility1Url { get; init; } = null!;
+        public string GodAbility2Url { get; init; } = null!;
+        public string GodAbility3Url { get; init; } = null!;
+        public string GodAbility4Url { get; init; } = null!;
+        public string GodAbility5Url { get; init; } = null!;
+        public string GodCardUrl { get; init; } = null!;
+        public string GodIconUrl { get; init; } = null!;
+        public int Id { get; init; }
+        public string LatestGod { get; init; } = null!;
+        public string? RetMsg { get; init; }
+    }
 
-    public record class AbilityDetailsDto(
-        DescriptionDto Description,
-        int Id,
-        string Summary,
-        string Url
-     );
+    public record class AbilityDetailsDto
+    {
+        public DescriptionDto Description { get; init; } = null!;
+        public int Id { get; init; }
+        public string Summary { get; init; } = null!;
+        public string Url { get; init; } = null!;
+    }
 
-    public record class DescriptionDto(
-        ItemDescriptionDto ItemDescription
-     );
+    public record class DescriptionDto
+    {
+        public ItemDescriptionDto ItemDescription { get; init; } = null!;
+    }
 
-    public record class ItemDescriptionDto(
-        string Cooldown,
-        string Cost,
-        string Description,
-        MenuItemDto[] MenuItems,
-        RankItemDto[] RankItems
-     );
+    public record class ItemDescriptionDto
+    {
+        public string Cooldown { get; init; } = null!;
+        public string Cost { get; init; } = null!;
+        public string Description { get; init; } = null!;
+        public MenuItemDto[] MenuItems { get; init; } = null!;
+        public RankItemDto[] RankItems { get; init; } = null!;
+    }
 
-    public record class MenuItemDto(
-        string Description,
-        string Value
-     );
+    public record class MenuItemDto
+    {
+        public string Description { get; init; } = null!;
+        public string Value { get; init; } = null!;
+    }
 
-    public record class RankItemDto(
-        string Description,
-        string Value
-     );
+    public record class RankItemDto
+    {
+        public string Description { get; init; } = null!;
+        public string Value { get; init; } = null!;
+    }
 
     public record class AbilityDescriptionDto
-    (
-        ItemDescriptionDto ItemDescription
-    );
+    {
+        public ItemDescriptionDto ItemDescription { get; init; } = null!;
+    }
 
     public record class BasicAttackDto
-    (
-        BasicAttackDescriptionDto ItemDescription
-    );
+    {
+        public BasicAttackDescriptionDto ItemDescription { get; init; } = null!;
+    }
 
     public record class BasicAttackDescriptionDto
-    (
-        string Cooldown,
-        string Cost,
-        string Description,
-        BasicAttackItemDto[] MenuItems,
-        RankItemDto[] RankItems
-    );
+    {
+        public string Cooldown { get; init; } = null!;
+        public string Cost { get; init; } = null!;
+        public string Description { get; init; } = null!;
+        public BasicAttackItemDto[] MenuItems { get; init; } = null!;
+        public RankItemDto[] RankItems { get; init; } = null!;
+    }
 
-    public record class BasicAttackItemDto(
-        string Description,
-        string Value
-    );
+    public record class BasicAttackItemDto
+    {
+        public string Description { get; init; } = null!;
+        public string Value { get; init; } = null!;
+    }
 }
