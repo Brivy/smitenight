@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using Smitenight.Providers.SmiteProvider.HiRez.Models.Common;
+using System.Text.Json.Serialization;
 
 namespace Smitenight.Providers.SmiteProvider.HiRez.Models.GodClient
 {
@@ -68,7 +69,7 @@ namespace Smitenight.Providers.SmiteProvider.HiRez.Models.GodClient
 
     public record class AbilityDetails
     {
-        [JsonPropertyName("Description")] public Description? Description { get; set; }
+        [JsonPropertyName("Description")] public Description Description { get; set; } = null!;
         [JsonPropertyName("Id")] public int Id { get; set; }
         [JsonPropertyName("Summary")] public string? Summary { get; set; }
         [JsonPropertyName("URL")] public string? Url { get; set; }
@@ -76,7 +77,7 @@ namespace Smitenight.Providers.SmiteProvider.HiRez.Models.GodClient
 
     public record class Description
     {
-        [JsonPropertyName("itemDescription")] public ItemDescription? ItemDescription { get; set; }
+        [JsonPropertyName("itemDescription")] public ItemDescription ItemDescription { get; set; } = null!;
     }
 
     public record class ItemDescription
@@ -84,30 +85,18 @@ namespace Smitenight.Providers.SmiteProvider.HiRez.Models.GodClient
         [JsonPropertyName("cooldown")] public string? Cooldown { get; set; }
         [JsonPropertyName("cost")] public string? Cost { get; set; }
         [JsonPropertyName("description")] public string? Description { get; set; }
-        [JsonPropertyName("menuitems")] public MenuItem[]? MenuItems { get; set; }
-        [JsonPropertyName("rankitems")] public RankItem[]? RankItems { get; set; }
-    }
-
-    public record class MenuItem
-    {
-        [JsonPropertyName("description")] public string? Description { get; set; }
-        [JsonPropertyName("value")] public string? Value { get; set; }
-    }
-
-    public record class RankItem
-    {
-        [JsonPropertyName("description")] public string? Description { get; set; }
-        [JsonPropertyName("value")] public string? Value { get; set; }
+        [JsonPropertyName("menuitems")] public CommonItem[] AbilityTags { get; set; } = null!;
+        [JsonPropertyName("rankitems")] public CommonItem[] AbilityRanks { get; set; } = null!;
     }
 
     public record class AbilityDescription
     {
-        [JsonPropertyName("itemDescription")] public ItemDescription? ItemDescription { get; set; }
+        [JsonPropertyName("itemDescription")] public ItemDescription ItemDescription { get; set; } = null!;
     }
 
     public record class BasicAttack
     {
-        [JsonPropertyName("itemDescription")] public ItemDescription? ItemDescription { get; set; }
+        [JsonPropertyName("itemDescription")] public BasicAttackDescription ItemDescription { get; set; } = null!;
     }
 
     public record class BasicAttackDescription
@@ -115,13 +104,7 @@ namespace Smitenight.Providers.SmiteProvider.HiRez.Models.GodClient
         [JsonPropertyName("cooldown")] public string? Cooldown { get; set; }
         [JsonPropertyName("cost")] public string? Cost { get; set; }
         [JsonPropertyName("description")] public string? Description { get; set; }
-        [JsonPropertyName("menuitems")] public BasicAttackItem[]? MenuItems { get; set; }
-        [JsonPropertyName("rankitems")] public RankItem[]? RankItems { get; set; }
-    }
-
-    public record class BasicAttackItem
-    {
-        [JsonPropertyName("description")] public string? Description { get; set; }
-        [JsonPropertyName("value")] public string? Value { get; set; }
+        [JsonPropertyName("menuitems")] public CommonItem[] BasicAttackItems { get; set; } = null!;
+        [JsonPropertyName("rankitems")] public CommonItem[] BasicAttackRanks { get; set; } = null!;
     }
 }

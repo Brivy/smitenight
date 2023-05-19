@@ -2,7 +2,7 @@
 
 namespace Smitenight.Providers.SmiteProvider.HiRez.Models.PlayerClient
 {
-    public record class SearchPlayers
+    public record class SearchPlayer
     {
         [JsonPropertyName("Name")] public string? Name { get; set; }
         [JsonPropertyName("hz_player_name")] public string? HzPlayerName { get; set; }

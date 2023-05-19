@@ -2,7 +2,7 @@
 
 namespace Smitenight.Providers.SmiteProvider.HiRez.Models.TeamClient
 {
-    public record class TeamPlayers
+    public record class TeamPlayer
     {
         [JsonPropertyName("AccountLevel")] public int AccountLevel { get; init; }
         [JsonPropertyName("JoinedDatetime")] public string? JoinedDatetime { get; init; }

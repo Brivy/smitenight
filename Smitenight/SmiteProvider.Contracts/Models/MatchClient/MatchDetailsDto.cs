@@ -106,9 +106,9 @@
         public int ObjectiveAssists { get; init; }
         public int PartyId { get; init; }
         public float RankStatConquest { get; init; }
-        public int RankStatDuel { get; init; }
-        public int RankStatJoust { get; init; }
-        public string Reference_Name { get; init; } = null!;
+        public float RankStatDuel { get; init; }
+        public float RankStatJoust { get; init; }
+        public string ReferenceName { get; init; } = null!;
         public string Region { get; init; } = null!;
         public string Role { get; init; } = null!;
         public string Skin { get; init; } = null!;

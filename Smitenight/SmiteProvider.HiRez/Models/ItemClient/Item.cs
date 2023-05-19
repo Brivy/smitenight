@@ -9,7 +9,7 @@ namespace Smitenight.Providers.SmiteProvider.HiRez.Models.ItemClient
         [JsonPropertyName("DeviceName")] public string? DeviceName { get; set; }
         [JsonPropertyName("Glyph")] public string? Glyph { get; set; }
         [JsonPropertyName("IconId")] public int IconId { get; set; }
-        [JsonPropertyName("ItemDescription")] public ItemDescription? ItemDescription { get; set; }
+        [JsonPropertyName("ItemDescription")] public ItemDescription ItemDescription { get; set; } = null!;
         [JsonPropertyName("ItemId")] public int ItemId { get; set; }
         [JsonPropertyName("ItemTier")] public int ItemTier { get; set; }
         [JsonPropertyName("Price")] public int Price { get; set; }
@@ -25,7 +25,7 @@ namespace Smitenight.Providers.SmiteProvider.HiRez.Models.ItemClient
     public record class ItemDescription
     {
         [JsonPropertyName("Description")] public string? Description { get; set; }
-        [JsonPropertyName("Menuitems")] public MenuItem[]? MenuItems { get; set; }
+        [JsonPropertyName("Menuitems")] public MenuItem[] MenuItems { get; set; } = null!;
         [JsonPropertyName("SecondaryDescription")] public string? SecondaryDescription { get; set; }
     }
 

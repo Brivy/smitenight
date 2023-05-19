@@ -14,7 +14,7 @@ namespace Smitenight.Providers.SmiteProvider.HiRez.Models.RetrievePlayerClient
         [JsonPropertyName("Level")] public int Level { get; set; }
         [JsonPropertyName("Losses")] public int Losses { get; set; }
         [JsonPropertyName("MasteryLevel")] public int MasteryLevel { get; set; }
-        [JsonPropertyName("MergedPlayers")] public object? MergedPlayers { get; set; } // No clue what this is/does so keep it a object
+        [JsonPropertyName("MergedPlayers")] public string? MergedPlayers { get; set; } // No clue what this is/does so keep it a string
         [JsonPropertyName("MinutesPlayed")] public int MinutesPlayed { get; set; }
         [JsonPropertyName("Name")] public string? Name { get; set; }
         [JsonPropertyName("Personal_Status_Message")] public string? PersonalStatusMessage { get; set; }
@@ -25,12 +25,12 @@ namespace Smitenight.Providers.SmiteProvider.HiRez.Models.RetrievePlayerClient
         [JsonPropertyName("Rank_Stat_Duel_Controller")] public float RankStatDuelController { get; set; }
         [JsonPropertyName("Rank_Stat_Joust")] public float RankStatJoust { get; set; }
         [JsonPropertyName("Rank_Stat_Joust_Controller")] public float RankStatJoustController { get; set; }
-        [JsonPropertyName("RankedConquest")] public RankedDetails? RankedConquest { get; set; }
-        [JsonPropertyName("RankedConquestController")] public RankedDetails? RankedConquestController { get; set; }
-        [JsonPropertyName("RankedDuel")] public RankedDetails? RankedDuel { get; set; }
-        [JsonPropertyName("RankedDuelController")] public RankedDetails? RankedDuelController { get; set; }
-        [JsonPropertyName("RankedJoust")] public RankedDetails? RankedJoust { get; set; }
-        [JsonPropertyName("RankedJoustController")] public RankedDetails? RankedJoustController { get; set; }
+        [JsonPropertyName("RankedConquest")] public RankedDetails RankedConquest { get; set; } = null!;
+        [JsonPropertyName("RankedConquestController")] public RankedDetails RankedConquestController { get; set; } = null!;
+        [JsonPropertyName("RankedDuel")] public RankedDetails RankedDuel { get; set; } = null!;
+        [JsonPropertyName("RankedDuelController")] public RankedDetails RankedDuelController { get; set; } = null!;
+        [JsonPropertyName("RankedJoust")] public RankedDetails RankedJoust { get; set; } = null!;
+        [JsonPropertyName("RankedJoustController")] public RankedDetails RankedJoustController { get; set; } = null!;
         [JsonPropertyName("Region")] public string? Region { get; set; }
         [JsonPropertyName("TeamId")] public int TeamId { get; set; }
         [JsonPropertyName("Team_Name")] public string? TeamName { get; set; }
@@ -62,7 +62,7 @@ namespace Smitenight.Providers.SmiteProvider.HiRez.Models.RetrievePlayerClient
         [JsonPropertyName("Tier")] public int Tier { get; set; }
         [JsonPropertyName("Trend")] public int Trend { get; set; }
         [JsonPropertyName("Wins")] public int Wins { get; set; }
-        [JsonPropertyName("player_id")] public int? PlayerId { get; set; }
+        [JsonPropertyName("player_id")] public int PlayerId { get; set; }
         [JsonPropertyName("ret_msg")] public string? RetMsg { get; set; }
     }
 }

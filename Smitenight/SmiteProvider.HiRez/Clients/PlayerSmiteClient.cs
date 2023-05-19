@@ -73,8 +73,8 @@ namespace Smitenight.Providers.SmiteProvider.HiRez.Clients
         {
             var urlPath = _smiteClientUrlService.ConstructUrlPath(playerId);
             var url = await _smiteClientUrlService.ConstructUrlAsync(MethodNameConstants.SearchPlayersMethod, urlPath, cancellationToken);
-            var result = await GetAsync<IEnumerable<SearchPlayers>>(url, cancellationToken);
-            return _mapperService.Map<IEnumerable<SearchPlayers>, IEnumerable<SearchPlayerDto>>(result);
+            var result = await GetAsync<IEnumerable<SearchPlayer>>(url, cancellationToken);
+            return _mapperService.Map<IEnumerable<SearchPlayer>, IEnumerable<SearchPlayerDto>>(result);
         }
     }
 }

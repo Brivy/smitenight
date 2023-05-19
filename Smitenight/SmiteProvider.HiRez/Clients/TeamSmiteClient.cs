@@ -32,8 +32,8 @@ namespace Smitenight.Providers.SmiteProvider.HiRez.Clients
         {
             var urlPath = _smiteClientUrlService.ConstructUrlPath(clanId);
             var url = await _smiteClientUrlService.ConstructUrlAsync(MethodNameConstants.TeamPlayersMethod, urlPath, cancellationToken);
-            var result = await GetAsync<IEnumerable<TeamPlayers>>(url, cancellationToken);
-            return _mapperService.Map<IEnumerable<TeamPlayers>, IEnumerable<TeamPlayerDto>>(result);
+            var result = await GetAsync<IEnumerable<TeamPlayer>>(url, cancellationToken);
+            return _mapperService.Map<IEnumerable<TeamPlayer>, IEnumerable<TeamPlayerDto>>(result);
         }
 
         public async Task<IEnumerable<SearchTeamsDto>> SearchTeamsAsync(string teamName, CancellationToken cancellationToken = default)

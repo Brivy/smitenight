@@ -19,17 +19,4 @@
         public string ItemIconUrl { get; init; } = null!;
         public string? RetMsg { get; init; }
     }
-
-    public record class ItemDescriptionDto
-    {
-        public string Description { get; init; } = null!;
-        public MenuItemDto[] MenuItems { get; init; } = null!;
-        public string SecondaryDescription { get; init; } = null!;
-    }
-
-    public record class MenuItemDto
-    {
-        public string Description { get; init; } = null!;
-        public string Value { get; init; } = null!;
-    }
 }

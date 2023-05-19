@@ -1,12 +1,19 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using Smitenight.Providers.SmiteProvider.Contracts.Models.SystemClient;
+using Smitenight.Providers.SmiteProvider.HiRez.Models.SystemClient;
+using Smitenight.Utilities.Mapper.Common.Models;
 
 namespace Smitenight.Providers.SmiteProvider.HiRez.Mappers
 {
-    internal class CreateSmiteSessionMapper
+    public class CreateSmiteSessionMapper : Mapper<CreateSmiteSession, CreateSmiteSessionDto>
     {
+        public override CreateSmiteSessionDto Map(CreateSmiteSession input)
+        {
+            return new CreateSmiteSessionDto
+            {
+                RetMsg = input.RetMsg,
+                SessionId = input.SessionId ?? string.Empty,
+                Timestamp = input.Timestamp ?? string.Empty,
+            };
+        }
     }
 }

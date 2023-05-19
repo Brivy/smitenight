@@ -51,7 +51,7 @@
         public AbilityDescriptionDto AbilityDescription3 { get; init; } = null!;
         public AbilityDescriptionDto AbilityDescription4 { get; init; } = null!;
         public AbilityDescriptionDto AbilityDescription5 { get; init; } = null!;
-        public BasicAttackDto BasicAttack { get; init; }
+        public BasicAttackDto BasicAttack { get; init; } = null!;
         public string GodAbility1Url { get; init; } = null!;
         public string GodAbility2Url { get; init; } = null!;
         public string GodAbility3Url { get; init; } = null!;
@@ -62,64 +62,5 @@
         public int Id { get; init; }
         public string LatestGod { get; init; } = null!;
         public string? RetMsg { get; init; }
-    }
-
-    public record class AbilityDetailsDto
-    {
-        public DescriptionDto Description { get; init; } = null!;
-        public int Id { get; init; }
-        public string Summary { get; init; } = null!;
-        public string Url { get; init; } = null!;
-    }
-
-    public record class DescriptionDto
-    {
-        public ItemDescriptionDto ItemDescription { get; init; } = null!;
-    }
-
-    public record class ItemDescriptionDto
-    {
-        public string Cooldown { get; init; } = null!;
-        public string Cost { get; init; } = null!;
-        public string Description { get; init; } = null!;
-        public MenuItemDto[] MenuItems { get; init; } = null!;
-        public RankItemDto[] RankItems { get; init; } = null!;
-    }
-
-    public record class MenuItemDto
-    {
-        public string Description { get; init; } = null!;
-        public string Value { get; init; } = null!;
-    }
-
-    public record class RankItemDto
-    {
-        public string Description { get; init; } = null!;
-        public string Value { get; init; } = null!;
-    }
-
-    public record class AbilityDescriptionDto
-    {
-        public ItemDescriptionDto ItemDescription { get; init; } = null!;
-    }
-
-    public record class BasicAttackDto
-    {
-        public BasicAttackDescriptionDto ItemDescription { get; init; } = null!;
-    }
-
-    public record class BasicAttackDescriptionDto
-    {
-        public string Cooldown { get; init; } = null!;
-        public string Cost { get; init; } = null!;
-        public string Description { get; init; } = null!;
-        public BasicAttackItemDto[] MenuItems { get; init; } = null!;
-        public RankItemDto[] RankItems { get; init; } = null!;
-    }
-
-    public record class BasicAttackItemDto
-    {
-        public string Description { get; init; } = null!;
-        public string Value { get; init; } = null!;
     }
 }
