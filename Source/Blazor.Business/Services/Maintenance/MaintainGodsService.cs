@@ -2,6 +2,7 @@
 using Smitenight.Application.Blazor.Business.Contracts.Services.Maintenance;
 using Smitenight.Persistence.Data.Contracts.Models;
 using Smitenight.Persistence.Data.Contracts.Repositories;
+using Smitenight.Providers.SmiteProvider.Contracts.Models.Common;
 using Smitenight.Providers.SmiteProvider.Contracts.Models.GodClient;
 using Smitenight.Utilities.Mapper.Common.Services;
 
@@ -64,7 +65,7 @@ namespace Smitenight.Application.Blazor.Business.Services.Maintenance
             }
         }
 
-        public async Task MaintainBasicAttacksAsync(int godId, bool godUpdated, IEnumerable<BasicAttackItemDto> basicAttacks, string checksum, CancellationToken cancellationToken = default)
+        public async Task MaintainBasicAttacksAsync(int godId, bool godUpdated, IEnumerable<CommonItemDto> basicAttacks, string checksum, CancellationToken cancellationToken = default)
         {
             if (_checksumService.IsChecksumDifferent(checksum, basicAttacks))
             {
@@ -106,17 +107,17 @@ namespace Smitenight.Application.Blazor.Business.Services.Maintenance
         public Task CreateAbility(int godId, AbilityDetailsDto ability, CancellationToken cancellationToken = default)
         {
             var createdAbility = _mapperService.Map<AbilityDetailsDto, CreateAbilityDto>(ability);
-            var createdAbilityRanks = CreateAbilityRanks(ability.Description.ItemDescription.RankItems);
-            var createdAbilityTags = CreateAbilityTags(ability.Description.ItemDescription.MenuItems);
+            var createdAbilityRanks = CreateAbilityRanks(ability.AbilityRanks);
+            var createdAbilityTags = CreateAbilityTags(ability.AbilityTags);
             return _maintainGodsRepository.CreateAbilityAsync(godId, createdAbility, createdAbilityTags, createdAbilityRanks, cancellationToken);
         }
 
-        public Task CreateBasicAttacksAsync(int godId, IEnumerable<BasicAttackItemDto> basicAttacks, CancellationToken cancellationToken = default)
+        public Task CreateBasicAttacksAsync(int godId, IEnumerable<CommonItemDto> basicAttacks, CancellationToken cancellationToken = default)
         {
-            var createdBasicAttackDescriptions = new List<CreateBasicAttackDescriptionDto>();
+            var createdBasicAttackDescriptions = new List<CreateBasicAttackDto>();
             foreach (var basicAttack in basicAttacks)
             {
-                createdBasicAttackDescriptions.Add(_mapperService.Map<BasicAttackItemDto, CreateBasicAttackDescriptionDto>(basicAttack));
+                createdBasicAttackDescriptions.Add(_mapperService.Map<CommonItemDto, CreateBasicAttackDto>(basicAttack));
             }
 
             return _maintainGodsRepository.CreateBasicAttackAsync(godId, createdBasicAttackDescriptions, cancellationToken);
@@ -128,23 +129,23 @@ namespace Smitenight.Application.Blazor.Business.Services.Maintenance
             return _maintainGodsRepository.CreateGodSkinAsync(godId, createdGodSkin, cancellationToken);
         }
 
-        private IEnumerable<CreateAbilityRankDto> CreateAbilityRanks(IEnumerable<RankItemDto> abilityRanks)
+        private IEnumerable<CreateAbilityRankDto> CreateAbilityRanks(IEnumerable<CommonItemDto> abilityRanks)
         {
             var createdAbilityRanks = new List<CreateAbilityRankDto>();
             foreach (var abilityRank in abilityRanks)
             {
-                createdAbilityRanks.Add(_mapperService.Map<RankItemDto, CreateAbilityRankDto>(abilityRank));
+                createdAbilityRanks.Add(_mapperService.Map<CommonItemDto, CreateAbilityRankDto>(abilityRank));
             }
 
             return createdAbilityRanks;
         }
 
-        private IEnumerable<CreateAbilityTagDto> CreateAbilityTags(IEnumerable<MenuItemDto> abilityTags)
+        private IEnumerable<CreateAbilityTagDto> CreateAbilityTags(IEnumerable<CommonItemDto> abilityTags)
         {
             var createdAbilityTags = new List<CreateAbilityTagDto>();
             foreach (var abilityTag in abilityTags)
             {
-                createdAbilityTags.Add(_mapperService.Map<MenuItemDto, CreateAbilityTagDto>(abilityTag));
+                createdAbilityTags.Add(_mapperService.Map<CommonItemDto, CreateAbilityTagDto>(abilityTag));
             }
 
             return createdAbilityTags;

@@ -3,6 +3,7 @@ using Smitenight.Application.Blazor.Business.Contracts.Services.Maintenance;
 using Smitenight.Persistence.Data.Contracts.Models;
 using Smitenight.Persistence.Data.Contracts.Repositories;
 using Smitenight.Providers.SmiteProvider.Contracts.Constants;
+using Smitenight.Providers.SmiteProvider.Contracts.Models.Common;
 using Smitenight.Providers.SmiteProvider.Contracts.Models.ItemClient;
 using Smitenight.Utilities.Mapper.Common.Services;
 
@@ -40,7 +41,7 @@ namespace Smitenight.Application.Blazor.Business.Services.Maintenance
             {
                 case ItemConstants.ItemType:
                     var createdItem = _mapperService.Map<ItemDto, CreateItemDto>(item);
-                    var createdItemDescriptions = CreateItemDescriptions(item.ItemDescription.MenuItems);
+                    var createdItemDescriptions = CreateItemDescriptions(item.ItemDescription.ItemSubDescriptions);
                     await _maintainItemsRepository.CreateItemAsync(createdItem, createdItemDescriptions, cancellationToken);
                     break;
                 case ItemConstants.ConsumableItemType:
@@ -98,12 +99,12 @@ namespace Smitenight.Application.Blazor.Business.Services.Maintenance
             await _maintainItemsRepository.UpdateActiveLinksAsync(updatedLinkActives, cancellationToken);
         }
 
-        private IEnumerable<CreateItemDescriptionDto> CreateItemDescriptions(IEnumerable<MenuItemDto> itemDescriptions)
+        private IEnumerable<CreateItemDescriptionDto> CreateItemDescriptions(IEnumerable<CommonItemDto> itemDescriptions)
         {
             var createdItemDescriptions = new List<CreateItemDescriptionDto>();
             foreach (var itemDescription in itemDescriptions)
             {
-                createdItemDescriptions.Add(_mapperService.Map<MenuItemDto, CreateItemDescriptionDto>(itemDescription));
+                createdItemDescriptions.Add(_mapperService.Map<CommonItemDto, CreateItemDescriptionDto>(itemDescription));
             }
 
             return createdItemDescriptions;

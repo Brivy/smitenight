@@ -4,9 +4,9 @@ using Smitenight.Persistence.Data.EntityFramework.Entities;
 
 namespace Smitenight.Persistence.Data.EntityFramework.Configurations
 {
-    public class BasicAttackDescriptionConfiguration : IEntityTypeConfiguration<BasicAttackDescription>
+    public class BasicAttackDescriptionConfiguration : IEntityTypeConfiguration<BasicAttack>
     {
-        public void Configure(EntityTypeBuilder<BasicAttackDescription> builder)
+        public void Configure(EntityTypeBuilder<BasicAttack> builder)
         {
             builder.ToTable("BasicAttackDescriptions");
 

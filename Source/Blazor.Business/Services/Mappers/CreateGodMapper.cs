@@ -35,10 +35,12 @@ namespace Smitenight.Application.Blazor.Business.Services.Mappers
                 BasicAttack = null!,
             };
 
-            var checksum = _checksumService.CalculateChecksum(strippedGod);
+            var godChecksum = _checksumService.CalculateChecksum(strippedGod);
+            var basicAttackChecksum = _checksumService.CalculateChecksum(god.BasicAttack);
             return new CreateGodDto
             {
-                Checksum = checksum,
+                Checksum = godChecksum,
+                BasicAttackChecksum = basicAttackChecksum,
                 AttackSpeed = god.AttackSpeed,
                 AttackSpeedPerLevel = god.AttackSpeedPerLevel,
                 AutoBanned = god.AutoBanned == SmiteConstants.Yes,

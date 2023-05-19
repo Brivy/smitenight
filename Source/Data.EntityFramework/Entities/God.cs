@@ -8,6 +8,7 @@ namespace Smitenight.Persistence.Data.EntityFramework.Entities
         public int SmiteId { get; set; }
 
         public string Checksum { get; set; } = null!;
+        public string BasicAttackChecksum { get; set; } = null!;
         public float AttackSpeed { get; set; }
         public float AttackSpeedPerLevel { get; set; }
         public bool AutoBanned { get; set; }
@@ -43,7 +44,7 @@ namespace Smitenight.Persistence.Data.EntityFramework.Entities
         #region Navigation
 
         public List<Ability> Abilities { get; set; }
-        public List<BasicAttackDescription> BasicAttackDescriptions { get; set; }
+        public List<BasicAttack> BasicAttackDescriptions { get; set; }
         public List<GodBan> GodBans { get; set; }
         public List<GodSkin> GodSkins { get; set; }
         public List<MatchDetail> MatchDetails { get; set; }
@@ -53,7 +54,7 @@ namespace Smitenight.Persistence.Data.EntityFramework.Entities
         public God()
         {
             Abilities = new List<Ability>();
-            BasicAttackDescriptions = new List<BasicAttackDescription>();
+            BasicAttackDescriptions = new List<BasicAttack>();
             GodBans = new List<GodBan>();
             GodSkins = new List<GodSkin>();
             MatchDetails = new List<MatchDetail>();

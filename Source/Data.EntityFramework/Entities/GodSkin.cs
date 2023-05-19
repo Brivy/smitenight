@@ -6,9 +6,11 @@ namespace Smitenight.Persistence.Data.EntityFramework.Entities
     {
         public int Id { get; set; }
         public int GodId { get; set; }
-        public int SmiteId { get; set; }
+        public int SmiteId1 { get; set; }
+        public int SmiteId2 { get; set; }
         public int SecondarySmiteId { get; set; }
 
+        public string Checksum { get; set; } = null!;
         public string? GodSkinUrl { get; set; }
         public string Name { get; set; } = null!;
         public GodSkinsObtainability Obtainability { get; set; }

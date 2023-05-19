@@ -27,8 +27,8 @@ namespace Smitenight.Persistence.Data.EntityFramework.Entities
         public Item? RootItem { get; set; }
         public Item? ChildItem { get; set; }
 
-        public List<ItemDescription> ItemDescriptions { get; set; }
-        public List<ItemPurchase> ItemPurchases { get; set; }
+        public IEnumerable<ItemDescription> ItemDescriptions { get; set; }
+        public IEnumerable<ItemPurchase> ItemPurchases { get; set; }
 
         #endregion
 
