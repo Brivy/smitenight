@@ -1,6 +1,6 @@
-﻿using Smitenight.Domain.Models.Constants.SmiteClient;
-using Smitenight.Providers.SmiteProvider.Contracts.Clients;
+﻿using Smitenight.Providers.SmiteProvider.Contracts.Clients;
 using Smitenight.Providers.SmiteProvider.Contracts.Models.TeamClient;
+using Smitenight.Providers.SmiteProvider.HiRez.Constants;
 using Smitenight.Providers.SmiteProvider.HiRez.Models.TeamClient;
 using Smitenight.Providers.SmiteProvider.HiRez.Services;
 using Smitenight.Utilities.Mapper.Common.Services;

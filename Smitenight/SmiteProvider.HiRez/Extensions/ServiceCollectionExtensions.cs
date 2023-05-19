@@ -7,6 +7,7 @@ using Smitenight.Providers.SmiteProvider.HiRez.Secrets;
 using Smitenight.Providers.SmiteProvider.HiRez.Services;
 using Smitenight.Providers.SmiteProvider.HiRez.Settings;
 using Smitenight.Utilities.DependencyInjection.Common.Extensions;
+using Smitenight.Utilities.Mapper.Common.Extensions;
 
 namespace Smitenight.Providers.SmiteProvider.HiRez.Extensions
 {
@@ -14,6 +15,8 @@ namespace Smitenight.Providers.SmiteProvider.HiRez.Extensions
     {
         public static void ConfigureServices(IServiceCollection services, IConfiguration configuration)
         {
+            services.AddMappers(typeof(ServiceCollectionExtensions).Assembly);
+
             services.Configure<SmiteClientSecrets>(configuration.GetSection(nameof(SmiteClientSecrets)));
 
             var section = configuration.GetSection(nameof(SmiteClientSettings));

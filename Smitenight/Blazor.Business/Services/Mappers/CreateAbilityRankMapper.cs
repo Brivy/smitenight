@@ -1,12 +1,12 @@
 ﻿using Smitenight.Persistence.Data.Contracts.Models;
-using Smitenight.Providers.SmiteProvider.Contracts.Models.GodClient;
+using Smitenight.Providers.SmiteProvider.Contracts.Models.Common;
 using Smitenight.Utilities.Mapper.Common.Models;
 
 namespace Smitenight.Application.Blazor.Business.Services.Mappers
 {
-    public class CreateAbilityRankMapper : Mapper<RankItemDto, CreateAbilityRankDto>
+    public class CreateAbilityRankMapper : Mapper<CommonItemDto, CreateAbilityRankDto>
     {
-        public override CreateAbilityRankDto Map(RankItemDto rankItem)
+        public override CreateAbilityRankDto Map(CommonItemDto rankItem)
         {
             return new CreateAbilityRankDto
             {

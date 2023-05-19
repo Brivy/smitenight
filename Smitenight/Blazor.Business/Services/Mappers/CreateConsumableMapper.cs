@@ -1,4 +1,4 @@
-﻿using Smitenight.Application.Blazor.Business.Services.Checksums;
+﻿using Smitenight.Application.Blazor.Business.Contracts.Services.Checksums;
 using Smitenight.Persistence.Data.Contracts.Models;
 using Smitenight.Providers.SmiteProvider.Contracts.Constants;
 using Smitenight.Providers.SmiteProvider.Contracts.Models.ItemClient;

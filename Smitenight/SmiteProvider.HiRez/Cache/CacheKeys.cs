@@ -1,4 +1,4 @@
-﻿namespace Smitenight.Domain.Models.Constants.Common
+﻿namespace Smitenight.Providers.SmiteProvider.HiRez.Cache
 {
     public static class CacheKeys
     {

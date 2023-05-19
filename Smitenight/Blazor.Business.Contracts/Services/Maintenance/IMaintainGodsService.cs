@@ -1,7 +1,7 @@
 ﻿using Smitenight.Persistence.Data.Contracts.Models;
 using Smitenight.Providers.SmiteProvider.Contracts.Models.GodClient;
 
-namespace Smitenight.Application.Blazor.Business.Services.Maintenance
+namespace Smitenight.Application.Blazor.Business.Contracts.Services.Maintenance
 {
     public interface IMaintainGodsService
     {

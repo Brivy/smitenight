@@ -1,4 +1,4 @@
-﻿namespace Smitenight.Application.Blazor.Business.Services.Checksums
+﻿namespace Smitenight.Application.Blazor.Business.Contracts.Services.Checksums
 {
     public interface IChecksumService
     {

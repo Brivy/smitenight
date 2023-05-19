@@ -1,12 +1,12 @@
 ﻿using Smitenight.Persistence.Data.Contracts.Models;
-using Smitenight.Providers.SmiteProvider.HiRez.Models.ItemClient;
+using Smitenight.Providers.SmiteProvider.Contracts.Models.Common;
 using Smitenight.Utilities.Mapper.Common.Models;
 
 namespace Smitenight.Application.Blazor.Business.Services.Mappers
 {
-    public class CreateItemDescriptionMapper : Mapper<MenuItem, CreateItemDescriptionDto>
+    public class CreateItemDescriptionMapper : Mapper<CommonItemDto, CreateItemDescriptionDto>
     {
-        public override CreateItemDescriptionDto Map(MenuItem itemDescription)
+        public override CreateItemDescriptionDto Map(CommonItemDto itemDescription)
         {
             return new CreateItemDescriptionDto
             {

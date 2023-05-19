@@ -1,7 +1,7 @@
-﻿using Smitenight.Domain.Models.Constants.SmiteClient;
-using Smitenight.Providers.SmiteProvider.Contracts.Clients;
+﻿using Smitenight.Providers.SmiteProvider.Contracts.Clients;
 using Smitenight.Providers.SmiteProvider.Contracts.Enums;
 using Smitenight.Providers.SmiteProvider.Contracts.Models.LeagueClient;
+using Smitenight.Providers.SmiteProvider.HiRez.Constants;
 using Smitenight.Providers.SmiteProvider.HiRez.Models.LeagueClient;
 using Smitenight.Providers.SmiteProvider.HiRez.Services;
 using Smitenight.Utilities.Mapper.Common.Services;

@@ -1,5 +1,4 @@
 ﻿using Microsoft.Extensions.Caching.Distributed;
-using Smitenight.Domain.Models.Constants.Common;
 using Smitenight.Providers.SmiteProvider.Contracts.Clients;
 using Smitenight.Utilities.Cache.Contracts.Providers;
 using System.Collections.Concurrent;

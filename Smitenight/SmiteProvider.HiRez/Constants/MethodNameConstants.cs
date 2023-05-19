@@ -1,4 +1,4 @@
-﻿namespace Smitenight.Domain.Models.Constants.SmiteClient
+﻿namespace Smitenight.Providers.SmiteProvider.HiRez.Constants
 {
     public static class MethodNameConstants
     {

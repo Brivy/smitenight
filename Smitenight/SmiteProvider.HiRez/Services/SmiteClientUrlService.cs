@@ -1,7 +1,7 @@
 ﻿using Clock.Common.Constants;
 using Microsoft.Extensions.Options;
-using Smitenight.Domain.Models.Constants.SmiteClient;
 using Smitenight.Providers.SmiteProvider.HiRez.Cache;
+using Smitenight.Providers.SmiteProvider.HiRez.Constants;
 using Smitenight.Providers.SmiteProvider.HiRez.Secrets;
 using Smitenight.Providers.SmiteProvider.HiRez.Settings;
 using System.Security.Cryptography;
