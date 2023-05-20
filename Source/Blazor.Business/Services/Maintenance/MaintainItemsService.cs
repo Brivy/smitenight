@@ -25,40 +25,39 @@ namespace Smitenight.Application.Blazor.Business.Services.Maintenance
             _mapperService = mapperService;
         }
 
-        public async Task MaintainItemAsync(ItemDto item, string checksum, CancellationToken cancellationToken = default)
+        public async Task<int?> MaintainItemAsync(ItemDto item, string checksum, CancellationToken cancellationToken = default)
         {
             if (!_checksumService.IsChecksumDifferent(checksum, item))
             {
-                return;
+                return null;
             }
 
-            await CreateItemAsync(item, cancellationToken);
+            return await CreateItemAsync(item, cancellationToken);
         }
 
-        public async Task CreateItemAsync(ItemDto item, CancellationToken cancellationToken = default)
+        public Task<int> CreateItemAsync(ItemDto item, CancellationToken cancellationToken = default)
         {
             switch (item.Type)
             {
                 case ItemConstants.ItemType:
                     var createdItem = _mapperService.Map<ItemDto, CreateItemDto>(item);
                     var createdItemDescriptions = CreateItemDescriptions(item.ItemDescription.ItemSubDescriptions);
-                    await _maintainItemsRepository.CreateItemAsync(createdItem, createdItemDescriptions, cancellationToken);
-                    break;
+                    return _maintainItemsRepository.CreateItemAsync(createdItem, createdItemDescriptions, cancellationToken);
                 case ItemConstants.ConsumableItemType:
                     var createdActive = _mapperService.Map<ItemDto, CreateActiveDto>(item);
-                    await _maintainItemsRepository.CreateActiveAsync(createdActive, cancellationToken);
-                    break;
+                    return _maintainItemsRepository.CreateActiveAsync(createdActive, cancellationToken);
                 case ItemConstants.ActiveItemType:
                     var createdConsumable = _mapperService.Map<ItemDto, CreateConsumableDto>(item);
-                    await _maintainItemsRepository.CreateConsumableAsync(createdConsumable, cancellationToken);
-                    break;
+                    return _maintainItemsRepository.CreateConsumableAsync(createdConsumable, cancellationToken);
+                default:
+                    throw new NotImplementedException($"Specified {item.Type} can not be processed");
             }
         }
 
-        public async Task LinkItemsAsync(IEnumerable<ItemDto> items, CancellationToken cancellationToken = default)
+        public async Task LinkItemsAsync(IEnumerable<ItemDto> items, IEnumerable<int> relinkNeededItemIds, CancellationToken cancellationToken = default)
         {
             var updatedLinkItems = new List<UpdateItemLinkDto>();
-            var linkItems = await _maintainItemsRepository.GetItemLinksAsync(cancellationToken);
+            var linkItems = await _maintainItemsRepository.GetItemForRelinkingAsync(cancellationToken);
 
             foreach (var linkItem in linkItems)
             {
@@ -80,7 +79,7 @@ namespace Smitenight.Application.Blazor.Business.Services.Maintenance
         public async Task LinkActivesAsync(IEnumerable<ItemDto> actives, CancellationToken cancellationToken = default)
         {
             var updatedLinkActives = new List<UpdateActiveLinkDto>();
-            var linkActives = await _maintainItemsRepository.GetActiveLinksAsync(cancellationToken);
+            var linkActives = await _maintainItemsRepository.GetActivesForRelinkingAsync(cancellationToken);
 
             foreach (var linkActive in linkActives)
             {

@@ -18,21 +18,25 @@ namespace Smitenight.Persistence.Data.EntityFramework.Repositories
             _mapperService = mapperService;
         }
 
-        public Task CreateActiveAsync(CreateActiveDto active, CancellationToken cancellationToken = default)
+        public async Task<int> CreateActiveAsync(CreateActiveDto active, CancellationToken cancellationToken = default)
         {
             var activeEntity = _mapperService.Map<CreateActiveDto, Active>(active);
             _dbContext.Actives.Add(activeEntity);
-            return _dbContext.SaveChangesAsync(cancellationToken);
+            await _dbContext.SaveChangesAsync(cancellationToken);
+
+            return activeEntity.Id;
         }
 
-        public Task CreateConsumableAsync(CreateConsumableDto consumable, CancellationToken cancellationToken = default)
+        public async Task<int> CreateConsumableAsync(CreateConsumableDto consumable, CancellationToken cancellationToken = default)
         {
             var consumableEntity = _mapperService.Map<CreateConsumableDto, Consumable>(consumable);
             _dbContext.Consumables.Add(consumableEntity);
-            return _dbContext.SaveChangesAsync(cancellationToken);
+            await _dbContext.SaveChangesAsync(cancellationToken);
+
+            return consumableEntity.Id;
         }
 
-        public Task CreateItemAsync(CreateItemDto item, IEnumerable<CreateItemDescriptionDto> itemDescriptions, CancellationToken cancellationToken = default)
+        public async Task<int> CreateItemAsync(CreateItemDto item, IEnumerable<CreateItemDescriptionDto> itemDescriptions, CancellationToken cancellationToken = default)
         {
             var itemEntity = _mapperService.Map<CreateItemDto, Item>(item);
             var itemDescriptionEntities = _mapperService.Map<IEnumerable<CreateItemDescriptionDto>, IEnumerable<ItemDescription>>(itemDescriptions);
@@ -40,10 +44,12 @@ namespace Smitenight.Persistence.Data.EntityFramework.Repositories
             itemEntity.ItemDescriptions = itemDescriptionEntities;
 
             _dbContext.Items.Add(itemEntity);
-            return _dbContext.SaveChangesAsync(cancellationToken);
+            await _dbContext.SaveChangesAsync(cancellationToken);
+
+            return itemEntity.Id;
         }
 
-        public Task<IEnumerable<ActiveLinkDto>> GetActiveLinksAsync(CancellationToken cancellationToken = default)
+        public Task<IEnumerable<ActiveLinkDto>> GetActivesForRelinkingAsync(CancellationToken cancellationToken = default)
         {
             //TODO: need the patch entity so we can determine which actives to update
             throw new NotImplementedException();
@@ -54,7 +60,7 @@ namespace Smitenight.Persistence.Data.EntityFramework.Repositories
             throw new NotImplementedException();
         }
 
-        public Task<IEnumerable<ItemLinkDto>> GetItemLinksAsync(CancellationToken cancellationToken = default)
+        public Task<IEnumerable<ItemLinkDto>> GetItemForRelinkingAsync(CancellationToken cancellationToken = default)
         {
             throw new NotImplementedException();
         }

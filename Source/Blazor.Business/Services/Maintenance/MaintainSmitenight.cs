@@ -31,16 +31,17 @@ namespace Smitenight.Application.Blazor.Business.Services.Maintenance
             var items = await _itemSmiteClient.GetItemsAsync(LanguageCode.English, cancellationToken);
             if (cancellationToken.IsCancellationRequested) return;
 
+            var relinkNeededItemIds = new List<int>();
             foreach (var item in items)
             {
                 var checksum = itemChecksums.SingleOrDefault(x => x.SmiteItemId == item.ItemId);
-                if (checksum == null)
+                var itemId = checksum == null
+                    ? await _maintainItemsService.CreateItemAsync(item, cancellationToken)
+                    : await _maintainItemsService.MaintainItemAsync(item, checksum.Checksum, cancellationToken);
+
+                if (itemId.HasValue)
                 {
-                    await _maintainItemsService.CreateItemAsync(item, cancellationToken);
-                }
-                else
-                {
-                    await _maintainItemsService.MaintainItemAsync(item, checksum.Checksum, cancellationToken);
+                    relinkNeededItemIds.Add(itemId.Value);
                 }
             }
 
