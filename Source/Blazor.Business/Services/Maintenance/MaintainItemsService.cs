@@ -57,7 +57,7 @@ namespace Smitenight.Application.Blazor.Business.Services.Maintenance
         public async Task LinkItemsAsync(IEnumerable<ItemDto> items, IEnumerable<int> relinkNeededItemIds, CancellationToken cancellationToken = default)
         {
             var updatedLinkItems = new List<UpdateItemLinkDto>();
-            var linkItems = await _maintainItemsRepository.GetItemForRelinkingAsync(cancellationToken);
+            var linkItems = await _maintainItemsRepository.GetItemForRelinkingAsync(relinkNeededItemIds, cancellationToken);
 
             foreach (var linkItem in linkItems)
             {
