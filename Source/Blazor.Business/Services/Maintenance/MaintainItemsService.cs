@@ -66,8 +66,8 @@ namespace Smitenight.Application.Blazor.Business.Services.Maintenance
 
                 if (linkItem.OldItemId.HasValue)
                 {
-                    childItemId = linkItems.SingleOrDefault(x => x.RootItemId == linkItem.OldItemId)?.NewItemId ?? childItemId;
-                    rootItemId = linkItems.SingleOrDefault(x => x.ChildItemId == linkItem.OldItemId)?.NewItemId ?? rootItemId;
+                    childItemId = linkItems.SingleOrDefault(x => x.RootItemId == linkItem.OldItemId)?.NewItemId ?? linkItem.ChildItemId;
+                    rootItemId = linkItems.SingleOrDefault(x => x.ChildItemId == linkItem.OldItemId)?.NewItemId ?? linkItem.RootItemId;
                 }
 
                 updatedLinkItems.Add(new UpdateItemLinkDto
