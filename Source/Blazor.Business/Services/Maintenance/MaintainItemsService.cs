@@ -58,18 +58,23 @@ namespace Smitenight.Application.Blazor.Business.Services.Maintenance
         {
             var updatedLinkItems = new List<UpdateItemLinkDto>();
             var linkItems = await _maintainItemsRepository.GetItemForRelinkingAsync(relinkNeededItemIds, cancellationToken);
-
             foreach (var linkItem in linkItems)
             {
                 var item = items.Single(x => x.ItemId == linkItem.SmiteId);
-                var childItem = linkItems.SingleOrDefault(x => x.SmiteId == item.ChildItemId);
-                var rootItem = linkItems.SingleOrDefault(x => x.SmiteId == item.RootItemId);
+                var childItemId = linkItems.SingleOrDefault(x => x.SmiteId == item.ChildItemId)?.NewItemId;
+                var rootItemId = linkItems.SingleOrDefault(x => x.SmiteId == item.RootItemId)?.NewItemId;
+
+                if (linkItem.OldItemId.HasValue)
+                {
+                    childItemId = linkItems.SingleOrDefault(x => x.RootItemId == linkItem.OldItemId)?.NewItemId ?? childItemId;
+                    rootItemId = linkItems.SingleOrDefault(x => x.ChildItemId == linkItem.OldItemId)?.NewItemId ?? rootItemId;
+                }
 
                 updatedLinkItems.Add(new UpdateItemLinkDto
                 {
-                    Id = linkItem.Id,
-                    ChildItemId = childItem?.Id,
-                    RootItemId = rootItem?.Id
+                    Id = linkItem.NewItemId,
+                    ChildItemId = childItemId,
+                    RootItemId = rootItemId
                 });
             }
 

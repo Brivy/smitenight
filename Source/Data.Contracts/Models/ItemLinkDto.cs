@@ -2,7 +2,8 @@
 {
     public class ItemLinkDto
     {
-        public int Id { get; set; }
+        public int? OldItemId { get; set; }
+        public int NewItemId { get; set; }
         public int SmiteId { get; set; }
         public int? RootItemId { get; set; }
         public int? ChildItemId { get; set; }
