@@ -11,9 +11,11 @@ namespace Smitenight.Persistence.Data.EntityFramework.Configurations
             builder.ToTable("PlayerNameAttempts");
 
             builder.HasKey(x => x.Id);
+
             builder.Property(x => x.PlayerName).IsRequired();
             builder.Property(x => x.Attempts).IsRequired();
             builder.Property(x => x.FirstTimeUsed).IsRequired();
+            builder.Property(x => x.LastTimeUsed).IsRequired();
             builder.Property(x => x.NextAttemptPossibleAt).IsRequired();
         }
     }

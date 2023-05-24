@@ -11,17 +11,19 @@ namespace Smitenight.Persistence.Data.EntityFramework.Configurations
             builder.ToTable("SmitenightMatches");
 
             builder.HasKey(x => x.Id);
+            builder.HasKey(x => x.MatchId);
+            builder.HasKey(x => x.SmitenightId);
 
-            builder.HasOne(x => x.Match)
-                .WithMany(x => x.SmitenightMatches)
-                .HasForeignKey(x => x.MatchId)
-                .OnDelete(DeleteBehavior.Cascade)
-                .IsRequired();
+            //builder.HasOne(x => x.Match)
+            //    .WithMany(x => x.SmitenightMatches)
+            //    .HasForeignKey(x => x.MatchId)
+            //    .OnDelete(DeleteBehavior.Cascade)
+            //    .IsRequired();
 
-            builder.HasOne(x => x.Smitenight)
-                .WithMany(x => x.SmitenightMatches)
-                .HasForeignKey(x => x.SmitenightId)
-                .OnDelete(DeleteBehavior.Cascade);
+            //builder.HasOne(x => x.Smitenight)
+            //    .WithMany(x => x.SmitenightMatches)
+            //    .HasForeignKey(x => x.SmitenightId)
+            //    .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

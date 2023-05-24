@@ -11,6 +11,13 @@ namespace Smitenight.Persistence.Data.EntityFramework.Configurations
             builder.ToTable("MatchDetails");
 
             builder.HasKey(x => x.Id);
+            builder.Property(x => x.GodId).IsRequired();
+            builder.Property(x => x.GodSkinId).IsRequired();
+            builder.Property(x => x.MatchId).IsRequired();
+            builder.Property(x => x.PartyId).IsRequired();
+            builder.Property(x => x.PlayerId).IsRequired(false);
+            builder.Property(x => x.TeamId).IsRequired(false);
+
             builder.Property(x => x.DamageDone).IsRequired();
             builder.Property(x => x.DamageDoneInHand).IsRequired();
             builder.Property(x => x.DamageDoneMagical).IsRequired();
@@ -50,44 +57,43 @@ namespace Smitenight.Persistence.Data.EntityFramework.Configurations
             builder.Property(x => x.LevelReached).IsRequired();
             builder.Property(x => x.MatchTeam).IsRequired();
             builder.Property(x => x.Surrendered).IsRequired();
-            builder.Property(x => x.TeamId).IsRequired(false);
             builder.Property(x => x.TotalTimeDead).IsRequired();
             builder.Property(x => x.WardsPlaced).IsRequired();
             builder.Property(x => x.Winner).IsRequired();
 
-            builder.HasOne(x => x.God)
-                .WithMany(x => x.MatchDetails)
-                .HasForeignKey(x => x.GodId)
-                .OnDelete(DeleteBehavior.NoAction)
-                .IsRequired();
+            //builder.HasOne(x => x.God)
+            //    .WithMany(x => x.MatchDetails)
+            //    .HasForeignKey(x => x.GodId)
+            //    .OnDelete(DeleteBehavior.NoAction)
+            //    .IsRequired();
 
-            builder.HasOne(x => x.GodSkin)
-                .WithMany(x => x.MatchDetails)
-                .HasForeignKey(x => x.GodSkinId)
-                .OnDelete(DeleteBehavior.NoAction)
-                .IsRequired();
+            //builder.HasOne(x => x.GodSkin)
+            //    .WithMany(x => x.MatchDetails)
+            //    .HasForeignKey(x => x.GodSkinId)
+            //    .OnDelete(DeleteBehavior.NoAction)
+            //    .IsRequired();
 
-            builder.HasOne(x => x.Match)
-                .WithMany(x => x.MatchDetails)
-                .HasForeignKey(x => x.MatchId)
-                .OnDelete(DeleteBehavior.Cascade)
-                .IsRequired();
+            //builder.HasOne(x => x.Match)
+            //    .WithMany(x => x.MatchDetails)
+            //    .HasForeignKey(x => x.MatchId)
+            //    .OnDelete(DeleteBehavior.Cascade)
+            //    .IsRequired();
 
-            builder.HasOne(x => x.Player)
-                .WithMany(x => x.MatchDetails)
-                .HasForeignKey(x => x.PlayerId)
-                .OnDelete(DeleteBehavior.NoAction)
-                .IsRequired();
+            //builder.HasOne(x => x.Player)
+            //    .WithMany(x => x.MatchDetails)
+            //    .HasForeignKey(x => x.PlayerId)
+            //    .OnDelete(DeleteBehavior.NoAction)
+            //    .IsRequired();
 
-            builder.HasMany(x => x.ActivePurchases)
-                .WithOne(x => x.MatchDetail)
-                .HasForeignKey(x => x.MatchDetailId)
-                .OnDelete(DeleteBehavior.Cascade);
+            //builder.HasMany(x => x.ActivePurchases)
+            //    .WithOne(x => x.MatchDetail)
+            //    .HasForeignKey(x => x.MatchDetailId)
+            //    .OnDelete(DeleteBehavior.Cascade);
 
-            builder.HasMany(x => x.ItemPurchases)
-                .WithOne(x => x.MatchDetail)
-                .HasForeignKey(x => x.MatchDetailId)
-                .OnDelete(DeleteBehavior.Cascade);
+            //builder.HasMany(x => x.ItemPurchases)
+            //    .WithOne(x => x.MatchDetail)
+            //    .HasForeignKey(x => x.MatchDetailId)
+            //    .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

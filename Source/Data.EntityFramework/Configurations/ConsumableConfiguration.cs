@@ -11,18 +11,17 @@ namespace Smitenight.Persistence.Data.EntityFramework.Configurations
             builder.ToTable("Consumables");
 
             builder.HasKey(x => x.Id);
+            builder.Property(x => x.SmiteId).IsRequired();
+
+            builder.Property(x => x.Checksum).IsRequired();
             builder.Property(x => x.Enabled).IsRequired();
             builder.Property(x => x.Name).IsRequired();
             builder.Property(x => x.Description).IsRequired(false);
-            builder.Property(x => x.SecondaryDescription).IsRequired();
-            builder.Property(x => x.SmiteId).IsRequired();
+            builder.Property(x => x.Price).IsRequired();
+            builder.Property(x => x.SecondaryDescription).IsRequired(false);
+            builder.Property(x => x.SmiteId).IsRequired(false);
             builder.Property(x => x.ShortDescription).IsRequired();
             builder.Property(x => x.ItemIconUrl).IsRequired();
-
-            builder.HasMany(x => x.ConsumableDescriptions)
-                .WithOne(x => x.Consumable)
-                .HasForeignKey(x => x.ConsumableId)
-                .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }

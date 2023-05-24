@@ -11,6 +11,8 @@ namespace Smitenight.Persistence.Data.EntityFramework.Configurations
             builder.ToTable("Actives");
 
             builder.HasKey(x => x.Id);
+
+
             builder.Property(x => x.ChildActiveId).IsRequired(false);
             builder.Property(x => x.Enabled).IsRequired();
             builder.Property(x => x.Name).IsRequired();

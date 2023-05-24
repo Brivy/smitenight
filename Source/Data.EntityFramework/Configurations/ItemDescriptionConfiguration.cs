@@ -11,14 +11,17 @@ namespace Smitenight.Persistence.Data.EntityFramework.Configurations
             builder.ToTable("ItemDescriptions");
 
             builder.HasKey(x => x.Id);
+            builder.Property(x => x.ItemId).IsRequired();
+
+            builder.Property(x => x.Checksum).IsRequired();
             builder.Property(x => x.Description).IsRequired();
             builder.Property(x => x.Value).IsRequired();
 
-            builder.HasOne(x => x.Item)
-                .WithMany(x => x.ItemDescriptions)
-                .HasForeignKey(x => x.ItemId)
-                .OnDelete(DeleteBehavior.Cascade)
-                .IsRequired();
+            //builder.HasOne(x => x.Item)
+            //    .WithMany(x => x.ItemDescriptions)
+            //    .HasForeignKey(x => x.ItemId)
+            //    .OnDelete(DeleteBehavior.Cascade)
+            //    .IsRequired();
         }
     }
 }

@@ -25,7 +25,7 @@ namespace Smitenight.Persistence.Data.EntityFramework.Repositories
             _dbContext.Actives.Add(activeEntity);
             await _dbContext.SaveChangesAsync(cancellationToken);
 
-            return activeEntity.Id;
+            return activeEntity.SmiteId;
         }
 
         public async Task<int> CreateConsumableAsync(CreateConsumableDto consumable, CancellationToken cancellationToken = default)
@@ -34,7 +34,7 @@ namespace Smitenight.Persistence.Data.EntityFramework.Repositories
             _dbContext.Consumables.Add(consumableEntity);
             await _dbContext.SaveChangesAsync(cancellationToken);
 
-            return consumableEntity.Id;
+            return consumableEntity.SmiteId;
         }
 
         public async Task<int> CreateItemAsync(CreateItemDto item, IEnumerable<CreateItemDescriptionDto> itemDescriptions, CancellationToken cancellationToken = default)
@@ -47,14 +47,14 @@ namespace Smitenight.Persistence.Data.EntityFramework.Repositories
             _dbContext.Items.Add(itemEntity);
             await _dbContext.SaveChangesAsync(cancellationToken);
 
-            return itemEntity.Id;
+            return itemEntity.SmiteId;
         }
 
-        public async Task<IEnumerable<ActiveLinkDto>> GetActivesForRelinkingAsync(IEnumerable<int> relinkNeededActiveIds, CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<ActiveLinkDto>> GetActivesForRelinkingAsync(IEnumerable<int> relinkNeededSmiteIds, CancellationToken cancellationToken = default)
         {
             var activeDictionary = await _dbContext.Actives
                 .AsNoTracking()
-                .Where(x => relinkNeededActiveIds.Contains(x.SmiteId))
+                .Where(x => relinkNeededSmiteIds.Contains(x.SmiteId))
                 .GroupBy(x => x.SmiteId)
                 .SelectMany(x => x.OrderByDescending(y => y.Id).Take(2))
                 .GroupBy(x => x.SmiteId)
@@ -78,16 +78,45 @@ namespace Smitenight.Persistence.Data.EntityFramework.Repositories
             return relinkingActives;
         }
 
-        public Task<IEnumerable<ItemChecksumsDto>> GetItemChecksumsDto(CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<ItemChecksumsDto>> GetItemChecksumsDto(CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var checksums = new List<ItemChecksumsDto>();
+
+            var itemChecksums = await _dbContext.Items
+                .Select(x => new ItemChecksumsDto
+                {
+                    ItemId = x.Id,
+                    SmiteItemId = x.SmiteId,
+                    Checksum = x.Checksum
+                }).ToListAsync(cancellationToken);
+
+            var activeChecksums = await _dbContext.Actives
+                .Select(x => new ItemChecksumsDto
+                {
+                    ItemId = x.Id,
+                    SmiteItemId = x.SmiteId,
+                    Checksum = x.Checksum
+                }).ToListAsync(cancellationToken);
+
+            var consumableChecksums = await _dbContext.Consumables
+                .Select(x => new ItemChecksumsDto
+                {
+                    ItemId = x.Id,
+                    SmiteItemId = x.SmiteId,
+                    Checksum = x.Checksum
+                }).ToListAsync(cancellationToken);
+
+            checksums.AddRange(itemChecksums);
+            checksums.AddRange(activeChecksums);
+            checksums.AddRange(consumableChecksums);
+            return checksums;
         }
 
-        public async Task<IEnumerable<ItemLinkDto>> GetItemForRelinkingAsync(IEnumerable<int> relinkNeededItemIds, CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<ItemLinkDto>> GetItemForRelinkingAsync(IEnumerable<int> relinkNeededSmiteIds, CancellationToken cancellationToken = default)
         {
             var itemDictionary = await _dbContext.Items
                 .AsNoTracking()
-                .Where(x => relinkNeededItemIds.Contains(x.SmiteId))
+                .Where(x => relinkNeededSmiteIds.Contains(x.SmiteId))
                 .GroupBy(x => x.SmiteId)
                 .SelectMany(x => x.OrderByDescending(y => y.Id).Take(2))
                 .GroupBy(x => x.SmiteId)
@@ -111,14 +140,36 @@ namespace Smitenight.Persistence.Data.EntityFramework.Repositories
             return relinkingItems;
         }
 
-        public Task UpdateActiveLinksAsync(IEnumerable<UpdateActiveLinkDto> itemLinks, CancellationToken cancellationToken = default)
+        public async Task UpdateActiveLinksAsync(IEnumerable<UpdateActiveLinkDto> activeLinks, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var actives = await _dbContext.Actives
+                .Where(x => activeLinks.Any(y => y.Id == x.Id))
+                .ToListAsync(cancellationToken);
+
+            foreach (var active in actives)
+            {
+                var itemLink = activeLinks.First(x => x.Id == active.Id);
+                active.ChildActiveId = itemLink.ChildActiveId;
+                active.RootActiveId = itemLink.RootActiveId;
+            }
+
+            await _dbContext.SaveChangesAsync(cancellationToken);
         }
 
-        public Task UpdateItemLinksAsync(IEnumerable<UpdateItemLinkDto> itemLinks, CancellationToken cancellationToken = default)
+        public async Task UpdateItemLinksAsync(IEnumerable<UpdateItemLinkDto> itemLinks, CancellationToken cancellationToken = default)
         {
-            throw new NotImplementedException();
+            var items = await _dbContext.Items
+                .Where(x => itemLinks.Any(y => y.Id == x.Id))
+                .ToListAsync(cancellationToken);
+
+            foreach (var item in items)
+            {
+                var itemLink = itemLinks.First(x => x.Id == item.Id);
+                item.ChildItemId = itemLink.ChildItemId;
+                item.RootItemId = itemLink.RootItemId;
+            }
+
+            await _dbContext.SaveChangesAsync(cancellationToken);
         }
     }
 }

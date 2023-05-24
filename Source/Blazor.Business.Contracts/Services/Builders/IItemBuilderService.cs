@@ -1,13 +1,13 @@
-﻿using Smitenight.Domain.Models.Clients.ItemClient;
-using Smitenight.Domain.Models.Models.Items;
+﻿//using Smitenight.Domain.Models.Clients.ItemClient;
+//using Smitenight.Domain.Models.Models.Items;
 
-namespace Smitenight.Application.Blazor.Business.Contracts.Services.Builders;
+//namespace Smitenight.Application.Blazor.Business.Contracts.Services.Builders;
 
-public interface IItemBuilderService
-{
-    Item BuildItem(ItemsResponse itemResponse);
+//public interface IItemBuilderService
+//{
+//    Item BuildItem(ItemsResponse itemResponse);
 
-    Consumable BuildConsumable(ItemsResponse consumableResponse);
+//    Consumable BuildConsumable(ItemsResponse consumableResponse);
 
-    Active BuildActive(ItemsResponse activeResponse);
-}
+//    Active BuildActive(ItemsResponse activeResponse);
+//}

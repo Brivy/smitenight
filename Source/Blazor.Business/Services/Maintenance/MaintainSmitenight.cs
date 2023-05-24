@@ -31,7 +31,7 @@ namespace Smitenight.Application.Blazor.Business.Services.Maintenance
             var items = await _itemSmiteClient.GetItemsAsync(LanguageCode.English, cancellationToken);
             if (cancellationToken.IsCancellationRequested) return;
 
-            var relinkNeededItemIds = new List<int>();
+            var relinkNeededSmiteIds = new List<int>();
             foreach (var item in items)
             {
                 var checksum = itemChecksums.SingleOrDefault(x => x.SmiteItemId == item.ItemId);
@@ -41,14 +41,14 @@ namespace Smitenight.Application.Blazor.Business.Services.Maintenance
 
                 if (itemId.HasValue)
                 {
-                    relinkNeededItemIds.Add(itemId.Value);
+                    relinkNeededSmiteIds.Add(itemId.Value);
                 }
             }
 
             var sortedItems = items.Where(x => x.Type == ItemConstants.ItemType).ToList();
             var sortedActives = items.Where(x => x.Type == ItemConstants.ActiveItemType).ToList();
-            await _maintainItemsService.LinkItemsAsync(sortedItems, cancellationToken);
-            await _maintainItemsService.LinkActivesAsync(sortedActives, cancellationToken);
+            await _maintainItemsService.LinkItemsAsync(sortedItems, relinkNeededSmiteIds, cancellationToken);
+            await _maintainItemsService.LinkActivesAsync(sortedActives, relinkNeededSmiteIds, cancellationToken);
         }
 
         public async Task MaintainGodsAsync(CancellationToken cancellationToken = default)

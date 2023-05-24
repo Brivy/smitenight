@@ -54,10 +54,10 @@ namespace Smitenight.Application.Blazor.Business.Services.Maintenance
             }
         }
 
-        public async Task LinkItemsAsync(IEnumerable<ItemDto> items, IEnumerable<int> relinkNeededItemIds, CancellationToken cancellationToken = default)
+        public async Task LinkItemsAsync(IEnumerable<ItemDto> items, IEnumerable<int> relinkNeededSmiteIds, CancellationToken cancellationToken = default)
         {
             var updatedLinkItems = new List<UpdateItemLinkDto>();
-            var linkItems = await _maintainItemsRepository.GetItemForRelinkingAsync(relinkNeededItemIds, cancellationToken);
+            var linkItems = await _maintainItemsRepository.GetItemForRelinkingAsync(relinkNeededSmiteIds, cancellationToken);
             foreach (var linkItem in linkItems)
             {
                 var item = items.Single(x => x.ItemId == linkItem.SmiteId);
@@ -81,10 +81,10 @@ namespace Smitenight.Application.Blazor.Business.Services.Maintenance
             await _maintainItemsRepository.UpdateItemLinksAsync(updatedLinkItems, cancellationToken);
         }
 
-        public async Task LinkActivesAsync(IEnumerable<ItemDto> actives, IEnumerable<int> relinkNeededActiveIds, CancellationToken cancellationToken = default)
+        public async Task LinkActivesAsync(IEnumerable<ItemDto> actives, IEnumerable<int> relinkNeededSmiteIds, CancellationToken cancellationToken = default)
         {
             var updatedLinkActives = new List<UpdateActiveLinkDto>();
-            var linkActives = await _maintainItemsRepository.GetActivesForRelinkingAsync(relinkNeededActiveIds, cancellationToken);
+            var linkActives = await _maintainItemsRepository.GetActivesForRelinkingAsync(relinkNeededSmiteIds, cancellationToken);
             foreach (var linkActive in linkActives)
             {
                 var item = actives.Single(x => x.ItemId == linkActive.SmiteId);

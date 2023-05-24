@@ -11,15 +11,17 @@ namespace Smitenight.Persistence.Data.EntityFramework.Configurations
             builder.ToTable("AbilityTags");
 
             builder.HasKey(x => x.Id);
+            builder.Property(x => x.AbilityId).IsRequired();
 
+            builder.Property(x => x.Checksum).IsRequired();
             builder.Property(x => x.Description).IsRequired();
             builder.Property(x => x.Value).IsRequired();
 
-            builder.HasOne(x => x.Ability)
-                .WithMany(x => x.AbilityTags)
-                .HasForeignKey(x => x.AbilityId)
-                .OnDelete(DeleteBehavior.Cascade)
-                .IsRequired();
+            //builder.HasOne(x => x.Ability)
+            //    .WithMany(x => x.AbilityTags)
+            //    .HasForeignKey(x => x.AbilityId)
+            //    .OnDelete(DeleteBehavior.Cascade)
+            //    .IsRequired();
         }
     }
 }

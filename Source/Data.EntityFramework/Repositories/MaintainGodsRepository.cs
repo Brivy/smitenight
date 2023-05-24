@@ -96,7 +96,7 @@ namespace Smitenight.Persistence.Data.EntityFramework.Repositories
 
         public async Task UpdateGodSkinRelationAsync(int godId, int godSkinId1, int godSkinId2, CancellationToken cancellationToken = default)
         {
-            var existingGodSkinEntity = await _dbContext.GodSkins.SingleAsync(x => x.SmiteId1 == godSkinId1 && x.SmiteId2 == godSkinId2, cancellationToken);
+            var existingGodSkinEntity = await _dbContext.GodSkins.SingleAsync(x => x.SmiteId == godSkinId1 && x.SecondarySmiteId == godSkinId2, cancellationToken);
             existingGodSkinEntity.GodId = godId;
             await _dbContext.SaveChangesAsync(cancellationToken);
         }

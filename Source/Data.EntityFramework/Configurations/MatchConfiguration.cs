@@ -11,6 +11,8 @@ namespace Smitenight.Persistence.Data.EntityFramework.Configurations
             builder.ToTable("Matches");
 
             builder.HasKey(x => x.Id);
+            builder.Property(x => x.SmiteId).IsRequired();
+
             builder.Property(x => x.GameMap).IsRequired();
             builder.Property(x => x.GameModeQueue).IsRequired();
             builder.Property(x => x.MatchDuration).IsRequired();
@@ -21,20 +23,20 @@ namespace Smitenight.Persistence.Data.EntityFramework.Configurations
             builder.Property(x => x.SmiteId).IsRequired();
             builder.Property(x => x.StartDate).IsRequired();
 
-            builder.HasMany(x => x.GodBans)
-                .WithOne(x => x.Match)
-                .HasForeignKey(x => x.MatchId)
-                .OnDelete(DeleteBehavior.Cascade);
+            //builder.HasMany(x => x.GodBans)
+            //    .WithOne(x => x.Match)
+            //    .HasForeignKey(x => x.MatchId)
+            //    .OnDelete(DeleteBehavior.Cascade);
 
-            builder.HasMany(x => x.MatchDetails)
-                .WithOne(x => x.Match)
-                .HasForeignKey(x => x.MatchId)
-                .OnDelete(DeleteBehavior.Cascade);
+            //builder.HasMany(x => x.MatchDetails)
+            //    .WithOne(x => x.Match)
+            //    .HasForeignKey(x => x.MatchId)
+            //    .OnDelete(DeleteBehavior.Cascade);
 
-            builder.HasMany(x => x.SmitenightMatches)
-                .WithOne(x => x.Match)
-                .HasForeignKey(x => x.MatchId)
-                .OnDelete(DeleteBehavior.Cascade);
+            //builder.HasMany(x => x.SmitenightMatches)
+            //    .WithOne(x => x.Match)
+            //    .HasForeignKey(x => x.MatchId)
+            //    .OnDelete(DeleteBehavior.Cascade);
         }
     }
 }
