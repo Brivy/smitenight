@@ -81,22 +81,27 @@ namespace Smitenight.Application.Blazor.Business.Services.Maintenance
             await _maintainItemsRepository.UpdateItemLinksAsync(updatedLinkItems, cancellationToken);
         }
 
-        public async Task LinkActivesAsync(IEnumerable<ItemDto> actives, CancellationToken cancellationToken = default)
+        public async Task LinkActivesAsync(IEnumerable<ItemDto> actives, IEnumerable<int> relinkNeededActiveIds, CancellationToken cancellationToken = default)
         {
             var updatedLinkActives = new List<UpdateActiveLinkDto>();
-            var linkActives = await _maintainItemsRepository.GetActivesForRelinkingAsync(cancellationToken);
-
+            var linkActives = await _maintainItemsRepository.GetActivesForRelinkingAsync(relinkNeededActiveIds, cancellationToken);
             foreach (var linkActive in linkActives)
             {
-                var active = actives.Single(x => x.ItemId == linkActive.SmiteId);
-                var childActive = linkActives.SingleOrDefault(x => x.SmiteId == active.ChildItemId);
-                var rootActive = linkActives.SingleOrDefault(x => x.SmiteId == active.RootItemId);
+                var item = actives.Single(x => x.ItemId == linkActive.SmiteId);
+                var childActiveId = linkActives.SingleOrDefault(x => x.SmiteId == item.ChildItemId)?.NewItemId;
+                var rootActiveId = linkActives.SingleOrDefault(x => x.SmiteId == item.RootItemId)?.NewItemId;
+
+                if (linkActive.OldItemId.HasValue)
+                {
+                    childActiveId = linkActives.SingleOrDefault(x => x.RootActiveId == linkActive.OldItemId)?.NewItemId ?? linkActive.ChildActiveId;
+                    rootActiveId = linkActives.SingleOrDefault(x => x.ChildActiveId == linkActive.OldItemId)?.NewItemId ?? linkActive.RootActiveId;
+                }
 
                 updatedLinkActives.Add(new UpdateActiveLinkDto
                 {
-                    Id = linkActive.Id,
-                    ChildActiveId = childActive?.Id,
-                    RootActiveId = rootActive?.Id
+                    Id = linkActive.NewItemId,
+                    ChildActiveId = childActiveId,
+                    RootActiveId = rootActiveId
                 });
             }
 
