@@ -6,19 +6,23 @@ namespace Smitenight.Providers.SmiteProvider.HiRez.Mappers
 {
     public class AbilityDescriptionIEnumerableMapper : Mapper<IEnumerable<AbilityDescription>, IEnumerable<AbilityDescriptionDto>>
     {
-
+        public override IEnumerable<AbilityDescriptionDto> Map(IEnumerable<AbilityDescription> input)
+        {
+            throw new NotImplementedException();
+        }
     }
 
-    public class AbilityDescriptionMapper : Mapper<AbilityDescription, AbilityDescriptionDto>
+    public class AbilityDescriptionObjectMapper : Mapper<AbilityDescription, AbilityDescriptionDto>
     {
-        //private readonly IMapperService _mapperService;
-
-        //public AbilityDescriptionMapper(IMapperService mapperService)
-        //{
-        //    _mapperService = mapperService;
-        //}
-
         public override AbilityDescriptionDto Map(AbilityDescription input)
+        {
+
+        }
+    }
+
+    public abstract class AbilityDescriptionMapper
+    {
+        protected AbilityDescriptionDto Map(AbilityDescription input)
         {
             var itemDescription = input.ItemDescription;
             return new AbilityDescriptionDto
@@ -26,8 +30,8 @@ namespace Smitenight.Providers.SmiteProvider.HiRez.Mappers
                 Cooldown = itemDescription.Cooldown ?? string.Empty,
                 Cost = itemDescription.Cost ?? string.Empty,
                 Description = itemDescription.Description ?? string.Empty,
-                //AbilityRanks = _mapperService.Map<CommonItem[], CommonItemDto[]>(itemDescription.AbilityRanks),
-                //AbilityTags = _mapperService.Map<CommonItem[], CommonItemDto[]>(itemDescription.AbilityTags)
+                AbilityRanks = _mapperService.Map<CommonItem[], CommonItemDto[]>(itemDescription.AbilityRanks),
+                AbilityTags = _mapperService.Map<CommonItem[], CommonItemDto[]>(itemDescription.AbilityTags)
             };
         }
     }
