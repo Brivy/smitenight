@@ -37,7 +37,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data.Contracts", "Source\Da
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Mapper.Common", "Source\Mapper.Common\Mapper.Common.csproj", "{2F88E0AB-0EB3-4475-A5A4-82D1E5C46A42}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Clock.Common", "Source\Clock.Common\Clock.Common.csproj", "{0691899A-F661-40E1-8D07-BE823B477FCB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Clock.Common", "Source\Clock.Common\Clock.Common.csproj", "{0691899A-F661-40E1-8D07-BE823B477FCB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Test.Maintenance", "Source\Test.Maintenance\Test.Maintenance.csproj", "{04BCB5D5-525D-4495-BBB7-53E0CBE1F982}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -97,6 +99,10 @@ Global
 		{0691899A-F661-40E1-8D07-BE823B477FCB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0691899A-F661-40E1-8D07-BE823B477FCB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0691899A-F661-40E1-8D07-BE823B477FCB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{04BCB5D5-525D-4495-BBB7-53E0CBE1F982}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{04BCB5D5-525D-4495-BBB7-53E0CBE1F982}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{04BCB5D5-525D-4495-BBB7-53E0CBE1F982}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{04BCB5D5-525D-4495-BBB7-53E0CBE1F982}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -115,6 +121,7 @@ Global
 		{D626B55B-9C46-4661-AA19-25BEE383E586} = {7E178BB9-3D2D-4DC0-907D-EBD87C20E963}
 		{2F88E0AB-0EB3-4475-A5A4-82D1E5C46A42} = {4AC7E5ED-DD29-4C29-9493-95CD20CCC4C1}
 		{0691899A-F661-40E1-8D07-BE823B477FCB} = {4AC7E5ED-DD29-4C29-9493-95CD20CCC4C1}
+		{04BCB5D5-525D-4495-BBB7-53E0CBE1F982} = {3EC7ED06-3F77-44BF-A4FC-D11760B0D950}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {3C8D7E88-4284-4074-85EF-6F7EA1429EE4}

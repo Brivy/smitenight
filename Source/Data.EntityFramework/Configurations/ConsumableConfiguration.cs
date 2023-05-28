@@ -19,7 +19,7 @@ namespace Smitenight.Persistence.Data.EntityFramework.Configurations
             builder.Property(x => x.Description).IsRequired(false);
             builder.Property(x => x.Price).IsRequired();
             builder.Property(x => x.SecondaryDescription).IsRequired(false);
-            builder.Property(x => x.SmiteId).IsRequired(false);
+            builder.Property(x => x.SmiteId).IsRequired();
             builder.Property(x => x.ShortDescription).IsRequired();
             builder.Property(x => x.ItemIconUrl).IsRequired();
         }

@@ -10,7 +10,7 @@ namespace Smitenight.Utilities.Cache.Redis.Extensions
 {
     public static class ServiceCollectionExtensions
     {
-        public static void ConfigureServices(IServiceCollection services, IConfiguration configuration)
+        public static void ConfigureCacheServices(this IServiceCollection services, IConfiguration configuration)
         {
             var section = configuration.GetSection(nameof(RedisCacheSettings));
             services.AddOptionsWithValidation<RedisCacheSettings>(section);

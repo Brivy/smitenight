@@ -1,21 +1,32 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Smitenight.Persistence.Data.Contracts.Repositories;
+using Smitenight.Persistence.Data.EntityFramework.Repositories;
 using Smitenight.Persistence.Data.EntityFramework.Secrets;
+using Smitenight.Utilities.DependencyInjection.Common.Extensions;
+using Smitenight.Utilities.Mapper.Common.Extensions;
 
 namespace Smitenight.Persistence.Data.EntityFramework.Extensions
 {
     public static class ServiceCollectionExtensions
     {
-        public static void ConfigureServices(IServiceCollection serviceCollection, IConfiguration configuration)
+        public static void ConfigureDataServices(this IServiceCollection services, IConfiguration configuration)
         {
-            serviceCollection.Configure<DatabaseSecrets>(configuration.GetSection(nameof(DatabaseSecrets)));
+            services.AddMappers(typeof(ServiceCollectionExtensions).Assembly);
 
-            serviceCollection.AddDbContext<SmitenightDbContext>(x =>
+            var databaseSecrets = configuration.GetSection(nameof(DatabaseSecrets));
+            services.AddOptionsWithValidation<DatabaseSecrets>(databaseSecrets);
+
+            services.AddDbContext<SmitenightDbContext>(x =>
             {
                 var connectionString = configuration[$"{nameof(DatabaseSecrets)}:{nameof(DatabaseSecrets.ConnectionString)}"];
                 x.UseSqlServer(connectionString);
             });
+
+            services
+                .AddScoped<IMaintainGodsRepository, MaintainGodsRepository>()
+                .AddScoped<IMaintainItemsRepository, MaintainItemsRepository>();
         }
     }
 }

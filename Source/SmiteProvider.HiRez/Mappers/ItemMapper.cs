@@ -1,18 +1,17 @@
 ﻿using Smitenight.Providers.SmiteProvider.Contracts.Models.ItemClient;
 using Smitenight.Providers.SmiteProvider.HiRez.Models.ItemClient;
 using Smitenight.Utilities.Mapper.Common.Models;
-using Smitenight.Utilities.Mapper.Common.Services;
 
 namespace Smitenight.Providers.SmiteProvider.HiRez.Mappers
 {
     public class ItemMapper : Mapper<Item, ItemDto>
     {
-        private readonly IMapperService _mapperService;
+        //private readonly IMapperService _mapperService;
 
-        public ItemMapper(IMapperService mapperService)
-        {
-            _mapperService = mapperService;
-        }
+        //public ItemMapper(IMapperService mapperService)
+        //{
+        //    _mapperService = mapperService;
+        //}
 
         public override ItemDto Map(Item input)
         {
@@ -22,7 +21,7 @@ namespace Smitenight.Providers.SmiteProvider.HiRez.Mappers
                 ChildItemId = input.ChildItemId,
                 DeviceName = input.DeviceName ?? string.Empty,
                 IconId = input.IconId,
-                ItemDescription = _mapperService.Map<ItemDescription, ItemDescriptionDto>(input.ItemDescription),
+                //ItemDescription = _mapperService.Map<ItemDescription, ItemDescriptionDto>(input.ItemDescription),
                 ItemId = input.ItemId,
                 ItemTier = input.ItemTier,
                 Price = input.Price,

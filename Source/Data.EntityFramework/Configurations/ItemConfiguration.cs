@@ -28,25 +28,25 @@ namespace Smitenight.Persistence.Data.EntityFramework.Configurations
             builder.Property(x => x.StartingItem).IsRequired();
             builder.Property(x => x.ItemIconUrl).IsRequired();
 
-            //builder.HasOne(x => x.ChildItem)
-            //    .WithMany()
-            //    .HasForeignKey(x => x.ChildItemId)
-            //    .OnDelete(DeleteBehavior.NoAction);
+            builder.HasOne(x => x.ChildItem)
+                .WithMany()
+                .HasForeignKey(x => x.ChildItemId)
+                .OnDelete(DeleteBehavior.Restrict);
 
-            //builder.HasOne(x => x.RootItem)
-            //    .WithMany()
-            //    .HasForeignKey(x => x.RootItemId)
-            //    .OnDelete(DeleteBehavior.NoAction);
+            builder.HasOne(x => x.RootItem)
+                .WithMany()
+                .HasForeignKey(x => x.RootItemId)
+                .OnDelete(DeleteBehavior.Restrict);
 
-            //builder.HasMany(x => x.ItemDescriptions)
-            //    .WithOne(x => x.Item)
-            //    .HasForeignKey(x => x.ItemId)
-            //    .OnDelete(DeleteBehavior.Cascade);
+            builder.HasMany(x => x.ItemDescriptions)
+                .WithOne(x => x.Item)
+                .HasForeignKey(x => x.ItemId)
+                .OnDelete(DeleteBehavior.Restrict);
 
-            //builder.HasMany(x => x.ItemPurchases)
-            //    .WithOne(x => x.Item)
-            //    .HasForeignKey(x => x.ItemId)
-            //    .OnDelete(DeleteBehavior.Cascade);
+            builder.HasMany(x => x.ItemPurchases)
+                .WithOne(x => x.Item)
+                .HasForeignKey(x => x.ItemId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

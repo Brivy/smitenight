@@ -23,20 +23,20 @@ namespace Smitenight.Persistence.Data.EntityFramework.Configurations
             builder.Property(x => x.SmiteId).IsRequired();
             builder.Property(x => x.StartDate).IsRequired();
 
-            //builder.HasMany(x => x.GodBans)
-            //    .WithOne(x => x.Match)
-            //    .HasForeignKey(x => x.MatchId)
-            //    .OnDelete(DeleteBehavior.Cascade);
+            builder.HasMany(x => x.GodBans)
+                .WithOne(x => x.Match)
+                .HasForeignKey(x => x.MatchId)
+                .OnDelete(DeleteBehavior.Restrict);
 
-            //builder.HasMany(x => x.MatchDetails)
-            //    .WithOne(x => x.Match)
-            //    .HasForeignKey(x => x.MatchId)
-            //    .OnDelete(DeleteBehavior.Cascade);
+            builder.HasMany(x => x.MatchDetails)
+                .WithOne(x => x.Match)
+                .HasForeignKey(x => x.MatchId)
+                .OnDelete(DeleteBehavior.Restrict);
 
-            //builder.HasMany(x => x.SmitenightMatches)
-            //    .WithOne(x => x.Match)
-            //    .HasForeignKey(x => x.MatchId)
-            //    .OnDelete(DeleteBehavior.Cascade);
+            builder.HasMany(x => x.SmitenightMatches)
+                .WithOne(x => x.Match)
+                .HasForeignKey(x => x.MatchId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

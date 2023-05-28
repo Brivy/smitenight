@@ -1,28 +1,38 @@
-﻿using Smitenight.Providers.SmiteProvider.Contracts.Exceptions;
+﻿using Smitenight.Providers.SmiteProvider.Contracts.Clients;
+using Smitenight.Providers.SmiteProvider.Contracts.Exceptions;
 using Smitenight.Providers.SmiteProvider.HiRez.Exceptions;
+using Smitenight.Providers.SmiteProvider.HiRez.Services;
+using Smitenight.Utilities.Mapper.Common.Services;
 using System.Net;
 using System.Net.Http.Json;
 using System.Text.Json;
 
 namespace Smitenight.Providers.SmiteProvider.HiRez.Clients
 {
-    public abstract class SmiteClient
+    public partial class SmiteClient : ISmiteClient
     {
         private readonly HttpClient _httpClient;
+        private readonly ISmiteClientUrlService _smiteClientUrlService;
+        private readonly IMapperService _mapperService;
 
-        protected SmiteClient(HttpClient httpClient)
+        public SmiteClient(
+            HttpClient httpClient,
+            ISmiteClientUrlService smiteClientUrlService,
+            IMapperService mapperService)
         {
             _httpClient = httpClient;
+            _smiteClientUrlService = smiteClientUrlService;
+            _mapperService = mapperService;
         }
 
-        protected async Task PingAsync(string url, CancellationToken cancellationToken = default)
+        private async Task PingAsync(string url, CancellationToken cancellationToken = default)
         {
             var request = new HttpRequestMessage(HttpMethod.Get, url);
             var response = await _httpClient.SendAsync(request, cancellationToken);
             if (response.StatusCode != HttpStatusCode.OK) throw new SmiteClientPingFailedException($"Ping returned invalid status code: {response.StatusCode}");
         }
 
-        protected async Task<TResponse> GetAsync<TResponse>(string url, CancellationToken cancellationToken = default)
+        private async Task<TResponse> GetAsync<TResponse>(string url, CancellationToken cancellationToken = default)
             where TResponse : class
         {
             try

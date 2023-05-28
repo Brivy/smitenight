@@ -13,28 +13,30 @@ namespace Smitenight.Providers.SmiteProvider.HiRez.Extensions
 {
     public static class ServiceCollectionExtensions
     {
-        public static void ConfigureServices(IServiceCollection services, IConfiguration configuration)
+        public static void ConfigureSmiteProviderServices(this IServiceCollection services, IConfiguration configuration)
         {
             services.AddMappers(typeof(ServiceCollectionExtensions).Assembly);
 
-            services.Configure<SmiteClientSecrets>(configuration.GetSection(nameof(SmiteClientSecrets)));
+            var smiteClientSecrets = configuration.GetSection(nameof(SmiteClientSecrets));
+            var smiteClientSettings = configuration.GetSection(nameof(SmiteClientSettings));
+            services.AddOptionsWithValidation<SmiteClientSecrets>(smiteClientSecrets);
+            services.AddOptionsWithValidation<SmiteClientSettings>(smiteClientSettings);
 
-            var section = configuration.GetSection(nameof(SmiteClientSettings));
-            services.AddOptionsWithValidation<SmiteClientSettings>(section);
+            var settings = smiteClientSettings.Get<SmiteClientSettings>() ?? throw new NullReferenceException();
+            services.AddHttpClient<ISmiteClient, SmiteClient>(client =>
+            {
+                client.BaseAddress = new Uri(settings.Url);
+            });
 
-            services.AddHttpClient<ISystemSmiteClient, SystemSmiteClient>();
-            services.AddHttpClient<IGodSmiteClient, GodSmiteClient>();
-            services.AddHttpClient<IItemSmiteClient, ItemSmiteClient>();
-            services.AddHttpClient<IRetrievePlayerSmiteClient, RetrievePlayerSmiteClient>();
-            services.AddHttpClient<IPlayerSmiteClient, PlayerSmiteClient>();
-            services.AddHttpClient<IMatchSmiteClient, MatchSmiteClient>();
-            services.AddHttpClient<ILeagueSmiteClient, LeagueSmiteClient>();
-            services.AddHttpClient<ITeamSmiteClient, TeamSmiteClient>();
-            services.AddHttpClient<IOtherSmiteClient, OtherSmiteSmiteClient>();
+            services.AddHttpClient<ISmiteSessionClient, SmiteSessionClient>(client =>
+            {
+                client.BaseAddress = new Uri(settings.Url);
+            });
 
             services
                 .AddScoped<ISmiteSessionCacheService, SmiteSessionCacheService>()
-                .AddScoped<ISmiteClientUrlService, SmiteClientUrlService>();
+                .AddScoped<ISmiteClientUrlService, SmiteClientUrlService>()
+                .AddScoped<ISmiteHashService, SmiteHashService>();
         }
     }
 }

@@ -1,19 +1,25 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using Smitenight.Application.Blazor.Business.Contracts.Services.Checksums;
 using Smitenight.Application.Blazor.Business.Contracts.Services.Maintenance;
 using Smitenight.Application.Blazor.Business.Services.Checksums;
 using Smitenight.Application.Blazor.Business.Services.Maintenance;
+using Smitenight.Persistence.Data.EntityFramework.Extensions;
+using Smitenight.Providers.SmiteProvider.HiRez.Extensions;
 using Smitenight.Utilities.Mapper.Common.Extensions;
 
 namespace Smitenight.Application.Blazor.Business.Extensions
 {
-    public static class Startup
+    public static class ServiceCollectionExtensions
     {
-        public static void ConfigureServices(IServiceCollection serviceCollection)
+        public static void ConfigureBusinessServices(this IServiceCollection services, IConfiguration configuration)
         {
-            serviceCollection.AddMappers(typeof(Startup).Assembly);
+            services.AddMappers(typeof(ServiceCollectionExtensions).Assembly);
 
-            serviceCollection
+            services.ConfigureDataServices(configuration);
+            services.ConfigureSmiteProviderServices(configuration);
+
+            services
                 .AddScoped<IChecksumService, ChecksumService>()
                 .AddScoped<IMaintainGodsService, MaintainGodsService>()
                 .AddScoped<IMaintainItemsService, MaintainItemsService>()

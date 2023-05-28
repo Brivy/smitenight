@@ -23,15 +23,15 @@ namespace Smitenight.Persistence.Data.EntityFramework.Configurations
             builder.Property(x => x.PortalType).IsRequired(false);
             builder.Property(x => x.PrivacyEnabled).IsRequired();
 
-            //builder.HasMany(x => x.MatchDetails)
-            //    .WithOne(x => x.Player)
-            //    .HasForeignKey(x => x.PlayerId)
-            //    .OnDelete(DeleteBehavior.NoAction);
+            builder.HasMany(x => x.MatchDetails)
+                .WithOne(x => x.Player)
+                .HasForeignKey(x => x.PlayerId)
+                .OnDelete(DeleteBehavior.Restrict);
 
-            //builder.HasMany(x => x.Smitenights)
-            //    .WithOne(x => x.Player)
-            //    .HasForeignKey(x => x.PlayerId)
-            //    .OnDelete(DeleteBehavior.Cascade);
+            builder.HasMany(x => x.Smitenights)
+                .WithOne(x => x.Player)
+                .HasForeignKey(x => x.PlayerId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

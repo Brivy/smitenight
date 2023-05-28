@@ -6,7 +6,7 @@
         public int ActiveId2 { get; init; }
         public string Active1 { get; init; } = null!;
         public string Active2 { get; init; } = null!;
-        public object Active3 { get; init; }
+        public string? Active3 { get; init; }
         public int Assists { get; init; }
         public string Ban1 { get; init; } = null!;
         public string Ban10 { get; init; } = null!;

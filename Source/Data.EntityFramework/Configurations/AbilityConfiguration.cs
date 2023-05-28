@@ -22,22 +22,21 @@ namespace Smitenight.Persistence.Data.EntityFramework.Configurations
             builder.Property(x => x.Url).IsRequired();
             builder.Property(x => x.AbilityType).IsRequired();
 
+            builder.HasOne(x => x.God)
+                .WithMany(x => x.Abilities)
+                .HasForeignKey(x => x.GodId)
+                .OnDelete(DeleteBehavior.Restrict)
+                .IsRequired();
 
-            //builder.HasOne(x => x.God)
-            //    .WithMany(x => x.Abilities)
-            //    .HasForeignKey(x => x.GodId)
-            //    .OnDelete(DeleteBehavior.Cascade)
-            //    .IsRequired();
+            builder.HasMany(x => x.AbilityRanks)
+                .WithOne(x => x.Ability)
+                .HasForeignKey(x => x.AbilityId)
+                .OnDelete(DeleteBehavior.Restrict);
 
-            //builder.HasMany(x => x.AbilityRanks)
-            //    .WithOne(x => x.Ability)
-            //    .HasForeignKey(x => x.AbilityId)
-            //    .OnDelete(DeleteBehavior.Cascade);
-
-            //builder.HasMany(x => x.AbilityTags)
-            //    .WithOne(x => x.Ability)
-            //    .HasForeignKey(x => x.AbilityId)
-            //    .OnDelete(DeleteBehavior.Cascade);
+            builder.HasMany(x => x.AbilityTags)
+                .WithOne(x => x.Ability)
+                .HasForeignKey(x => x.AbilityId)
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

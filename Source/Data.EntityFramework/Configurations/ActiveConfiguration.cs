@@ -12,7 +12,6 @@ namespace Smitenight.Persistence.Data.EntityFramework.Configurations
 
             builder.HasKey(x => x.Id);
 
-
             builder.Property(x => x.ChildActiveId).IsRequired(false);
             builder.Property(x => x.Enabled).IsRequired();
             builder.Property(x => x.Name).IsRequired();
@@ -28,17 +27,17 @@ namespace Smitenight.Persistence.Data.EntityFramework.Configurations
             builder.HasOne(x => x.ChildActive)
                 .WithMany()
                 .HasForeignKey(x => x.ChildActiveId)
-                .OnDelete(DeleteBehavior.NoAction);
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(x => x.RootActive)
                 .WithMany()
                 .HasForeignKey(x => x.RootActiveId)
-                .OnDelete(DeleteBehavior.NoAction);
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasMany(x => x.ActivePurchases)
                 .WithOne(x => x.Active)
                 .HasForeignKey(x => x.ActiveId)
-                .OnDelete(DeleteBehavior.Cascade);
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

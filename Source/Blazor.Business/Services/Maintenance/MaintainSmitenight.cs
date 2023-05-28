@@ -10,25 +10,22 @@ namespace Smitenight.Application.Blazor.Business.Services.Maintenance
     {
         private readonly IMaintainItemsService _maintainItemsService;
         private readonly IMaintainGodsService _maintainGodsService;
-        private readonly IItemSmiteClient _itemSmiteClient;
-        private readonly IGodSmiteClient _godSmiteClient;
+        private readonly ISmiteClient _smiteClient;
 
         public MaintainSmitenight(
             IMaintainItemsService maintainItemsService,
             IMaintainGodsService maintainGodsService,
-            IItemSmiteClient itemSmiteClient,
-            IGodSmiteClient godSmiteClient)
+            ISmiteClient smiteClient)
         {
             _maintainItemsService = maintainItemsService;
             _maintainGodsService = maintainGodsService;
-            _itemSmiteClient = itemSmiteClient;
-            _godSmiteClient = godSmiteClient;
+            _smiteClient = smiteClient;
         }
 
         public async Task MaintainItemsAsync(CancellationToken cancellationToken = default)
         {
             var itemChecksums = await _maintainItemsService.GetItemChecksumsAsync(cancellationToken);
-            var items = await _itemSmiteClient.GetItemsAsync(LanguageCode.English, cancellationToken);
+            var items = await _smiteClient.GetItemsAsync(LanguageCode.English, cancellationToken);
             if (cancellationToken.IsCancellationRequested) return;
 
             var relinkNeededSmiteIds = new List<int>();
@@ -54,7 +51,7 @@ namespace Smitenight.Application.Blazor.Business.Services.Maintenance
         public async Task MaintainGodsAsync(CancellationToken cancellationToken = default)
         {
             var godChecksums = await _maintainGodsService.GetGodChecksumsAsync(cancellationToken);
-            var gods = await _godSmiteClient.GetGodsAsync(LanguageCode.English, cancellationToken);
+            var gods = await _smiteClient.GetGodsAsync(LanguageCode.English, cancellationToken);
             if (cancellationToken.IsCancellationRequested) return;
 
             foreach (var god in gods)
@@ -74,7 +71,7 @@ namespace Smitenight.Application.Blazor.Business.Services.Maintenance
                 await _maintainGodsService.MaintainAbilitiesAsync(godId, godUpdated, abilityDictionary, cancellationToken);
                 await _maintainGodsService.MaintainBasicAttacksAsync(godId, godUpdated, god.BasicAttack.BasicAttackItems, checksums.BasicAttackChecksum, cancellationToken);
 
-                var godSkins = await _godSmiteClient.GetGodSkinsAsync(god.Id, LanguageCode.English, cancellationToken);
+                var godSkins = await _smiteClient.GetGodSkinsAsync(god.Id, LanguageCode.English, cancellationToken);
                 await _maintainGodsService.MaintainGodSkinsAsync(godId, godUpdated, godSkins, checksums.GodSkinChecksums, cancellationToken);
             }
         }
@@ -89,7 +86,7 @@ namespace Smitenight.Application.Blazor.Business.Services.Maintenance
             await _maintainGodsService.CreateAbility(createdGodId, god.AbilityDetails5, cancellationToken);
             await _maintainGodsService.CreateBasicAttacksAsync(createdGodId, god.BasicAttack.BasicAttackItems, cancellationToken);
 
-            var godSkins = await _godSmiteClient.GetGodSkinsAsync(god.Id, LanguageCode.English, cancellationToken);
+            var godSkins = await _smiteClient.GetGodSkinsAsync(god.Id, LanguageCode.English, cancellationToken);
             foreach (var godSkin in godSkins)
             {
                 await _maintainGodsService.CreateGodSkinAsync(createdGodId, godSkin, cancellationToken);

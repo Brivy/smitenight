@@ -1,18 +1,17 @@
 ﻿using Smitenight.Providers.SmiteProvider.Contracts.Models.RetrievePlayerClient;
 using Smitenight.Providers.SmiteProvider.HiRez.Models.RetrievePlayerClient;
 using Smitenight.Utilities.Mapper.Common.Models;
-using Smitenight.Utilities.Mapper.Common.Services;
 
 namespace Smitenight.Providers.SmiteProvider.HiRez.Mappers
 {
     public class PlayerMapper : Mapper<Player, PlayerDto>
     {
-        private readonly IMapperService _mapperService;
+        //private readonly IMapperService _mapperService;
 
-        public PlayerMapper(IMapperService mapperService)
-        {
-            _mapperService = mapperService;
-        }
+        //public PlayerMapper(IMapperService mapperService)
+        //{
+        //    _mapperService = mapperService;
+        //}
 
         public override PlayerDto Map(Player input)
         {
@@ -39,12 +38,12 @@ namespace Smitenight.Providers.SmiteProvider.HiRez.Mappers
                 RankStatConquestController = input.RankStatConquestController,
                 RankStatDuelController = input.RankStatDuelController,
                 RankStatJoustController = input.RankStatJoustController,
-                RankedConquest = _mapperService.Map<RankedDetails, RankedDetailsDto>(input.RankedConquest),
-                RankedConquestController = _mapperService.Map<RankedDetails, RankedDetailsDto>(input.RankedConquestController),
-                RankedDuel = _mapperService.Map<RankedDetails, RankedDetailsDto>(input.RankedDuel),
-                RankedDuelController = _mapperService.Map<RankedDetails, RankedDetailsDto>(input.RankedDuelController),
-                RankedJoust = _mapperService.Map<RankedDetails, RankedDetailsDto>(input.RankedJoust),
-                RankedJoustController = _mapperService.Map<RankedDetails, RankedDetailsDto>(input.RankedJoustController),
+                //RankedConquest = _mapperService.Map<RankedDetails, RankedDetailsDto>(input.RankedConquest),
+                //RankedConquestController = _mapperService.Map<RankedDetails, RankedDetailsDto>(input.RankedConquestController),
+                //RankedDuel = _mapperService.Map<RankedDetails, RankedDetailsDto>(input.RankedDuel),
+                //RankedDuelController = _mapperService.Map<RankedDetails, RankedDetailsDto>(input.RankedDuelController),
+                //RankedJoust = _mapperService.Map<RankedDetails, RankedDetailsDto>(input.RankedJoust),
+                //RankedJoustController = _mapperService.Map<RankedDetails, RankedDetailsDto>(input.RankedJoustController),
                 Region = input.Region ?? string.Empty,
                 TeamId = input.TeamId,
                 TeamName = input.TeamName ?? string.Empty,

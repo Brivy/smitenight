@@ -16,17 +16,17 @@ namespace Smitenight.Persistence.Data.EntityFramework.Configurations
 
             builder.Property(x => x.PurchaseOrder).IsRequired();
 
-            //builder.HasOne(x => x.Item)
-            //    .WithMany(x => x.ItemPurchases)
-            //    .HasForeignKey(x => x.ItemId)
-            //    .OnDelete(DeleteBehavior.Cascade)
-            //    .IsRequired();
+            builder.HasOne(x => x.Item)
+                .WithMany(x => x.ItemPurchases)
+                .HasForeignKey(x => x.ItemId)
+                .OnDelete(DeleteBehavior.Restrict)
+                .IsRequired();
 
-            //builder.HasOne(x => x.MatchDetail)
-            //    .WithMany(x => x.ItemPurchases)
-            //    .HasForeignKey(x => x.ItemId)
-            //    .OnDelete(DeleteBehavior.Cascade)
-            //    .IsRequired();
+            builder.HasOne(x => x.MatchDetail)
+                .WithMany(x => x.ItemPurchases)
+                .HasForeignKey(x => x.ItemId)
+                .OnDelete(DeleteBehavior.Restrict)
+                .IsRequired();
         }
     }
 }

@@ -3,8 +3,6 @@ using Microsoft.Extensions.Options;
 using Smitenight.Providers.SmiteProvider.HiRez.Cache;
 using Smitenight.Providers.SmiteProvider.HiRez.Constants;
 using Smitenight.Providers.SmiteProvider.HiRez.Secrets;
-using Smitenight.Providers.SmiteProvider.HiRez.Settings;
-using System.Security.Cryptography;
 using System.Text;
 
 namespace Smitenight.Providers.SmiteProvider.HiRez.Services
@@ -12,22 +10,22 @@ namespace Smitenight.Providers.SmiteProvider.HiRez.Services
     public class SmiteClientUrlService : ISmiteClientUrlService
     {
         private readonly ISmiteSessionCacheService _smiteSessionCacheService;
-        private readonly SmiteClientSettings _smiteClientSettings;
+        private readonly ISmiteHashService _smiteHashService;
         private readonly SmiteClientSecrets _smiteClientSecrets;
 
         public SmiteClientUrlService(
             ISmiteSessionCacheService smiteSessionCacheService,
-            IOptions<SmiteClientSettings> smiteClientSettings,
+            ISmiteHashService smiteHashService,
             IOptions<SmiteClientSecrets> smiteClientSecrets)
         {
             _smiteSessionCacheService = smiteSessionCacheService;
-            _smiteClientSettings = smiteClientSettings.Value;
+            _smiteHashService = smiteHashService;
             _smiteClientSecrets = smiteClientSecrets.Value;
         }
 
         public string ConstructPingUrl()
         {
-            return $"{_smiteClientSettings.Url}{MethodNameConstants.TestSessionMethod}Json";
+            return $"{MethodNameConstants.TestSessionMethod}Json";
         }
 
         public Task<string> ConstructUrlAsync(string methodName, CancellationToken cancellationToken = default)
@@ -37,11 +35,11 @@ namespace Smitenight.Providers.SmiteProvider.HiRez.Services
 
         public async Task<string> ConstructUrlAsync(string methodName, string? urlPath, CancellationToken cancellationToken = default)
         {
-            var utcDateString = GetCurrentUtcDate();
-            var signature = GenerateMd5Hash(methodName, utcDateString);
+            var utcDateString = DateTime.UtcNow.ToString(DateTimeFormats.SessionIdFormat);
+            var signature = _smiteHashService.GenerateSmiteHash(methodName, utcDateString);
             var sessionId = await _smiteSessionCacheService.GetSessionIdAsync(cancellationToken);
             var urlPathSegment = !string.IsNullOrWhiteSpace(urlPath) ? $"/{urlPath}" : string.Empty;
-            return $"{_smiteClientSettings.Url}/{methodName}Json/{_smiteClientSecrets.DeveloperId}/{signature}/{sessionId}/{utcDateString}{urlPathSegment}";
+            return $"{methodName}Json/{_smiteClientSecrets.DeveloperId}/{signature}/{sessionId}/{utcDateString}{urlPathSegment}";
         }
 
         public string ConstructUrlPath(params object[] urlPaths)
@@ -61,32 +59,5 @@ namespace Smitenight.Providers.SmiteProvider.HiRez.Services
             sb.Length--;
             return sb.ToString();
         }
-
-        /// <summary>
-        /// Creates a MD5 hash from the method we are calling and our credentials
-        /// This is needed for each request to Smite (except Ping)
-        /// </summary>
-        /// <returns></returns>
-        private string GenerateMd5Hash(string methodName, string utcDateString)
-        {
-            var credentials = $"{_smiteClientSecrets.DeveloperId}{methodName}{_smiteClientSecrets.AuthenticationKey}{utcDateString}";
-
-            using var md5 = MD5.Create();
-            var bytes = md5.ComputeHash(Encoding.ASCII.GetBytes(credentials));
-            var sb = new StringBuilder();
-            foreach (var b in bytes)
-            {
-                sb.Append(b.ToString("x2").ToLower());
-            }
-
-            return sb.ToString();
-        }
-
-        /// <summary>
-        /// Converts the current UTC date to a string in the <see cref="DateTimeFormats.SessionIdFormat"/> format
-        /// </summary>
-        /// <returns></returns>
-        private static string GetCurrentUtcDate() =>
-            DateTime.UtcNow.ToString(DateTimeFormats.SessionIdFormat);
     }
 }

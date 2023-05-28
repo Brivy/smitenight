@@ -17,11 +17,11 @@ namespace Smitenight.Persistence.Data.EntityFramework.Configurations
             builder.Property(x => x.Description).IsRequired();
             builder.Property(x => x.Value).IsRequired();
 
-            //builder.HasOne(x => x.God)
-            //    .WithMany(x => x.BasicAttackDescriptions)
-            //    .HasForeignKey(x => x.GodId)
-            //    .OnDelete(DeleteBehavior.Cascade)
-            //    .IsRequired();
+            builder.HasOne(x => x.God)
+                .WithMany(x => x.BasicAttackDescriptions)
+                .HasForeignKey(x => x.GodId)
+                .OnDelete(DeleteBehavior.Restrict)
+                .IsRequired();
         }
     }
 }

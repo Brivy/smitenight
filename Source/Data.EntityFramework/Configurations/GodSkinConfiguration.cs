@@ -22,16 +22,16 @@ namespace Smitenight.Persistence.Data.EntityFramework.Configurations
             builder.Property(x => x.PriceFavor).IsRequired();
             builder.Property(x => x.PriceGems).IsRequired();
 
-            //builder.HasOne(x => x.God)
-            //    .WithMany(x => x.GodSkins)
-            //    .HasForeignKey(x => x.GodId)
-            //    .OnDelete(DeleteBehavior.Cascade)
-            //    .IsRequired();
+            builder.HasOne(x => x.God)
+                .WithMany(x => x.GodSkins)
+                .HasForeignKey(x => x.GodId)
+                .OnDelete(DeleteBehavior.Restrict)
+                .IsRequired();
 
-            //builder.HasMany(x => x.MatchDetails)
-            //    .WithOne(x => x.GodSkin)
-            //    .HasForeignKey(x => x.GodSkinId)
-            //    .OnDelete(DeleteBehavior.NoAction);
+            builder.HasMany(x => x.MatchDetails)
+                .WithOne(x => x.GodSkin)
+                .HasForeignKey(x => x.GodSkinId)
+                .OnDelete(DeleteBehavior.NoAction);
         }
     }
 }
