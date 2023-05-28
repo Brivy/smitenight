@@ -16,14 +16,14 @@ namespace Smitenight.Providers.SmiteProvider.HiRez.Clients
         {
             var url = await _smiteClientUrlService.ConstructUrlAsync(MethodNameConstants.DataUsedMethod, cancellationToken);
             var result = await GetAsync<IEnumerable<DataUsed>>(url, cancellationToken);
-            return _mapperService.Map<IEnumerable<DataUsed>, IEnumerable<DataUsedDto>>(result);
+            return _mapperService.MapAll<DataUsed, DataUsedDto>(result);
         }
 
         public async Task<IEnumerable<HirezServerStatusDto>> GetHirezServerStatusAsync(CancellationToken cancellationToken = default)
         {
             var url = await _smiteClientUrlService.ConstructUrlAsync(MethodNameConstants.HirezServerStatusMethod, cancellationToken);
             var result = await GetAsync<IEnumerable<HirezServerStatus>>(url, cancellationToken);
-            return _mapperService.Map<IEnumerable<HirezServerStatus>, IEnumerable<HirezServerStatusDto>>(result);
+            return _mapperService.MapAll<HirezServerStatus, HirezServerStatusDto>(result);
         }
 
         public async Task<PatchInfoDto> GetPatchInfoAsync(CancellationToken cancellationToken = default)

@@ -12,7 +12,7 @@ namespace Smitenight.Providers.SmiteProvider.HiRez.Clients
             var urlPath = _smiteClientUrlService.ConstructUrlPath((int)gameModeQueue, (int)leagueTier);
             var url = await _smiteClientUrlService.ConstructUrlAsync(MethodNameConstants.LeagueLeaderbordMethod, urlPath, cancellationToken);
             var result = await GetAsync<IEnumerable<LeagueLeaderboard>>(url, cancellationToken);
-            return _mapperService.Map<IEnumerable<LeagueLeaderboard>, IEnumerable<LeagueLeaderboardDto>>(result);
+            return _mapperService.MapAll<LeagueLeaderboard, LeagueLeaderboardDto>(result);
         }
 
         public async Task<IEnumerable<LeagueSeasonDto>> GetLeagueSeasonsAsync(GameModeQueue gameModeQueue, CancellationToken cancellationToken = default)
@@ -20,7 +20,7 @@ namespace Smitenight.Providers.SmiteProvider.HiRez.Clients
             var urlPath = _smiteClientUrlService.ConstructUrlPath((int)gameModeQueue);
             var url = await _smiteClientUrlService.ConstructUrlAsync(MethodNameConstants.LeagueSeasonsMethod, urlPath, cancellationToken);
             var result = await GetAsync<IEnumerable<LeagueSeason>>(url, cancellationToken);
-            return _mapperService.Map<IEnumerable<LeagueSeason>, IEnumerable<LeagueSeasonDto>>(result);
+            return _mapperService.MapAll<LeagueSeason, LeagueSeasonDto>(result);
         }
     }
 }

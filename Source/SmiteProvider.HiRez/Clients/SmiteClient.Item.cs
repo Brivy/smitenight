@@ -12,7 +12,7 @@ namespace Smitenight.Providers.SmiteProvider.HiRez.Clients
             var urlPath = _smiteClientUrlService.ConstructUrlPath(godId, (int)languageCode);
             var url = await _smiteClientUrlService.ConstructUrlAsync(MethodNameConstants.GodRecommendedItemsMethod, urlPath, cancellationToken);
             var result = await GetAsync<IEnumerable<GodRecommendedItem>>(url, cancellationToken);
-            return _mapperService.Map<IEnumerable<GodRecommendedItem>, IEnumerable<GodRecommendedItemDto>>(result);
+            return _mapperService.MapAll<GodRecommendedItem, GodRecommendedItemDto>(result);
         }
 
         public async Task<IEnumerable<ItemDto>> GetItemsAsync(LanguageCode languageCode, CancellationToken cancellationToken = default)
@@ -20,7 +20,7 @@ namespace Smitenight.Providers.SmiteProvider.HiRez.Clients
             var urlPath = _smiteClientUrlService.ConstructUrlPath((int)languageCode);
             var url = await _smiteClientUrlService.ConstructUrlAsync(MethodNameConstants.ItemsMethod, urlPath, cancellationToken);
             var result = await GetAsync<IEnumerable<Item>>(url, cancellationToken);
-            return _mapperService.Map<IEnumerable<Item>, IEnumerable<ItemDto>>(result);
+            return _mapperService.MapAll<Item, ItemDto>(result);
         }
     }
 }

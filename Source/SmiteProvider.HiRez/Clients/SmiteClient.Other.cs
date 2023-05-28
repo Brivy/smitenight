@@ -10,14 +10,14 @@ namespace Smitenight.Providers.SmiteProvider.HiRez.Clients
         {
             var url = await _smiteClientUrlService.ConstructUrlAsync(MethodNameConstants.EsportProLeagueMethod, cancellationToken);
             var result = await GetAsync<IEnumerable<EsportProLeague>>(url, cancellationToken);
-            return _mapperService.Map<IEnumerable<EsportProLeague>, IEnumerable<EsportProLeagueDto>>(result);
+            return _mapperService.MapAll<EsportProLeague, EsportProLeagueDto>(result);
         }
 
         public async Task<IEnumerable<MotdDto>> GetMotdAsync(CancellationToken cancellationToken = default)
         {
             var url = await _smiteClientUrlService.ConstructUrlAsync(MethodNameConstants.MotdMethod, cancellationToken);
             var result = await GetAsync<IEnumerable<Motd>>(url, cancellationToken);
-            return _mapperService.Map<IEnumerable<Motd>, IEnumerable<MotdDto>>(result);
+            return _mapperService.MapAll<Motd, MotdDto>(result);
         }
     }
 }

@@ -21,7 +21,6 @@ namespace Smitenight.Utilities.Mapper.Common.Services
             throw new InvalidOperationException($"No mapper found for {typeof(TSource).Name} to {typeof(TDestination).Name}");
         }
 
-        // TODO: Make mapping IEnumerables possible
         public TDestination Map<TSource, TDestination>(TSource source)
         {
             if (source == null)
@@ -31,6 +30,38 @@ namespace Smitenight.Utilities.Mapper.Common.Services
 
             var mapper = GetMapper<TSource, TDestination>();
             return mapper.Map(source);
+        }
+
+        public IEnumerable<TDestination> MapAll<TSource, TDestination>(IEnumerable<TSource> source)
+        {
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            var mappedItems = new List<TDestination>();
+            foreach (var item in source)
+            {
+                mappedItems.Add(Map<TSource, TDestination>(item));
+            }
+
+            return mappedItems;
+        }
+
+        public IEnumerable<TDestination> MapAll<TSource, TDestination>(TSource[] source)
+        {
+            if (source == null)
+            {
+                throw new ArgumentNullException(nameof(source));
+            }
+
+            var mappedItems = new List<TDestination>();
+            foreach (var item in source)
+            {
+                mappedItems.Add(Map<TSource, TDestination>(item));
+            }
+
+            return mappedItems;
         }
     }
 }
