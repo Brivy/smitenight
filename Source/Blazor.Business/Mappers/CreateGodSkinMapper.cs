@@ -5,7 +5,7 @@ using Smitenight.Persistence.Data.Contracts.Models;
 using Smitenight.Providers.SmiteProvider.Contracts.Models.GodClient;
 using Smitenight.Utilities.Mapper.Common.Models;
 
-namespace Smitenight.Application.Blazor.Business.Services.Mappers
+namespace Smitenight.Application.Blazor.Business.Mappers
 {
     public class CreateGodSkinMapper : Mapper<GodSkinDto, CreateGodSkinDto>
     {

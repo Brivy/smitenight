@@ -1,4 +1,5 @@
-﻿using System.Text.Json.Serialization;
+﻿using Smitenight.Providers.SmiteProvider.HiRez.Models.Common;
+using System.Text.Json.Serialization;
 
 namespace Smitenight.Providers.SmiteProvider.HiRez.Models.ItemClient
 {
@@ -25,13 +26,7 @@ namespace Smitenight.Providers.SmiteProvider.HiRez.Models.ItemClient
     public record class ItemDescription
     {
         [JsonPropertyName("Description")] public string? Description { get; set; }
-        [JsonPropertyName("Menuitems")] public MenuItem[] MenuItems { get; set; } = null!;
+        [JsonPropertyName("Menuitems")] public CommonItem[] ItemSubDescriptions { get; set; } = null!;
         [JsonPropertyName("SecondaryDescription")] public string? SecondaryDescription { get; set; }
-    }
-
-    public record class MenuItem
-    {
-        [JsonPropertyName("Description")] public string? Description { get; set; }
-        [JsonPropertyName("Value")] public string? Value { get; set; }
     }
 }

@@ -48,17 +48,17 @@ namespace Smitenight.Utilities.Mapper.Common.Services
             return mappedItems;
         }
 
-        public IEnumerable<TDestination> MapAll<TSource, TDestination>(TSource[] source)
+        public TDestination[] MapAll<TSource, TDestination>(TSource[] source)
         {
             if (source == null)
             {
                 throw new ArgumentNullException(nameof(source));
             }
 
-            var mappedItems = new List<TDestination>();
-            foreach (var item in source)
+            var mappedItems = new TDestination[source.Length];
+            for (var i = 0; i < source.Length; i++)
             {
-                mappedItems.Add(Map<TSource, TDestination>(item));
+                mappedItems[i] = Map<TSource, TDestination>(source[i]);
             }
 
             return mappedItems;

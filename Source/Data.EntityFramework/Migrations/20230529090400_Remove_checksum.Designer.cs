@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Smitenight.Persistence.Data.EntityFramework;
 
@@ -11,9 +12,11 @@ using Smitenight.Persistence.Data.EntityFramework;
 namespace Smitenight.Persistence.Data.EntityFramework.Migrations
 {
     [DbContext(typeof(SmitenightDbContext))]
-    partial class SmitenightDbContextModelSnapshot : ModelSnapshot
+    [Migration("20230529090400_Remove_checksum")]
+    partial class Remove_checksum
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

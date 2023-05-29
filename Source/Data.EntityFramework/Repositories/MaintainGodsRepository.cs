@@ -22,9 +22,10 @@ namespace Smitenight.Persistence.Data.EntityFramework.Repositories
         public Task CreateAbilityAsync(int godId, CreateAbilityDto ability, IEnumerable<CreateAbilityTagDto> abilityTags, IEnumerable<CreateAbilityRankDto> abilityRanks, CancellationToken cancellationToken = default)
         {
             var abilityEntity = _mapperService.Map<CreateAbilityDto, Ability>(ability);
-            var abilityTagEntities = _mapperService.Map<IEnumerable<CreateAbilityTagDto>, IEnumerable<AbilityTag>>(abilityTags);
-            var abilityRankEntities = _mapperService.Map<IEnumerable<CreateAbilityRankDto>, IEnumerable<AbilityRank>>(abilityRanks);
+            var abilityTagEntities = _mapperService.MapAll<CreateAbilityTagDto, AbilityTag>(abilityTags);
+            var abilityRankEntities = _mapperService.MapAll<CreateAbilityRankDto, AbilityRank>(abilityRanks);
 
+            abilityEntity.GodId = godId;
             abilityEntity.AbilityTags = abilityTagEntities;
             abilityEntity.AbilityRanks = abilityRankEntities;
 
@@ -34,7 +35,12 @@ namespace Smitenight.Persistence.Data.EntityFramework.Repositories
 
         public Task CreateBasicAttackAsync(int godId, IEnumerable<CreateBasicAttackDto> basicAttacks, CancellationToken cancellationToken = default)
         {
-            var basicAttackEntities = _mapperService.Map<IEnumerable<CreateBasicAttackDto>, IEnumerable<BasicAttack>>(basicAttacks);
+            var basicAttackEntities = _mapperService.MapAll<CreateBasicAttackDto, BasicAttack>(basicAttacks);
+            foreach (var basicAttackEntity in basicAttackEntities)
+            {
+                basicAttackEntity.GodId = godId;
+            }
+
             _dbContext.BasicAttacks.AddRange(basicAttackEntities);
             return _dbContext.SaveChangesAsync(cancellationToken);
         }
@@ -50,6 +56,8 @@ namespace Smitenight.Persistence.Data.EntityFramework.Repositories
         public Task CreateGodSkinAsync(int godId, CreateGodSkinDto godSkin, CancellationToken cancellationToken = default)
         {
             var godSkinEntity = _mapperService.Map<CreateGodSkinDto, GodSkin>(godSkin);
+            godSkinEntity.GodId = godId;
+
             _dbContext.GodSkins.Add(godSkinEntity);
             return _dbContext.SaveChangesAsync(cancellationToken);
         }

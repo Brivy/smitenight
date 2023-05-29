@@ -7,9 +7,10 @@ namespace Smitenight.Utilities.Mapper.Common.Extensions
 {
     public static class ServiceCollectionExtensions
     {
-        public static void ConfigureMapperServices(this IServiceCollection services)
+        public static IServiceCollection ConfigureMapperServices(this IServiceCollection services)
         {
             services.AddScoped<IMapperService, MapperService>();
+            return services;
         }
 
         public static IServiceCollection AddMappers(this IServiceCollection services, Assembly assembly)
@@ -22,11 +23,13 @@ namespace Smitenight.Utilities.Mapper.Common.Extensions
 
             foreach (var type in mapperTypes)
             {
+                var mapperInterface = type.GetInterfaces().First(i => i.IsGenericType && i.GetGenericTypeDefinition() == mapperGenericType);
+
+                services.AddScoped(mapperInterface, type);
                 services.AddScoped(mapperType, type);
             }
 
             return services;
         }
     }
-
 }

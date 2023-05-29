@@ -2,9 +2,9 @@
 using Smitenight.Providers.SmiteProvider.Contracts.Models.Common;
 using Smitenight.Utilities.Mapper.Common.Models;
 
-namespace Smitenight.Application.Blazor.Business.Services.Mappers
+namespace Smitenight.Application.Blazor.Business.Mappers
 {
-    public class CreateBasicAttackDescriptionMapper : Mapper<CommonItemDto, CreateBasicAttackDto>
+    public class CreateBasicAttackMapper : Mapper<CommonItemDto, CreateBasicAttackDto>
     {
         public override CreateBasicAttackDto Map(CommonItemDto basicAttack)
         {

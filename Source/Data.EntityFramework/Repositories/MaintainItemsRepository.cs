@@ -40,7 +40,7 @@ namespace Smitenight.Persistence.Data.EntityFramework.Repositories
         public async Task<int> CreateItemAsync(CreateItemDto item, IEnumerable<CreateItemDescriptionDto> itemDescriptions, CancellationToken cancellationToken = default)
         {
             var itemEntity = _mapperService.Map<CreateItemDto, Item>(item);
-            var itemDescriptionEntities = _mapperService.Map<IEnumerable<CreateItemDescriptionDto>, IEnumerable<ItemDescription>>(itemDescriptions);
+            var itemDescriptionEntities = _mapperService.MapAll<CreateItemDescriptionDto, ItemDescription>(itemDescriptions);
 
             itemEntity.ItemDescriptions = itemDescriptionEntities;
 

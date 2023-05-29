@@ -7,6 +7,6 @@ namespace Smitenight.Utilities.Mapper.Common.Services
         IMapper<TSource, TDestination> GetMapper<TSource, TDestination>();
         TDestination Map<TSource, TDestination>(TSource source);
         IEnumerable<TDestination> MapAll<TSource, TDestination>(IEnumerable<TSource> source);
-        IEnumerable<TDestination> MapAll<TSource, TDestination>(TSource[] source);
+        TDestination[] MapAll<TSource, TDestination>(TSource[] source);
     }
 }

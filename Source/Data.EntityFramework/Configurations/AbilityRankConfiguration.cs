@@ -13,7 +13,6 @@ namespace Smitenight.Persistence.Data.EntityFramework.Configurations
             builder.HasKey(x => x.Id);
             builder.Property(x => x.AbilityId).IsRequired();
 
-            builder.Property(x => x.Checksum).IsRequired();
             builder.Property(x => x.Description).IsRequired();
             builder.Property(x => x.Value).IsRequired();
 

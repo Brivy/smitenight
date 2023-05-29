@@ -2,7 +2,7 @@
 using Smitenight.Providers.SmiteProvider.Contracts.Models.Common;
 using Smitenight.Utilities.Mapper.Common.Models;
 
-namespace Smitenight.Application.Blazor.Business.Services.Mappers
+namespace Smitenight.Application.Blazor.Business.Mappers
 {
     public class CreateAbilityTagMapper : Mapper<CommonItemDto, CreateAbilityTagDto>
     {

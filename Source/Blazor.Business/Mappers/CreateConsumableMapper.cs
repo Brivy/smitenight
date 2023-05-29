@@ -4,7 +4,7 @@ using Smitenight.Providers.SmiteProvider.Contracts.Constants;
 using Smitenight.Providers.SmiteProvider.Contracts.Models.ItemClient;
 using Smitenight.Utilities.Mapper.Common.Models;
 
-namespace Smitenight.Application.Blazor.Business.Services.Mappers
+namespace Smitenight.Application.Blazor.Business.Mappers
 {
     public class CreateConsumableMapper : Mapper<ItemDto, CreateConsumableDto>
     {

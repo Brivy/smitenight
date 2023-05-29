@@ -6,7 +6,7 @@ using Smitenight.Providers.SmiteProvider.Contracts.Constants;
 using Smitenight.Providers.SmiteProvider.Contracts.Models.GodClient;
 using Smitenight.Utilities.Mapper.Common.Models;
 
-namespace Smitenight.Application.Blazor.Business.Services.Mappers
+namespace Smitenight.Application.Blazor.Business.Mappers
 {
     public class CreateGodMapper : Mapper<GodDto, CreateGodDto>
     {
