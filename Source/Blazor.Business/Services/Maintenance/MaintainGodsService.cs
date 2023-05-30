@@ -82,7 +82,7 @@ namespace Smitenight.Application.Blazor.Business.Services.Maintenance
             foreach (var godSkin in godSkins)
             {
                 var skinChecksum = _checksumService.CalculateChecksum(godSkin);
-                if (checksums.Any(x => x != skinChecksum))
+                if (!checksums.Any(x => x == skinChecksum))
                 {
                     await CreateGodSkinAsync(godId, godSkin, cancellationToken);
                 }

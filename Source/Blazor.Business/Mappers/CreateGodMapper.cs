@@ -36,7 +36,7 @@ namespace Smitenight.Application.Blazor.Business.Mappers
             };
 
             var godChecksum = _checksumService.CalculateChecksum(strippedGod);
-            var basicAttackChecksum = _checksumService.CalculateChecksum(god.BasicAttack);
+            var basicAttackChecksum = _checksumService.CalculateChecksum(god.BasicAttack.BasicAttackItems);
             return new CreateGodDto
             {
                 Checksum = godChecksum,

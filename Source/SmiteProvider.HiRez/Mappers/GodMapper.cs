@@ -1,4 +1,5 @@
-﻿using Smitenight.Providers.SmiteProvider.Contracts.Models.GodClient;
+﻿using Smitenight.Providers.SmiteProvider.Contracts.Enums;
+using Smitenight.Providers.SmiteProvider.Contracts.Models.GodClient;
 using Smitenight.Providers.SmiteProvider.HiRez.Models.GodClient;
 using Smitenight.Utilities.Mapper.Common.Contracts;
 using Smitenight.Utilities.Mapper.Common.Models;
@@ -35,11 +36,11 @@ namespace Smitenight.Providers.SmiteProvider.HiRez.Mappers
                 AbilityId3 = input.AbilityId3,
                 AbilityId4 = input.AbilityId4,
                 AbilityId5 = input.AbilityId5,
-                AbilityDetails1 = _abilityDetailsMapper.Map(input.AbilityDetails1),
-                AbilityDetails2 = _abilityDetailsMapper.Map(input.AbilityDetails2),
-                AbilityDetails3 = _abilityDetailsMapper.Map(input.AbilityDetails3),
-                AbilityDetails4 = _abilityDetailsMapper.Map(input.AbilityDetails4),
-                AbilityDetails5 = _abilityDetailsMapper.Map(input.AbilityDetails5),
+                AbilityDetails1 = _abilityDetailsMapper.Map(input.AbilityDetails1) with { AbilityType = AbilityType.Primary },
+                AbilityDetails2 = _abilityDetailsMapper.Map(input.AbilityDetails2) with { AbilityType = AbilityType.Secondary },
+                AbilityDetails3 = _abilityDetailsMapper.Map(input.AbilityDetails3) with { AbilityType = AbilityType.Tertiary },
+                AbilityDetails4 = _abilityDetailsMapper.Map(input.AbilityDetails4) with { AbilityType = AbilityType.Ultimate },
+                AbilityDetails5 = _abilityDetailsMapper.Map(input.AbilityDetails5) with { AbilityType = AbilityType.Passive },
                 AttackSpeed = input.AttackSpeed,
                 AttackSpeedPerLevel = input.AttackSpeedPerLevel,
                 AutoBanned = input.AutoBanned ?? string.Empty,

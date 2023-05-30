@@ -1,8 +1,8 @@
 ﻿using Smitenight.Application.Blazor.Business.Contracts.Services.Checksums;
-using Smitenight.Persistence.Data.Contracts.Enums;
 using Smitenight.Persistence.Data.Contracts.Models;
 using Smitenight.Providers.SmiteProvider.Contracts.Models.GodClient;
 using Smitenight.Utilities.Mapper.Common.Models;
+using AbilityType = Smitenight.Persistence.Data.Contracts.Enums.AbilityType;
 
 namespace Smitenight.Application.Blazor.Business.Mappers
 {
@@ -21,7 +21,7 @@ namespace Smitenight.Application.Blazor.Business.Mappers
             return new CreateAbilityDto
             {
                 Checksum = checksum,
-                AbilityType = AbilityType.Primary,
+                AbilityType = (AbilityType)ability.AbilityType,
                 Cooldown = !string.IsNullOrWhiteSpace(ability.Cooldown) ? ability.Cooldown : null,
                 Cost = !string.IsNullOrWhiteSpace(ability.Cost) ? ability.Cost : null,
                 Description = ability.Description,
