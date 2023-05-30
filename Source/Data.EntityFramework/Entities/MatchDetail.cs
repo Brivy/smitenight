@@ -59,17 +59,12 @@ namespace Smitenight.Persistence.Data.EntityFramework.Entities
         public int WardsPlaced { get; set; }
         public bool Winner { get; set; }
 
-        #region Navigation
-
         public God? God { get; set; }
         public GodSkin? GodSkin { get; set; }
         public Match? Match { get; set; }
         public Player? Player { get; set; }
-
-        public List<ActivePurchase> ActivePurchases { get; set; }
-        public List<ItemPurchase> ItemPurchases { get; set; }
-
-        #endregion
+        public IEnumerable<ActivePurchase> ActivePurchases { get; set; }
+        public IEnumerable<ItemPurchase> ItemPurchases { get; set; }
 
         public MatchDetail()
         {

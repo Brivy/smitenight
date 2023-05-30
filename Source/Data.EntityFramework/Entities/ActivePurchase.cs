@@ -10,11 +10,7 @@ namespace Smitenight.Persistence.Data.EntityFramework.Entities
 
         public ActivePurchaseOrder ActivePurchaseOrder { get; set; }
 
-        #region Navigation
-
         public Active? Active { get; set; }
         public MatchDetail? MatchDetail { get; set; }
-
-        #endregion
     }
 }

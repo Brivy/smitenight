@@ -10,16 +10,16 @@ namespace Smitenight.Providers.SmiteProvider.HiRez.Mappers
     {
         private readonly IMapper<AbilityDetails, AbilityDetailsDto> _abilityDetailsMapper;
         private readonly IMapper<AbilityDescription, AbilityDescriptionDto> _abilityDescriptionMapper;
-        private readonly IMapper<BasicAttack, BasicAttackDto> _basicAttackMapper;
+        private readonly IMapper<GodBasicAttack, GodBasicAttackDto> _godBasicAttackMapper;
 
         public GodMapper(
             IMapper<AbilityDetails, AbilityDetailsDto> abilityDetailsMapper,
             IMapper<AbilityDescription, AbilityDescriptionDto> abilityDescriptionMapper,
-            IMapper<BasicAttack, BasicAttackDto> basicAttackMapper)
+            IMapper<GodBasicAttack, GodBasicAttackDto> basicAttackMapper)
         {
             _abilityDetailsMapper = abilityDetailsMapper;
             _abilityDescriptionMapper = abilityDescriptionMapper;
-            _basicAttackMapper = basicAttackMapper;
+            _godBasicAttackMapper = basicAttackMapper;
         }
 
         public override GodDto Map(God input)
@@ -75,7 +75,7 @@ namespace Smitenight.Providers.SmiteProvider.HiRez.Mappers
                 AbilityDescription3 = _abilityDescriptionMapper.Map(input.AbilityDescription3),
                 AbilityDescription4 = _abilityDescriptionMapper.Map(input.AbilityDescription4),
                 AbilityDescription5 = _abilityDescriptionMapper.Map(input.AbilityDescription5),
-                BasicAttack = _basicAttackMapper.Map(input.BasicAttack),
+                GodBasicAttack = _godBasicAttackMapper.Map(input.GodBasicAttack),
                 GodAbility1Url = input.GodAbility1Url ?? string.Empty,
                 GodAbility2Url = input.GodAbility2Url ?? string.Empty,
                 GodAbility3Url = input.GodAbility3Url ?? string.Empty,

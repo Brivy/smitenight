@@ -16,12 +16,8 @@ namespace Smitenight.Persistence.Data.EntityFramework.Entities
         public int PriceFavor { get; set; }
         public int PriceGems { get; set; }
 
-        #region Navigation
-
         public God? God { get; set; }
-        public List<MatchDetail> MatchDetails { get; set; }
-
-        #endregion
+        public IEnumerable<MatchDetail> MatchDetails { get; set; }
 
         public GodSkin()
         {

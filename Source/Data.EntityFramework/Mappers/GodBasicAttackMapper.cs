@@ -4,11 +4,11 @@ using Smitenight.Utilities.Mapper.Common.Models;
 
 namespace Smitenight.Persistence.Data.EntityFramework.Mappers
 {
-    public class BasicAttackMapper : Mapper<CreateBasicAttackDto, BasicAttack>
+    public class GodBasicAttackMapper : Mapper<CreateGodBasicAttackDto, GodBasicAttack>
     {
-        public override BasicAttack Map(CreateBasicAttackDto input)
+        public override GodBasicAttack Map(CreateGodBasicAttackDto input)
         {
-            return new BasicAttack
+            return new GodBasicAttack
             {
                 Value = input.Value,
                 Description = input.Description

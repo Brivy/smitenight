@@ -16,14 +16,9 @@ namespace Smitenight.Persistence.Data.EntityFramework.Entities
         public string Url { get; set; } = null!;
         public AbilityType AbilityType { get; set; }
 
-        #region Navigation
-
         public God? God { get; set; }
-
         public IEnumerable<AbilityRank> AbilityRanks { get; set; }
         public IEnumerable<AbilityTag> AbilityTags { get; set; }
-
-        #endregion
 
         public Ability()
         {

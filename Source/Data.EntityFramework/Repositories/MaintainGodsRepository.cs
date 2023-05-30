@@ -33,21 +33,13 @@ namespace Smitenight.Persistence.Data.EntityFramework.Repositories
             return _dbContext.SaveChangesAsync(cancellationToken);
         }
 
-        public Task CreateBasicAttackAsync(int godId, IEnumerable<CreateBasicAttackDto> basicAttacks, CancellationToken cancellationToken = default)
-        {
-            var basicAttackEntities = _mapperService.MapAll<CreateBasicAttackDto, BasicAttack>(basicAttacks);
-            foreach (var basicAttackEntity in basicAttackEntities)
-            {
-                basicAttackEntity.GodId = godId;
-            }
-
-            _dbContext.BasicAttacks.AddRange(basicAttackEntities);
-            return _dbContext.SaveChangesAsync(cancellationToken);
-        }
-
-        public async Task<int> CreateGodAsync(CreateGodDto god, CancellationToken cancellationToken = default)
+        public async Task<int> CreateGodAsync(CreateGodDto god, IEnumerable<CreateGodBasicAttackDto> godBasicAttacks, CancellationToken cancellationToken = default)
         {
             var godEntity = _mapperService.Map<CreateGodDto, God>(god);
+            var godBasicAttackEntities = _mapperService.MapAll<CreateGodBasicAttackDto, GodBasicAttack>(godBasicAttacks);
+
+            godEntity.GodBasicAttacks = godBasicAttackEntities;
+
             _dbContext.Gods.Add(godEntity);
             await _dbContext.SaveChangesAsync(cancellationToken);
             return godEntity.Id;
@@ -77,7 +69,6 @@ namespace Smitenight.Persistence.Data.EntityFramework.Repositories
                     Ability3Checksum = x.Abilities.Single(y => y.AbilityType == Contracts.Enums.AbilityType.Tertiary).Checksum,
                     Ability4Checksum = x.Abilities.Single(y => y.AbilityType == Contracts.Enums.AbilityType.Ultimate).Checksum,
                     Ability5Checksum = x.Abilities.Single(y => y.AbilityType == Contracts.Enums.AbilityType.Passive).Checksum,
-                    BasicAttackChecksum = x.BasicAttackChecksum,
                     GodSkinChecksums = x.GodSkins.Select(y => y.Checksum).ToList()
                 }).ToListAsync(cancellationToken);
 
@@ -88,17 +79,6 @@ namespace Smitenight.Persistence.Data.EntityFramework.Repositories
         {
             var existingAbilityEntity = await _dbContext.Abilities.SingleAsync(x => x.SmiteId == abilityId, cancellationToken);
             existingAbilityEntity.GodId = godId;
-            await _dbContext.SaveChangesAsync(cancellationToken);
-        }
-
-        public async Task UpdateBasicAttackRelationAsync(int godId, CancellationToken cancellationToken = default)
-        {
-            var existingBasicAttackEntities = await _dbContext.BasicAttacks.Where(x => x.GodId == godId).ToListAsync(cancellationToken);
-            foreach (var existingBasicAttackEntity in existingBasicAttackEntities)
-            {
-                existingBasicAttackEntity.GodId = godId;
-            }
-
             await _dbContext.SaveChangesAsync(cancellationToken);
         }
 

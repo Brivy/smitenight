@@ -39,7 +39,6 @@ namespace Smitenight.Application.Blazor.Business.Services.Maintenance
                 AbilityDescription3 = null!,
                 AbilityDescription4 = null!,
                 AbilityDescription5 = null!,
-                BasicAttack = null!,
             };
 
             if (!_checksumService.IsChecksumDifferent(checksum, strippedGod))
@@ -62,18 +61,6 @@ namespace Smitenight.Application.Blazor.Business.Services.Maintenance
                 {
                     await _maintainGodsRepository.UpdateAbilityRelationAsync(godId, abilityChecksum.Value.Id, cancellationToken);
                 }
-            }
-        }
-
-        public async Task MaintainBasicAttacksAsync(int godId, bool godUpdated, IEnumerable<CommonItemDto> basicAttacks, string checksum, CancellationToken cancellationToken = default)
-        {
-            if (_checksumService.IsChecksumDifferent(checksum, basicAttacks))
-            {
-                await CreateBasicAttacksAsync(godId, basicAttacks, cancellationToken);
-            }
-            else if (godUpdated)
-            {
-                await _maintainGodsRepository.UpdateBasicAttackRelationAsync(godId, cancellationToken);
             }
         }
 
@@ -101,7 +88,8 @@ namespace Smitenight.Application.Blazor.Business.Services.Maintenance
         public Task<int> CreateGodAsync(GodDto god, CancellationToken cancellationToken = default)
         {
             var createGod = _mapperService.Map<GodDto, CreateGodDto>(god);
-            return _maintainGodsRepository.CreateGodAsync(createGod, cancellationToken);
+            var createGodBasicAttack = CreateGodBasicAttacksAsync(god.GodBasicAttack.GodBasicAttackItems);
+            return _maintainGodsRepository.CreateGodAsync(createGod, createGodBasicAttack, cancellationToken);
         }
 
         public Task CreateAbility(int godId, AbilityDetailsDto ability, CancellationToken cancellationToken = default)
@@ -112,21 +100,21 @@ namespace Smitenight.Application.Blazor.Business.Services.Maintenance
             return _maintainGodsRepository.CreateAbilityAsync(godId, createdAbility, createdAbilityTags, createdAbilityRanks, cancellationToken);
         }
 
-        public Task CreateBasicAttacksAsync(int godId, IEnumerable<CommonItemDto> basicAttacks, CancellationToken cancellationToken = default)
-        {
-            var createdBasicAttackDescriptions = new List<CreateBasicAttackDto>();
-            foreach (var basicAttack in basicAttacks)
-            {
-                createdBasicAttackDescriptions.Add(_mapperService.Map<CommonItemDto, CreateBasicAttackDto>(basicAttack));
-            }
-
-            return _maintainGodsRepository.CreateBasicAttackAsync(godId, createdBasicAttackDescriptions, cancellationToken);
-        }
-
         public Task CreateGodSkinAsync(int godId, GodSkinDto godSkin, CancellationToken cancellationToken = default)
         {
             var createdGodSkin = _mapperService.Map<GodSkinDto, CreateGodSkinDto>(godSkin);
             return _maintainGodsRepository.CreateGodSkinAsync(godId, createdGodSkin, cancellationToken);
+        }
+
+        private IEnumerable<CreateGodBasicAttackDto> CreateGodBasicAttacksAsync(IEnumerable<CommonItemDto> basicAttacks)
+        {
+            var createdBasicAttackDescriptions = new List<CreateGodBasicAttackDto>();
+            foreach (var basicAttack in basicAttacks)
+            {
+                createdBasicAttackDescriptions.Add(_mapperService.Map<CommonItemDto, CreateGodBasicAttackDto>(basicAttack));
+            }
+
+            return createdBasicAttackDescriptions;
         }
 
         private IEnumerable<CreateAbilityRankDto> CreateAbilityRanks(IEnumerable<CommonItemDto> abilityRanks)

@@ -8,10 +8,6 @@
         public string Description { get; set; } = null!;
         public string Value { get; set; } = null!;
 
-        #region Navigation
-
         public Ability? Ability { get; set; }
-
-        #endregion
     }
 }

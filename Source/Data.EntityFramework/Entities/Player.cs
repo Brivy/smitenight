@@ -17,12 +17,8 @@ namespace Smitenight.Persistence.Data.EntityFramework.Entities
         public PortalType? PortalType { get; set; }
         public bool PrivacyEnabled { get; set; }
 
-        #region Navigation
-
-        public List<MatchDetail> MatchDetails { get; set; }
-        public List<Smitenight> Smitenights { get; set; }
-
-        #endregion
+        public IEnumerable<MatchDetail> MatchDetails { get; set; }
+        public IEnumerable<Smitenight> Smitenights { get; set; }
 
         public Player()
         {

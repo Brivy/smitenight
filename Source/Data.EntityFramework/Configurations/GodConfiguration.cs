@@ -14,7 +14,6 @@ namespace Smitenight.Persistence.Data.EntityFramework.Configurations
             builder.Property(x => x.SmiteId).IsRequired();
 
             builder.Property(x => x.Checksum).IsRequired();
-            builder.Property(x => x.BasicAttackChecksum).IsRequired();
             builder.Property(x => x.AttackSpeed).IsRequired();
             builder.Property(x => x.AttackSpeedPerLevel).IsRequired();
             builder.Property(x => x.AutoBanned).IsRequired();
@@ -52,7 +51,7 @@ namespace Smitenight.Persistence.Data.EntityFramework.Configurations
                 .HasForeignKey(x => x.GodId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            builder.HasMany(x => x.BasicAttackDescriptions)
+            builder.HasMany(x => x.GodBasicAttacks)
                 .WithOne(x => x.God)
                 .HasForeignKey(x => x.GodId)
                 .OnDelete(DeleteBehavior.Restrict);

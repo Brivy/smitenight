@@ -9,12 +9,8 @@
         public DateTime? EndDate { get; set; }
         public string? PinCode { get; set; }
 
-        #region Navigation
-
         public Player? Player { get; set; }
-        public List<SmitenightMatch> SmitenightMatches { get; set; }
-
-        #endregion
+        public IEnumerable<SmitenightMatch> SmitenightMatches { get; set; }
 
         public Smitenight()
         {

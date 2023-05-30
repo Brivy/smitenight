@@ -21,8 +21,7 @@ namespace Smitenight.Persistence.Data.EntityFramework.Entities
 
         public Active? RootActive { get; set; }
         public Active? ChildActive { get; set; }
-
-        public List<ActivePurchase> ActivePurchases { get; set; }
+        public IEnumerable<ActivePurchase> ActivePurchases { get; set; }
 
         public Active()
         {

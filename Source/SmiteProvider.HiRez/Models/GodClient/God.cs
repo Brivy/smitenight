@@ -54,7 +54,7 @@ namespace Smitenight.Providers.SmiteProvider.HiRez.Models.GodClient
         [JsonPropertyName("abilityDescription3")] public AbilityDescription AbilityDescription3 { get; set; } = null!;
         [JsonPropertyName("abilityDescription4")] public AbilityDescription AbilityDescription4 { get; set; } = null!;
         [JsonPropertyName("abilityDescription5")] public AbilityDescription AbilityDescription5 { get; set; } = null!;
-        [JsonPropertyName("basicAttack")] public BasicAttack BasicAttack { get; set; } = null!;
+        [JsonPropertyName("basicAttack")] public GodBasicAttack GodBasicAttack { get; set; } = null!;
         [JsonPropertyName("godAbility1_URL")] public string? GodAbility1Url { get; set; }
         [JsonPropertyName("godAbility2_URL")] public string? GodAbility2Url { get; set; }
         [JsonPropertyName("godAbility3_URL")] public string? GodAbility3Url { get; set; }
@@ -94,17 +94,17 @@ namespace Smitenight.Providers.SmiteProvider.HiRez.Models.GodClient
         [JsonPropertyName("itemDescription")] public ItemDescription ItemDescription { get; set; } = null!;
     }
 
-    public record class BasicAttack
+    public record class GodBasicAttack
     {
-        [JsonPropertyName("itemDescription")] public BasicAttackDescription ItemDescription { get; set; } = null!;
+        [JsonPropertyName("itemDescription")] public GodBasicAttackDescription ItemDescription { get; set; } = null!;
     }
 
-    public record class BasicAttackDescription
+    public record class GodBasicAttackDescription
     {
         [JsonPropertyName("cooldown")] public string? Cooldown { get; set; }
         [JsonPropertyName("cost")] public string? Cost { get; set; }
         [JsonPropertyName("description")] public string? Description { get; set; }
-        [JsonPropertyName("menuitems")] public CommonItem[] BasicAttackItems { get; set; } = null!;
-        [JsonPropertyName("rankitems")] public CommonItem[] BasicAttackRanks { get; set; } = null!;
+        [JsonPropertyName("menuitems")] public CommonItem[] GodBasicAttackItems { get; set; } = null!;
+        [JsonPropertyName("rankitems")] public CommonItem[] GodBasicAttackRanks { get; set; } = null!;
     }
 }

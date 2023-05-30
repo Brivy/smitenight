@@ -22,15 +22,10 @@ namespace Smitenight.Persistence.Data.EntityFramework.Entities
         public bool StartingItem { get; set; }
         public string ItemIconUrl { get; set; } = null!;
 
-        #region Navigation
-
         public Item? RootItem { get; set; }
         public Item? ChildItem { get; set; }
-
         public IEnumerable<ItemDescription> ItemDescriptions { get; set; }
         public IEnumerable<ItemPurchase> ItemPurchases { get; set; }
-
-        #endregion
 
         public Item()
         {

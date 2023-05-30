@@ -24,7 +24,6 @@ namespace Smitenight.Persistence.Data.EntityFramework.Mappers
                 AttackSpeed = input.AttackSpeed,
                 AttackSpeedPerLevel = input.AttackSpeedPerLevel,
                 AutoBanned = input.AutoBanned,
-                BasicAttackChecksum = input.BasicAttackChecksum,
                 Checksum = input.Checksum,
                 GodCardUrl = input.GodCardUrl,
                 GodIconUrl = input.GodIconUrl,

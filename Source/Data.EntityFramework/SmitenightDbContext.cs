@@ -18,7 +18,7 @@ namespace Smitenight.Persistence.Data.EntityFramework
         public DbSet<Ability> Abilities => Set<Ability>();
         public DbSet<AbilityRank> AbilityRanks => Set<AbilityRank>();
         public DbSet<AbilityTag> AbilityTags => Set<AbilityTag>();
-        public DbSet<BasicAttack> BasicAttacks => Set<BasicAttack>();
+        public DbSet<GodBasicAttack> GodBasicAttacks => Set<GodBasicAttack>();
         public DbSet<God> Gods => Set<God>();
         public DbSet<GodBan> GodBans => Set<GodBan>();
         public DbSet<GodSkin> GodSkins => Set<GodSkin>();

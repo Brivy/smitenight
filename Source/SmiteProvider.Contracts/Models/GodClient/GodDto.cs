@@ -51,7 +51,7 @@
         public AbilityDescriptionDto AbilityDescription3 { get; init; } = null!;
         public AbilityDescriptionDto AbilityDescription4 { get; init; } = null!;
         public AbilityDescriptionDto AbilityDescription5 { get; init; } = null!;
-        public BasicAttackDto BasicAttack { get; init; } = null!;
+        public GodBasicAttackDto GodBasicAttack { get; init; } = null!;
         public string GodAbility1Url { get; init; } = null!;
         public string GodAbility2Url { get; init; } = null!;
         public string GodAbility3Url { get; init; } = null!;

@@ -10,11 +10,7 @@ namespace Smitenight.Persistence.Data.EntityFramework.Entities
 
         public GodBanOrder GodBanOrder { get; set; }
 
-        #region Navigation
-
         public God? God { get; set; }
         public Match? Match { get; set; }
-
-        #endregion
     }
 }

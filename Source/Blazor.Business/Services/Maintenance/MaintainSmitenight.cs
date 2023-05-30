@@ -69,7 +69,6 @@ namespace Smitenight.Application.Blazor.Business.Services.Maintenance
 
                 var abilityDictionary = new Dictionary<string, AbilityDetailsDto> { { checksums.Ability1Checksum, god.AbilityDetails1 }, { checksums.Ability2Checksum, god.AbilityDetails2 }, { checksums.Ability3Checksum, god.AbilityDetails3 }, { checksums.Ability4Checksum, god.AbilityDetails4 }, { checksums.Ability5Checksum, god.AbilityDetails5 } };
                 await _maintainGodsService.MaintainAbilitiesAsync(godId, godUpdated, abilityDictionary, cancellationToken);
-                await _maintainGodsService.MaintainBasicAttacksAsync(godId, godUpdated, god.BasicAttack.BasicAttackItems, checksums.BasicAttackChecksum, cancellationToken);
 
                 var godSkins = await _smiteClient.GetGodSkinsAsync(god.Id, LanguageCode.English, cancellationToken);
                 await _maintainGodsService.MaintainGodSkinsAsync(godId, godUpdated, godSkins, checksums.GodSkinChecksums, cancellationToken);
@@ -84,7 +83,6 @@ namespace Smitenight.Application.Blazor.Business.Services.Maintenance
             await _maintainGodsService.CreateAbility(createdGodId, god.AbilityDetails3, cancellationToken);
             await _maintainGodsService.CreateAbility(createdGodId, god.AbilityDetails4, cancellationToken);
             await _maintainGodsService.CreateAbility(createdGodId, god.AbilityDetails5, cancellationToken);
-            await _maintainGodsService.CreateBasicAttacksAsync(createdGodId, god.BasicAttack.BasicAttackItems, cancellationToken);
 
             var godSkins = await _smiteClient.GetGodSkinsAsync(god.Id, LanguageCode.English, cancellationToken);
             foreach (var godSkin in godSkins)

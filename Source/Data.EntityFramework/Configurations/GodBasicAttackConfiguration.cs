@@ -4,11 +4,11 @@ using Smitenight.Persistence.Data.EntityFramework.Entities;
 
 namespace Smitenight.Persistence.Data.EntityFramework.Configurations
 {
-    public class BasicAttackConfiguration : IEntityTypeConfiguration<BasicAttack>
+    public class GodBasicAttackConfiguration : IEntityTypeConfiguration<GodBasicAttack>
     {
-        public void Configure(EntityTypeBuilder<BasicAttack> builder)
+        public void Configure(EntityTypeBuilder<GodBasicAttack> builder)
         {
-            builder.ToTable("BasicAttacks");
+            builder.ToTable("GodBasicAttacks");
 
             builder.HasKey(x => x.Id);
             builder.Property(x => x.GodId).IsRequired();
@@ -17,7 +17,7 @@ namespace Smitenight.Persistence.Data.EntityFramework.Configurations
             builder.Property(x => x.Value).IsRequired();
 
             builder.HasOne(x => x.God)
-                .WithMany(x => x.BasicAttackDescriptions)
+                .WithMany(x => x.GodBasicAttacks)
                 .HasForeignKey(x => x.GodId)
                 .OnDelete(DeleteBehavior.Restrict)
                 .IsRequired();
