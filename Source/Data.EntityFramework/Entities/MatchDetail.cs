@@ -63,8 +63,8 @@ namespace Smitenight.Persistence.Data.EntityFramework.Entities
         public GodSkin? GodSkin { get; set; }
         public Match? Match { get; set; }
         public Player? Player { get; set; }
-        public IEnumerable<ActivePurchase> ActivePurchases { get; set; }
-        public IEnumerable<ItemPurchase> ItemPurchases { get; set; }
+        public ICollection<ActivePurchase> ActivePurchases { get; set; }
+        public ICollection<ItemPurchase> ItemPurchases { get; set; }
 
         public MatchDetail()
         {

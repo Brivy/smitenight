@@ -19,27 +19,17 @@ namespace Smitenight.Persistence.Data.EntityFramework.Repositories
             _mapperService = mapperService;
         }
 
-        public Task CreateAbilityAsync(int godId, CreateAbilityDto ability, IEnumerable<CreateAbilityTagDto> abilityTags, IEnumerable<CreateAbilityRankDto> abilityRanks, CancellationToken cancellationToken = default)
+        public Task CreateAbilityAsync(int godId, CreateAbilityDto ability, CancellationToken cancellationToken = default)
         {
             var abilityEntity = _mapperService.Map<CreateAbilityDto, Ability>(ability);
-            var abilityTagEntities = _mapperService.MapAll<CreateAbilityTagDto, AbilityTag>(abilityTags);
-            var abilityRankEntities = _mapperService.MapAll<CreateAbilityRankDto, AbilityRank>(abilityRanks);
-
             abilityEntity.GodId = godId;
-            abilityEntity.AbilityTags = abilityTagEntities;
-            abilityEntity.AbilityRanks = abilityRankEntities;
-
             _dbContext.Abilities.Add(abilityEntity);
             return _dbContext.SaveChangesAsync(cancellationToken);
         }
 
-        public async Task<int> CreateGodAsync(CreateGodDto god, IEnumerable<CreateGodBasicAttackDto> godBasicAttacks, CancellationToken cancellationToken = default)
+        public async Task<int> CreateGodAsync(CreateGodDto god, CancellationToken cancellationToken = default)
         {
             var godEntity = _mapperService.Map<CreateGodDto, God>(god);
-            var godBasicAttackEntities = _mapperService.MapAll<CreateGodBasicAttackDto, GodBasicAttack>(godBasicAttacks);
-
-            godEntity.GodBasicAttacks = godBasicAttackEntities;
-
             _dbContext.Gods.Add(godEntity);
             await _dbContext.SaveChangesAsync(cancellationToken);
             return godEntity.Id;

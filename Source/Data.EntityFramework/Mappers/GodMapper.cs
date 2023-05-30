@@ -1,11 +1,19 @@
 ﻿using Smitenight.Persistence.Data.Contracts.Models;
 using Smitenight.Persistence.Data.EntityFramework.Entities;
+using Smitenight.Utilities.Mapper.Common.Contracts;
 using Smitenight.Utilities.Mapper.Common.Models;
 
 namespace Smitenight.Persistence.Data.EntityFramework.Mappers
 {
     public class GodMapper : Mapper<CreateGodDto, God>
     {
+        private readonly IMapper<CreateGodBasicAttackDto, GodBasicAttack> _godBasicAttackMapper;
+
+        public GodMapper(IMapper<CreateGodBasicAttackDto, GodBasicAttack> godBasicAttackMapper)
+        {
+            _godBasicAttackMapper = godBasicAttackMapper;
+        }
+
         public override God Map(CreateGodDto input)
         {
             return new God
@@ -42,7 +50,8 @@ namespace Smitenight.Persistence.Data.EntityFramework.Mappers
                 PhysicalPowerPerLevel = input.PhysicalPowerPerLevel,
                 PhysicalProtection = input.PhysicalProtection,
                 PhysicalProtectionPerLevel = input.PhysicalProtectionPerLevel,
-                Role = input.Role
+                Role = input.Role,
+                GodBasicAttacks = input.GodBasicAttackDto.Select(x => _godBasicAttackMapper.Map(x)).ToList()
             };
         }
     }

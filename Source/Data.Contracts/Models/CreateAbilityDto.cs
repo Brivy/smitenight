@@ -12,5 +12,7 @@ namespace Smitenight.Persistence.Data.Contracts.Models
         public string Summary { get; set; } = null!;
         public string Url { get; set; } = null!;
         public AbilityType AbilityType { get; set; }
+        public IEnumerable<CreateAbilityRankDto> AbilityRanks { get; set; } = new List<CreateAbilityRankDto>();
+        public IEnumerable<CreateAbilityTagDto> AbilityTags { get; set; } = new List<CreateAbilityTagDto>();
     }
 }

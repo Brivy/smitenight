@@ -42,7 +42,7 @@ namespace Smitenight.Persistence.Data.EntityFramework.Repositories
             var itemEntity = _mapperService.Map<CreateItemDto, Item>(item);
             var itemDescriptionEntities = _mapperService.MapAll<CreateItemDescriptionDto, ItemDescription>(itemDescriptions);
 
-            itemEntity.ItemDescriptions = itemDescriptionEntities;
+            itemEntity.ItemDescriptions = itemDescriptionEntities.ToList();
 
             _dbContext.Items.Add(itemEntity);
             await _dbContext.SaveChangesAsync(cancellationToken);

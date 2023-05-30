@@ -40,11 +40,11 @@ namespace Smitenight.Persistence.Data.EntityFramework.Entities
         public string Title { get; set; } = null!;
         public GodType Type { get; set; }
 
-        public IEnumerable<Ability> Abilities { get; set; }
-        public IEnumerable<GodBasicAttack> GodBasicAttacks { get; set; }
-        public IEnumerable<GodBan> GodBans { get; set; }
-        public IEnumerable<GodSkin> GodSkins { get; set; }
-        public IEnumerable<MatchDetail> MatchDetails { get; set; }
+        public ICollection<Ability> Abilities { get; set; }
+        public ICollection<GodBasicAttack> GodBasicAttacks { get; set; }
+        public ICollection<GodBan> GodBans { get; set; }
+        public ICollection<GodSkin> GodSkins { get; set; }
+        public ICollection<MatchDetail> MatchDetails { get; set; }
 
         public God()
         {

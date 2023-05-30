@@ -37,5 +37,6 @@ namespace Smitenight.Persistence.Data.Contracts.Models
         public int Speed { get; set; }
         public string Title { get; set; } = null!;
         public GodType Type { get; set; }
+        public IEnumerable<CreateGodBasicAttackDto> GodBasicAttackDto { get; init; } = new List<CreateGodBasicAttackDto>();
     }
 }

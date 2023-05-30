@@ -16,9 +16,9 @@ namespace Smitenight.Persistence.Data.EntityFramework.Entities
         public string Region { get; set; } = null!;
         public DateTime StartDate { get; set; }
 
-        public IEnumerable<GodBan> GodBans { get; set; }
-        public IEnumerable<MatchDetail> MatchDetails { get; set; }
-        public IEnumerable<SmitenightMatch> SmitenightMatches { get; set; }
+        public ICollection<GodBan> GodBans { get; set; }
+        public ICollection<MatchDetail> MatchDetails { get; set; }
+        public ICollection<SmitenightMatch> SmitenightMatches { get; set; }
 
         public Match()
         {

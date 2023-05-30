@@ -17,7 +17,7 @@ namespace Smitenight.Persistence.Data.EntityFramework.Entities
         public int PriceGems { get; set; }
 
         public God? God { get; set; }
-        public IEnumerable<MatchDetail> MatchDetails { get; set; }
+        public ICollection<MatchDetail> MatchDetails { get; set; }
 
         public GodSkin()
         {

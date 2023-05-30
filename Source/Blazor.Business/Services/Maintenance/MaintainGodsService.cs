@@ -2,7 +2,6 @@
 using Smitenight.Application.Blazor.Business.Contracts.Services.Maintenance;
 using Smitenight.Persistence.Data.Contracts.Models;
 using Smitenight.Persistence.Data.Contracts.Repositories;
-using Smitenight.Providers.SmiteProvider.Contracts.Models.Common;
 using Smitenight.Providers.SmiteProvider.Contracts.Models.GodClient;
 using Smitenight.Utilities.Mapper.Common.Services;
 
@@ -88,55 +87,19 @@ namespace Smitenight.Application.Blazor.Business.Services.Maintenance
         public Task<int> CreateGodAsync(GodDto god, CancellationToken cancellationToken = default)
         {
             var createGod = _mapperService.Map<GodDto, CreateGodDto>(god);
-            var createGodBasicAttack = CreateGodBasicAttacksAsync(god.GodBasicAttack.GodBasicAttackItems);
-            return _maintainGodsRepository.CreateGodAsync(createGod, createGodBasicAttack, cancellationToken);
+            return _maintainGodsRepository.CreateGodAsync(createGod, cancellationToken);
         }
 
         public Task CreateAbility(int godId, AbilityDetailsDto ability, CancellationToken cancellationToken = default)
         {
             var createdAbility = _mapperService.Map<AbilityDetailsDto, CreateAbilityDto>(ability);
-            var createdAbilityRanks = CreateAbilityRanks(ability.AbilityRanks);
-            var createdAbilityTags = CreateAbilityTags(ability.AbilityTags);
-            return _maintainGodsRepository.CreateAbilityAsync(godId, createdAbility, createdAbilityTags, createdAbilityRanks, cancellationToken);
+            return _maintainGodsRepository.CreateAbilityAsync(godId, createdAbility, cancellationToken);
         }
 
         public Task CreateGodSkinAsync(int godId, GodSkinDto godSkin, CancellationToken cancellationToken = default)
         {
             var createdGodSkin = _mapperService.Map<GodSkinDto, CreateGodSkinDto>(godSkin);
             return _maintainGodsRepository.CreateGodSkinAsync(godId, createdGodSkin, cancellationToken);
-        }
-
-        private IEnumerable<CreateGodBasicAttackDto> CreateGodBasicAttacksAsync(IEnumerable<CommonItemDto> basicAttacks)
-        {
-            var createdBasicAttackDescriptions = new List<CreateGodBasicAttackDto>();
-            foreach (var basicAttack in basicAttacks)
-            {
-                createdBasicAttackDescriptions.Add(_mapperService.Map<CommonItemDto, CreateGodBasicAttackDto>(basicAttack));
-            }
-
-            return createdBasicAttackDescriptions;
-        }
-
-        private IEnumerable<CreateAbilityRankDto> CreateAbilityRanks(IEnumerable<CommonItemDto> abilityRanks)
-        {
-            var createdAbilityRanks = new List<CreateAbilityRankDto>();
-            foreach (var abilityRank in abilityRanks)
-            {
-                createdAbilityRanks.Add(_mapperService.Map<CommonItemDto, CreateAbilityRankDto>(abilityRank));
-            }
-
-            return createdAbilityRanks;
-        }
-
-        private IEnumerable<CreateAbilityTagDto> CreateAbilityTags(IEnumerable<CommonItemDto> abilityTags)
-        {
-            var createdAbilityTags = new List<CreateAbilityTagDto>();
-            foreach (var abilityTag in abilityTags)
-            {
-                createdAbilityTags.Add(_mapperService.Map<CommonItemDto, CreateAbilityTagDto>(abilityTag));
-            }
-
-            return createdAbilityTags;
         }
     }
 }

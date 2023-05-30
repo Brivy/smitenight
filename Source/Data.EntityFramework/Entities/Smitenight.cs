@@ -10,7 +10,7 @@
         public string? PinCode { get; set; }
 
         public Player? Player { get; set; }
-        public IEnumerable<SmitenightMatch> SmitenightMatches { get; set; }
+        public ICollection<SmitenightMatch> SmitenightMatches { get; set; }
 
         public Smitenight()
         {

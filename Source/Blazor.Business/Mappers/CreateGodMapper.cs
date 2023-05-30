@@ -3,7 +3,9 @@ using Smitenight.Application.Blazor.Business.Contracts.Services.Checksums;
 using Smitenight.Persistence.Data.Contracts.Enums;
 using Smitenight.Persistence.Data.Contracts.Models;
 using Smitenight.Providers.SmiteProvider.Contracts.Constants;
+using Smitenight.Providers.SmiteProvider.Contracts.Models.Common;
 using Smitenight.Providers.SmiteProvider.Contracts.Models.GodClient;
+using Smitenight.Utilities.Mapper.Common.Contracts;
 using Smitenight.Utilities.Mapper.Common.Models;
 
 namespace Smitenight.Application.Blazor.Business.Mappers
@@ -11,10 +13,14 @@ namespace Smitenight.Application.Blazor.Business.Mappers
     public class CreateGodMapper : Mapper<GodDto, CreateGodDto>
     {
         private readonly IChecksumService _checksumService;
+        private readonly IMapper<CommonItemDto, CreateGodBasicAttackDto> _godBasicAttackMapper;
 
-        public CreateGodMapper(IChecksumService checksumService)
+        public CreateGodMapper(
+            IChecksumService checksumService,
+            IMapper<CommonItemDto, CreateGodBasicAttackDto> godBasicAttackMapper)
         {
             _checksumService = checksumService;
+            _godBasicAttackMapper = godBasicAttackMapper;
         }
 
         public override CreateGodDto Map(GodDto god)
@@ -69,7 +75,8 @@ namespace Smitenight.Application.Blazor.Business.Mappers
                 SmiteId = god.Id,
                 Speed = god.Speed,
                 Title = god.Title,
-                Type = ConvertToGodType(god.Type)
+                Type = ConvertToGodType(god.Type),
+                GodBasicAttackDto = god.GodBasicAttack.GodBasicAttackItems.Select(_godBasicAttackMapper.Map).ToArray()
             };
         }
 

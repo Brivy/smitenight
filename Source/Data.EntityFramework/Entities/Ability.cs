@@ -17,8 +17,8 @@ namespace Smitenight.Persistence.Data.EntityFramework.Entities
         public AbilityType AbilityType { get; set; }
 
         public God? God { get; set; }
-        public IEnumerable<AbilityRank> AbilityRanks { get; set; }
-        public IEnumerable<AbilityTag> AbilityTags { get; set; }
+        public ICollection<AbilityRank> AbilityRanks { get; set; }
+        public ICollection<AbilityTag> AbilityTags { get; set; }
 
         public Ability()
         {

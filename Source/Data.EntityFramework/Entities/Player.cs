@@ -17,8 +17,8 @@ namespace Smitenight.Persistence.Data.EntityFramework.Entities
         public PortalType? PortalType { get; set; }
         public bool PrivacyEnabled { get; set; }
 
-        public IEnumerable<MatchDetail> MatchDetails { get; set; }
-        public IEnumerable<Smitenight> Smitenights { get; set; }
+        public ICollection<MatchDetail> MatchDetails { get; set; }
+        public ICollection<Smitenight> Smitenights { get; set; }
 
         public Player()
         {
