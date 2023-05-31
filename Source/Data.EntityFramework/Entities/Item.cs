@@ -8,6 +8,7 @@ namespace Smitenight.Persistence.Data.EntityFramework.Entities
         public int SmiteId { get; set; }
         public int? RootItemId { get; set; }
         public int? ChildItemId { get; set; }
+        public int PatchId { get; set; }
 
         public string Checksum { get; set; } = null!;
         public bool Enabled { get; set; }
@@ -22,6 +23,7 @@ namespace Smitenight.Persistence.Data.EntityFramework.Entities
         public bool StartingItem { get; set; }
         public string ItemIconUrl { get; set; } = null!;
 
+        public Patch? Patch { get; set; }
         public Item? RootItem { get; set; }
         public Item? ChildItem { get; set; }
         public ICollection<ItemDescription> ItemDescriptions { get; set; }

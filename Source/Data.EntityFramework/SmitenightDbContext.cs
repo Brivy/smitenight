@@ -30,6 +30,7 @@ namespace Smitenight.Persistence.Data.EntityFramework
         public DbSet<ItemPurchase> ItemPurchases => Set<ItemPurchase>();
         public DbSet<Match> Matches => Set<Match>();
         public DbSet<MatchDetail> MatchDetails => Set<MatchDetail>();
+        public DbSet<Patch> Patches => Set<Patch>();
         public DbSet<Player> Players => Set<Player>();
         public DbSet<PlayerNameAttempt> PlayerNameAttempts => Set<PlayerNameAttempt>();
         public DbSet<SmitenightMatch> SmitenightMatches => Set<SmitenightMatch>();

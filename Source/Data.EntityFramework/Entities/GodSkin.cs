@@ -8,6 +8,7 @@ namespace Smitenight.Persistence.Data.EntityFramework.Entities
         public int GodId { get; set; }
         public int SmiteId { get; set; }
         public int SecondarySmiteId { get; set; }
+        public int PatchId { get; set; }
 
         public string Checksum { get; set; } = null!;
         public string? GodSkinUrl { get; set; }
@@ -16,6 +17,7 @@ namespace Smitenight.Persistence.Data.EntityFramework.Entities
         public int PriceFavor { get; set; }
         public int PriceGems { get; set; }
 
+        public Patch? Patch { get; set; }
         public God? God { get; set; }
         public ICollection<MatchDetail> MatchDetails { get; set; }
 

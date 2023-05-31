@@ -9,7 +9,7 @@ using Smitenight.Utilities.Cache.Redis.Extensions;
 using Smitenight.Utilities.Cache.Redis.Secrets;
 using Smitenight.Utilities.Mapper.Common.Extensions;
 
-namespace Smitenight.Presentation.Test.Maintenance
+namespace Smitenight.Presentation.Test.Maintenace
 {
     public static class Program
     {
@@ -37,6 +37,7 @@ namespace Smitenight.Presentation.Test.Maintenance
             {
                 var serviceProvider = serviceScope.ServiceProvider;
                 var maintainSmitenight = serviceProvider.GetRequiredService<IMaintainSmitenight>();
+                await maintainSmitenight.MaintainPatchesAsync();
                 await maintainSmitenight.MaintainGodsAsync();
             }
         }

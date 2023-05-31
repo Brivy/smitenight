@@ -14,6 +14,7 @@ namespace Smitenight.Persistence.Data.EntityFramework.Configurations
             builder.Property(x => x.SmiteId).IsRequired();
             builder.Property(x => x.RootItemId).IsRequired();
             builder.Property(x => x.ChildItemId).IsRequired();
+            builder.Property(x => x.PatchId).IsRequired();
 
             builder.Property(x => x.Checksum).IsRequired();
             builder.Property(x => x.Enabled).IsRequired();
@@ -27,6 +28,12 @@ namespace Smitenight.Persistence.Data.EntityFramework.Configurations
             builder.Property(x => x.ShortDescription).IsRequired(false);
             builder.Property(x => x.StartingItem).IsRequired();
             builder.Property(x => x.ItemIconUrl).IsRequired();
+
+            builder.HasOne(x => x.Patch)
+                .WithMany(x => x.Items)
+                .HasForeignKey(x => x.PatchId)
+                .OnDelete(DeleteBehavior.Restrict)
+                .IsRequired();
 
             builder.HasOne(x => x.ChildItem)
                 .WithMany()

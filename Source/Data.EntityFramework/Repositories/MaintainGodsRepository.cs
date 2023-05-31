@@ -19,36 +19,50 @@ namespace Smitenight.Persistence.Data.EntityFramework.Repositories
             _mapperService = mapperService;
         }
 
-        public Task CreateAbilityAsync(int godId, CreateAbilityDto ability, CancellationToken cancellationToken = default)
+        public async Task CreateAbilityAsync(int godId, CreateAbilityDto ability, CancellationToken cancellationToken = default)
         {
             var abilityEntity = _mapperService.Map<CreateAbilityDto, Ability>(ability);
+            var patchId = await GetLatestPatchIdAsync(cancellationToken);
+
             abilityEntity.GodId = godId;
+            abilityEntity.PatchId = patchId;
+
             _dbContext.Abilities.Add(abilityEntity);
-            return _dbContext.SaveChangesAsync(cancellationToken);
+            await _dbContext.SaveChangesAsync(cancellationToken);
         }
 
         public async Task<int> CreateGodAsync(CreateGodDto god, CancellationToken cancellationToken = default)
         {
             var godEntity = _mapperService.Map<CreateGodDto, God>(god);
+            var patchId = await GetLatestPatchIdAsync(cancellationToken);
+
+            godEntity.PatchId = patchId;
+
             _dbContext.Gods.Add(godEntity);
             await _dbContext.SaveChangesAsync(cancellationToken);
             return godEntity.Id;
         }
 
-        public Task CreateGodSkinAsync(int godId, CreateGodSkinDto godSkin, CancellationToken cancellationToken = default)
+        public async Task CreateGodSkinAsync(int godId, CreateGodSkinDto godSkin, CancellationToken cancellationToken = default)
         {
             var godSkinEntity = _mapperService.Map<CreateGodSkinDto, GodSkin>(godSkin);
+            var patchId = await GetLatestPatchIdAsync(cancellationToken);
+
             godSkinEntity.GodId = godId;
+            godSkinEntity.PatchId = patchId;
 
             _dbContext.GodSkins.Add(godSkinEntity);
-            return _dbContext.SaveChangesAsync(cancellationToken);
+            await _dbContext.SaveChangesAsync(cancellationToken);
         }
 
         public async Task<IEnumerable<GodChecksumsDto>> GetGodChecksumsAsync(CancellationToken cancellationToken = default)
         {
+            // TODO: Figure the latest patch stuff out here, and still need to test it
             var godChecksums = await _dbContext.Gods
-                .Include(x => x.Abilities)
-                .Include(x => x.GodSkins)
+                .Include(x => x.Abilities.GroupBy(x => x.SmiteId).Select(x => x.OrderByDescending(y => y.PatchId).First()))
+                .Include(x => x.GodSkins.GroupBy(x => x.SmiteId).Select(x => x.OrderByDescending(y => y.PatchId).First()))
+                .GroupBy(x => x.SmiteId)
+                .Select(x => x.OrderByDescending(y => y.PatchId).First())
                 .Select(x => new GodChecksumsDto
                 {
                     GodId = x.Id,
@@ -77,6 +91,14 @@ namespace Smitenight.Persistence.Data.EntityFramework.Repositories
             var existingGodSkinEntity = await _dbContext.GodSkins.SingleAsync(x => x.SmiteId == godSkinId1 && x.SecondarySmiteId == godSkinId2, cancellationToken);
             existingGodSkinEntity.GodId = godId;
             await _dbContext.SaveChangesAsync(cancellationToken);
+        }
+
+        private Task<int> GetLatestPatchIdAsync(CancellationToken cancellationToken = default)
+        {
+            return _dbContext.Patches
+                .OrderByDescending(x => x.ReleaseDate)
+                .Select(x => x.Id)
+                .FirstAsync(cancellationToken);
         }
     }
 }

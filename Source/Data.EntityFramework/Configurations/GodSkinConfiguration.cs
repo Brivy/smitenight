@@ -14,6 +14,7 @@ namespace Smitenight.Persistence.Data.EntityFramework.Configurations
             builder.Property(x => x.GodId).IsRequired();
             builder.Property(x => x.SmiteId).IsRequired();
             builder.Property(x => x.SecondarySmiteId).IsRequired();
+            builder.Property(x => x.PatchId).IsRequired();
 
             builder.Property(x => x.Checksum).IsRequired();
             builder.Property(x => x.GodSkinUrl).IsRequired(false);
@@ -21,6 +22,12 @@ namespace Smitenight.Persistence.Data.EntityFramework.Configurations
             builder.Property(x => x.Obtainability).IsRequired();
             builder.Property(x => x.PriceFavor).IsRequired();
             builder.Property(x => x.PriceGems).IsRequired();
+
+            builder.HasOne(x => x.Patch)
+                .WithMany(x => x.GodSkins)
+                .HasForeignKey(x => x.PatchId)
+                .OnDelete(DeleteBehavior.Restrict)
+                .IsRequired();
 
             builder.HasOne(x => x.God)
                 .WithMany(x => x.GodSkins)

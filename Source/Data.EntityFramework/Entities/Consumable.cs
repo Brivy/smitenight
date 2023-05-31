@@ -4,6 +4,7 @@
     {
         public int Id { get; set; }
         public int SmiteId { get; set; }
+        public int PatchId { get; set; }
 
         public string Checksum { get; set; } = null!;
         public bool Enabled { get; set; }
@@ -13,5 +14,7 @@
         public string? SecondaryDescription { get; set; }
         public string? ShortDescription { get; set; }
         public string ItemIconUrl { get; set; } = null!;
+
+        public Patch? Patch { get; set; }
     }
 }

@@ -6,6 +6,7 @@ namespace Smitenight.Persistence.Data.EntityFramework.Entities
     {
         public int Id { get; set; }
         public int SmiteId { get; set; }
+        public int PatchId { get; set; }
 
         public string Checksum { get; set; } = null!;
         public float AttackSpeed { get; set; }
@@ -40,6 +41,7 @@ namespace Smitenight.Persistence.Data.EntityFramework.Entities
         public string Title { get; set; } = null!;
         public GodType Type { get; set; }
 
+        public Patch? Patch { get; set; }
         public ICollection<Ability> Abilities { get; set; }
         public ICollection<GodBasicAttack> GodBasicAttacks { get; set; }
         public ICollection<GodBan> GodBans { get; set; }

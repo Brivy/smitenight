@@ -11,6 +11,7 @@ namespace Smitenight.Persistence.Data.EntityFramework.Configurations
             builder.ToTable("Actives");
 
             builder.HasKey(x => x.Id);
+            builder.Property(x => x.PatchId).IsRequired();
 
             builder.Property(x => x.ChildActiveId).IsRequired(false);
             builder.Property(x => x.Enabled).IsRequired();
@@ -23,6 +24,12 @@ namespace Smitenight.Persistence.Data.EntityFramework.Configurations
             builder.Property(x => x.ItemIconUrl).IsRequired();
             builder.Property(x => x.ItemTier).IsRequired();
             builder.Property(x => x.Price).IsRequired();
+
+            builder.HasOne(x => x.Patch)
+                .WithMany(x => x.Actives)
+                .HasForeignKey(x => x.PatchId)
+                .OnDelete(DeleteBehavior.Restrict)
+                .IsRequired();
 
             builder.HasOne(x => x.ChildActive)
                 .WithMany()

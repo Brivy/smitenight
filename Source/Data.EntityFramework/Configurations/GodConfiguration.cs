@@ -12,6 +12,7 @@ namespace Smitenight.Persistence.Data.EntityFramework.Configurations
 
             builder.HasKey(x => x.Id);
             builder.Property(x => x.SmiteId).IsRequired();
+            builder.Property(x => x.PatchId).IsRequired();
 
             builder.Property(x => x.Checksum).IsRequired();
             builder.Property(x => x.AttackSpeed).IsRequired();
@@ -45,6 +46,12 @@ namespace Smitenight.Persistence.Data.EntityFramework.Configurations
             builder.Property(x => x.Speed).IsRequired();
             builder.Property(x => x.Title).IsRequired();
             builder.Property(x => x.Type).IsRequired();
+
+            builder.HasOne(x => x.Patch)
+                .WithMany(x => x.Gods)
+                .HasForeignKey(x => x.PatchId)
+                .OnDelete(DeleteBehavior.Restrict)
+                .IsRequired();
 
             builder.HasMany(x => x.Abilities)
                 .WithOne(x => x.God)

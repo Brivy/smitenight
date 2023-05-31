@@ -7,6 +7,7 @@ namespace Smitenight.Persistence.Data.EntityFramework.Entities
         public int Id { get; set; }
         public int GodId { get; set; }
         public int SmiteId { get; set; }
+        public int PatchId { get; set; }
 
         public string Checksum { get; set; } = null!;
         public string? Cooldown { get; set; }
@@ -17,6 +18,7 @@ namespace Smitenight.Persistence.Data.EntityFramework.Entities
         public AbilityType AbilityType { get; set; }
 
         public God? God { get; set; }
+        public Patch? Patch { get; set; }
         public ICollection<AbilityRank> AbilityRanks { get; set; }
         public ICollection<AbilityTag> AbilityTags { get; set; }
 

@@ -23,6 +23,7 @@ namespace Smitenight.Application.Blazor.Business.Extensions
                 .AddScoped<IChecksumService, ChecksumService>()
                 .AddScoped<IMaintainGodsService, MaintainGodsService>()
                 .AddScoped<IMaintainItemsService, MaintainItemsService>()
+                .AddScoped<IMaintainPatchesService, MaintainPatchesService>()
                 .AddScoped<IMaintainSmitenight, MaintainSmitenight>();
         }
     }

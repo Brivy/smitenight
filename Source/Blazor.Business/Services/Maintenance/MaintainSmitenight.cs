@@ -10,16 +10,26 @@ namespace Smitenight.Application.Blazor.Business.Services.Maintenance
     {
         private readonly IMaintainItemsService _maintainItemsService;
         private readonly IMaintainGodsService _maintainGodsService;
+        private readonly IMaintainPatchesService _maintainPatchesService;
         private readonly ISmiteClient _smiteClient;
 
         public MaintainSmitenight(
             IMaintainItemsService maintainItemsService,
             IMaintainGodsService maintainGodsService,
+            IMaintainPatchesService maintainPatchesService,
             ISmiteClient smiteClient)
         {
             _maintainItemsService = maintainItemsService;
             _maintainGodsService = maintainGodsService;
+            _maintainPatchesService = maintainPatchesService;
             _smiteClient = smiteClient;
+        }
+
+        public async Task MaintainPatchesAsync(CancellationToken cancellationToken = default)
+        {
+            var serverStatus = await _smiteClient.GetHirezServerStatusAsync(cancellationToken);
+            var currentPatch = serverStatus.First().Version;
+            await _maintainPatchesService.MaintainPatchAsync(currentPatch, cancellationToken);
         }
 
         public async Task MaintainItemsAsync(CancellationToken cancellationToken = default)

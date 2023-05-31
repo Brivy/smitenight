@@ -26,7 +26,8 @@ namespace Smitenight.Persistence.Data.EntityFramework.Extensions
 
             services
                 .AddScoped<IMaintainGodsRepository, MaintainGodsRepository>()
-                .AddScoped<IMaintainItemsRepository, MaintainItemsRepository>();
+                .AddScoped<IMaintainItemsRepository, MaintainItemsRepository>()
+                .AddScoped<IMaintainPatchesRepository, MaintainPatchesRepository>();
         }
     }
 }
