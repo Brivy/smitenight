@@ -37,8 +37,8 @@ namespace Smitenight.Presentation.Test.Maintenace
             {
                 var serviceProvider = serviceScope.ServiceProvider;
                 var maintainSmitenight = serviceProvider.GetRequiredService<IMaintainSmitenight>();
-                await maintainSmitenight.MaintainPatchesAsync();
-                await maintainSmitenight.MaintainGodsAsync();
+                //await maintainSmitenight.MaintainPatchesAsync();
+                await maintainSmitenight.MaintainItemsAsync();
             }
         }
     }

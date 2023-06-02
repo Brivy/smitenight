@@ -1,11 +1,19 @@
 ﻿using Smitenight.Persistence.Data.Contracts.Models;
 using Smitenight.Persistence.Data.EntityFramework.Entities;
+using Smitenight.Utilities.Mapper.Common.Contracts;
 using Smitenight.Utilities.Mapper.Common.Models;
 
 namespace Smitenight.Persistence.Data.EntityFramework.Mappers
 {
     public class ItemMapper : Mapper<CreateItemDto, Item>
     {
+        private readonly IMapper<CreateItemDescriptionDto, ItemDescription> _itemDescriptionMapper;
+
+        public ItemMapper(IMapper<CreateItemDescriptionDto, ItemDescription> itemDescriptionMapper)
+        {
+            _itemDescriptionMapper = itemDescriptionMapper;
+        }
+
         public override Item Map(CreateItemDto input)
         {
             return new Item
@@ -22,7 +30,8 @@ namespace Smitenight.Persistence.Data.EntityFramework.Mappers
                 ItemTier = input.ItemTier,
                 Glyph = input.Glyph,
                 RestrictedRoles = input.RestrictedRoles,
-                StartingItem = input.StartingItem
+                StartingItem = input.StartingItem,
+                ItemDescriptions = input.ItemDescription.Select(_itemDescriptionMapper.Map).ToList()
             };
         }
     }

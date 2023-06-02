@@ -2,7 +2,9 @@
 using Smitenight.Persistence.Data.Contracts.Enums;
 using Smitenight.Persistence.Data.Contracts.Models;
 using Smitenight.Providers.SmiteProvider.Contracts.Constants;
+using Smitenight.Providers.SmiteProvider.Contracts.Models.Common;
 using Smitenight.Providers.SmiteProvider.Contracts.Models.ItemClient;
+using Smitenight.Utilities.Mapper.Common.Contracts;
 using Smitenight.Utilities.Mapper.Common.Models;
 
 namespace Smitenight.Application.Blazor.Business.Mappers
@@ -10,10 +12,14 @@ namespace Smitenight.Application.Blazor.Business.Mappers
     public class CreateItemMapper : Mapper<ItemDto, CreateItemDto>
     {
         private readonly IChecksumService _checksumService;
+        private readonly IMapper<CommonItemDto, CreateItemDescriptionDto> _itemDescriptionMapper;
 
-        public CreateItemMapper(IChecksumService checksumService)
+        public CreateItemMapper(
+            IChecksumService checksumService,
+            IMapper<CommonItemDto, CreateItemDescriptionDto> itemDescriptionMapper)
         {
             _checksumService = checksumService;
+            _itemDescriptionMapper = itemDescriptionMapper;
         }
 
         public override CreateItemDto Map(ItemDto item)
@@ -33,7 +39,8 @@ namespace Smitenight.Application.Blazor.Business.Mappers
                 SecondaryDescription = !string.IsNullOrWhiteSpace(item.ItemDescription.SecondaryDescription) ? item.ItemDescription.SecondaryDescription : null,
                 ShortDescription = !string.IsNullOrWhiteSpace(item.ShortDesc) ? item.ShortDesc : null,
                 SmiteId = item.ItemId,
-                StartingItem = item.StartingItem
+                StartingItem = item.StartingItem,
+                ItemDescription = item.ItemDescription.ItemSubDescriptions.Select(_itemDescriptionMapper.Map).ToArray()
             };
         }
 

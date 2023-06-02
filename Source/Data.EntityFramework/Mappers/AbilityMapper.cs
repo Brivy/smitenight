@@ -30,8 +30,8 @@ namespace Smitenight.Persistence.Data.EntityFramework.Mappers
                 Cost = input.Cost,
                 Summary = input.Summary,
                 Url = input.Url,
-                AbilityRanks = input.AbilityRanks.Select(x => _abilityRankMapper.Map(x)).ToList(),
-                AbilityTags = input.AbilityTags.Select(x => _abilityTagMapper.Map(x)).ToList()
+                AbilityRanks = input.AbilityRanks.Select(_abilityRankMapper.Map).ToList(),
+                AbilityTags = input.AbilityTags.Select(_abilityTagMapper.Map).ToList()
             };
         }
     }

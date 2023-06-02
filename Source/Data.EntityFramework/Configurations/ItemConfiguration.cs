@@ -12,8 +12,8 @@ namespace Smitenight.Persistence.Data.EntityFramework.Configurations
 
             builder.HasKey(x => x.Id);
             builder.Property(x => x.SmiteId).IsRequired();
-            builder.Property(x => x.RootItemId).IsRequired();
-            builder.Property(x => x.ChildItemId).IsRequired();
+            builder.Property(x => x.RootItemId).IsRequired(false);
+            builder.Property(x => x.ChildItemId).IsRequired(false);
             builder.Property(x => x.PatchId).IsRequired();
 
             builder.Property(x => x.Checksum).IsRequired();

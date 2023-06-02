@@ -22,6 +22,10 @@ namespace Smitenight.Persistence.Data.EntityFramework.Repositories
         public async Task<int> CreateActiveAsync(CreateActiveDto active, CancellationToken cancellationToken = default)
         {
             var activeEntity = _mapperService.Map<CreateActiveDto, Active>(active);
+            var patchId = await GetLatestPatchIdAsync(cancellationToken);
+
+            activeEntity.PatchId = patchId;
+
             _dbContext.Actives.Add(activeEntity);
             await _dbContext.SaveChangesAsync(cancellationToken);
 
@@ -31,18 +35,22 @@ namespace Smitenight.Persistence.Data.EntityFramework.Repositories
         public async Task<int> CreateConsumableAsync(CreateConsumableDto consumable, CancellationToken cancellationToken = default)
         {
             var consumableEntity = _mapperService.Map<CreateConsumableDto, Consumable>(consumable);
+            var patchId = await GetLatestPatchIdAsync(cancellationToken);
+
+            consumableEntity.PatchId = patchId;
+
             _dbContext.Consumables.Add(consumableEntity);
             await _dbContext.SaveChangesAsync(cancellationToken);
 
             return consumableEntity.SmiteId;
         }
 
-        public async Task<int> CreateItemAsync(CreateItemDto item, IEnumerable<CreateItemDescriptionDto> itemDescriptions, CancellationToken cancellationToken = default)
+        public async Task<int> CreateItemAsync(CreateItemDto item, CancellationToken cancellationToken = default)
         {
             var itemEntity = _mapperService.Map<CreateItemDto, Item>(item);
-            var itemDescriptionEntities = _mapperService.MapAll<CreateItemDescriptionDto, ItemDescription>(itemDescriptions);
+            var patchId = await GetLatestPatchIdAsync(cancellationToken);
 
-            itemEntity.ItemDescriptions = itemDescriptionEntities.ToList();
+            itemEntity.PatchId = patchId;
 
             _dbContext.Items.Add(itemEntity);
             await _dbContext.SaveChangesAsync(cancellationToken);
@@ -114,6 +122,7 @@ namespace Smitenight.Persistence.Data.EntityFramework.Repositories
 
         public async Task<IEnumerable<ItemLinkDto>> GetItemForRelinkingAsync(IEnumerable<int> relinkNeededSmiteIds, CancellationToken cancellationToken = default)
         {
+            //TODO: Fix patch stuff again here
             var itemDictionary = await _dbContext.Items
                 .AsNoTracking()
                 .Where(x => relinkNeededSmiteIds.Contains(x.SmiteId))
@@ -170,6 +179,14 @@ namespace Smitenight.Persistence.Data.EntityFramework.Repositories
             }
 
             await _dbContext.SaveChangesAsync(cancellationToken);
+        }
+
+        private Task<int> GetLatestPatchIdAsync(CancellationToken cancellationToken = default)
+        {
+            return _dbContext.Patches
+                .OrderByDescending(x => x.ReleaseDate)
+                .Select(x => x.Id)
+                .FirstAsync(cancellationToken);
         }
     }
 }

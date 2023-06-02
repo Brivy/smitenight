@@ -11,13 +11,13 @@ namespace Smitenight.Persistence.Data.EntityFramework.Configurations
             builder.ToTable("Actives");
 
             builder.HasKey(x => x.Id);
+            builder.Property(x => x.ChildActiveId).IsRequired(false);
+            builder.Property(x => x.RootActiveId).IsRequired(false);
             builder.Property(x => x.PatchId).IsRequired();
 
-            builder.Property(x => x.ChildActiveId).IsRequired(false);
             builder.Property(x => x.Enabled).IsRequired();
             builder.Property(x => x.Name).IsRequired();
             builder.Property(x => x.Description).IsRequired(false);
-            builder.Property(x => x.RootActiveId).IsRequired(false);
             builder.Property(x => x.SecondaryDescription).IsRequired();
             builder.Property(x => x.SmiteId).IsRequired();
             builder.Property(x => x.ShortDescription).IsRequired();

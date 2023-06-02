@@ -17,5 +17,6 @@ namespace Smitenight.Persistence.Data.Contracts.Models
         public string? ShortDescription { get; set; }
         public bool StartingItem { get; set; }
         public string ItemIconUrl { get; set; } = null!;
+        public IEnumerable<CreateItemDescriptionDto> ItemDescription { get; set; } = new List<CreateItemDescriptionDto>();
     }
 }

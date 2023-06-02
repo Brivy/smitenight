@@ -51,7 +51,7 @@ namespace Smitenight.Persistence.Data.EntityFramework.Mappers
                 PhysicalProtection = input.PhysicalProtection,
                 PhysicalProtectionPerLevel = input.PhysicalProtectionPerLevel,
                 Role = input.Role,
-                GodBasicAttacks = input.GodBasicAttackDto.Select(x => _godBasicAttackMapper.Map(x)).ToList()
+                GodBasicAttacks = input.GodBasicAttackDto.Select(_godBasicAttackMapper.Map).ToList()
             };
         }
     }

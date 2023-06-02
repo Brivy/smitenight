@@ -3,7 +3,6 @@ using Smitenight.Application.Blazor.Business.Contracts.Services.Maintenance;
 using Smitenight.Persistence.Data.Contracts.Models;
 using Smitenight.Persistence.Data.Contracts.Repositories;
 using Smitenight.Providers.SmiteProvider.Contracts.Constants;
-using Smitenight.Providers.SmiteProvider.Contracts.Models.Common;
 using Smitenight.Providers.SmiteProvider.Contracts.Models.ItemClient;
 using Smitenight.Utilities.Mapper.Common.Services;
 
@@ -41,8 +40,7 @@ namespace Smitenight.Application.Blazor.Business.Services.Maintenance
             {
                 case ItemConstants.ItemType:
                     var createdItem = _mapperService.Map<ItemDto, CreateItemDto>(item);
-                    var createdItemDescriptions = CreateItemDescriptions(item.ItemDescription.ItemSubDescriptions);
-                    return _maintainItemsRepository.CreateItemAsync(createdItem, createdItemDescriptions, cancellationToken);
+                    return _maintainItemsRepository.CreateItemAsync(createdItem, cancellationToken);
                 case ItemConstants.ConsumableItemType:
                     var createdActive = _mapperService.Map<ItemDto, CreateActiveDto>(item);
                     return _maintainItemsRepository.CreateActiveAsync(createdActive, cancellationToken);
@@ -106,17 +104,6 @@ namespace Smitenight.Application.Blazor.Business.Services.Maintenance
             }
 
             await _maintainItemsRepository.UpdateActiveLinksAsync(updatedLinkActives, cancellationToken);
-        }
-
-        private IEnumerable<CreateItemDescriptionDto> CreateItemDescriptions(IEnumerable<CommonItemDto> itemDescriptions)
-        {
-            var createdItemDescriptions = new List<CreateItemDescriptionDto>();
-            foreach (var itemDescription in itemDescriptions)
-            {
-                createdItemDescriptions.Add(_mapperService.Map<CommonItemDto, CreateItemDescriptionDto>(itemDescription));
-            }
-
-            return createdItemDescriptions;
         }
 
         public Task<IEnumerable<ItemChecksumsDto>> GetItemChecksumsAsync(CancellationToken cancellationToken = default)
