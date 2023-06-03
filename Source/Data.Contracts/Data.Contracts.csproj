@@ -9,7 +9,7 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\DependencyInjection.Common\DependencyInjection.Common.csproj" />
-	  <ProjectReference Include="..\Mapper.Common\Mapper.csproj" />
+	  <ProjectReference Include="..\Mapper\Mapper.csproj" />
 	</ItemGroup>
 
 </Project>
