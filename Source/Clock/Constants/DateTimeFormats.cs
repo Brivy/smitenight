@@ -1,4 +1,4 @@
-﻿namespace Clock.Common.Constants
+﻿namespace Smitenight.Utilities.Clock.Constants
 {
     public static class DateTimeFormats
     {

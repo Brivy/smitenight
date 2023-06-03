@@ -7,7 +7,7 @@ using Smitenight.Providers.SmiteProvider.HiRez.Secrets;
 using Smitenight.Providers.SmiteProvider.HiRez.Services;
 using Smitenight.Providers.SmiteProvider.HiRez.Settings;
 using Smitenight.Utilities.DependencyInjection.Common.Extensions;
-using Smitenight.Utilities.Mapper.Common.Extensions;
+using Smitenight.Utilities.Mapper.Extensions;
 
 namespace Smitenight.Providers.SmiteProvider.HiRez.Extensions
 {

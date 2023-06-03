@@ -3,7 +3,7 @@ using Smitenight.Application.Blazor.Business.Contracts.Services.Maintenance;
 using Smitenight.Persistence.Data.Contracts.Models;
 using Smitenight.Persistence.Data.Contracts.Repositories;
 using Smitenight.Providers.SmiteProvider.Contracts.Models.GodClient;
-using Smitenight.Utilities.Mapper.Common.Services;
+using Smitenight.Utilities.Mapper.Services;
 
 namespace Smitenight.Application.Blazor.Business.Services.Maintenance
 {

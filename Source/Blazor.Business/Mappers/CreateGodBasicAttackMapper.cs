@@ -1,6 +1,6 @@
 ﻿using Smitenight.Persistence.Data.Contracts.Models;
 using Smitenight.Providers.SmiteProvider.Contracts.Models.Common;
-using Smitenight.Utilities.Mapper.Common.Models;
+using Smitenight.Utilities.Mapper.Models;
 
 namespace Smitenight.Application.Blazor.Business.Mappers
 {

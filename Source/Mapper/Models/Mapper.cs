@@ -1,6 +1,6 @@
-﻿using Smitenight.Utilities.Mapper.Common.Contracts;
+﻿using Smitenight.Utilities.Mapper.Contracts.Contracts;
 
-namespace Smitenight.Utilities.Mapper.Common.Models
+namespace Smitenight.Utilities.Mapper.Models
 {
     public abstract class Mapper<TInput, TOutput> : IMapper<TInput, TOutput>
     {

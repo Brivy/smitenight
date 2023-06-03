@@ -2,7 +2,7 @@
 using Smitenight.Persistence.Data.Contracts.Models;
 using Smitenight.Providers.SmiteProvider.Contracts.Constants;
 using Smitenight.Providers.SmiteProvider.Contracts.Models.ItemClient;
-using Smitenight.Utilities.Mapper.Common.Models;
+using Smitenight.Utilities.Mapper.Models;
 
 namespace Smitenight.Application.Blazor.Business.Mappers
 {

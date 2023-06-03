@@ -7,7 +7,7 @@ using Smitenight.Persistence.Data.EntityFramework.Secrets;
 using Smitenight.Providers.SmiteProvider.HiRez.Secrets;
 using Smitenight.Utilities.Cache.Redis.Extensions;
 using Smitenight.Utilities.Cache.Redis.Secrets;
-using Smitenight.Utilities.Mapper.Common.Extensions;
+using Smitenight.Utilities.Mapper.Extensions;
 
 namespace Smitenight.Presentation.Test.Maintenace
 {

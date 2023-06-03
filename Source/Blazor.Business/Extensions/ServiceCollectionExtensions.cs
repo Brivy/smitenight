@@ -6,7 +6,7 @@ using Smitenight.Application.Blazor.Business.Services.Checksums;
 using Smitenight.Application.Blazor.Business.Services.Maintenance;
 using Smitenight.Persistence.Data.EntityFramework.Extensions;
 using Smitenight.Providers.SmiteProvider.HiRez.Extensions;
-using Smitenight.Utilities.Mapper.Common.Extensions;
+using Smitenight.Utilities.Mapper.Extensions;
 
 namespace Smitenight.Application.Blazor.Business.Extensions
 {

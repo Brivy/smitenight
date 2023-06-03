@@ -1,6 +1,6 @@
 ﻿using Smitenight.Providers.SmiteProvider.Contracts.Models.LeagueClient;
 using Smitenight.Providers.SmiteProvider.HiRez.Models.LeagueClient;
-using Smitenight.Utilities.Mapper.Common.Models;
+using Smitenight.Utilities.Mapper.Models;
 
 namespace Smitenight.Providers.SmiteProvider.HiRez.Mappers
 {

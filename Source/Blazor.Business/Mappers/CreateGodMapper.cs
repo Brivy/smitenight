@@ -5,8 +5,8 @@ using Smitenight.Persistence.Data.Contracts.Models;
 using Smitenight.Providers.SmiteProvider.Contracts.Constants;
 using Smitenight.Providers.SmiteProvider.Contracts.Models.Common;
 using Smitenight.Providers.SmiteProvider.Contracts.Models.GodClient;
-using Smitenight.Utilities.Mapper.Common.Contracts;
-using Smitenight.Utilities.Mapper.Common.Models;
+using Smitenight.Utilities.Mapper.Contracts.Contracts;
+using Smitenight.Utilities.Mapper.Models;
 
 namespace Smitenight.Application.Blazor.Business.Mappers
 {

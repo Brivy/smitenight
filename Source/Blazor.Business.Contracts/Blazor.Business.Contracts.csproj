@@ -9,7 +9,7 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\Data.EntityFramework\Data.EntityFramework.csproj" />
-	  <ProjectReference Include="..\Mapper.Common\Mapper.Common.csproj" />
+	  <ProjectReference Include="..\Mapper.Common\Mapper.csproj" />
 	  <ProjectReference Include="..\SmiteProvider.HiRez\SmiteProvider.HiRez.csproj" />
 	</ItemGroup>
 

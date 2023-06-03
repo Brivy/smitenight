@@ -2,7 +2,7 @@
 using Smitenight.Persistence.Data.Contracts.Models;
 using Smitenight.Persistence.Data.Contracts.Repositories;
 using Smitenight.Persistence.Data.EntityFramework.Entities;
-using Smitenight.Utilities.Mapper.Common.Services;
+using Smitenight.Utilities.Mapper.Services;
 
 namespace Smitenight.Persistence.Data.EntityFramework.Repositories
 {

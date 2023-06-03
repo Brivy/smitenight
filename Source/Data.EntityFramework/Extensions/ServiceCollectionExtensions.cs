@@ -5,7 +5,7 @@ using Smitenight.Persistence.Data.Contracts.Repositories;
 using Smitenight.Persistence.Data.EntityFramework.Repositories;
 using Smitenight.Persistence.Data.EntityFramework.Secrets;
 using Smitenight.Utilities.DependencyInjection.Common.Extensions;
-using Smitenight.Utilities.Mapper.Common.Extensions;
+using Smitenight.Utilities.Mapper.Extensions;
 
 namespace Smitenight.Persistence.Data.EntityFramework.Extensions
 {

@@ -1,6 +1,6 @@
-﻿using Smitenight.Utilities.Mapper.Common.Contracts;
+﻿using Smitenight.Utilities.Mapper.Contracts.Contracts;
 
-namespace Smitenight.Utilities.Mapper.Common.Services
+namespace Smitenight.Utilities.Mapper.Services
 {
     public class MapperService : IMapperService
     {

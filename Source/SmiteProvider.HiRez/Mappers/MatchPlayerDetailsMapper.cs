@@ -1,6 +1,6 @@
 ﻿using Smitenight.Providers.SmiteProvider.Contracts.Models.MatchClient;
 using Smitenight.Providers.SmiteProvider.HiRez.Models.MatchClient;
-using Smitenight.Utilities.Mapper.Common.Models;
+using Smitenight.Utilities.Mapper.Models;
 
 namespace Smitenight.Providers.SmiteProvider.HiRez.Mappers
 {

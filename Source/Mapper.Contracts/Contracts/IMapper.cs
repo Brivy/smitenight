@@ -1,4 +1,4 @@
-﻿namespace Smitenight.Utilities.Mapper.Common.Contracts
+﻿namespace Smitenight.Utilities.Mapper.Contracts.Contracts
 {
     public interface IMapper
     {

@@ -3,7 +3,7 @@ using Smitenight.Application.Blazor.Business.Contracts.Services.Checksums;
 using Smitenight.Persistence.Data.Contracts.Enums;
 using Smitenight.Persistence.Data.Contracts.Models;
 using Smitenight.Providers.SmiteProvider.Contracts.Models.GodClient;
-using Smitenight.Utilities.Mapper.Common.Models;
+using Smitenight.Utilities.Mapper.Models;
 
 namespace Smitenight.Application.Blazor.Business.Mappers
 {

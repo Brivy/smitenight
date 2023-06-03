@@ -1,9 +1,9 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
-using Smitenight.Utilities.Mapper.Common.Contracts;
-using Smitenight.Utilities.Mapper.Common.Services;
+using Smitenight.Utilities.Mapper.Contracts.Contracts;
+using Smitenight.Utilities.Mapper.Services;
 using System.Reflection;
 
-namespace Smitenight.Utilities.Mapper.Common.Extensions
+namespace Smitenight.Utilities.Mapper.Extensions
 {
     public static class ServiceCollectionExtensions
     {

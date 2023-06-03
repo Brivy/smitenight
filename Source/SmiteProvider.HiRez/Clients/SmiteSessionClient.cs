@@ -1,5 +1,4 @@
-﻿using Clock.Common.Constants;
-using Microsoft.Extensions.Options;
+﻿using Microsoft.Extensions.Options;
 using Smitenight.Providers.SmiteProvider.Contracts.Clients;
 using Smitenight.Providers.SmiteProvider.Contracts.Exceptions;
 using Smitenight.Providers.SmiteProvider.Contracts.Models.SystemClient;
@@ -8,7 +7,8 @@ using Smitenight.Providers.SmiteProvider.HiRez.Exceptions;
 using Smitenight.Providers.SmiteProvider.HiRez.Models.SystemClient;
 using Smitenight.Providers.SmiteProvider.HiRez.Secrets;
 using Smitenight.Providers.SmiteProvider.HiRez.Services;
-using Smitenight.Utilities.Mapper.Common.Services;
+using Smitenight.Utilities.Clock.Constants;
+using Smitenight.Utilities.Mapper.Services;
 using System.Net.Http.Json;
 using System.Text.Json;
 

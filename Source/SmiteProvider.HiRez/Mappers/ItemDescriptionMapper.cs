@@ -2,8 +2,8 @@
 using Smitenight.Providers.SmiteProvider.Contracts.Models.ItemClient;
 using Smitenight.Providers.SmiteProvider.HiRez.Models.Common;
 using Smitenight.Providers.SmiteProvider.HiRez.Models.ItemClient;
-using Smitenight.Utilities.Mapper.Common.Contracts;
-using Smitenight.Utilities.Mapper.Common.Models;
+using Smitenight.Utilities.Mapper.Contracts.Contracts;
+using Smitenight.Utilities.Mapper.Models;
 
 namespace Smitenight.Providers.SmiteProvider.HiRez.Mappers
 {

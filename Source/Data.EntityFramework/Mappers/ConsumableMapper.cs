@@ -1,6 +1,6 @@
 ﻿using Smitenight.Persistence.Data.Contracts.Models;
 using Smitenight.Persistence.Data.EntityFramework.Entities;
-using Smitenight.Utilities.Mapper.Common.Models;
+using Smitenight.Utilities.Mapper.Models;
 
 namespace Smitenight.Persistence.Data.EntityFramework.Mappers
 {
