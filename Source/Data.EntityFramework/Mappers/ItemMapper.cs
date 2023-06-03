@@ -31,7 +31,8 @@ namespace Smitenight.Persistence.Data.EntityFramework.Mappers
                 Glyph = input.Glyph,
                 RestrictedRoles = input.RestrictedRoles,
                 StartingItem = input.StartingItem,
-                ItemDescriptions = input.ItemDescription.Select(_itemDescriptionMapper.Map).ToList()
+                ItemDescriptions = input.ItemDescription.Select(_itemDescriptionMapper.Map).ToList(),
+                Latest = true // If we map it from a CreateDto, it's always the latest
             };
         }
     }

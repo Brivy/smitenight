@@ -51,7 +51,8 @@ namespace Smitenight.Persistence.Data.EntityFramework.Mappers
                 PhysicalProtection = input.PhysicalProtection,
                 PhysicalProtectionPerLevel = input.PhysicalProtectionPerLevel,
                 Role = input.Role,
-                GodBasicAttacks = input.GodBasicAttackDto.Select(_godBasicAttackMapper.Map).ToList()
+                GodBasicAttacks = input.GodBasicAttackDto.Select(_godBasicAttackMapper.Map).ToList(),
+                Latest = true // If we map it from a CreateDto, it's always the latest
             };
         }
     }

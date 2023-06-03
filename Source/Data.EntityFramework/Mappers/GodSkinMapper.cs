@@ -17,7 +17,8 @@ namespace Smitenight.Persistence.Data.EntityFramework.Mappers
                 PriceFavor = input.PriceFavor,
                 PriceGems = input.PriceGems,
                 SecondarySmiteId = input.SecondarySmiteId,
-                SmiteId = input.SmiteId
+                SmiteId = input.SmiteId,
+                Latest = true // If we map it from a CreateDto, it's always the latest
             };
         }
     }

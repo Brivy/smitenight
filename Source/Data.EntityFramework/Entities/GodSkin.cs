@@ -16,6 +16,7 @@ namespace Smitenight.Persistence.Data.EntityFramework.Entities
         public GodSkinsObtainability Obtainability { get; set; }
         public int PriceFavor { get; set; }
         public int PriceGems { get; set; }
+        public bool Latest { get; set; }
 
         public Patch? Patch { get; set; }
         public God? God { get; set; }

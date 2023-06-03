@@ -6,7 +6,7 @@ namespace Smitenight.Persistence.Data.EntityFramework.Entities
     {
         public int Id { get; set; }
         public int SmiteId { get; set; }
-        public int? RootItemId { get; set; }
+        public int? RootItemId { get; set; } // Root is not the same as a parent. Root is the base item that all other items are built from.
         public int? ChildItemId { get; set; }
         public int PatchId { get; set; }
 
@@ -22,6 +22,7 @@ namespace Smitenight.Persistence.Data.EntityFramework.Entities
         public string? ShortDescription { get; set; }
         public bool StartingItem { get; set; }
         public string ItemIconUrl { get; set; } = null!;
+        public bool Latest { get; set; }
 
         public Patch? Patch { get; set; }
         public Item? RootItem { get; set; }

@@ -22,6 +22,7 @@ namespace Smitenight.Persistence.Data.EntityFramework.Configurations
             builder.Property(x => x.Summary).IsRequired();
             builder.Property(x => x.Url).IsRequired();
             builder.Property(x => x.AbilityType).IsRequired();
+            builder.Property(x => x.Latest).IsRequired();
 
             builder.HasOne(x => x.God)
                 .WithMany(x => x.Abilities)

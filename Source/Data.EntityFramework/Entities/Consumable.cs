@@ -14,6 +14,7 @@
         public string? SecondaryDescription { get; set; }
         public string? ShortDescription { get; set; }
         public string ItemIconUrl { get; set; } = null!;
+        public bool Latest { get; set; }
 
         public Patch? Patch { get; set; }
     }

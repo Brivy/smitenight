@@ -16,6 +16,7 @@ namespace Smitenight.Persistence.Data.EntityFramework.Entities
         public string Summary { get; set; } = null!;
         public string Url { get; set; } = null!;
         public AbilityType AbilityType { get; set; }
+        public bool Latest { get; set; }
 
         public God? God { get; set; }
         public Patch? Patch { get; set; }

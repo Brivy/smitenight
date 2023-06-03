@@ -46,6 +46,7 @@ namespace Smitenight.Persistence.Data.EntityFramework.Configurations
             builder.Property(x => x.Speed).IsRequired();
             builder.Property(x => x.Title).IsRequired();
             builder.Property(x => x.Type).IsRequired();
+            builder.Property(x => x.Latest).IsRequired();
 
             builder.HasOne(x => x.Patch)
                 .WithMany(x => x.Gods)

@@ -18,12 +18,13 @@ namespace Smitenight.Persistence.Data.EntityFramework.Configurations
             builder.Property(x => x.Enabled).IsRequired();
             builder.Property(x => x.Name).IsRequired();
             builder.Property(x => x.Description).IsRequired(false);
-            builder.Property(x => x.SecondaryDescription).IsRequired();
+            builder.Property(x => x.SecondaryDescription).IsRequired(false);
             builder.Property(x => x.SmiteId).IsRequired();
-            builder.Property(x => x.ShortDescription).IsRequired();
+            builder.Property(x => x.ShortDescription).IsRequired(false);
             builder.Property(x => x.ItemIconUrl).IsRequired();
             builder.Property(x => x.ItemTier).IsRequired();
             builder.Property(x => x.Price).IsRequired();
+            builder.Property(x => x.Latest).IsRequired();
 
             builder.HasOne(x => x.Patch)
                 .WithMany(x => x.Actives)

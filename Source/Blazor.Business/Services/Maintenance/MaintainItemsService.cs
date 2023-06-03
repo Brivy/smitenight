@@ -41,10 +41,10 @@ namespace Smitenight.Application.Blazor.Business.Services.Maintenance
                 case ItemConstants.ItemType:
                     var createdItem = _mapperService.Map<ItemDto, CreateItemDto>(item);
                     return _maintainItemsRepository.CreateItemAsync(createdItem, cancellationToken);
-                case ItemConstants.ConsumableItemType:
+                case ItemConstants.ActiveItemType:
                     var createdActive = _mapperService.Map<ItemDto, CreateActiveDto>(item);
                     return _maintainItemsRepository.CreateActiveAsync(createdActive, cancellationToken);
-                case ItemConstants.ActiveItemType:
+                case ItemConstants.ConsumableItemType:
                     var createdConsumable = _mapperService.Map<ItemDto, CreateConsumableDto>(item);
                     return _maintainItemsRepository.CreateConsumableAsync(createdConsumable, cancellationToken);
                 default:
@@ -64,8 +64,9 @@ namespace Smitenight.Application.Blazor.Business.Services.Maintenance
 
                 if (linkItem.OldItemId.HasValue)
                 {
-                    childItemId = linkItems.SingleOrDefault(x => x.RootItemId == linkItem.OldItemId)?.NewItemId ?? linkItem.ChildItemId;
-                    rootItemId = linkItems.SingleOrDefault(x => x.ChildItemId == linkItem.OldItemId)?.NewItemId ?? linkItem.RootItemId;
+                    // Broken logic, still takes into account that root item is the parent item
+                    //childItemId = linkItems.SingleOrDefault(x => x.RootItemId == linkItem.OldItemId)?.NewItemId ?? linkItem.ChildItemId;
+                    //rootItemId = linkItems.SingleOrDefault(x => x.ChildItemId == linkItem.OldItemId)?.NewItemId ?? linkItem.RootItemId;
                 }
 
                 updatedLinkItems.Add(new UpdateItemLinkDto
@@ -91,8 +92,9 @@ namespace Smitenight.Application.Blazor.Business.Services.Maintenance
 
                 if (linkActive.OldItemId.HasValue)
                 {
-                    childActiveId = linkActives.SingleOrDefault(x => x.RootActiveId == linkActive.OldItemId)?.NewItemId ?? linkActive.ChildActiveId;
-                    rootActiveId = linkActives.SingleOrDefault(x => x.ChildActiveId == linkActive.OldItemId)?.NewItemId ?? linkActive.RootActiveId;
+                    // Broken logic, still takes into account that root item is the parent item
+                    //childActiveId = linkActives.SingleOrDefault(x => x.RootActiveId == linkActive.OldItemId)?.NewItemId ?? linkActive.ChildActiveId;
+                    //rootActiveId = linkActives.SingleOrDefault(x => x.ChildActiveId == linkActive.OldItemId)?.NewItemId ?? linkActive.RootActiveId;
                 }
 
                 updatedLinkActives.Add(new UpdateActiveLinkDto

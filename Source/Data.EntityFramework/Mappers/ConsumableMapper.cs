@@ -18,7 +18,8 @@ namespace Smitenight.Persistence.Data.EntityFramework.Mappers
                 Price = input.Price,
                 Enabled = input.Enabled,
                 SecondaryDescription = input.SecondaryDescription,
-                ShortDescription = input.ShortDescription
+                ShortDescription = input.ShortDescription,
+                Latest = true // If we map it from a CreateDto, it's always the latest
             };
         }
     }

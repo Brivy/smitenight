@@ -31,7 +31,8 @@ namespace Smitenight.Persistence.Data.EntityFramework.Mappers
                 Summary = input.Summary,
                 Url = input.Url,
                 AbilityRanks = input.AbilityRanks.Select(_abilityRankMapper.Map).ToList(),
-                AbilityTags = input.AbilityTags.Select(_abilityTagMapper.Map).ToList()
+                AbilityTags = input.AbilityTags.Select(_abilityTagMapper.Map).ToList(),
+                Latest = true // If we map it from a CreateDto, it's always the latest
             };
         }
     }

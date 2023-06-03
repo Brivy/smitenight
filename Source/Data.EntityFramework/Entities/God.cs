@@ -40,6 +40,7 @@ namespace Smitenight.Persistence.Data.EntityFramework.Entities
         public int Speed { get; set; }
         public string Title { get; set; } = null!;
         public GodType Type { get; set; }
+        public bool Latest { get; set; }
 
         public Patch? Patch { get; set; }
         public ICollection<Ability> Abilities { get; set; }

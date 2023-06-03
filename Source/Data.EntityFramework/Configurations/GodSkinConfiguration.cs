@@ -22,6 +22,7 @@ namespace Smitenight.Persistence.Data.EntityFramework.Configurations
             builder.Property(x => x.Obtainability).IsRequired();
             builder.Property(x => x.PriceFavor).IsRequired();
             builder.Property(x => x.PriceGems).IsRequired();
+            builder.Property(x => x.Latest).IsRequired();
 
             builder.HasOne(x => x.Patch)
                 .WithMany(x => x.GodSkins)

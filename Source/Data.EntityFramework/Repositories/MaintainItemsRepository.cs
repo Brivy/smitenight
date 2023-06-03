@@ -27,8 +27,11 @@ namespace Smitenight.Persistence.Data.EntityFramework.Repositories
             activeEntity.PatchId = patchId;
 
             _dbContext.Actives.Add(activeEntity);
-            await _dbContext.SaveChangesAsync(cancellationToken);
 
+            var existingActive = await _dbContext.Actives.SingleOrDefaultAsync(x => x.SmiteId == active.SmiteId && x.Latest, cancellationToken);
+            if (existingActive != null) existingActive.Latest = false;
+
+            await _dbContext.SaveChangesAsync(cancellationToken);
             return activeEntity.SmiteId;
         }
 
@@ -40,8 +43,11 @@ namespace Smitenight.Persistence.Data.EntityFramework.Repositories
             consumableEntity.PatchId = patchId;
 
             _dbContext.Consumables.Add(consumableEntity);
-            await _dbContext.SaveChangesAsync(cancellationToken);
 
+            var existingConsumable = await _dbContext.Consumables.SingleOrDefaultAsync(x => x.SmiteId == consumable.SmiteId && x.Latest, cancellationToken);
+            if (existingConsumable != null) existingConsumable.Latest = false;
+
+            await _dbContext.SaveChangesAsync(cancellationToken);
             return consumableEntity.SmiteId;
         }
 
@@ -53,33 +59,37 @@ namespace Smitenight.Persistence.Data.EntityFramework.Repositories
             itemEntity.PatchId = patchId;
 
             _dbContext.Items.Add(itemEntity);
-            await _dbContext.SaveChangesAsync(cancellationToken);
 
+            var existingItem = await _dbContext.Items.SingleOrDefaultAsync(x => x.SmiteId == item.SmiteId && x.Latest, cancellationToken);
+            if (existingItem != null) existingItem.Latest = false;
+
+            await _dbContext.SaveChangesAsync(cancellationToken);
             return itemEntity.SmiteId;
         }
 
         public async Task<IEnumerable<ActiveLinkDto>> GetActivesForRelinkingAsync(IEnumerable<int> relinkNeededSmiteIds, CancellationToken cancellationToken = default)
         {
-            var activeDictionary = await _dbContext.Actives
+            var combinedActiveList = await _dbContext.Actives
                 .AsNoTracking()
                 .Where(x => relinkNeededSmiteIds.Contains(x.SmiteId))
                 .GroupBy(x => x.SmiteId)
-                .SelectMany(x => x.OrderByDescending(y => y.Id).Take(2))
-                .GroupBy(x => x.SmiteId)
-                .ToDictionaryAsync(x => x.Key, x => x.Select(y => y).ToList(), cancellationToken);
+                .Select(x => x.OrderByDescending(y => y.Id).Take(2))
+                .ToListAsync(cancellationToken);
 
             var relinkingActives = new List<ActiveLinkDto>();
-            foreach (var activeKvp in activeDictionary)
+            foreach (var actives in combinedActiveList)
             {
-                var newActive = activeKvp.Value[0];
-                var oldActive = activeKvp.Value[1];
+                Active? oldActive = null;
+                var newActive = actives.First();
+                if (actives.Count() == 2) oldActive = actives.Last();
+
                 relinkingActives.Add(new ActiveLinkDto
                 {
-                    OldItemId = activeKvp.Value.Count == 2 ? oldActive.Id : null,
+                    OldItemId = oldActive?.Id,
                     NewItemId = newActive.Id,
-                    SmiteId = activeKvp.Key,
-                    ChildActiveId = newActive.ChildActiveId,
-                    RootActiveId = newActive.RootActiveId
+                    SmiteId = newActive.SmiteId,
+                    ChildActiveId = oldActive?.ChildActiveId,
+                    RootActiveId = oldActive?.RootActiveId
                 });
             }
 
@@ -91,6 +101,7 @@ namespace Smitenight.Persistence.Data.EntityFramework.Repositories
             var checksums = new List<ItemChecksumsDto>();
 
             var itemChecksums = await _dbContext.Items
+                .Where(x => x.Latest)
                 .Select(x => new ItemChecksumsDto
                 {
                     ItemId = x.Id,
@@ -99,6 +110,7 @@ namespace Smitenight.Persistence.Data.EntityFramework.Repositories
                 }).ToListAsync(cancellationToken);
 
             var activeChecksums = await _dbContext.Actives
+                .Where(x => x.Latest)
                 .Select(x => new ItemChecksumsDto
                 {
                     ItemId = x.Id,
@@ -107,6 +119,7 @@ namespace Smitenight.Persistence.Data.EntityFramework.Repositories
                 }).ToListAsync(cancellationToken);
 
             var consumableChecksums = await _dbContext.Consumables
+                .Where(x => x.Latest)
                 .Select(x => new ItemChecksumsDto
                 {
                     ItemId = x.Id,
@@ -122,27 +135,27 @@ namespace Smitenight.Persistence.Data.EntityFramework.Repositories
 
         public async Task<IEnumerable<ItemLinkDto>> GetItemForRelinkingAsync(IEnumerable<int> relinkNeededSmiteIds, CancellationToken cancellationToken = default)
         {
-            //TODO: Fix patch stuff again here
-            var itemDictionary = await _dbContext.Items
+            var combinedItemList = await _dbContext.Items
                 .AsNoTracking()
                 .Where(x => relinkNeededSmiteIds.Contains(x.SmiteId))
                 .GroupBy(x => x.SmiteId)
-                .SelectMany(x => x.OrderByDescending(y => y.Id).Take(2))
-                .GroupBy(x => x.SmiteId)
-                .ToDictionaryAsync(x => x.Key, x => x.Select(y => y).ToList(), cancellationToken);
+                .Select(x => x.OrderByDescending(y => y.Id).Take(2))
+                .ToListAsync(cancellationToken);
 
             var relinkingItems = new List<ItemLinkDto>();
-            foreach (var itemKvp in itemDictionary)
+            foreach (var items in combinedItemList)
             {
-                var newItem = itemKvp.Value[0];
-                var oldItem = itemKvp.Value[1];
+                Item? oldItem = null;
+                var newItem = items.First();
+                if (items.Count() == 2) oldItem = items.Last();
+
                 relinkingItems.Add(new ItemLinkDto
                 {
-                    OldItemId = itemKvp.Value.Count == 2 ? oldItem.Id : null,
+                    OldItemId = oldItem?.Id,
                     NewItemId = newItem.Id,
-                    SmiteId = itemKvp.Key,
-                    ChildItemId = newItem.ChildItemId,
-                    RootItemId = newItem.RootItemId
+                    SmiteId = newItem.SmiteId,
+                    ChildItemId = oldItem?.ChildItemId,
+                    RootItemId = oldItem?.RootItemId
                 });
             }
 
@@ -151,8 +164,9 @@ namespace Smitenight.Persistence.Data.EntityFramework.Repositories
 
         public async Task UpdateActiveLinksAsync(IEnumerable<UpdateActiveLinkDto> activeLinks, CancellationToken cancellationToken = default)
         {
+            var activeLinkIds = activeLinks.Select(y => y.Id).ToList();
             var actives = await _dbContext.Actives
-                .Where(x => activeLinks.Any(y => y.Id == x.Id))
+                .Where(x => activeLinkIds.Contains(x.Id))
                 .ToListAsync(cancellationToken);
 
             foreach (var active in actives)
@@ -167,13 +181,15 @@ namespace Smitenight.Persistence.Data.EntityFramework.Repositories
 
         public async Task UpdateItemLinksAsync(IEnumerable<UpdateItemLinkDto> itemLinks, CancellationToken cancellationToken = default)
         {
+            var itemLinkIds = itemLinks.Select(y => y.Id).ToList();
             var items = await _dbContext.Items
-                .Where(x => itemLinks.Any(y => y.Id == x.Id))
-                .ToListAsync(cancellationToken);
+                            .Where(x => itemLinkIds.Contains(x.Id))
+                            .ToListAsync(cancellationToken);
+
 
             foreach (var item in items)
             {
-                var itemLink = itemLinks.First(x => x.Id == item.Id);
+                var itemLink = itemLinks.Single(x => x.Id == item.Id);
                 item.ChildItemId = itemLink.ChildItemId;
                 item.RootItemId = itemLink.RootItemId;
             }

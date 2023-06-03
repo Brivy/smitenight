@@ -20,6 +20,7 @@ namespace Smitenight.Persistence.Data.EntityFramework.Mappers
                 SecondaryDescription = input.SecondaryDescription,
                 ShortDescription = input.ShortDescription,
                 ItemTier = input.ItemTier,
+                Latest = true // If we map it from a CreateDto, it's always the latest
             };
         }
     }

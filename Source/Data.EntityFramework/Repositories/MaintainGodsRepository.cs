@@ -28,6 +28,10 @@ namespace Smitenight.Persistence.Data.EntityFramework.Repositories
             abilityEntity.PatchId = patchId;
 
             _dbContext.Abilities.Add(abilityEntity);
+
+            var existingAbility = await _dbContext.Abilities.SingleOrDefaultAsync(x => x.SmiteId == ability.SmiteId && x.Latest, cancellationToken);
+            if (existingAbility != null) existingAbility.Latest = false;
+
             await _dbContext.SaveChangesAsync(cancellationToken);
         }
 
@@ -40,6 +44,10 @@ namespace Smitenight.Persistence.Data.EntityFramework.Repositories
 
             _dbContext.Gods.Add(godEntity);
             await _dbContext.SaveChangesAsync(cancellationToken);
+
+            var existingGodEntity = await _dbContext.Gods.SingleOrDefaultAsync(x => x.SmiteId == god.SmiteId && x.Latest, cancellationToken);
+            if (existingGodEntity != null) existingGodEntity.Latest = false;
+
             return godEntity.Id;
         }
 
@@ -52,30 +60,31 @@ namespace Smitenight.Persistence.Data.EntityFramework.Repositories
             godSkinEntity.PatchId = patchId;
 
             _dbContext.GodSkins.Add(godSkinEntity);
+
+            var existingGodSkin = await _dbContext.GodSkins.SingleOrDefaultAsync(x => x.SmiteId == godSkin.SmiteId && x.SecondarySmiteId == godSkin.SecondarySmiteId && x.Latest, cancellationToken);
+            if (existingGodSkin != null) existingGodSkin.Latest = false;
+
             await _dbContext.SaveChangesAsync(cancellationToken);
         }
 
         public async Task<IEnumerable<GodChecksumsDto>> GetGodChecksumsAsync(CancellationToken cancellationToken = default)
         {
-            var gods = await _dbContext.Gods
-                .Include(x => x.Abilities)
-                .Include(x => x.GodSkins)
-                .GroupBy(x => x.SmiteId)
-                .Select(x => x.OrderByDescending(y => y.PatchId).First())
-                .ToListAsync(cancellationToken);
-
-            var godChecksums = gods.Select(x => new GodChecksumsDto
-            {
-                GodId = x.Id,
-                SmiteGodId = x.SmiteId,
-                GodChecksum = x.Checksum,
-                Ability1Checksum = x.Abilities.Where(y => y.AbilityType == Contracts.Enums.AbilityType.Primary).OrderByDescending(y => y.PatchId).First().Checksum,
-                Ability2Checksum = x.Abilities.Where(y => y.AbilityType == Contracts.Enums.AbilityType.Secondary).OrderByDescending(y => y.PatchId).First().Checksum,
-                Ability3Checksum = x.Abilities.Where(y => y.AbilityType == Contracts.Enums.AbilityType.Tertiary).OrderByDescending(y => y.PatchId).First().Checksum,
-                Ability4Checksum = x.Abilities.Where(y => y.AbilityType == Contracts.Enums.AbilityType.Ultimate).OrderByDescending(y => y.PatchId).First().Checksum,
-                Ability5Checksum = x.Abilities.Where(y => y.AbilityType == Contracts.Enums.AbilityType.Passive).OrderByDescending(y => y.PatchId).First().Checksum,
-                GodSkinChecksums = x.GodSkins.GroupBy(y => y.SmiteId).Select(skinGroup => skinGroup.OrderByDescending(s => s.PatchId).First().Checksum).ToList()
-            });
+            var godChecksums = await _dbContext.Gods
+                .Include(x => x.Abilities.Where(y => y.Latest))
+                .Include(x => x.GodSkins.Where(y => y.Latest))
+                .Where(x => x.Latest)
+                .Select(x => new GodChecksumsDto
+                {
+                    GodId = x.Id,
+                    SmiteGodId = x.SmiteId,
+                    GodChecksum = x.Checksum,
+                    Ability1Checksum = x.Abilities.Single(y => y.AbilityType == Contracts.Enums.AbilityType.Primary).Checksum,
+                    Ability2Checksum = x.Abilities.Single(y => y.AbilityType == Contracts.Enums.AbilityType.Secondary).Checksum,
+                    Ability3Checksum = x.Abilities.Single(y => y.AbilityType == Contracts.Enums.AbilityType.Tertiary).Checksum,
+                    Ability4Checksum = x.Abilities.Single(y => y.AbilityType == Contracts.Enums.AbilityType.Ultimate).Checksum,
+                    Ability5Checksum = x.Abilities.Single(y => y.AbilityType == Contracts.Enums.AbilityType.Passive).Checksum,
+                    GodSkinChecksums = x.GodSkins.Select(y => y.Checksum).ToList()
+                }).ToListAsync(cancellationToken);
 
             return godChecksums;
         }
