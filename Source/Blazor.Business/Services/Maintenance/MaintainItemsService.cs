@@ -62,11 +62,11 @@ namespace Smitenight.Application.Blazor.Business.Services.Maintenance
                 var childItemId = linkItems.SingleOrDefault(x => x.SmiteId == item.ChildItemId)?.NewItemId;
                 var rootItemId = linkItems.SingleOrDefault(x => x.SmiteId == item.RootItemId)?.NewItemId;
 
+                // If an item has an older version, we need to check if the child and root items are also updated
                 if (linkItem.OldItemId.HasValue)
                 {
-                    // Broken logic, still takes into account that root item is the parent item
-                    //childItemId = linkItems.SingleOrDefault(x => x.RootItemId == linkItem.OldItemId)?.NewItemId ?? linkItem.ChildItemId;
-                    //rootItemId = linkItems.SingleOrDefault(x => x.ChildItemId == linkItem.OldItemId)?.NewItemId ?? linkItem.RootItemId;
+                    childItemId = linkItems.SingleOrDefault(x => x.OldItemId == linkItem.ChildItemId)?.NewItemId ?? linkItem.ChildItemId;
+                    rootItemId = linkItems.SingleOrDefault(x => x.OldItemId == linkItem.RootItemId)?.NewItemId ?? linkItem.RootItemId;
                 }
 
                 updatedLinkItems.Add(new UpdateItemLinkDto
@@ -90,11 +90,11 @@ namespace Smitenight.Application.Blazor.Business.Services.Maintenance
                 var childActiveId = linkActives.SingleOrDefault(x => x.SmiteId == item.ChildItemId)?.NewItemId;
                 var rootActiveId = linkActives.SingleOrDefault(x => x.SmiteId == item.RootItemId)?.NewItemId;
 
+                // If an active has an older version, we need to check if the child and root actives are also updated
                 if (linkActive.OldItemId.HasValue)
                 {
-                    // Broken logic, still takes into account that root item is the parent item
-                    //childActiveId = linkActives.SingleOrDefault(x => x.RootActiveId == linkActive.OldItemId)?.NewItemId ?? linkActive.ChildActiveId;
-                    //rootActiveId = linkActives.SingleOrDefault(x => x.ChildActiveId == linkActive.OldItemId)?.NewItemId ?? linkActive.RootActiveId;
+                    childActiveId = linkActives.SingleOrDefault(x => x.OldItemId == linkActive.ChildActiveId)?.NewItemId ?? linkActive.ChildActiveId;
+                    rootActiveId = linkActives.SingleOrDefault(x => x.OldItemId == linkActive.RootActiveId)?.NewItemId ?? linkActive.RootActiveId;
                 }
 
                 updatedLinkActives.Add(new UpdateActiveLinkDto
