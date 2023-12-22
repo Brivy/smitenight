@@ -19,7 +19,7 @@
             "args": [
                 "build",
                 "--configuration", "Maintenance",
-                "--output", "${workspaceFolder}/Source/Test.Maintenance/bin/Maintenance/net7.0",
+                "--output", "${workspaceFolder}/Source/Test.Maintenance/bin/Maintenance/net8.0",
             ],
             "type": "shell",
             "group": "build",

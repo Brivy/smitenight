@@ -9,7 +9,7 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build Maintenance",
-            "program": "${workspaceFolder}/Source/Test.Maintenance/bin/Maintenance/net7.0/Test.Maintenance.dll",
+            "program": "${workspaceFolder}/Source/Test.Maintenance/bin/Maintenance/net8.0/Test.Maintenance.dll",
             "args": ["--configuration", "Maintenance"],
             "cwd": "${workspaceFolder}/Source/Test.Maintenance",
             "stopAtEntry": false,

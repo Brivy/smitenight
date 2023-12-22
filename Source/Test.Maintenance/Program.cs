@@ -41,6 +41,8 @@ namespace Smitenight.Presentation.Test.Maintenace
                 await maintainSmitenight.MaintainGodsAsync();
                 await maintainSmitenight.MaintainItemsAsync();
             }
+
+            Console.ReadLine("Press any key to exit...");
         }
     }
 }
