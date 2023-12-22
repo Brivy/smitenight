@@ -21,7 +21,7 @@ namespace Smitenight.Presentation.Test.Maintenace
                .AddJsonFile("appsettings.Development.json", optional: true, reloadOnChange: true)
                .AddUserSecrets<SmiteClientSecrets>()
                .AddUserSecrets<DatabaseSecrets>()
-               .AddUserSecrets<RedisCacheSecrets>()
+               .AddUserSecrets<RedisSecrets>()
                .Build();
 
             var host = Host.CreateDefaultBuilder(args)

@@ -1,0 +1,27 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": ".NET Server Only Debug",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build Maintenance",
+            "program": "${workspaceFolder}/Source/Test.Maintenance/bin/Maintenance/net7.0/Test.Maintenance.dll",
+            "args": ["--configuration", "Maintenance"],
+            "cwd": "${workspaceFolder}/Source/Test.Maintenance",
+            "stopAtEntry": false,
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "^\\s*Now listening on:\\s+(https?://\\S+)"
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "console": "externalTerminal",
+            "internalConsoleOptions": "neverOpen"
+        }
+    ]
+}

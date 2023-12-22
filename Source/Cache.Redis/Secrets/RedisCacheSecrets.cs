@@ -1,6 +1,6 @@
 ﻿namespace Smitenight.Utilities.Cache.Redis.Secrets
 {
-    public class RedisCacheSecrets
+    public class RedisSecrets
     {
         public string ConnectionString { get; set; } = string.Empty;
     }

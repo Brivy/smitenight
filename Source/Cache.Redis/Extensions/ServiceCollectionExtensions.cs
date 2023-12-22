@@ -17,7 +17,7 @@ namespace Smitenight.Utilities.Cache.Redis.Extensions
 
             services.AddStackExchangeRedisCache(options =>
             {
-                options.Configuration = configuration[$"{nameof(RedisCacheSecrets)}:{nameof(RedisCacheSecrets.ConnectionString)}"];
+                options.Configuration = configuration[$"{nameof(RedisSecrets)}:{nameof(RedisSecrets.ConnectionString)}"];
                 options.InstanceName = configuration[$"{nameof(RedisCacheSettings)}:{nameof(RedisCacheSettings.InstanceName)}"];
             });
 
