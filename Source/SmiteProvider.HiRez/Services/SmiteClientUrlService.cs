@@ -2,7 +2,7 @@
 using Smitenight.Providers.SmiteProvider.HiRez.Cache;
 using Smitenight.Providers.SmiteProvider.HiRez.Constants;
 using Smitenight.Providers.SmiteProvider.HiRez.Secrets;
-using Smitenight.Utilities.Clock.Constants;
+using Smitenight.Utilities.Time.Common.Constants;
 using System.Text;
 
 namespace Smitenight.Providers.SmiteProvider.HiRez.Services
@@ -11,16 +11,20 @@ namespace Smitenight.Providers.SmiteProvider.HiRez.Services
     {
         private readonly ISmiteSessionCacheService _smiteSessionCacheService;
         private readonly ISmiteHashService _smiteHashService;
+        private readonly TimeProvider _timeProvider;
+
         private readonly SmiteClientSecrets _smiteClientSecrets;
 
         public SmiteClientUrlService(
             ISmiteSessionCacheService smiteSessionCacheService,
             ISmiteHashService smiteHashService,
-            IOptions<SmiteClientSecrets> smiteClientSecrets)
+            IOptions<SmiteClientSecrets> smiteClientSecrets,
+            TimeProvider timeProvider)
         {
             _smiteSessionCacheService = smiteSessionCacheService;
             _smiteHashService = smiteHashService;
             _smiteClientSecrets = smiteClientSecrets.Value;
+             _timeProvider = timeProvider;
         }
 
         public string ConstructPingUrl()
@@ -35,7 +39,7 @@ namespace Smitenight.Providers.SmiteProvider.HiRez.Services
 
         public async Task<string> ConstructUrlAsync(string methodName, string? urlPath, CancellationToken cancellationToken = default)
         {
-            var utcDateString = DateTime.UtcNow.ToString(DateTimeFormats.SessionIdFormat);
+            var utcDateString = _timeProvider.GetUtcNow().ToString(DateTimeFormat.SessionIdFormat);
             var signature = _smiteHashService.GenerateSmiteHash(methodName, utcDateString);
             var sessionId = await _smiteSessionCacheService.GetSessionIdAsync(cancellationToken);
             var urlPathSegment = !string.IsNullOrWhiteSpace(urlPath) ? $"/{urlPath}" : string.Empty;

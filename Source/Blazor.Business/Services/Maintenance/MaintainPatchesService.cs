@@ -7,10 +7,13 @@ namespace Smitenight.Application.Blazor.Business.Services.Maintenance
     public class MaintainPatchesService : IMaintainPatchesService
     {
         private readonly IMaintainPatchesRepository _maintainPatchesRepository;
+        private readonly TimeProvider _timeProvider;
 
-        public MaintainPatchesService(IMaintainPatchesRepository maintainPatchesRepository)
+
+        public MaintainPatchesService(IMaintainPatchesRepository maintainPatchesRepository, TimeProvider timeProvider)
         {
             _maintainPatchesRepository = maintainPatchesRepository;
+            _timeProvider = timeProvider;
         }
 
         public async Task MaintainPatchAsync(string version, CancellationToken cancellationToken = default)
@@ -26,7 +29,7 @@ namespace Smitenight.Application.Blazor.Business.Services.Maintenance
             var patchDto = new CreatePatchDto
             {
                 Version = version,
-                ReleaseDate = DateTime.UtcNow
+                ReleaseDate = _timeProvider.GetUtcNow()
             };
 
             return _maintainPatchesRepository.CreatePatchAsync(patchDto, cancellationToken);

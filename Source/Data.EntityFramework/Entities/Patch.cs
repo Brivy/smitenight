@@ -5,7 +5,7 @@
         public int Id { get; set; }
 
         public string Version { get; set; } = null!;
-        public DateTime ReleaseDate { get; set; }
+        public DateTimeOffset ReleaseDate { get; set; }
 
         public ICollection<Ability> Abilities { get; set; }
         public ICollection<Active> Actives { get; set; }

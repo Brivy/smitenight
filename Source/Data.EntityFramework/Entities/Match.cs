@@ -14,7 +14,7 @@ namespace Smitenight.Persistence.Data.EntityFramework.Entities
         public int? TeamTwoScore { get; set; }
         public string Name { get; set; } = null!;
         public string Region { get; set; } = null!;
-        public DateTime StartDate { get; set; }
+        public DateTimeOffset StartDate { get; set; }
 
         public ICollection<GodBan> GodBans { get; set; }
         public ICollection<MatchDetail> MatchDetails { get; set; }

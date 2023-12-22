@@ -7,7 +7,7 @@ using Smitenight.Providers.SmiteProvider.HiRez.Exceptions;
 using Smitenight.Providers.SmiteProvider.HiRez.Models.SystemClient;
 using Smitenight.Providers.SmiteProvider.HiRez.Secrets;
 using Smitenight.Providers.SmiteProvider.HiRez.Services;
-using Smitenight.Utilities.Clock.Constants;
+using Smitenight.Utilities.Time.Common.Constants;
 using Smitenight.Utilities.Mapper.Services;
 using System.Net.Http.Json;
 using System.Text.Json;
@@ -19,23 +19,27 @@ namespace Smitenight.Providers.SmiteProvider.HiRez.Clients
         private readonly HttpClient _httpClient;
         private readonly ISmiteHashService _smiteHashService;
         private readonly IMapperService _mapperService;
+        private readonly TimeProvider _timeProvider;
+
         private readonly SmiteClientSecrets _smiteClientSecrets;
 
         public SmiteSessionClient(
             HttpClient httpClient,
             ISmiteHashService smiteHashService,
             IMapperService mapperService,
-            IOptions<SmiteClientSecrets> smiteClientSecrets)
+            IOptions<SmiteClientSecrets> smiteClientSecrets,
+            TimeProvider timeProvider)
         {
             _httpClient = httpClient;
             _smiteHashService = smiteHashService;
             _mapperService = mapperService;
             _smiteClientSecrets = smiteClientSecrets.Value;
+            _timeProvider = timeProvider;
         }
 
         public async Task<CreateSmiteSessionDto> CreateSmiteSessionAsync(CancellationToken cancellationToken = default)
         {
-            var utcDateString = DateTime.UtcNow.ToString(DateTimeFormats.SessionIdFormat);
+            var utcDateString = _timeProvider.GetUtcNow().ToString(DateTimeFormat.SessionIdFormat);
             var signature = _smiteHashService.GenerateSmiteHash(MethodNameConstants.CreateSessionMethod, utcDateString);
             var url = $"{MethodNameConstants.CreateSessionMethod}Json/{_smiteClientSecrets.DeveloperId}/{signature}/{utcDateString}";
 

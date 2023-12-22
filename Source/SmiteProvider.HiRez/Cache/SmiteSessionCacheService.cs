@@ -9,15 +9,18 @@ namespace Smitenight.Providers.SmiteProvider.HiRez.Cache
     {
         private readonly ISmiteSessionClient _smiteSessionClient;
         private readonly IRedisCacheProvider _redisCacheProvider;
-
+        private readonly TimeProvider _timeProvider;
         private readonly ConcurrentDictionary<object, SemaphoreSlim> _locks;
 
         public SmiteSessionCacheService(
             ISmiteSessionClient smiteSessionClient,
-            IRedisCacheProvider redisCacheProvider)
+            IRedisCacheProvider redisCacheProvider,
+            TimeProvider timeProvider)
         {
             _smiteSessionClient = smiteSessionClient;
             _redisCacheProvider = redisCacheProvider;
+            _timeProvider = timeProvider;
+
             _locks = new ConcurrentDictionary<object, SemaphoreSlim>();
         }
 
@@ -48,7 +51,7 @@ namespace Smitenight.Providers.SmiteProvider.HiRez.Cache
                     // While session IDs are valid for 15 minutes, we set it to 10 minutes because we don't want any failures on long running processes
                     var sessionResponse = await _smiteSessionClient.CreateSmiteSessionAsync(cancellationToken);
                     smiteSessionCacheItem = new SmiteSessionCacheItem { SessionId = sessionResponse.SessionId };
-                    var cacheOptions = new DistributedCacheEntryOptions { AbsoluteExpiration = DateTime.Now.AddMinutes(10) };
+                    var cacheOptions = new DistributedCacheEntryOptions { AbsoluteExpiration = _timeProvider.GetUtcNow().AddMinutes(10) };
                     await _redisCacheProvider.SetAsync(cacheKey, smiteSessionCacheItem, cacheOptions, cancellationToken);
                 }
             }

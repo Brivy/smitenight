@@ -16,6 +16,7 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\SmiteProvider.Contracts\SmiteProvider.Contracts.csproj" />
+    <ProjectReference Include="..\Time.Common\Time.Common.csproj" />
 	</ItemGroup>
 
 </Project>

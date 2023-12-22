@@ -9,13 +9,13 @@ using Smitenight.Utilities.Cache.Redis.Extensions;
 using Smitenight.Utilities.Cache.Redis.Secrets;
 using Smitenight.Utilities.Mapper.Extensions;
 
-namespace Smitenight.Presentation.Test.Maintenace
+namespace Smitenight.Presentation.Test.Maintenance
 {
     public static class Program
     {
         static async Task Main(string[] args)
         {
-            var configuration = new ConfigurationBuilder()
+            IConfigurationRoot configuration = new ConfigurationBuilder()
                .SetBasePath(Directory.GetCurrentDirectory())
                .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
                .AddJsonFile("appsettings.Development.json", optional: true, reloadOnChange: true)
@@ -24,25 +24,27 @@ namespace Smitenight.Presentation.Test.Maintenace
                .AddUserSecrets<RedisSecrets>()
                .Build();
 
-            var host = Host.CreateDefaultBuilder(args)
+            IHost host = Host.CreateDefaultBuilder(args)
                 .ConfigureServices((hostContext, services) =>
                 {
+                    services.AddSingleton(TimeProvider.System);
                     services.ConfigureCacheServices(configuration);
                     services.ConfigureMapperServices();
                     services.ConfigureBusinessServices(configuration);
                 })
                 .Build();
 
-            using (var serviceScope = host.Services.CreateScope())
+            using (IServiceScope serviceScope = host.Services.CreateScope())
             {
-                var serviceProvider = serviceScope.ServiceProvider;
-                var maintainSmitenight = serviceProvider.GetRequiredService<IMaintainSmitenight>();
+                IServiceProvider serviceProvider = serviceScope.ServiceProvider;
+                IMaintainSmitenight maintainSmitenight = serviceProvider.GetRequiredService<IMaintainSmitenight>();
                 await maintainSmitenight.MaintainPatchesAsync();
                 await maintainSmitenight.MaintainGodsAsync();
                 await maintainSmitenight.MaintainItemsAsync();
             }
 
-            Console.ReadLine("Press any key to exit...");
+            Console.WriteLine("Press any key to exit...");
+            Console.ReadLine();
         }
     }
 }

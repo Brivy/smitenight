@@ -5,7 +5,7 @@
 		<TargetFramework>net8.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
-		<RootNamespace>Smitenight.Presentation.Test.Maintenace</RootNamespace>
+		<RootNamespace>Smitenight.Presentation.Test.Maintenance</RootNamespace>
 		<UserSecretsId>13849b15-d144-43e0-bd2c-763143cdfc1b</UserSecretsId>
 	</PropertyGroup>
 
