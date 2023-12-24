@@ -2,18 +2,17 @@
 using Smitenight.Providers.SmiteProvider.HiRez.Models.SystemClient;
 using Smitenight.Utilities.Mapper.Models;
 
-namespace Smitenight.Providers.SmiteProvider.HiRez.Mappers
+namespace Smitenight.Providers.SmiteProvider.HiRez.Mappers;
+
+public class CreateSmiteSessionMapper : Mapper<CreateSmiteSession, CreateSmiteSessionDto>
 {
-    public class CreateSmiteSessionMapper : Mapper<CreateSmiteSession, CreateSmiteSessionDto>
+    public override CreateSmiteSessionDto Map(CreateSmiteSession input)
     {
-        public override CreateSmiteSessionDto Map(CreateSmiteSession input)
+        return new CreateSmiteSessionDto
         {
-            return new CreateSmiteSessionDto
-            {
-                RetMsg = input.RetMsg,
-                SessionId = input.SessionId ?? string.Empty,
-                Timestamp = input.Timestamp ?? string.Empty,
-            };
-        }
+            RetMsg = input.RetMsg,
+            SessionId = input.SessionId ?? string.Empty,
+            Timestamp = input.Timestamp ?? string.Empty,
+        };
     }
 }

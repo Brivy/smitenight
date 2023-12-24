@@ -1,7 +1,6 @@
-﻿namespace Smitenight.Providers.SmiteProvider.HiRez.Cache
+﻿namespace Smitenight.Providers.SmiteProvider.HiRez.Cache;
+
+public static class CacheKeys
 {
-    public static class CacheKeys
-    {
-        public const string SmiteSessionCacheKey = nameof(SmiteSessionCacheKey);
-    }
+    public const string SmiteSessionCacheKey = nameof(SmiteSessionCacheKey);
 }

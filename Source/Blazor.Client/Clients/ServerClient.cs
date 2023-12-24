@@ -4,17 +4,11 @@ using System.Net.Http.Json;
 
 namespace Smitenight.Presentation.Blazor.Client.Clients
 {
-    public abstract class ServerClient
+    public abstract class ServerClient(HttpClient httpClient,
+        string baseUrl)
     {
-        private readonly HttpClient _httpClient;
-        private readonly string _baseUrl;
-
-        protected ServerClient(HttpClient httpClient,
-            string baseUrl)
-        {
-            _httpClient = httpClient;
-            _baseUrl = baseUrl;
-        }
+        private readonly HttpClient _httpClient = httpClient;
+        private readonly string _baseUrl = baseUrl;
 
         protected async Task<ServerResponseDto> GetAsync(string url, CancellationToken cancellationToken)
         {

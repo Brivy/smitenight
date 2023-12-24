@@ -1,7 +1,6 @@
-﻿namespace Smitenight.Providers.SmiteProvider.HiRez.Cache
+﻿namespace Smitenight.Providers.SmiteProvider.HiRez.Cache;
+
+public class SmiteSessionCacheItem
 {
-    public class SmiteSessionCacheItem
-    {
-        public string? SessionId { get; set; }
-    }
+    public string? SessionId { get; set; }
 }

@@ -2,20 +2,19 @@
 using Smitenight.Providers.SmiteProvider.HiRez.Models.RetrievePlayerClient;
 using Smitenight.Utilities.Mapper.Models;
 
-namespace Smitenight.Providers.SmiteProvider.HiRez.Mappers
+namespace Smitenight.Providers.SmiteProvider.HiRez.Mappers;
+
+public class PlayerIdMapper : Mapper<PlayerId, PlayerIdDto>
 {
-    public class PlayerIdMapper : Mapper<PlayerId, PlayerIdDto>
+    public override PlayerIdDto Map(PlayerId input)
     {
-        public override PlayerIdDto Map(PlayerId input)
+        return new PlayerIdDto
         {
-            return new PlayerIdDto
-            {
-                PlayerId = input.Id,
-                PortalId = input.PortalId ?? string.Empty,
-                RetMsg = input.RetMsg ?? string.Empty,
-                Portal = input.Portal ?? string.Empty,
-                PrivacyFlag = input.PrivacyFlag ?? string.Empty
-            };
-        }
+            PlayerId = input.Id,
+            PortalId = input.PortalId ?? string.Empty,
+            RetMsg = input.RetMsg ?? string.Empty,
+            Portal = input.Portal ?? string.Empty,
+            PrivacyFlag = input.PrivacyFlag ?? string.Empty
+        };
     }
 }

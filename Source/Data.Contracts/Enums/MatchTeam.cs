@@ -1,9 +1,8 @@
-﻿namespace Smitenight.Persistence.Data.Contracts.Enums
+﻿namespace Smitenight.Persistence.Data.Contracts.Enums;
+
+public enum MatchTeam
 {
-    public enum MatchTeam
-    {
-        Unknown = 0,
-        TeamOne = 1,
-        TeamTwo = 2
-    }
+    Unknown = 0,
+    TeamOne = 1,
+    TeamTwo = 2
 }

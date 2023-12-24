@@ -5,63 +5,54 @@ using Smitenight.Providers.SmiteProvider.HiRez.Secrets;
 using Smitenight.Utilities.Time.Common.Constants;
 using System.Text;
 
-namespace Smitenight.Providers.SmiteProvider.HiRez.Services
+namespace Smitenight.Providers.SmiteProvider.HiRez.Services;
+
+public class SmiteClientUrlService(
+    ISmiteSessionCacheService smiteSessionCacheService,
+    ISmiteHashService smiteHashService,
+    IOptions<SmiteClientSecrets> smiteClientSecrets,
+    TimeProvider timeProvider) : ISmiteClientUrlService
 {
-    public class SmiteClientUrlService : ISmiteClientUrlService
+    private readonly ISmiteSessionCacheService _smiteSessionCacheService = smiteSessionCacheService;
+    private readonly ISmiteHashService _smiteHashService = smiteHashService;
+    private readonly TimeProvider _timeProvider = timeProvider;
+
+    private readonly SmiteClientSecrets _smiteClientSecrets = smiteClientSecrets.Value;
+
+    public string ConstructPingUrl()
     {
-        private readonly ISmiteSessionCacheService _smiteSessionCacheService;
-        private readonly ISmiteHashService _smiteHashService;
-        private readonly TimeProvider _timeProvider;
+        return $"{MethodNameConstants.TestSessionMethod}Json";
+    }
 
-        private readonly SmiteClientSecrets _smiteClientSecrets;
+    public Task<string> ConstructUrlAsync(string methodName, CancellationToken cancellationToken = default)
+    {
+        return ConstructUrlAsync(methodName, null, cancellationToken);
+    }
 
-        public SmiteClientUrlService(
-            ISmiteSessionCacheService smiteSessionCacheService,
-            ISmiteHashService smiteHashService,
-            IOptions<SmiteClientSecrets> smiteClientSecrets,
-            TimeProvider timeProvider)
+    public async Task<string> ConstructUrlAsync(string methodName, string? urlPath, CancellationToken cancellationToken = default)
+    {
+        string utcDateString = _timeProvider.GetUtcNow().ToString(DateTimeFormat.SessionIdFormat);
+        string signature = _smiteHashService.GenerateSmiteHash(methodName, utcDateString);
+        string sessionId = await _smiteSessionCacheService.GetSessionIdAsync(cancellationToken);
+        string urlPathSegment = !string.IsNullOrWhiteSpace(urlPath) ? $"/{urlPath}" : string.Empty;
+        return $"{methodName}Json/{_smiteClientSecrets.DeveloperId}/{signature}/{sessionId}/{utcDateString}{urlPathSegment}";
+    }
+
+    public string ConstructUrlPath(params object[] urlPaths)
+    {
+        if (urlPaths.Length == 0)
         {
-            _smiteSessionCacheService = smiteSessionCacheService;
-            _smiteHashService = smiteHashService;
-            _smiteClientSecrets = smiteClientSecrets.Value;
-             _timeProvider = timeProvider;
+            return string.Empty;
         }
 
-        public string ConstructPingUrl()
+        var sb = new StringBuilder();
+        foreach (object urlPath in urlPaths)
         {
-            return $"{MethodNameConstants.TestSessionMethod}Json";
+            sb.Append($"{urlPath.ToString()}/");
         }
 
-        public Task<string> ConstructUrlAsync(string methodName, CancellationToken cancellationToken = default)
-        {
-            return ConstructUrlAsync(methodName, null, cancellationToken);
-        }
-
-        public async Task<string> ConstructUrlAsync(string methodName, string? urlPath, CancellationToken cancellationToken = default)
-        {
-            var utcDateString = _timeProvider.GetUtcNow().ToString(DateTimeFormat.SessionIdFormat);
-            var signature = _smiteHashService.GenerateSmiteHash(methodName, utcDateString);
-            var sessionId = await _smiteSessionCacheService.GetSessionIdAsync(cancellationToken);
-            var urlPathSegment = !string.IsNullOrWhiteSpace(urlPath) ? $"/{urlPath}" : string.Empty;
-            return $"{methodName}Json/{_smiteClientSecrets.DeveloperId}/{signature}/{sessionId}/{utcDateString}{urlPathSegment}";
-        }
-
-        public string ConstructUrlPath(params object[] urlPaths)
-        {
-            if (!urlPaths.Any())
-            {
-                return string.Empty;
-            }
-
-            var sb = new StringBuilder();
-            foreach (var urlPath in urlPaths)
-            {
-                sb.Append($"{urlPath.ToString()}/");
-            }
-
-            // Remove last slash
-            sb.Length--;
-            return sb.ToString();
-        }
+        // Remove last slash
+        sb.Length--;
+        return sb.ToString();
     }
 }

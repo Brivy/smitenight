@@ -6,40 +6,32 @@ using Smitenight.Utilities.Mapper.Contracts.Contracts;
 using Smitenight.Utilities.Mapper.Models;
 using AbilityType = Smitenight.Persistence.Data.Contracts.Enums.AbilityType;
 
-namespace Smitenight.Application.Blazor.Business.Mappers
+namespace Smitenight.Application.Blazor.Business.Mappers;
+
+public class CreateAbilityMapper(
+    IChecksumService checksumService,
+    IMapper<CommonItemDto, CreateAbilityRankDto> abilityRankMapper,
+    IMapper<CommonItemDto, CreateAbilityTagDto> abilityTagMapper) : Mapper<AbilityDetailsDto, CreateAbilityDto>
 {
-    public class CreateAbilityMapper : Mapper<AbilityDetailsDto, CreateAbilityDto>
+    private readonly IChecksumService _checksumService = checksumService;
+    private readonly IMapper<CommonItemDto, CreateAbilityRankDto> _abilityRankMapper = abilityRankMapper;
+    private readonly IMapper<CommonItemDto, CreateAbilityTagDto> _abilityTagMapper = abilityTagMapper;
+
+    public override CreateAbilityDto Map(AbilityDetailsDto ability)
     {
-        private readonly IChecksumService _checksumService;
-        private readonly IMapper<CommonItemDto, CreateAbilityRankDto> _abilityRankMapper;
-        private readonly IMapper<CommonItemDto, CreateAbilityTagDto> _abilityTagMapper;
-
-        public CreateAbilityMapper(
-            IChecksumService checksumService,
-            IMapper<CommonItemDto, CreateAbilityRankDto> abilityRankMapper,
-            IMapper<CommonItemDto, CreateAbilityTagDto> abilityTagMapper)
+        string checksum = _checksumService.CalculateChecksum(ability);
+        return new CreateAbilityDto
         {
-            _checksumService = checksumService;
-            _abilityRankMapper = abilityRankMapper;
-            _abilityTagMapper = abilityTagMapper;
-        }
-
-        public override CreateAbilityDto Map(AbilityDetailsDto ability)
-        {
-            var checksum = _checksumService.CalculateChecksum(ability);
-            return new CreateAbilityDto
-            {
-                Checksum = checksum,
-                AbilityType = (AbilityType)ability.AbilityType,
-                Cooldown = !string.IsNullOrWhiteSpace(ability.Cooldown) ? ability.Cooldown : null,
-                Cost = !string.IsNullOrWhiteSpace(ability.Cost) ? ability.Cost : null,
-                Description = ability.Description,
-                SmiteId = ability.Id,
-                Summary = ability.Summary,
-                Url = ability.Url,
-                AbilityRanks = ability.AbilityRanks.Select(_abilityRankMapper.Map).ToArray(),
-                AbilityTags = ability.AbilityRanks.Select(_abilityTagMapper.Map).ToArray()
-            };
-        }
+            Checksum = checksum,
+            AbilityType = (AbilityType)ability.AbilityType,
+            Cooldown = !string.IsNullOrWhiteSpace(ability.Cooldown) ? ability.Cooldown : null,
+            Cost = !string.IsNullOrWhiteSpace(ability.Cost) ? ability.Cost : null,
+            Description = ability.Description,
+            SmiteId = ability.Id,
+            Summary = ability.Summary,
+            Url = ability.Url,
+            AbilityRanks = ability.AbilityRanks.Select(_abilityRankMapper.Map).ToArray(),
+            AbilityTags = ability.AbilityRanks.Select(_abilityTagMapper.Map).ToArray()
+        };
     }
 }

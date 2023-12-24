@@ -3,30 +3,22 @@ using Smitenight.Providers.SmiteProvider.HiRez.Secrets;
 using System.Security.Cryptography;
 using System.Text;
 
-namespace Smitenight.Providers.SmiteProvider.HiRez.Services
+namespace Smitenight.Providers.SmiteProvider.HiRez.Services;
+
+public class SmiteHashService(IOptions<SmiteClientSecrets> smiteClientSecrets) : ISmiteHashService
 {
-    public class SmiteHashService : ISmiteHashService
+    private readonly SmiteClientSecrets _smiteClientSecrets = smiteClientSecrets.Value;
+
+    public string GenerateSmiteHash(string methodName, string utcDateString)
     {
-        private readonly SmiteClientSecrets _smiteClientSecrets;
-
-        public SmiteHashService(IOptions<SmiteClientSecrets> smiteClientSecrets)
+        string credentials = $"{_smiteClientSecrets.DeveloperId}{methodName}{_smiteClientSecrets.AuthenticationKey}{utcDateString}";
+        byte[] bytes = MD5.HashData(Encoding.ASCII.GetBytes(credentials));
+        var sb = new StringBuilder();
+        foreach (byte b in bytes)
         {
-            _smiteClientSecrets = smiteClientSecrets.Value;
+            sb.Append(b.ToString("x2").ToLower());
         }
 
-        public string GenerateSmiteHash(string methodName, string utcDateString)
-        {
-            var credentials = $"{_smiteClientSecrets.DeveloperId}{methodName}{_smiteClientSecrets.AuthenticationKey}{utcDateString}";
-
-            using var md5 = MD5.Create();
-            var bytes = md5.ComputeHash(Encoding.ASCII.GetBytes(credentials));
-            var sb = new StringBuilder();
-            foreach (var b in bytes)
-            {
-                sb.Append(b.ToString("x2").ToLower());
-            }
-
-            return sb.ToString();
-        }
+        return sb.ToString();
     }
 }

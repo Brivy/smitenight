@@ -5,14 +5,9 @@ namespace Smitenight.Presentation.Blazor.Server.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class GodController : ControllerBase
+    public class GodController(IGodService godService) : ControllerBase
     {
-        private readonly IGodService _godService;
-
-        public GodController(IGodService godService)
-        {
-            _godService = godService;
-        }
+        private readonly IGodService _godService = godService;
 
         [HttpGet]
         [Route("skins/home/loading")]

@@ -2,17 +2,16 @@
 using Smitenight.Providers.SmiteProvider.HiRez.Models.Common;
 using Smitenight.Utilities.Mapper.Models;
 
-namespace Smitenight.Providers.SmiteProvider.HiRez.Mappers
+namespace Smitenight.Providers.SmiteProvider.HiRez.Mappers;
+
+public class CommonItemMapper : Mapper<CommonItem, CommonItemDto>
 {
-    public class CommonItemMapper : Mapper<CommonItem, CommonItemDto>
+    public override CommonItemDto Map(CommonItem input)
     {
-        public override CommonItemDto Map(CommonItem input)
+        return new CommonItemDto
         {
-            return new CommonItemDto
-            {
-                Description = input.Description ?? string.Empty,
-                Value = input.Value ?? string.Empty
-            };
-        }
+            Description = input.Description ?? string.Empty,
+            Value = input.Value ?? string.Empty
+        };
     }
 }

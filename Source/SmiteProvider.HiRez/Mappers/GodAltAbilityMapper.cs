@@ -2,21 +2,20 @@
 using Smitenight.Providers.SmiteProvider.HiRez.Models.GodClient;
 using Smitenight.Utilities.Mapper.Models;
 
-namespace Smitenight.Providers.SmiteProvider.HiRez.Mappers
+namespace Smitenight.Providers.SmiteProvider.HiRez.Mappers;
+
+public class GodAltAbilityMapper : Mapper<GodAltAbility, GodAltAbilityDto>
 {
-    public class GodAltAbilityMapper : Mapper<GodAltAbility, GodAltAbilityDto>
+    public override GodAltAbilityDto Map(GodAltAbility input)
     {
-        public override GodAltAbilityDto Map(GodAltAbility input)
+        return new GodAltAbilityDto
         {
-            return new GodAltAbilityDto
-            {
-                AltName = input.AltName ?? string.Empty,
-                AltPosition = input.AltPosition ?? string.Empty,
-                God = input.God ?? string.Empty,
-                GodId = input.GodId,
-                ItemId = input.ItemId,
-                RetMsg = input.RetMsg ?? string.Empty
-            };
-        }
+            AltName = input.AltName ?? string.Empty,
+            AltPosition = input.AltPosition ?? string.Empty,
+            God = input.God ?? string.Empty,
+            GodId = input.GodId,
+            ItemId = input.ItemId,
+            RetMsg = input.RetMsg ?? string.Empty
+        };
     }
 }

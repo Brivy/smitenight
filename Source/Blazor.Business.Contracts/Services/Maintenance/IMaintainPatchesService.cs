@@ -1,7 +1,6 @@
-﻿namespace Smitenight.Application.Blazor.Business.Contracts.Services.Maintenance
+﻿namespace Smitenight.Application.Blazor.Business.Contracts.Services.Maintenance;
+
+public interface IMaintainPatchesService
 {
-    public interface IMaintainPatchesService
-    {
-        Task MaintainPatchAsync(string version, CancellationToken cancellationToken = default);
-    }
+    Task MaintainPatchAsync(string version, CancellationToken cancellationToken = default);
 }

@@ -5,25 +5,19 @@ using Smitenight.Providers.SmiteProvider.HiRez.Models.ItemClient;
 using Smitenight.Utilities.Mapper.Contracts.Contracts;
 using Smitenight.Utilities.Mapper.Models;
 
-namespace Smitenight.Providers.SmiteProvider.HiRez.Mappers
+namespace Smitenight.Providers.SmiteProvider.HiRez.Mappers;
+
+public class ItemDescriptionMapper(IMapper<CommonItem, CommonItemDto> commonItemMapper) : Mapper<ItemDescription, ItemDescriptionDto>
 {
-    public class ItemDescriptionMapper : Mapper<ItemDescription, ItemDescriptionDto>
+    private readonly IMapper<CommonItem, CommonItemDto> _commonItemMapper = commonItemMapper;
+
+    public override ItemDescriptionDto Map(ItemDescription input)
     {
-        private readonly IMapper<CommonItem, CommonItemDto> _commonItemMapper;
-
-        public ItemDescriptionMapper(IMapper<CommonItem, CommonItemDto> commonItemMapper)
+        return new ItemDescriptionDto
         {
-            _commonItemMapper = commonItemMapper;
-        }
-
-        public override ItemDescriptionDto Map(ItemDescription input)
-        {
-            return new ItemDescriptionDto
-            {
-                Description = input.Description ?? string.Empty,
-                SecondaryDescription = input.SecondaryDescription ?? string.Empty,
-                ItemSubDescriptions = input.ItemSubDescriptions.Select(_commonItemMapper.Map).ToArray()
-            };
-        }
+            Description = input.Description ?? string.Empty,
+            SecondaryDescription = input.SecondaryDescription ?? string.Empty,
+            ItemSubDescriptions = input.ItemSubDescriptions.Select(_commonItemMapper.Map).ToArray()
+        };
     }
 }

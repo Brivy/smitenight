@@ -2,17 +2,16 @@
 using Smitenight.Persistence.Data.EntityFramework.Entities;
 using Smitenight.Utilities.Mapper.Models;
 
-namespace Smitenight.Persistence.Data.EntityFramework.Mappers
+namespace Smitenight.Persistence.Data.EntityFramework.Mappers;
+
+public class PatchMapper : Mapper<CreatePatchDto, Patch>
 {
-    public class PatchMapper : Mapper<CreatePatchDto, Patch>
+    public override Patch Map(CreatePatchDto input)
     {
-        public override Patch Map(CreatePatchDto input)
+        return new Patch
         {
-            return new Patch
-            {
-                Version = input.Version,
-                ReleaseDate = input.ReleaseDate
-            };
-        }
+            Version = input.Version,
+            ReleaseDate = input.ReleaseDate
+        };
     }
 }

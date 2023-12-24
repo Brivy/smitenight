@@ -1,9 +1,8 @@
-﻿namespace Smitenight.Persistence.Data.Contracts.Enums
+﻿namespace Smitenight.Persistence.Data.Contracts.Enums;
+
+public enum ActivePurchaseOrder
 {
-    public enum ActivePurchaseOrder
-    {
-        Unknown = 0,
-        FirstActive = 1,
-        SecondActive = 2
-    }
+    Unknown = 0,
+    FirstActive = 1,
+    SecondActive = 2
 }

@@ -5,11 +5,8 @@ using Smitenight.Presentation.Blazor.Client.Interfaces;
 
 namespace Smitenight.Presentation.Blazor.Client.Clients
 {
-    public class SmitenightClient : ServerClient, ISmitenightClient
+    public class SmitenightClient(HttpClient httpClient) : ServerClient(httpClient, SmitenightEndpoints.BaseUrl), ISmitenightClient
     {
-        public SmitenightClient(HttpClient httpClient) : base(httpClient, SmitenightEndpoints.BaseUrl)
-        {
-        }
 
         public async Task<ServerResponseDto<SmitenightDto>> StartSmitenightAsync(SmitenightProcessDto requestDto, CancellationToken cancellationToken = default)
         {

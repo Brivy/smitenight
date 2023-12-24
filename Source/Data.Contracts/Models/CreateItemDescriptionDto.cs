@@ -1,8 +1,7 @@
-﻿namespace Smitenight.Persistence.Data.Contracts.Models
+﻿namespace Smitenight.Persistence.Data.Contracts.Models;
+
+public record CreateItemDescriptionDto
 {
-    public record CreateItemDescriptionDto
-    {
-        public string Description { get; set; } = null!;
-        public string Value { get; set; } = null!;
-    }
+    public string Description { get; set; } = null!;
+    public string Value { get; set; } = null!;
 }

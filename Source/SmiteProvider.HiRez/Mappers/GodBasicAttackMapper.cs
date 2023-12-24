@@ -5,28 +5,22 @@ using Smitenight.Providers.SmiteProvider.HiRez.Models.GodClient;
 using Smitenight.Utilities.Mapper.Contracts.Contracts;
 using Smitenight.Utilities.Mapper.Models;
 
-namespace Smitenight.Providers.SmiteProvider.HiRez.Mappers
+namespace Smitenight.Providers.SmiteProvider.HiRez.Mappers;
+
+public class GodBasicAttackMapper(IMapper<CommonItem, CommonItemDto> commonItemMapper) : Mapper<GodBasicAttack, GodBasicAttackDto>
 {
-    public class GodBasicAttackMapper : Mapper<GodBasicAttack, GodBasicAttackDto>
+    private readonly IMapper<CommonItem, CommonItemDto> _commonItemMapper = commonItemMapper;
+
+    public override GodBasicAttackDto Map(GodBasicAttack input)
     {
-        private readonly IMapper<CommonItem, CommonItemDto> _commonItemMapper;
-
-        public GodBasicAttackMapper(IMapper<CommonItem, CommonItemDto> commonItemMapper)
+        GodBasicAttackDescription godBasicAttackDescription = input.ItemDescription;
+        return new GodBasicAttackDto
         {
-            _commonItemMapper = commonItemMapper;
-        }
-
-        public override GodBasicAttackDto Map(GodBasicAttack input)
-        {
-            var godBasicAttackDescription = input.ItemDescription;
-            return new GodBasicAttackDto
-            {
-                Cooldown = godBasicAttackDescription.Cooldown ?? string.Empty,
-                Cost = godBasicAttackDescription.Cost ?? string.Empty,
-                Description = godBasicAttackDescription.Description ?? string.Empty,
-                GodBasicAttackItems = godBasicAttackDescription.GodBasicAttackItems.Select(_commonItemMapper.Map).ToArray(),
-                GodBasicAttackRanks = godBasicAttackDescription.GodBasicAttackRanks.Select(_commonItemMapper.Map).ToArray()
-            };
-        }
+            Cooldown = godBasicAttackDescription.Cooldown ?? string.Empty,
+            Cost = godBasicAttackDescription.Cost ?? string.Empty,
+            Description = godBasicAttackDescription.Description ?? string.Empty,
+            GodBasicAttackItems = godBasicAttackDescription.GodBasicAttackItems.Select(_commonItemMapper.Map).ToArray(),
+            GodBasicAttackRanks = godBasicAttackDescription.GodBasicAttackRanks.Select(_commonItemMapper.Map).ToArray()
+        };
     }
 }

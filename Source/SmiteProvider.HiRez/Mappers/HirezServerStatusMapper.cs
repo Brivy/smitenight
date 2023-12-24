@@ -2,22 +2,21 @@
 using Smitenight.Providers.SmiteProvider.HiRez.Models.SystemClient;
 using Smitenight.Utilities.Mapper.Models;
 
-namespace Smitenight.Providers.SmiteProvider.HiRez.Mappers
+namespace Smitenight.Providers.SmiteProvider.HiRez.Mappers;
+
+public class HirezServerStatusMapper : Mapper<HirezServerStatus, HirezServerStatusDto>
 {
-    public class HirezServerStatusMapper : Mapper<HirezServerStatus, HirezServerStatusDto>
+    public override HirezServerStatusDto Map(HirezServerStatus input)
     {
-        public override HirezServerStatusDto Map(HirezServerStatus input)
+        return new HirezServerStatusDto
         {
-            return new HirezServerStatusDto
-            {
-                EntryDatetime = input.EntryDatetime ?? string.Empty,
-                Environment = input.Environment ?? string.Empty,
-                LimitedAccess = input.LimitedAccess,
-                Platform = input.Platform ?? string.Empty,
-                RetMsg = input.RetMsg ?? string.Empty,
-                Status = input.Status ?? string.Empty,
-                Version = input.Version ?? string.Empty
-            };
-        }
+            EntryDatetime = input.EntryDatetime ?? string.Empty,
+            Environment = input.Environment ?? string.Empty,
+            LimitedAccess = input.LimitedAccess,
+            Platform = input.Platform ?? string.Empty,
+            RetMsg = input.RetMsg ?? string.Empty,
+            Status = input.Status ?? string.Empty,
+            Version = input.Version ?? string.Empty
+        };
     }
 }

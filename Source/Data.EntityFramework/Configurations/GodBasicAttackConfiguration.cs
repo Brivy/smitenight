@@ -2,25 +2,24 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Smitenight.Persistence.Data.EntityFramework.Entities;
 
-namespace Smitenight.Persistence.Data.EntityFramework.Configurations
+namespace Smitenight.Persistence.Data.EntityFramework.Configurations;
+
+public class GodBasicAttackConfiguration : IEntityTypeConfiguration<GodBasicAttack>
 {
-    public class GodBasicAttackConfiguration : IEntityTypeConfiguration<GodBasicAttack>
+    public void Configure(EntityTypeBuilder<GodBasicAttack> builder)
     {
-        public void Configure(EntityTypeBuilder<GodBasicAttack> builder)
-        {
-            builder.ToTable("GodBasicAttacks");
+        builder.ToTable("GodBasicAttacks");
 
-            builder.HasKey(x => x.Id);
-            builder.Property(x => x.GodId).IsRequired();
+        builder.HasKey(x => x.Id);
+        builder.Property(x => x.GodId).IsRequired();
 
-            builder.Property(x => x.Description).IsRequired();
-            builder.Property(x => x.Value).IsRequired();
+        builder.Property(x => x.Description).IsRequired();
+        builder.Property(x => x.Value).IsRequired();
 
-            builder.HasOne(x => x.God)
-                .WithMany(x => x.GodBasicAttacks)
-                .HasForeignKey(x => x.GodId)
-                .OnDelete(DeleteBehavior.Restrict)
-                .IsRequired();
-        }
+        builder.HasOne(x => x.God)
+            .WithMany(x => x.GodBasicAttacks)
+            .HasForeignKey(x => x.GodId)
+            .OnDelete(DeleteBehavior.Restrict)
+            .IsRequired();
     }
 }

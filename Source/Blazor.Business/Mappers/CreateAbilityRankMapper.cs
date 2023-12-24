@@ -2,17 +2,16 @@
 using Smitenight.Providers.SmiteProvider.Contracts.Models.Common;
 using Smitenight.Utilities.Mapper.Models;
 
-namespace Smitenight.Application.Blazor.Business.Mappers
+namespace Smitenight.Application.Blazor.Business.Mappers;
+
+public class CreateAbilityRankMapper : Mapper<CommonItemDto, CreateAbilityRankDto>
 {
-    public class CreateAbilityRankMapper : Mapper<CommonItemDto, CreateAbilityRankDto>
+    public override CreateAbilityRankDto Map(CommonItemDto rankItem)
     {
-        public override CreateAbilityRankDto Map(CommonItemDto rankItem)
+        return new CreateAbilityRankDto
         {
-            return new CreateAbilityRankDto
-            {
-                Description = rankItem.Description,
-                Value = rankItem.Value
-            };
-        }
+            Description = rankItem.Description,
+            Value = rankItem.Value
+        };
     }
 }

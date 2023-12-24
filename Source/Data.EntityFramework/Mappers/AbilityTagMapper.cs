@@ -2,17 +2,16 @@
 using Smitenight.Persistence.Data.EntityFramework.Entities;
 using Smitenight.Utilities.Mapper.Models;
 
-namespace Smitenight.Persistence.Data.EntityFramework.Mappers
+namespace Smitenight.Persistence.Data.EntityFramework.Mappers;
+
+public class AbilityTagMapper : Mapper<CreateAbilityTagDto, AbilityTag>
 {
-    public class AbilityTagMapper : Mapper<CreateAbilityTagDto, AbilityTag>
+    public override AbilityTag Map(CreateAbilityTagDto input)
     {
-        public override AbilityTag Map(CreateAbilityTagDto input)
+        return new AbilityTag
         {
-            return new AbilityTag
-            {
-                Description = input.Description,
-                Value = input.Value
-            };
-        }
+            Description = input.Description,
+            Value = input.Value
+        };
     }
 }

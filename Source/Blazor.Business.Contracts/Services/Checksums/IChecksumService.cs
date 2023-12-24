@@ -1,8 +1,7 @@
-﻿namespace Smitenight.Application.Blazor.Business.Contracts.Services.Checksums
+﻿namespace Smitenight.Application.Blazor.Business.Contracts.Services.Checksums;
+
+public interface IChecksumService
 {
-    public interface IChecksumService
-    {
-        string CalculateChecksum<T>(T @object);
-        bool IsChecksumDifferent<TCompare>(string checksum, TCompare comparisonObject);
-    }
+    string CalculateChecksum<T>(T @object);
+    bool IsChecksumDifferent<TCompare>(string checksum, TCompare comparisonObject);
 }

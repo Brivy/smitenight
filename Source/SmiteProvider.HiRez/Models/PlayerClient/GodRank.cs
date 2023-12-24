@@ -1,20 +1,19 @@
 ﻿using System.Text.Json.Serialization;
 
-namespace Smitenight.Providers.SmiteProvider.HiRez.Models.PlayerClient
+namespace Smitenight.Providers.SmiteProvider.HiRez.Models.PlayerClient;
+
+public record class GodRank
 {
-    public record class GodRank
-    {
-        [JsonPropertyName("Assists")] public int Assists { get; set; }
-        [JsonPropertyName("Deaths")] public int Deaths { get; set; }
-        [JsonPropertyName("Kills")] public int Kills { get; set; }
-        [JsonPropertyName("Losses")] public int Losses { get; set; }
-        [JsonPropertyName("MinionKills")] public int MinionKills { get; set; }
-        [JsonPropertyName("Rank")] public int Rank { get; set; }
-        [JsonPropertyName("Wins")] public int Wins { get; set; }
-        [JsonPropertyName("Worshippers")] public int Worshippers { get; set; }
-        [JsonPropertyName("god")] public string? God { get; set; }
-        [JsonPropertyName("god_id")] public string? GodId { get; set; }
-        [JsonPropertyName("player_id")] public string? PlayerId { get; set; }
-        [JsonPropertyName("ret_msg")] public string? RetMsg { get; set; }
-    }
+    [JsonPropertyName("Assists")] public int Assists { get; set; }
+    [JsonPropertyName("Deaths")] public int Deaths { get; set; }
+    [JsonPropertyName("Kills")] public int Kills { get; set; }
+    [JsonPropertyName("Losses")] public int Losses { get; set; }
+    [JsonPropertyName("MinionKills")] public int MinionKills { get; set; }
+    [JsonPropertyName("Rank")] public int Rank { get; set; }
+    [JsonPropertyName("Wins")] public int Wins { get; set; }
+    [JsonPropertyName("Worshippers")] public int Worshippers { get; set; }
+    [JsonPropertyName("god")] public string? God { get; set; }
+    [JsonPropertyName("god_id")] public string? GodId { get; set; }
+    [JsonPropertyName("player_id")] public string? PlayerId { get; set; }
+    [JsonPropertyName("ret_msg")] public string? RetMsg { get; set; }
 }

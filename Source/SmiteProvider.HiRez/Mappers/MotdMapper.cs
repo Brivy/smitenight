@@ -2,8 +2,8 @@
 using Smitenight.Providers.SmiteProvider.HiRez.Models.OtherClient;
 using Smitenight.Utilities.Mapper.Models;
 
-namespace Smitenight.Providers.SmiteProvider.HiRez.Mappers
-{
+namespace Smitenight.Providers.SmiteProvider.HiRez.Mappers;
+
     public class MotdMapper : Mapper<Motd, MotdDto>
     {
         public override MotdDto Map(Motd input)
@@ -22,4 +22,3 @@ namespace Smitenight.Providers.SmiteProvider.HiRez.Mappers
             };
         }
     }
-}

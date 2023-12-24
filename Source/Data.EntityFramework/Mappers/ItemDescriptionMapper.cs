@@ -2,17 +2,16 @@
 using Smitenight.Persistence.Data.EntityFramework.Entities;
 using Smitenight.Utilities.Mapper.Models;
 
-namespace Smitenight.Persistence.Data.EntityFramework.Mappers
+namespace Smitenight.Persistence.Data.EntityFramework.Mappers;
+
+public class ItemDescriptionMapper : Mapper<CreateItemDescriptionDto, ItemDescription>
 {
-    public class ItemDescriptionMapper : Mapper<CreateItemDescriptionDto, ItemDescription>
+    public override ItemDescription Map(CreateItemDescriptionDto input)
     {
-        public override ItemDescription Map(CreateItemDescriptionDto input)
+        return new ItemDescription
         {
-            return new ItemDescription
-            {
-                Description = input.Description,
-                Value = input.Value
-            };
-        }
+            Description = input.Description,
+            Value = input.Value
+        };
     }
 }

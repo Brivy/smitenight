@@ -6,14 +6,9 @@ namespace Smitenight.Presentation.Blazor.Server.Controllers
 {
     [ApiController]
     [Route("[controller]")]
-    public class SmitenightController : ControllerBase
+    public class SmitenightController(ISmitenightService smitenightService) : ControllerBase
     {
-        private readonly ISmitenightService _smitenightService;
-
-        public SmitenightController(ISmitenightService smitenightService)
-        {
-            _smitenightService = smitenightService;
-        }
+        private readonly ISmitenightService _smitenightService = smitenightService;
 
         [HttpPost]
         [Route("start")]

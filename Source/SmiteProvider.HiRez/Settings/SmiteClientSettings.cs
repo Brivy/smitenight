@@ -1,10 +1,9 @@
 ﻿using System.ComponentModel.DataAnnotations;
 
-namespace Smitenight.Providers.SmiteProvider.HiRez.Settings
+namespace Smitenight.Providers.SmiteProvider.HiRez.Settings;
+
+public record SmiteClientSettings
 {
-    public record SmiteClientSettings
-    {
-        [Required]
-        public required string Url { get; set; }
-    }
+    [Required]
+    public required string Url { get; set; }
 }

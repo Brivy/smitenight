@@ -1,11 +1,10 @@
-﻿namespace Smitenight.Persistence.Data.Contracts.Enums
+﻿namespace Smitenight.Persistence.Data.Contracts.Enums;
+
+public enum ItemTier
 {
-    public enum ItemTier
-    {
-        Unknown = 0,
-        TierOne = 1,
-        TierTwo = 2,
-        TierThree = 3,
-        TierFour = 4
-    }
+    Unknown = 0,
+    TierOne = 1,
+    TierTwo = 2,
+    TierThree = 3,
+    TierFour = 4
 }

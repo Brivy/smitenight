@@ -1,9 +1,8 @@
 ﻿using Smitenight.Providers.SmiteProvider.Contracts.Models.SystemClient;
 
-namespace Smitenight.Providers.SmiteProvider.Contracts.Clients
+namespace Smitenight.Providers.SmiteProvider.Contracts.Clients;
+
+public interface ISmiteSessionClient
 {
-    public interface ISmiteSessionClient
-    {
-        Task<CreateSmiteSessionDto> CreateSmiteSessionAsync(CancellationToken cancellationToken = default);
-    }
+    Task<CreateSmiteSessionDto> CreateSmiteSessionAsync(CancellationToken cancellationToken = default);
 }

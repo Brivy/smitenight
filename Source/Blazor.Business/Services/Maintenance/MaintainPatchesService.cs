@@ -2,37 +2,29 @@
 using Smitenight.Persistence.Data.Contracts.Models;
 using Smitenight.Persistence.Data.Contracts.Repositories;
 
-namespace Smitenight.Application.Blazor.Business.Services.Maintenance
+namespace Smitenight.Application.Blazor.Business.Services.Maintenance;
+
+public class MaintainPatchesService(IMaintainPatchesRepository maintainPatchesRepository, TimeProvider timeProvider) : IMaintainPatchesService
 {
-    public class MaintainPatchesService : IMaintainPatchesService
+    private readonly IMaintainPatchesRepository _maintainPatchesRepository = maintainPatchesRepository;
+    private readonly TimeProvider _timeProvider = timeProvider;
+
+    public async Task MaintainPatchAsync(string version, CancellationToken cancellationToken = default)
     {
-        private readonly IMaintainPatchesRepository _maintainPatchesRepository;
-        private readonly TimeProvider _timeProvider;
-
-
-        public MaintainPatchesService(IMaintainPatchesRepository maintainPatchesRepository, TimeProvider timeProvider)
+        if (await _maintainPatchesRepository.IsNewVersionAsync(version, cancellationToken))
         {
-            _maintainPatchesRepository = maintainPatchesRepository;
-            _timeProvider = timeProvider;
+            await CreatePatchAsync(version, cancellationToken);
         }
+    }
 
-        public async Task MaintainPatchAsync(string version, CancellationToken cancellationToken = default)
+    private Task CreatePatchAsync(string version, CancellationToken cancellationToken = default)
+    {
+        var patchDto = new CreatePatchDto
         {
-            if (await _maintainPatchesRepository.IsNewVersionAsync(version, cancellationToken))
-            {
-                await CreatePatchAsync(version, cancellationToken);
-            }
-        }
+            Version = version,
+            ReleaseDate = _timeProvider.GetUtcNow()
+        };
 
-        private Task CreatePatchAsync(string version, CancellationToken cancellationToken = default)
-        {
-            var patchDto = new CreatePatchDto
-            {
-                Version = version,
-                ReleaseDate = _timeProvider.GetUtcNow()
-            };
-
-            return _maintainPatchesRepository.CreatePatchAsync(patchDto, cancellationToken);
-        }
+        return _maintainPatchesRepository.CreatePatchAsync(patchDto, cancellationToken);
     }
 }

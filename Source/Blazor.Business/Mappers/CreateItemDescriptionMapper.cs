@@ -2,17 +2,16 @@
 using Smitenight.Providers.SmiteProvider.Contracts.Models.Common;
 using Smitenight.Utilities.Mapper.Models;
 
-namespace Smitenight.Application.Blazor.Business.Mappers
+namespace Smitenight.Application.Blazor.Business.Mappers;
+
+public class CreateItemDescriptionMapper : Mapper<CommonItemDto, CreateItemDescriptionDto>
 {
-    public class CreateItemDescriptionMapper : Mapper<CommonItemDto, CreateItemDescriptionDto>
+    public override CreateItemDescriptionDto Map(CommonItemDto itemDescription)
     {
-        public override CreateItemDescriptionDto Map(CommonItemDto itemDescription)
+        return new CreateItemDescriptionDto
         {
-            return new CreateItemDescriptionDto
-            {
-                Description = itemDescription.Description!, // An item always has a description otherwise what is the point of the item?
-                Value = itemDescription.Value! // An item always has a description otherwise what is the point of the item?
-            };
-        }
+            Description = itemDescription.Description!, // An item always has a description otherwise what is the point of the item?
+            Value = itemDescription.Value! // An item always has a description otherwise what is the point of the item?
+        };
     }
 }

@@ -1,7 +1,6 @@
-﻿namespace Smitenight.Providers.SmiteProvider.HiRez.Cache
+﻿namespace Smitenight.Providers.SmiteProvider.HiRez.Cache;
+
+public interface ISmiteSessionCacheService
 {
-    public interface ISmiteSessionCacheService
-    {
-        Task<string> GetSessionIdAsync(CancellationToken cancellationToken = default);
-    }
+    Task<string> GetSessionIdAsync(CancellationToken cancellationToken = default);
 }

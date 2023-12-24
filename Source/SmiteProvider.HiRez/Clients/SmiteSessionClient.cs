@@ -12,56 +12,46 @@ using Smitenight.Utilities.Mapper.Services;
 using System.Net.Http.Json;
 using System.Text.Json;
 
-namespace Smitenight.Providers.SmiteProvider.HiRez.Clients
+namespace Smitenight.Providers.SmiteProvider.HiRez.Clients;
+
+public class SmiteSessionClient(
+    HttpClient httpClient,
+    ISmiteHashService smiteHashService,
+    IMapperService mapperService,
+    IOptions<SmiteClientSecrets> smiteClientSecrets,
+    TimeProvider timeProvider) : ISmiteSessionClient
 {
-    public class SmiteSessionClient : ISmiteSessionClient
+    private readonly HttpClient _httpClient = httpClient;
+    private readonly ISmiteHashService _smiteHashService = smiteHashService;
+    private readonly IMapperService _mapperService = mapperService;
+    private readonly TimeProvider _timeProvider = timeProvider;
+
+    private readonly SmiteClientSecrets _smiteClientSecrets = smiteClientSecrets.Value;
+
+    public async Task<CreateSmiteSessionDto> CreateSmiteSessionAsync(CancellationToken cancellationToken = default)
     {
-        private readonly HttpClient _httpClient;
-        private readonly ISmiteHashService _smiteHashService;
-        private readonly IMapperService _mapperService;
-        private readonly TimeProvider _timeProvider;
+        string utcDateString = _timeProvider.GetUtcNow().ToString(DateTimeFormat.SessionIdFormat);
+        string signature = _smiteHashService.GenerateSmiteHash(MethodNameConstants.CreateSessionMethod, utcDateString);
+        string url = $"{MethodNameConstants.CreateSessionMethod}Json/{_smiteClientSecrets.DeveloperId}/{signature}/{utcDateString}";
 
-        private readonly SmiteClientSecrets _smiteClientSecrets;
-
-        public SmiteSessionClient(
-            HttpClient httpClient,
-            ISmiteHashService smiteHashService,
-            IMapperService mapperService,
-            IOptions<SmiteClientSecrets> smiteClientSecrets,
-            TimeProvider timeProvider)
+        try
         {
-            _httpClient = httpClient;
-            _smiteHashService = smiteHashService;
-            _mapperService = mapperService;
-            _smiteClientSecrets = smiteClientSecrets.Value;
-            _timeProvider = timeProvider;
+            var request = new HttpRequestMessage(HttpMethod.Get, url);
+            HttpResponseMessage response = await _httpClient.SendAsync(request, cancellationToken);
+            CreateSmiteSession result = await response.Content.ReadFromJsonAsync<CreateSmiteSession>(cancellationToken: cancellationToken) ?? throw new SmiteClientInvalidResponseException("The HTTP content is empty or empty");
+            return _mapperService.Map<CreateSmiteSession, CreateSmiteSessionDto>(result);
         }
-
-        public async Task<CreateSmiteSessionDto> CreateSmiteSessionAsync(CancellationToken cancellationToken = default)
+        catch (SmiteClientInvalidResponseException ex)
         {
-            var utcDateString = _timeProvider.GetUtcNow().ToString(DateTimeFormat.SessionIdFormat);
-            var signature = _smiteHashService.GenerateSmiteHash(MethodNameConstants.CreateSessionMethod, utcDateString);
-            var url = $"{MethodNameConstants.CreateSessionMethod}Json/{_smiteClientSecrets.DeveloperId}/{signature}/{utcDateString}";
-
-            try
-            {
-                var request = new HttpRequestMessage(HttpMethod.Get, url);
-                var response = await _httpClient.SendAsync(request, cancellationToken);
-                var result = await response.Content.ReadFromJsonAsync<CreateSmiteSession>(cancellationToken: cancellationToken) ?? throw new SmiteClientInvalidResponseException("The HTTP content is empty or empty");
-                return _mapperService.Map<CreateSmiteSession, CreateSmiteSessionDto>(result);
-            }
-            catch (SmiteClientInvalidResponseException ex)
-            {
-                throw new SmiteClientRequestException($"The response was invalid: {ex.Message}");
-            }
-            catch (JsonException ex)
-            {
-                throw new SmiteClientRequestException($"Could not deserialize response body: {ex.Message}");
-            }
-            catch (Exception ex)
-            {
-                throw new SmiteClientRequestException($"The request ended in an exception: {ex.Message}");
-            }
+            throw new SmiteClientRequestException($"The response was invalid: {ex.Message}");
+        }
+        catch (JsonException ex)
+        {
+            throw new SmiteClientRequestException($"Could not deserialize response body: {ex.Message}");
+        }
+        catch (Exception ex)
+        {
+            throw new SmiteClientRequestException($"The request ended in an exception: {ex.Message}");
         }
     }
 }
