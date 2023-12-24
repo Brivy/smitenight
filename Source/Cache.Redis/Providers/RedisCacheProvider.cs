@@ -10,22 +10,22 @@ namespace Smitenight.Utilities.Cache.Redis.Providers
     public class RedisCacheProvider : IRedisCacheProvider
     {
         private readonly IDistributedCache _distributedCache;
-        private readonly RedisCacheSettings _redisCacheSettings;
+        private readonly RedisSettings _redisSettings;
         private readonly ILogger<RedisCacheProvider> _logger;
 
         public RedisCacheProvider(
             IDistributedCache distributedCache,
-            IOptions<RedisCacheSettings> redisCacheSettings,
+            IOptions<RedisSettings> redisSettings,
             ILogger<RedisCacheProvider> logger)
         {
             _distributedCache = distributedCache;
-            _redisCacheSettings = redisCacheSettings.Value;
+            _redisSettings = redisSettings.Value;
             _logger = logger;
         }
 
         public string GenerateCacheKey(string key)
         {
-            return $"{_redisCacheSettings.EnvironmentPrefix}-{key}";
+            return $"{_redisSettings.EnvironmentPrefix}-{key}";
         }
 
         public async Task<T?> GetAsync<T>(string key, CancellationToken cancellationToken = default)

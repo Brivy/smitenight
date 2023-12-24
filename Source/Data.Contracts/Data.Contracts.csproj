@@ -10,6 +10,7 @@
 	<ItemGroup>
 	  <ProjectReference Include="..\DependencyInjection.Common\DependencyInjection.Common.csproj" />
 	  <ProjectReference Include="..\Mapper\Mapper.csproj" />
+	  <ProjectReference Include="..\Configuration.Common\Configuration.Common.csproj" />
 	</ItemGroup>
 
 </Project>

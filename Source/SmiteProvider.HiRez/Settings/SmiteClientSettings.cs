@@ -2,9 +2,9 @@
 
 namespace Smitenight.Providers.SmiteProvider.HiRez.Settings
 {
-    public class SmiteClientSettings
+    public record SmiteClientSettings
     {
         [Required]
-        public string Url { get; set; } = null!;
+        public required string Url { get; set; }
     }
 }

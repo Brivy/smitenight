@@ -1,9 +1,13 @@
-﻿namespace Smitenight.Providers.SmiteProvider.HiRez.Secrets
-{
-    public class SmiteClientSecrets
-    {
-        public int DeveloperId { get; set; }
+﻿using System.ComponentModel.DataAnnotations;
 
-        public string AuthenticationKey { get; set; } = null!;
+namespace Smitenight.Providers.SmiteProvider.HiRez.Secrets
+{
+    public record SmiteClientSecrets
+    {
+        [Required]
+        public required int DeveloperId { get; set; }
+
+        [Required]
+        public required string AuthenticationKey { get; set; }
     }
 }

@@ -6,7 +6,8 @@ using Smitenight.Providers.SmiteProvider.HiRez.Clients;
 using Smitenight.Providers.SmiteProvider.HiRez.Secrets;
 using Smitenight.Providers.SmiteProvider.HiRez.Services;
 using Smitenight.Providers.SmiteProvider.HiRez.Settings;
-using Smitenight.Utilities.DependencyInjection.Common.Extensions;
+using Smitenight.Providers.SmiteProvider.HiRez.Settings.Validators;
+using Smitenight.Utilities.Configuration.Common.Extensions;
 using Smitenight.Utilities.Mapper.Extensions;
 
 namespace Smitenight.Providers.SmiteProvider.HiRez.Extensions
@@ -17,20 +18,23 @@ namespace Smitenight.Providers.SmiteProvider.HiRez.Extensions
         {
             services.AddMappers(typeof(ServiceCollectionExtensions).Assembly);
 
-            var smiteClientSecrets = configuration.GetSection(nameof(SmiteClientSecrets));
-            var smiteClientSettings = configuration.GetSection(nameof(SmiteClientSettings));
-            services.AddOptionsWithValidation<SmiteClientSecrets>(smiteClientSecrets);
-            services.AddOptionsWithValidation<SmiteClientSettings>(smiteClientSettings);
+            services.Configure<SmiteClientSettings>(configuration.GetSection(nameof(SmiteClientSettings)));
+            services.Configure<SmiteClientSecrets>(configuration.GetSection(nameof(SmiteClientSecrets)));
 
-            var settings = smiteClientSettings.Get<SmiteClientSettings>() ?? throw new NullReferenceException();
             services.AddHttpClient<ISmiteClient, SmiteClient>(client =>
             {
-                client.BaseAddress = new Uri(settings.Url);
+                configuration.ValidateConfiguration<SmiteClientSettings, SmiteClientSettingsValidator>();
+
+                string url = configuration[$"{nameof(SmiteClientSettings)}:{nameof(SmiteClientSettings.Url)}"] ?? throw new NullReferenceException();
+                client.BaseAddress = new Uri(url);
             });
 
             services.AddHttpClient<ISmiteSessionClient, SmiteSessionClient>(client =>
             {
-                client.BaseAddress = new Uri(settings.Url);
+                configuration.ValidateConfiguration<SmiteClientSettings, SmiteClientSettingsValidator>();
+
+                string url = configuration[$"{nameof(SmiteClientSettings)}:{nameof(SmiteClientSettings.Url)}"] ?? throw new NullReferenceException();
+                client.BaseAddress = new Uri(url);
             });
 
             services

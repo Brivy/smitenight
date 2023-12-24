@@ -24,7 +24,7 @@ namespace Smitenight.Presentation.Test.Maintenance
                .AddUserSecrets<RedisSecrets>()
                .Build();
 
-            IHost host = Host.CreateDefaultBuilder(args)
+            using IHost host = Host.CreateDefaultBuilder(args)
                 .ConfigureServices((hostContext, services) =>
                 {
                     services.AddSingleton(TimeProvider.System);

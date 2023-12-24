@@ -1,7 +1,10 @@
-﻿namespace Smitenight.Persistence.Data.EntityFramework.Secrets
+﻿using System.ComponentModel.DataAnnotations;
+
+namespace Smitenight.Persistence.Data.EntityFramework.Secrets
 {
-    public class DatabaseSecrets
+    public record DatabaseSecrets
     {
-        public string ConnectionString { get; set; } = string.Empty;
+        [Required]
+        public required string ConnectionString { get; set; }
     }
 }
