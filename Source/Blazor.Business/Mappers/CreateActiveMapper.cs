@@ -1,11 +1,11 @@
-﻿using Smitenight.Application.Blazor.Business.Contracts.Services.Checksums;
+﻿using Smitenight.Application.Core.Business.Contracts.Services.Checksums;
 using Smitenight.Persistence.Data.Contracts.Enums;
 using Smitenight.Persistence.Data.Contracts.Models;
 using Smitenight.Providers.SmiteProvider.Contracts.Constants;
 using Smitenight.Providers.SmiteProvider.Contracts.Models.ItemClient;
 using Smitenight.Utilities.Mapper.Models;
 
-namespace Smitenight.Application.Blazor.Business.Mappers;
+namespace Smitenight.Application.Core.Business.Mappers;
 
 public class CreateActiveMapper(IChecksumService checksumService) : Mapper<ItemDto, CreateActiveDto>
 {

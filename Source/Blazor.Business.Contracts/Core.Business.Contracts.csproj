@@ -4,7 +4,7 @@
 		<TargetFramework>net8.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
-		<RootNamespace>Smitenight.Application.Blazor.Business.Contracts</RootNamespace>
+		<RootNamespace>Smitenight.Application.Core.Business.Contracts</RootNamespace>
 	</PropertyGroup>
 
 	<ItemGroup>

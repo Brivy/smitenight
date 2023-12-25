@@ -1,4 +1,4 @@
-﻿using Smitenight.Application.Blazor.Business.Contracts.Services.Maintenance;
+﻿using Smitenight.Application.Core.Business.Contracts.Services.Maintenance;
 using Smitenight.Persistence.Data.Contracts.Models;
 using Smitenight.Providers.SmiteProvider.Contracts.Clients;
 using Smitenight.Providers.SmiteProvider.Contracts.Constants;
@@ -7,7 +7,7 @@ using Smitenight.Providers.SmiteProvider.Contracts.Models.GodClient;
 using Smitenight.Providers.SmiteProvider.Contracts.Models.ItemClient;
 using Smitenight.Providers.SmiteProvider.Contracts.Models.SystemClient;
 
-namespace Smitenight.Application.Blazor.Business.Services.Maintenance;
+namespace Smitenight.Application.Core.Business.Services.Maintenance;
 
 public class MaintainSmitenight(
     IMaintainItemsService maintainItemsService,

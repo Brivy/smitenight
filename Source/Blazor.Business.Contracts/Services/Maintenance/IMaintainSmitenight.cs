@@ -1,4 +1,4 @@
-﻿namespace Smitenight.Application.Blazor.Business.Contracts.Services.Maintenance;
+﻿namespace Smitenight.Application.Core.Business.Contracts.Services.Maintenance;
 
 public interface IMaintainSmitenight
 {

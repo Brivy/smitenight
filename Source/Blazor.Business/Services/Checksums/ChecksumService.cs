@@ -1,9 +1,9 @@
-﻿using Smitenight.Application.Blazor.Business.Contracts.Services.Checksums;
+﻿using Smitenight.Application.Core.Business.Contracts.Services.Checksums;
 using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
 
-namespace Smitenight.Application.Blazor.Business.Services.Checksums;
+namespace Smitenight.Application.Core.Business.Services.Checksums;
 
 public class ChecksumService : IChecksumService
 {

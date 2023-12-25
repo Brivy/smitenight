@@ -1,4 +1,4 @@
-﻿namespace Smitenight.Application.Blazor.Business.Constants
+﻿namespace Smitenight.Application.Core.Business.Constants
 {
     public static class GodConstants
     {

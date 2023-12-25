@@ -19,7 +19,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\Blazor.Business\Blazor.Business.csproj" />
+	  <ProjectReference Include="..\Blazor.Business\Core.Business.csproj" />
 	  <ProjectReference Include="..\Mapper\Mapper.csproj" />
 	</ItemGroup>
 

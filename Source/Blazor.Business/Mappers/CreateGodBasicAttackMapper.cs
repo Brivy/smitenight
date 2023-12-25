@@ -2,7 +2,7 @@
 using Smitenight.Providers.SmiteProvider.Contracts.Models.Common;
 using Smitenight.Utilities.Mapper.Models;
 
-namespace Smitenight.Application.Blazor.Business.Mappers;
+namespace Smitenight.Application.Core.Business.Mappers;
 
 public class CreateGodBasicAttackMapper : Mapper<CommonItemDto, CreateGodBasicAttackDto>
 {

@@ -3,17 +3,13 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio Version 17
 VisualStudioVersion = 17.1.32421.90
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazor.Server", "Source\Blazor.Server\Blazor.Server.csproj", "{1E26B93F-90E9-4A74-9AB4-5E5C2CBE0E1A}"
-EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazor.Client", "Source\Blazor.Client\Blazor.Client.csproj", "{6ADA5167-9AC7-41B0-88AE-A05F6571E532}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentation", "{3EC7ED06-3F77-44BF-A4FC-D11760B0D950}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{7F2D8975-C5A5-47DE-84C8-DB3A7F634764}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazor.Business", "Source\Blazor.Business\Blazor.Business.csproj", "{6BC07B7D-3138-4A1A-ACD4-63CC3C79589F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Business", "Source\Blazor.Business\Core.Business.csproj", "{6BC07B7D-3138-4A1A-ACD4-63CC3C79589F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Blazor.Business.Contracts", "Source\Blazor.Business.Contracts\Blazor.Business.Contracts.csproj", "{E51F3E9A-ED37-4E51-93BA-24EC097F8B37}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Business.Contracts", "Source\Blazor.Business.Contracts\Core.Business.Contracts.csproj", "{E51F3E9A-ED37-4E51-93BA-24EC097F8B37}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data.EntityFramework", "Source\Data.EntityFramework\Data.EntityFramework.csproj", "{FDE35ACD-FBBF-490D-B54E-1DDC0667967C}"
 EndProject
@@ -50,16 +46,6 @@ Global
 		Release|Any CPU = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
-		{1E26B93F-90E9-4A74-9AB4-5E5C2CBE0E1A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{1E26B93F-90E9-4A74-9AB4-5E5C2CBE0E1A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{1E26B93F-90E9-4A74-9AB4-5E5C2CBE0E1A}.Maintenance|Any CPU.ActiveCfg = Debug|Any CPU
-		{1E26B93F-90E9-4A74-9AB4-5E5C2CBE0E1A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{1E26B93F-90E9-4A74-9AB4-5E5C2CBE0E1A}.Release|Any CPU.Build.0 = Release|Any CPU
-		{6ADA5167-9AC7-41B0-88AE-A05F6571E532}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{6ADA5167-9AC7-41B0-88AE-A05F6571E532}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{6ADA5167-9AC7-41B0-88AE-A05F6571E532}.Maintenance|Any CPU.ActiveCfg = Debug|Any CPU
-		{6ADA5167-9AC7-41B0-88AE-A05F6571E532}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{6ADA5167-9AC7-41B0-88AE-A05F6571E532}.Release|Any CPU.Build.0 = Release|Any CPU
 		{6BC07B7D-3138-4A1A-ACD4-63CC3C79589F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6BC07B7D-3138-4A1A-ACD4-63CC3C79589F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6BC07B7D-3138-4A1A-ACD4-63CC3C79589F}.Maintenance|Any CPU.ActiveCfg = Debug|Any CPU
@@ -143,8 +129,6 @@ Global
 		HideSolutionNode = FALSE
 	EndGlobalSection
 	GlobalSection(NestedProjects) = preSolution
-		{1E26B93F-90E9-4A74-9AB4-5E5C2CBE0E1A} = {3EC7ED06-3F77-44BF-A4FC-D11760B0D950}
-		{6ADA5167-9AC7-41B0-88AE-A05F6571E532} = {3EC7ED06-3F77-44BF-A4FC-D11760B0D950}
 		{6BC07B7D-3138-4A1A-ACD4-63CC3C79589F} = {7F2D8975-C5A5-47DE-84C8-DB3A7F634764}
 		{E51F3E9A-ED37-4E51-93BA-24EC097F8B37} = {7F2D8975-C5A5-47DE-84C8-DB3A7F634764}
 		{FDE35ACD-FBBF-490D-B54E-1DDC0667967C} = {7E178BB9-3D2D-4DC0-907D-EBD87C20E963}

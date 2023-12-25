@@ -1,5 +1,5 @@
-﻿using Smitenight.Application.Blazor.Business.Constants;
-using Smitenight.Application.Blazor.Business.Contracts.Services.Checksums;
+﻿using Smitenight.Application.Core.Business.Constants;
+using Smitenight.Application.Core.Business.Contracts.Services.Checksums;
 using Smitenight.Persistence.Data.Contracts.Enums;
 using Smitenight.Persistence.Data.Contracts.Models;
 using Smitenight.Providers.SmiteProvider.Contracts.Constants;
@@ -8,7 +8,7 @@ using Smitenight.Providers.SmiteProvider.Contracts.Models.GodClient;
 using Smitenight.Utilities.Mapper.Contracts.Contracts;
 using Smitenight.Utilities.Mapper.Models;
 
-namespace Smitenight.Application.Blazor.Business.Mappers;
+namespace Smitenight.Application.Core.Business.Mappers;
 
 public class CreateGodMapper(
     IChecksumService checksumService,

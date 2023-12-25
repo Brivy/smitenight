@@ -1,8 +1,8 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Smitenight.Application.Blazor.Business.Contracts.Services.Maintenance;
-using Smitenight.Application.Blazor.Business.Extensions;
+using Smitenight.Application.Core.Business.Contracts.Services.Maintenance;
+using Smitenight.Application.Core.Business.Extensions;
 using Smitenight.Persistence.Data.EntityFramework.Secrets;
 using Smitenight.Providers.SmiteProvider.HiRez.Secrets;
 using Smitenight.Utilities.Cache.Redis.Extensions;

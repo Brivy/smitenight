@@ -1,11 +1,11 @@
-﻿using Smitenight.Application.Blazor.Business.Contracts.Services.Checksums;
-using Smitenight.Application.Blazor.Business.Contracts.Services.Maintenance;
+﻿using Smitenight.Application.Core.Business.Contracts.Services.Checksums;
+using Smitenight.Application.Core.Business.Contracts.Services.Maintenance;
 using Smitenight.Persistence.Data.Contracts.Models;
 using Smitenight.Persistence.Data.Contracts.Repositories;
 using Smitenight.Providers.SmiteProvider.Contracts.Models.GodClient;
 using Smitenight.Utilities.Mapper.Services;
 
-namespace Smitenight.Application.Blazor.Business.Services.Maintenance;
+namespace Smitenight.Application.Core.Business.Services.Maintenance;
 
 public class MaintainGodsService(
     IMaintainGodsRepository maintainGodsRepository,

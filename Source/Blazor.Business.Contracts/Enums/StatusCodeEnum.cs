@@ -1,4 +1,4 @@
-﻿namespace Smitenight.Application.Blazor.Business.Contracts.Enums;
+﻿namespace Smitenight.Application.Core.Business.Contracts.Enums;
 
 public enum StatusCodeEnum
 {

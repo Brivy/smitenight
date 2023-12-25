@@ -9,7 +9,6 @@
 
 	<ItemGroup>
 	  <ProjectReference Include="..\Cache.Redis\Cache.Redis.csproj" />
-	  <ProjectReference Include="..\DependencyInjection.Common\DependencyInjection.Common.csproj" />
 	  <ProjectReference Include="..\Mapper\Mapper.csproj" />
 	</ItemGroup>
 

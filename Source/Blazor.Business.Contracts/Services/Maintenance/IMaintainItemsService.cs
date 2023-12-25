@@ -1,7 +1,7 @@
 ﻿using Smitenight.Persistence.Data.Contracts.Models;
 using Smitenight.Providers.SmiteProvider.Contracts.Models.ItemClient;
 
-namespace Smitenight.Application.Blazor.Business.Contracts.Services.Maintenance;
+namespace Smitenight.Application.Core.Business.Contracts.Services.Maintenance;
 
 public interface IMaintainItemsService
 {

@@ -4,7 +4,7 @@
 		<TargetFramework>net8.0</TargetFramework>
 		<ImplicitUsings>enable</ImplicitUsings>
 		<Nullable>enable</Nullable>
-		<RootNamespace>Smitenight.Application.Blazor.Business</RootNamespace>
+		<RootNamespace>Smitenight.Application.Core.Business</RootNamespace>
 	</PropertyGroup>
 
 	<ItemGroup>
@@ -12,7 +12,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <ProjectReference Include="..\Blazor.Business.Contracts\Blazor.Business.Contracts.csproj" />
+	  <ProjectReference Include="..\Blazor.Business.Contracts\Core.Business.Contracts.csproj" />
 	</ItemGroup>
 
 </Project>

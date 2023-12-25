@@ -1,4 +1,4 @@
-﻿using Smitenight.Application.Blazor.Business.Contracts.Services.Checksums;
+﻿using Smitenight.Application.Core.Business.Contracts.Services.Checksums;
 using Smitenight.Persistence.Data.Contracts.Models;
 using Smitenight.Providers.SmiteProvider.Contracts.Models.Common;
 using Smitenight.Providers.SmiteProvider.Contracts.Models.GodClient;
@@ -6,7 +6,7 @@ using Smitenight.Utilities.Mapper.Contracts.Contracts;
 using Smitenight.Utilities.Mapper.Models;
 using AbilityType = Smitenight.Persistence.Data.Contracts.Enums.AbilityType;
 
-namespace Smitenight.Application.Blazor.Business.Mappers;
+namespace Smitenight.Application.Core.Business.Mappers;
 
 public class CreateAbilityMapper(
     IChecksumService checksumService,

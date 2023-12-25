@@ -1,8 +1,8 @@
-﻿using Smitenight.Application.Blazor.Business.Contracts.Services.Maintenance;
+﻿using Smitenight.Application.Core.Business.Contracts.Services.Maintenance;
 using Smitenight.Persistence.Data.Contracts.Models;
 using Smitenight.Persistence.Data.Contracts.Repositories;
 
-namespace Smitenight.Application.Blazor.Business.Services.Maintenance;
+namespace Smitenight.Application.Core.Business.Services.Maintenance;
 
 public class MaintainPatchesService(IMaintainPatchesRepository maintainPatchesRepository, TimeProvider timeProvider) : IMaintainPatchesService
 {
