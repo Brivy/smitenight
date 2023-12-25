@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace Smitenight.Persistence.Data.EntityFramework.Migrations
 {
     /// <inheritdoc />
-    public partial class Add_Patch : Migration
+    public partial class AddPatch : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

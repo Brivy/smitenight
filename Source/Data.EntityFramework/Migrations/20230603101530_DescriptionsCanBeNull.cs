@@ -5,7 +5,7 @@
 namespace Smitenight.Persistence.Data.EntityFramework.Migrations
 {
     /// <inheritdoc />
-    public partial class Descriptionscanbenull : Migration
+    public partial class DescriptionsCanBeNull : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

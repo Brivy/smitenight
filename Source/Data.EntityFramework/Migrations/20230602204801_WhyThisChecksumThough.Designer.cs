@@ -12,8 +12,8 @@ using Smitenight.Persistence.Data.EntityFramework;
 namespace Smitenight.Persistence.Data.EntityFramework.Migrations
 {
     [DbContext(typeof(SmitenightDbContext))]
-    [Migration("20230602204801_Why this checksum though")]
-    partial class Whythischecksumthough
+    [Migration("20230602204801_WhyThisChecksumThough")]
+    partial class WhyThisChecksumThough
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

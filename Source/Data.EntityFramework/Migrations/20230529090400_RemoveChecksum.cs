@@ -5,7 +5,7 @@
 namespace Smitenight.Persistence.Data.EntityFramework.Migrations
 {
     /// <inheritdoc />
-    public partial class Remove_checksum : Migration
+    public partial class RemoveChecksum : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

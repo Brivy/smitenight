@@ -5,7 +5,7 @@
 namespace Smitenight.Persistence.Data.EntityFramework.Migrations
 {
     /// <inheritdoc />
-    public partial class Whythischecksumthough : Migration
+    public partial class WhyThisChecksumThough : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

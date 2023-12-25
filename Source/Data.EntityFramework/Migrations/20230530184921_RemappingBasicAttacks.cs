@@ -5,7 +5,7 @@
 namespace Smitenight.Persistence.Data.EntityFramework.Migrations
 {
     /// <inheritdoc />
-    public partial class Remappingbasicattacks : Migration
+    public partial class RemappingBasicAttacks : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

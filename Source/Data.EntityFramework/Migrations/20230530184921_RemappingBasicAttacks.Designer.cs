@@ -12,8 +12,8 @@ using Smitenight.Persistence.Data.EntityFramework;
 namespace Smitenight.Persistence.Data.EntityFramework.Migrations
 {
     [DbContext(typeof(SmitenightDbContext))]
-    [Migration("20230530184921_Remapping basic attacks")]
-    partial class Remappingbasicattacks
+    [Migration("20230530184921_RemappingBasicAttacks")]
+    partial class RemappingBasicAttacks
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

@@ -12,8 +12,8 @@ using Smitenight.Persistence.Data.EntityFramework;
 namespace Smitenight.Persistence.Data.EntityFramework.Migrations
 {
     [DbContext(typeof(SmitenightDbContext))]
-    [Migration("20230528092351_Initial migration")]
-    partial class Initialmigration
+    [Migration("20230529090400_RemoveChecksum")]
+    partial class RemoveChecksum
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -82,10 +82,6 @@ namespace Smitenight.Persistence.Data.EntityFramework.Migrations
                     b.Property<int>("AbilityId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Checksum")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Description")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -111,10 +107,6 @@ namespace Smitenight.Persistence.Data.EntityFramework.Migrations
 
                     b.Property<int>("AbilityId")
                         .HasColumnType("int");
-
-                    b.Property<string>("Checksum")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -222,10 +214,6 @@ namespace Smitenight.Persistence.Data.EntityFramework.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Checksum")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
                         .IsRequired()

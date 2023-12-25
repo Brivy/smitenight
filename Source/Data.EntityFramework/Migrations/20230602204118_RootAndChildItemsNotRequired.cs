@@ -5,7 +5,7 @@
 namespace Smitenight.Persistence.Data.EntityFramework.Migrations
 {
     /// <inheritdoc />
-    public partial class rootandchilditemsnotrequired : Migration
+    public partial class RootAndChildItemsNotRequired : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)

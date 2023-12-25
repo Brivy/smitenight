@@ -12,8 +12,8 @@ using Smitenight.Persistence.Data.EntityFramework;
 namespace Smitenight.Persistence.Data.EntityFramework.Migrations
 {
     [DbContext(typeof(SmitenightDbContext))]
-    [Migration("20230531185801_Add_Patch")]
-    partial class Add_Patch
+    [Migration("20230602204118_RootAndChildItemsNotRequired")]
+    partial class RootAndChildItemsNotRequired
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -505,7 +505,6 @@ namespace Smitenight.Persistence.Data.EntityFramework.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("ChildItemId")
-                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
@@ -538,7 +537,6 @@ namespace Smitenight.Persistence.Data.EntityFramework.Migrations
                         .HasColumnType("int");
 
                     b.Property<int?>("RootItemId")
-                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<string>("SecondaryDescription")
@@ -1126,8 +1124,7 @@ namespace Smitenight.Persistence.Data.EntityFramework.Migrations
                     b.HasOne("Smitenight.Persistence.Data.EntityFramework.Entities.Item", "ChildItem")
                         .WithMany()
                         .HasForeignKey("ChildItemId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("Smitenight.Persistence.Data.EntityFramework.Entities.Patch", "Patch")
                         .WithMany("Items")
@@ -1138,8 +1135,7 @@ namespace Smitenight.Persistence.Data.EntityFramework.Migrations
                     b.HasOne("Smitenight.Persistence.Data.EntityFramework.Entities.Item", "RootItem")
                         .WithMany()
                         .HasForeignKey("RootItemId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("ChildItem");
 

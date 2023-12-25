@@ -12,8 +12,8 @@ using Smitenight.Persistence.Data.EntityFramework;
 namespace Smitenight.Persistence.Data.EntityFramework.Migrations
 {
     [DbContext(typeof(SmitenightDbContext))]
-    [Migration("20230603101530_Descriptions can be null")]
-    partial class Descriptionscanbenull
+    [Migration("20230528092351_InitialMigration")]
+    partial class InitialMigration
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -53,12 +53,6 @@ namespace Smitenight.Persistence.Data.EntityFramework.Migrations
                     b.Property<int>("GodId")
                         .HasColumnType("int");
 
-                    b.Property<bool>("Latest")
-                        .HasColumnType("bit");
-
-                    b.Property<int>("PatchId")
-                        .HasColumnType("int");
-
                     b.Property<int>("SmiteId")
                         .HasColumnType("int");
 
@@ -74,8 +68,6 @@ namespace Smitenight.Persistence.Data.EntityFramework.Migrations
 
                     b.HasIndex("GodId");
 
-                    b.HasIndex("PatchId");
-
                     b.ToTable("Abilities", (string)null);
                 });
 
@@ -89,6 +81,10 @@ namespace Smitenight.Persistence.Data.EntityFramework.Migrations
 
                     b.Property<int>("AbilityId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Checksum")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -115,6 +111,10 @@ namespace Smitenight.Persistence.Data.EntityFramework.Migrations
 
                     b.Property<int>("AbilityId")
                         .HasColumnType("int");
+
+                    b.Property<string>("Checksum")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -159,15 +159,9 @@ namespace Smitenight.Persistence.Data.EntityFramework.Migrations
                     b.Property<int>("ItemTier")
                         .HasColumnType("int");
 
-                    b.Property<bool>("Latest")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("PatchId")
-                        .HasColumnType("int");
 
                     b.Property<int>("Price")
                         .HasColumnType("int");
@@ -176,9 +170,11 @@ namespace Smitenight.Persistence.Data.EntityFramework.Migrations
                         .HasColumnType("int");
 
                     b.Property<string>("SecondaryDescription")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ShortDescription")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("SmiteId")
@@ -187,8 +183,6 @@ namespace Smitenight.Persistence.Data.EntityFramework.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("ChildActiveId");
-
-                    b.HasIndex("PatchId");
 
                     b.HasIndex("RootActiveId");
 
@@ -221,6 +215,36 @@ namespace Smitenight.Persistence.Data.EntityFramework.Migrations
                     b.ToTable("ActivePurchases", (string)null);
                 });
 
+            modelBuilder.Entity("Smitenight.Persistence.Data.EntityFramework.Entities.BasicAttack", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Checksum")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("GodId")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Value")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GodId");
+
+                    b.ToTable("BasicAttacks", (string)null);
+                });
+
             modelBuilder.Entity("Smitenight.Persistence.Data.EntityFramework.Entities.Consumable", b =>
                 {
                     b.Property<int>("Id")
@@ -243,15 +267,9 @@ namespace Smitenight.Persistence.Data.EntityFramework.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("Latest")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("PatchId")
-                        .HasColumnType("int");
 
                     b.Property<int>("Price")
                         .HasColumnType("int");
@@ -260,14 +278,13 @@ namespace Smitenight.Persistence.Data.EntityFramework.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ShortDescription")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("SmiteId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("PatchId");
 
                     b.ToTable("Consumables", (string)null);
                 });
@@ -288,6 +305,10 @@ namespace Smitenight.Persistence.Data.EntityFramework.Migrations
 
                     b.Property<bool>("AutoBanned")
                         .HasColumnType("bit");
+
+                    b.Property<string>("BasicAttackChecksum")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Checksum")
                         .IsRequired()
@@ -312,9 +333,6 @@ namespace Smitenight.Persistence.Data.EntityFramework.Migrations
 
                     b.Property<float>("Hp5PerLevel")
                         .HasColumnType("real");
-
-                    b.Property<bool>("Latest")
-                        .HasColumnType("bit");
 
                     b.Property<bool>("LatestGod")
                         .HasColumnType("bit");
@@ -358,9 +376,6 @@ namespace Smitenight.Persistence.Data.EntityFramework.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("PatchId")
-                        .HasColumnType("int");
-
                     b.Property<int>("PhysicalPower")
                         .HasColumnType("int");
 
@@ -395,8 +410,6 @@ namespace Smitenight.Persistence.Data.EntityFramework.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("PatchId");
-
                     b.ToTable("Gods", (string)null);
                 });
 
@@ -426,32 +439,6 @@ namespace Smitenight.Persistence.Data.EntityFramework.Migrations
                     b.ToTable("GodBans", (string)null);
                 });
 
-            modelBuilder.Entity("Smitenight.Persistence.Data.EntityFramework.Entities.GodBasicAttack", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<string>("Description")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("GodId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Value")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("GodId");
-
-                    b.ToTable("GodBasicAttacks", (string)null);
-                });
-
             modelBuilder.Entity("Smitenight.Persistence.Data.EntityFramework.Entities.GodSkin", b =>
                 {
                     b.Property<int>("Id")
@@ -470,17 +457,11 @@ namespace Smitenight.Persistence.Data.EntityFramework.Migrations
                     b.Property<string>("GodSkinUrl")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<bool>("Latest")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Obtainability")
-                        .HasColumnType("int");
-
-                    b.Property<int>("PatchId")
                         .HasColumnType("int");
 
                     b.Property<int>("PriceFavor")
@@ -499,8 +480,6 @@ namespace Smitenight.Persistence.Data.EntityFramework.Migrations
 
                     b.HasIndex("GodId");
 
-                    b.HasIndex("PatchId");
-
                     b.ToTable("GodSkins", (string)null);
                 });
 
@@ -517,6 +496,7 @@ namespace Smitenight.Persistence.Data.EntityFramework.Migrations
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int?>("ChildItemId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<string>("Description")
@@ -535,15 +515,9 @@ namespace Smitenight.Persistence.Data.EntityFramework.Migrations
                     b.Property<int>("ItemTier")
                         .HasColumnType("int");
 
-                    b.Property<bool>("Latest")
-                        .HasColumnType("bit");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("PatchId")
-                        .HasColumnType("int");
 
                     b.Property<int>("Price")
                         .HasColumnType("int");
@@ -552,6 +526,7 @@ namespace Smitenight.Persistence.Data.EntityFramework.Migrations
                         .HasColumnType("int");
 
                     b.Property<int?>("RootItemId")
+                        .IsRequired()
                         .HasColumnType("int");
 
                     b.Property<string>("SecondaryDescription")
@@ -570,8 +545,6 @@ namespace Smitenight.Persistence.Data.EntityFramework.Migrations
 
                     b.HasIndex("ChildItemId");
 
-                    b.HasIndex("PatchId");
-
                     b.HasIndex("RootItemId");
 
                     b.ToTable("Items", (string)null);
@@ -584,6 +557,10 @@ namespace Smitenight.Persistence.Data.EntityFramework.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Checksum")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Description")
                         .IsRequired()
@@ -837,26 +814,6 @@ namespace Smitenight.Persistence.Data.EntityFramework.Migrations
                     b.ToTable("MatchDetails", (string)null);
                 });
 
-            modelBuilder.Entity("Smitenight.Persistence.Data.EntityFramework.Entities.Patch", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
-
-                    b.Property<DateTime>("ReleaseDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Version")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Patches", (string)null);
-                });
-
             modelBuilder.Entity("Smitenight.Persistence.Data.EntityFramework.Entities.Player", b =>
                 {
                     b.Property<int>("Id")
@@ -982,15 +939,7 @@ namespace Smitenight.Persistence.Data.EntityFramework.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Smitenight.Persistence.Data.EntityFramework.Entities.Patch", "Patch")
-                        .WithMany("Abilities")
-                        .HasForeignKey("PatchId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.Navigation("God");
-
-                    b.Navigation("Patch");
                 });
 
             modelBuilder.Entity("Smitenight.Persistence.Data.EntityFramework.Entities.AbilityRank", b =>
@@ -1022,20 +971,12 @@ namespace Smitenight.Persistence.Data.EntityFramework.Migrations
                         .HasForeignKey("ChildActiveId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("Smitenight.Persistence.Data.EntityFramework.Entities.Patch", "Patch")
-                        .WithMany("Actives")
-                        .HasForeignKey("PatchId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.HasOne("Smitenight.Persistence.Data.EntityFramework.Entities.Active", "RootActive")
                         .WithMany()
                         .HasForeignKey("RootActiveId")
                         .OnDelete(DeleteBehavior.Restrict);
 
                     b.Navigation("ChildActive");
-
-                    b.Navigation("Patch");
 
                     b.Navigation("RootActive");
                 });
@@ -1059,26 +1000,15 @@ namespace Smitenight.Persistence.Data.EntityFramework.Migrations
                     b.Navigation("MatchDetail");
                 });
 
-            modelBuilder.Entity("Smitenight.Persistence.Data.EntityFramework.Entities.Consumable", b =>
+            modelBuilder.Entity("Smitenight.Persistence.Data.EntityFramework.Entities.BasicAttack", b =>
                 {
-                    b.HasOne("Smitenight.Persistence.Data.EntityFramework.Entities.Patch", "Patch")
-                        .WithMany("Consumables")
-                        .HasForeignKey("PatchId")
+                    b.HasOne("Smitenight.Persistence.Data.EntityFramework.Entities.God", "God")
+                        .WithMany("BasicAttackDescriptions")
+                        .HasForeignKey("GodId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.Navigation("Patch");
-                });
-
-            modelBuilder.Entity("Smitenight.Persistence.Data.EntityFramework.Entities.God", b =>
-                {
-                    b.HasOne("Smitenight.Persistence.Data.EntityFramework.Entities.Patch", "Patch")
-                        .WithMany("Gods")
-                        .HasForeignKey("PatchId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("Patch");
+                    b.Navigation("God");
                 });
 
             modelBuilder.Entity("Smitenight.Persistence.Data.EntityFramework.Entities.GodBan", b =>
@@ -1100,17 +1030,6 @@ namespace Smitenight.Persistence.Data.EntityFramework.Migrations
                     b.Navigation("Match");
                 });
 
-            modelBuilder.Entity("Smitenight.Persistence.Data.EntityFramework.Entities.GodBasicAttack", b =>
-                {
-                    b.HasOne("Smitenight.Persistence.Data.EntityFramework.Entities.God", "God")
-                        .WithMany("GodBasicAttacks")
-                        .HasForeignKey("GodId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
-                    b.Navigation("God");
-                });
-
             modelBuilder.Entity("Smitenight.Persistence.Data.EntityFramework.Entities.GodSkin", b =>
                 {
                     b.HasOne("Smitenight.Persistence.Data.EntityFramework.Entities.God", "God")
@@ -1119,15 +1038,7 @@ namespace Smitenight.Persistence.Data.EntityFramework.Migrations
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
-                    b.HasOne("Smitenight.Persistence.Data.EntityFramework.Entities.Patch", "Patch")
-                        .WithMany("GodSkins")
-                        .HasForeignKey("PatchId")
-                        .OnDelete(DeleteBehavior.Restrict)
-                        .IsRequired();
-
                     b.Navigation("God");
-
-                    b.Navigation("Patch");
                 });
 
             modelBuilder.Entity("Smitenight.Persistence.Data.EntityFramework.Entities.Item", b =>
@@ -1135,22 +1046,16 @@ namespace Smitenight.Persistence.Data.EntityFramework.Migrations
                     b.HasOne("Smitenight.Persistence.Data.EntityFramework.Entities.Item", "ChildItem")
                         .WithMany()
                         .HasForeignKey("ChildItemId")
-                        .OnDelete(DeleteBehavior.Restrict);
-
-                    b.HasOne("Smitenight.Persistence.Data.EntityFramework.Entities.Patch", "Patch")
-                        .WithMany("Items")
-                        .HasForeignKey("PatchId")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("Smitenight.Persistence.Data.EntityFramework.Entities.Item", "RootItem")
                         .WithMany()
                         .HasForeignKey("RootItemId")
-                        .OnDelete(DeleteBehavior.Restrict);
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
 
                     b.Navigation("ChildItem");
-
-                    b.Navigation("Patch");
 
                     b.Navigation("RootItem");
                 });
@@ -1266,9 +1171,9 @@ namespace Smitenight.Persistence.Data.EntityFramework.Migrations
                 {
                     b.Navigation("Abilities");
 
-                    b.Navigation("GodBans");
+                    b.Navigation("BasicAttackDescriptions");
 
-                    b.Navigation("GodBasicAttacks");
+                    b.Navigation("GodBans");
 
                     b.Navigation("GodSkins");
 
@@ -1301,21 +1206,6 @@ namespace Smitenight.Persistence.Data.EntityFramework.Migrations
                     b.Navigation("ActivePurchases");
 
                     b.Navigation("ItemPurchases");
-                });
-
-            modelBuilder.Entity("Smitenight.Persistence.Data.EntityFramework.Entities.Patch", b =>
-                {
-                    b.Navigation("Abilities");
-
-                    b.Navigation("Actives");
-
-                    b.Navigation("Consumables");
-
-                    b.Navigation("GodSkins");
-
-                    b.Navigation("Gods");
-
-                    b.Navigation("Items");
                 });
 
             modelBuilder.Entity("Smitenight.Persistence.Data.EntityFramework.Entities.Player", b =>
