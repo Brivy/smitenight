@@ -2,15 +2,15 @@
 
 public record class GodSkinDto
 {
-    public string GodIconUrl { get; init; } = null!;
-    public string GodSkinUrl { get; init; } = null!;
-    public int GodId { get; init; }
-    public string GodName { get; init; } = null!;
-    public string Obtainability { get; init; } = null!;
-    public int PriceFavor { get; init; }
-    public int PriceGems { get; init; }
+    public required string GodIconUrl { get; init; }
+    public required string GodSkinUrl { get; init; }
+    public required int GodId { get; init; }
+    public required string GodName { get; init; }
+    public required string Obtainability { get; init; }
+    public required int PriceFavor { get; init; }
+    public required int PriceGems { get; init; }
     public string? RetMsg { get; init; }
-    public int SkinId1 { get; init; }
-    public int SkinId2 { get; init; }
-    public string SkinName { get; init; } = null!;
+    public required int SkinId1 { get; init; }
+    public required int SkinId2 { get; init; }
+    public required string SkinName { get; init; }
 }

@@ -1,4 +1,5 @@
-﻿using Smitenight.Providers.SmiteProvider.Contracts.Models.Common;
+﻿using Smitenight.Providers.SmiteProvider.Contracts.Enums;
+using Smitenight.Providers.SmiteProvider.Contracts.Models.Common;
 using Smitenight.Providers.SmiteProvider.Contracts.Models.GodClient;
 using Smitenight.Providers.SmiteProvider.HiRez.Models.Common;
 using Smitenight.Providers.SmiteProvider.HiRez.Models.GodClient;
@@ -22,6 +23,7 @@ internal class AbilityDetailsMapper(IMapper<CommonItem, CommonItemDto> commonIte
             Cooldown = itemDescription.Cooldown ?? string.Empty,
             Cost = itemDescription.Cost ?? string.Empty,
             Description = itemDescription.Description ?? string.Empty,
+            AbilityType = AbilityType.Unknown, // We don't have this information about the ability
             AbilityRanks = itemDescription.AbilityRanks.Select(_commonItemMapper.Map).ToArray(),
             AbilityTags = itemDescription.AbilityTags.Select(_commonItemMapper.Map).ToArray()
         };

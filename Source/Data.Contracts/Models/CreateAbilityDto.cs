@@ -4,14 +4,14 @@ namespace Smitenight.Persistence.Data.Contracts.Models;
 
 public record CreateAbilityDto
 {
-    public int SmiteId { get; set; }
-    public string Checksum { get; set; } = null!;
-    public string? Cooldown { get; set; }
-    public string? Cost { get; set; }
-    public string Description { get; set; } = null!;
-    public string Summary { get; set; } = null!;
-    public string Url { get; set; } = null!;
-    public AbilityType AbilityType { get; set; }
-    public IEnumerable<CreateAbilityRankDto> AbilityRanks { get; set; } = new List<CreateAbilityRankDto>();
-    public IEnumerable<CreateAbilityTagDto> AbilityTags { get; set; } = new List<CreateAbilityTagDto>();
+    public required int SmiteId { get; init; }
+    public required string Checksum { get; init; }
+    public string? Cooldown { get; init; }
+    public string? Cost { get; init; }
+    public required string Description { get; init; }
+    public required string Summary { get; init; }
+    public required string Url { get; init; }
+    public required AbilityType AbilityType { get; init; }
+    public IEnumerable<CreateAbilityRankDto> AbilityRanks { get; init; } = new List<CreateAbilityRankDto>();
+    public IEnumerable<CreateAbilityTagDto> AbilityTags { get; init; } = new List<CreateAbilityTagDto>();
 }

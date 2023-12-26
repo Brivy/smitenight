@@ -2,13 +2,13 @@
 
 public record class MotdDto
 {
-    public string Description { get; init; } = null!;
-    public string GameMode { get; init; } = null!;
-    public string MaxPlayers { get; init; } = null!;
-    public string Name { get; init; } = null!;
+    public required string Description { get; init; }
+    public required string GameMode { get; init; }
+    public required string MaxPlayers { get; init; }
+    public required string Name { get; init; }
     public string? RetMsg { get; init; }
-    public string StartDateTime { get; init; } = null!;
-    public string Team1GodsCsv { get; init; } = null!;
-    public string Team2GodsCsv { get; init; } = null!;
-    public string Title { get; init; } = null!;
+    public required string StartDateTime { get; init; }
+    public required string Team1GodsCsv { get; init; }
+    public required string Team2GodsCsv { get; init; }
+    public required string Title { get; init; }
 }

@@ -2,19 +2,19 @@
 
 public record class EsportProLeagueDto
 {
-    public int AwayTeamClanId { get; init; }
-    public string AwayTeamName { get; init; } = null!;
-    public string AwayTeamTagname { get; init; } = null!;
-    public int HomeTeamClanId { get; init; }
-    public string HomeTeamName { get; init; } = null!;
-    public string HomeTeamTagname { get; init; } = null!;
-    public string MapInstanceId { get; init; } = null!;
-    public string MatchDate { get; init; } = null!;
-    public string MatchNumber { get; init; } = null!;
-    public string MatchStatus { get; init; } = null!;
-    public string MatchupId { get; init; } = null!;
-    public string Region { get; init; } = null!;
+    public required int AwayTeamClanId { get; init; }
+    public required string AwayTeamName { get; init; }
+    public required string AwayTeamTagname { get; init; }
+    public required int HomeTeamClanId { get; init; }
+    public required string HomeTeamName { get; init; }
+    public required string HomeTeamTagname { get; init; }
+    public required string MapInstanceId { get; init; }
+    public required string MatchDate { get; init; }
+    public required string MatchNumber { get; init; }
+    public required string MatchStatus { get; init; }
+    public required string MatchupId { get; init; }
+    public required string Region { get; init; }
     public string? RetMsg { get; init; }
-    public string TournamentName { get; init; } = null!;
-    public int WinningTeamClanId { get; init; }
+    public required string TournamentName { get; init; }
+    public required int WinningTeamClanId { get; init; }
 }

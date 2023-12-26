@@ -2,25 +2,25 @@
 
 public record class MatchPlayerDetailsDto
 {
-    public int AccountGodsPlayed { get; init; }
-    public int AccountLevel { get; init; }
-    public int GodId { get; init; }
-    public int GodLevel { get; init; }
-    public string GodName { get; init; } = null!;
-    public int MasteryLevel { get; init; }
-    public int Match { get; init; }
-    public string Queue { get; init; } = null!;
-    public int RankStat { get; init; }
-    public int SkinId { get; init; }
-    public int Tier { get; init; }
-    public string MapGame { get; init; } = null!;
-    public string PlayerCreated { get; init; } = null!;
-    public string PlayerId { get; init; } = null!;
-    public string PlayerName { get; init; } = null!;
-    public string PlayerRegion { get; init; } = null!;
+    public required int AccountGodsPlayed { get; init; }
+    public required int AccountLevel { get; init; }
+    public required int GodId { get; init; }
+    public required int GodLevel { get; init; }
+    public required string GodName { get; init; }
+    public required int MasteryLevel { get; init; }
+    public required int Match { get; init; }
+    public required string Queue { get; init; }
+    public required int RankStat { get; init; }
+    public required int SkinId { get; init; }
+    public required int Tier { get; init; }
+    public required string MapGame { get; init; }
+    public required string PlayerCreated { get; init; }
+    public required string PlayerId { get; init; }
+    public required string PlayerName { get; init; }
+    public required string PlayerRegion { get; init; }
     public string? RetMsg { get; init; }
-    public int TaskForce { get; init; }
-    public int TierLosses { get; init; }
-    public int TierPoints { get; init; }
-    public int TierWins { get; init; }
+    public required int TaskForce { get; init; }
+    public required int TierLosses { get; init; }
+    public required int TierPoints { get; init; }
+    public required int TierWins { get; init; }
 }

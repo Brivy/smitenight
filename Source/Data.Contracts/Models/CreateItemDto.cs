@@ -4,18 +4,18 @@ namespace Smitenight.Persistence.Data.Contracts.Models;
 
 public record CreateItemDto
 {
-    public int SmiteId { get; set; }
-    public string Checksum { get; set; } = null!;
-    public bool Enabled { get; set; }
-    public string Name { get; set; } = null!;
-    public string? Description { get; set; }
-    public bool Glyph { get; set; }
-    public ItemTier ItemTier { get; set; }
-    public int Price { get; set; }
-    public RestrictedRoles RestrictedRoles { get; set; }
-    public string? SecondaryDescription { get; set; }
-    public string? ShortDescription { get; set; }
-    public bool StartingItem { get; set; }
-    public string ItemIconUrl { get; set; } = null!;
-    public IEnumerable<CreateItemDescriptionDto> ItemDescription { get; set; } = new List<CreateItemDescriptionDto>();
+    public required int SmiteId { get; init; }
+    public required string Checksum { get; init; }
+    public required bool Enabled { get; init; }
+    public required string Name { get; init; }
+    public string? Description { get; init; }
+    public required bool Glyph { get; init; }
+    public required ItemTier ItemTier { get; init; }
+    public required int Price { get; init; }
+    public required RestrictedRoles RestrictedRoles { get; init; }
+    public string? SecondaryDescription { get; init; }
+    public string? ShortDescription { get; init; }
+    public required bool StartingItem { get; init; }
+    public required string ItemIconUrl { get; init; }
+    public IEnumerable<CreateItemDescriptionDto> ItemDescription { get; init; } = new List<CreateItemDescriptionDto>();
 }

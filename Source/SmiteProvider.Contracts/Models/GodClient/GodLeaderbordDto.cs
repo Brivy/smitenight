@@ -2,12 +2,12 @@
 
 public record class GodLeaderboardDto
 {
-    public string GodId { get; init; } = null!;
-    public string Losses { get; init; } = null!;
-    public string PlayerId { get; init; } = null!;
-    public string PlayerName { get; init; } = null!;
-    public string PlayerRanking { get; init; } = null!;
-    public string Rank { get; init; } = null!;
+    public required string GodId { get; init; }
+    public required string Losses { get; init; }
+    public required string PlayerId { get; init; }
+    public required string PlayerName { get; init; }
+    public required string PlayerRanking { get; init; }
+    public required string Rank { get; init; }
     public string? RetMsg { get; init; }
-    public string Wins { get; init; } = null!;
+    public required string Wins { get; init; }
 }

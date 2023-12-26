@@ -2,10 +2,10 @@
 
 public record class PlayerStatusDto
 {
-    public int Match { get; init; }
-    public int MatchQueueId { get; init; }
-    public string PersonalStatusMessage { get; init; } = null!;
+    public required int Match { get; init; }
+    public required int MatchQueueId { get; init; }
+    public required string PersonalStatusMessage { get; init; }
     public string? RetMsg { get; init; }
-    public int Status { get; init; }
-    public string StatusString { get; init; } = null!;
+    public required int Status { get; init; }
+    public required string StatusString { get; init; }
 }

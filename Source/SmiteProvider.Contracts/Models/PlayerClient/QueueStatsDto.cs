@@ -2,18 +2,18 @@
 
 public record class QueueStatsDto
 {
-    public int Assists { get; init; }
-    public int Deaths { get; init; }
-    public string God { get; init; } = null!;
-    public int GodId { get; init; }
-    public int Gold { get; init; }
-    public int Kills { get; init; }
-    public string LastPlayed { get; init; } = null!;
-    public int Losses { get; init; }
-    public int Matches { get; init; }
-    public int Minutes { get; init; }
-    public string Queue { get; init; } = null!;
-    public int Wins { get; init; }
-    public string PlayerId { get; init; } = null!;
+    public required int Assists { get; init; }
+    public required int Deaths { get; init; }
+    public required string God { get; init; }
+    public required int GodId { get; init; }
+    public required int Gold { get; init; }
+    public required int Kills { get; init; }
+    public required string LastPlayed { get; init; }
+    public required int Losses { get; init; }
+    public required int Matches { get; init; }
+    public required int Minutes { get; init; }
+    public required string Queue { get; init; }
+    public required int Wins { get; init; }
+    public required string PlayerId { get; init; }
     public string? RetMsg { get; init; }
 }

@@ -2,26 +2,26 @@
 
 public record class DemoDetailsDto
 {
-    public int BanId1 { get; init; }
-    public int BanId2 { get; init; }
-    public int BanId3 { get; init; }
-    public int BanId4 { get; init; }
-    public string EntryDatetime { get; init; } = null!;
-    public int Match { get; init; }
-    public int MatchTime { get; init; }
-    public int OfflineSpectators { get; init; }
-    public string Queue { get; init; } = null!;
-    public int RealtimeSpectators { get; init; }
-    public string RecordingEnded { get; init; } = null!;
-    public string RecordingStarted { get; init; } = null!;
-    public int Team1AvgLevel { get; init; }
-    public int Team1Gold { get; init; }
-    public int Team1Kills { get; init; }
-    public int Team1Score { get; init; }
-    public int Team2AvgLevel { get; init; }
-    public int Team2Gold { get; init; }
-    public int Team2Kills { get; init; }
-    public int Team2Score { get; init; }
-    public int WinningTeam { get; init; }
+    public required int BanId1 { get; init; }
+    public required int BanId2 { get; init; }
+    public required int BanId3 { get; init; }
+    public required int BanId4 { get; init; }
+    public required string EntryDatetime { get; init; }
+    public required int Match { get; init; }
+    public required int MatchTime { get; init; }
+    public required int OfflineSpectators { get; init; }
+    public required string Queue { get; init; }
+    public required int RealtimeSpectators { get; init; }
+    public required string RecordingEnded { get; init; }
+    public required string RecordingStarted { get; init; }
+    public required int Team1AvgLevel { get; init; }
+    public required int Team1Gold { get; init; }
+    public required int Team1Kills { get; init; }
+    public required int Team1Score { get; init; }
+    public required int Team2AvgLevel { get; init; }
+    public required int Team2Gold { get; init; }
+    public required int Team2Kills { get; init; }
+    public required int Team2Score { get; init; }
+    public required int WinningTeam { get; init; }
     public string? RetMsg { get; init; }
 }

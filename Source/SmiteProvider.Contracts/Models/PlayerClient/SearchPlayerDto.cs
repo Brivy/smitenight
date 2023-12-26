@@ -2,10 +2,10 @@
 
 public record class SearchPlayerDto
 {
-    public string Name { get; init; } = null!;
-    public string HzPlayerName { get; init; } = null!;
-    public string PlayerId { get; init; } = null!;
-    public string PortalId { get; init; } = null!;
-    public string PrivacyFlag { get; init; } = null!;
+    public required string Name { get; init; }
+    public required string HzPlayerName { get; init; }
+    public required string PlayerId { get; init; }
+    public required string PortalId { get; init; }
+    public required string PrivacyFlag { get; init; }
     public string? RetMsg { get; init; }
 }

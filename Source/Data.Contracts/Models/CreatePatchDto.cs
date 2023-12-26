@@ -2,6 +2,6 @@
 
 public record CreatePatchDto
 {
-    public string Version { get; init; } = null!;
-    public DateTimeOffset ReleaseDate { get; init; }
+    public required string Version { get; init; }
+    public required DateTimeOffset ReleaseDate { get; init; }
 }

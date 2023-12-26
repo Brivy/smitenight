@@ -4,38 +4,38 @@ namespace Smitenight.Persistence.Data.Contracts.Models;
 
 public record CreateGodDto
 {
-    public int SmiteId { get; set; }
-    public string Checksum { get; set; } = null!;
-    public float AttackSpeed { get; set; }
-    public float AttackSpeedPerLevel { get; set; }
-    public bool AutoBanned { get; set; }
-    public string GodCardUrl { get; set; } = null!;
-    public string GodIconUrl { get; set; } = null!;
-    public float Hp5PerLevel { get; set; }
-    public int Health { get; set; }
-    public int HealthPerFive { get; set; }
-    public int HealthPerLevel { get; set; }
-    public bool LatestGod { get; set; }
-    public string Lore { get; set; } = null!;
-    public float Mp5PerLevel { get; set; }
-    public float MagicProtection { get; set; }
-    public float MagicProtectionPerLevel { get; set; }
-    public int MagicalPower { get; set; }
-    public float MagicalPowerPerLevel { get; set; }
-    public int Mana { get; set; }
-    public float ManaPerFive { get; set; }
-    public int ManaPerLevel { get; set; }
-    public string Name { get; set; } = null!;
-    public bool OnFreeRotation { get; set; }
-    public string Pantheon { get; set; } = null!;
-    public int PhysicalPower { get; set; }
-    public float PhysicalPowerPerLevel { get; set; }
-    public float PhysicalProtection { get; set; }
-    public float PhysicalProtectionPerLevel { get; set; }
-    public string Pros { get; set; } = null!;
-    public GodRole Role { get; set; }
-    public int Speed { get; set; }
-    public string Title { get; set; } = null!;
-    public GodType Type { get; set; }
+    public required int SmiteId { get; init; }
+    public required string Checksum { get; init; }
+    public float AttackSpeed { get; init; }
+    public float AttackSpeedPerLevel { get; init; }
+    public required bool AutoBanned { get; init; }
+    public required string GodCardUrl { get; init; }
+    public required string GodIconUrl { get; init; }
+    public required float Hp5PerLevel { get; init; }
+    public required int Health { get; init; }
+    public required int HealthPerFive { get; init; }
+    public required int HealthPerLevel { get; init; }
+    public required bool LatestGod { get; init; }
+    public required string Lore { get; init; }
+    public required float Mp5PerLevel { get; init; }
+    public required float MagicProtection { get; init; }
+    public required float MagicProtectionPerLevel { get; init; }
+    public required int MagicalPower { get; init; }
+    public required float MagicalPowerPerLevel { get; init; }
+    public required int Mana { get; init; }
+    public required float ManaPerFive { get; init; }
+    public required int ManaPerLevel { get; init; }
+    public required string Name { get; init; }
+    public required bool OnFreeRotation { get; init; }
+    public required string Pantheon { get; init; }
+    public required int PhysicalPower { get; init; }
+    public required float PhysicalPowerPerLevel { get; init; }
+    public required float PhysicalProtection { get; init; }
+    public required float PhysicalProtectionPerLevel { get; init; }
+    public required string Pros { get; init; }
+    public required GodRole Role { get; init; }
+    public required int Speed { get; init; }
+    public required string Title { get; init; }
+    public required GodType Type { get; init; }
     public IEnumerable<CreateGodBasicAttackDto> GodBasicAttackDto { get; init; } = new List<CreateGodBasicAttackDto>();
 }
