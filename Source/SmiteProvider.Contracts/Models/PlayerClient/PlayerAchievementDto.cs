@@ -2,30 +2,30 @@
 
 public record class PlayerAchievementDto
 {
-    public int AssistedKills { get; init; }
-    public int CampsCleared { get; init; }
-    public int Deaths { get; init; }
-    public int DivineSpree { get; init; }
-    public int DoubleKills { get; init; }
-    public int FireGiantKills { get; init; }
-    public int FirstBloods { get; init; }
-    public int GodLikeSpree { get; init; }
-    public int GoldFuryKills { get; init; }
-    public int Id { get; init; }
-    public int ImmortalSpree { get; init; }
-    public int KillingSpree { get; init; }
-    public int MinionKills { get; init; }
-    public string Name { get; init; } = null!;
-    public int PentaKills { get; init; }
-    public int PhoenixKills { get; init; }
-    public int PlayerKills { get; init; }
-    public int QuadraKills { get; init; }
-    public int RampageSpree { get; init; }
-    public int ShutdownSpree { get; init; }
-    public int SiegeJuggernautKills { get; init; }
-    public int TowerKills { get; init; }
-    public int TripleKills { get; init; }
-    public int UnstoppableSpree { get; init; }
-    public int WildJuggernautKills { get; init; }
+    public required int AssistedKills { get; init; }
+    public required int CampsCleared { get; init; }
+    public required int Deaths { get; init; }
+    public required int DivineSpree { get; init; }
+    public required int DoubleKills { get; init; }
+    public required int FireGiantKills { get; init; }
+    public required int FirstBloods { get; init; }
+    public required int GodLikeSpree { get; init; }
+    public required int GoldFuryKills { get; init; }
+    public required int Id { get; init; }
+    public required int ImmortalSpree { get; init; }
+    public required int KillingSpree { get; init; }
+    public required int MinionKills { get; init; }
+    public required string Name { get; init; }
+    public required int PentaKills { get; init; }
+    public required int PhoenixKills { get; init; }
+    public required int PlayerKills { get; init; }
+    public required int QuadraKills { get; init; }
+    public required int RampageSpree { get; init; }
+    public required int ShutdownSpree { get; init; }
+    public required int SiegeJuggernautKills { get; init; }
+    public required int TowerKills { get; init; }
+    public required int TripleKills { get; init; }
+    public required int UnstoppableSpree { get; init; }
+    public required int WildJuggernautKills { get; init; }
     public string? RetMsg { get; init; }
 }

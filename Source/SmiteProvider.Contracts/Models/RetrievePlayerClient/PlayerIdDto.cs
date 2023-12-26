@@ -2,9 +2,9 @@
 
 public record class PlayerIdDto
 {
-    public int PlayerId { get; init; }
-    public string Portal { get; init; } = null!;
-    public string PortalId { get; init; } = null!;
-    public string PrivacyFlag { get; init; } = null!;
+    public required int PlayerId { get; init; }
+    public required string Portal { get; init; }
+    public required string PortalId { get; init; }
+    public required string PrivacyFlag { get; init; }
     public string? RetMsg { get; init; }
 }

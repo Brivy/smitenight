@@ -2,7 +2,7 @@
 
 public record class MatchIdsByQueueDto
 {
-    public string ActiveFlag { get; init; } = null!;
-    public string Match { get; init; } = null!;
+    public required string ActiveFlag { get; init; }
+    public required string Match { get; init; }
     public string? RetMsg { get; init; }
 }

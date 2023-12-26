@@ -2,10 +2,10 @@
 
 public record class TeamPlayerDto
 {
-    public int AccountLevel { get; init; }
-    public string JoinedDatetime { get; init; } = null!;
-    public string LastLoginDatetime { get; init; } = null!;
-    public string Name { get; init; } = null!;
-    public string PlayerId { get; init; } = null!;
+    public required int AccountLevel { get; init; }
+    public required string JoinedDatetime { get; init; }
+    public required string LastLoginDatetime { get; init; }
+    public required string Name { get; init; }
+    public required string PlayerId { get; init; }
     public string? RetMsg { get; init; }
 }

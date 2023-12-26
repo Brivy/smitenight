@@ -4,9 +4,9 @@ namespace Smitenight.Providers.SmiteProvider.Contracts.Models.GodClient;
 
 public record class AbilityDescriptionDto
 {
-    public string Cooldown { get; init; } = null!;
-    public string Cost { get; init; } = null!;
-    public string Description { get; init; } = null!;
-    public CommonItemDto[] AbilityTags { get; init; } = null!;
-    public CommonItemDto[] AbilityRanks { get; init; } = null!;
+    public required string Cooldown { get; init; }
+    public required string Cost { get; init; }
+    public required string Description { get; init; }
+    public CommonItemDto[] AbilityTags { get; init; } = [];
+    public CommonItemDto[] AbilityRanks { get; init; } = [];
 }

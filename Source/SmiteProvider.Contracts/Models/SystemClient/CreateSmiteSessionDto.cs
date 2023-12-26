@@ -2,7 +2,7 @@
 
 public record class CreateSmiteSessionDto
 {
-    public string? RetMsg { get; init; } = null!;
-    public string SessionId { get; init; } = null!;
-    public string Timestamp { get; init; } = null!;
+    public string? RetMsg { get; init; }
+    public required string SessionId { get; init; }
+    public required string Timestamp { get; init; }
 }

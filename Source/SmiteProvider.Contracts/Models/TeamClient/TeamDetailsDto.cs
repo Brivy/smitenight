@@ -2,15 +2,15 @@
 
 public record class TeamDetailsDto
 {
-    public string AvatarUrl { get; init; } = null!;
-    public string Founder { get; init; } = null!;
-    public string FounderId { get; init; } = null!;
-    public int Losses { get; init; }
-    public string Name { get; init; } = null!;
-    public int Players { get; init; }
-    public int Rating { get; init; }
-    public string Tag { get; init; } = null!;
-    public int TeamId { get; init; }
-    public int Wins { get; init; }
+    public required string AvatarUrl { get; init; }
+    public required string Founder { get; init; }
+    public required string FounderId { get; init; }
+    public required int Losses { get; init; }
+    public required string Name { get; init; }
+    public required int Players { get; init; }
+    public required int Rating { get; init; }
+    public required string Tag { get; init; }
+    public required int TeamId { get; init; }
+    public required int Wins { get; init; }
     public string? RetMsg { get; init; }
 }

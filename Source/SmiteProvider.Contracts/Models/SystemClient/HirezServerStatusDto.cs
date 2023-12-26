@@ -2,11 +2,11 @@
 
 public record class HirezServerStatusDto
 {
-    public string EntryDatetime { get; init; } = null!;
-    public string Environment { get; init; } = null!;
-    public bool LimitedAccess { get; init; }
-    public string Platform { get; init; } = null!;
+    public required string EntryDatetime { get; init; }
+    public required string Environment { get; init; }
+    public required bool LimitedAccess { get; init; }
+    public required string Platform { get; init; }
     public string? RetMsg { get; init; }
-    public string Status { get; init; } = null!;
-    public string Version { get; init; } = null!;
+    public required string Status { get; init; }
+    public required string Version { get; init; }
 }

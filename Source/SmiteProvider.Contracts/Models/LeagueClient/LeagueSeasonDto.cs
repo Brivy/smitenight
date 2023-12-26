@@ -2,11 +2,11 @@
 
 public record class LeagueSeasonDto
 {
-    public bool Complete { get; init; }
-    public int Id { get; init; }
-    public string LeagueDescription { get; init; } = null!;
-    public string Name { get; init; } = null!;
-    public string RetMsg { get; init; } = null!;
-    public int Round { get; init; }
-    public int Season { get; init; }
+    public required bool Complete { get; init; }
+    public required int Id { get; init; }
+    public required string LeagueDescription { get; init; }
+    public required string Name { get; init; }
+    public required string RetMsg { get; init; }
+    public required int Round { get; init; }
+    public required int Season { get; init; }
 }

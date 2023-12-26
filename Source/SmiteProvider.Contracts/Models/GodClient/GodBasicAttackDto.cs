@@ -4,9 +4,9 @@ namespace Smitenight.Providers.SmiteProvider.Contracts.Models.GodClient;
 
 public record class GodBasicAttackDto
 {
-    public string Cooldown { get; init; } = null!;
-    public string Cost { get; init; } = null!;
-    public string Description { get; init; } = null!;
-    public CommonItemDto[] GodBasicAttackItems { get; init; } = null!;
-    public CommonItemDto[] GodBasicAttackRanks { get; init; } = null!;
+    public required string Cooldown { get; init; }
+    public required string Cost { get; init; }
+    public required string Description { get; init; }
+    public CommonItemDto[] GodBasicAttackItems { get; init; } = [];
+    public CommonItemDto[] GodBasicAttackRanks { get; init; } = [];
 }

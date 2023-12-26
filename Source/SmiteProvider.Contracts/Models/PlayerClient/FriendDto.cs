@@ -2,12 +2,12 @@
 
 public record class FriendDto
 {
-    public string AccountId { get; init; } = null!;
-    public string AvatarUrl { get; init; } = null!;
-    public string FriendFlags { get; init; } = null!;
-    public string Name { get; init; } = null!;
-    public string PlayerId { get; init; } = null!;
-    public string PortalId { get; init; } = null!;
+    public required string AccountId { get; init; }
+    public required string AvatarUrl { get; init; }
+    public required string FriendFlags { get; init; }
+    public required string Name { get; init; }
+    public required string PlayerId { get; init; }
+    public required string PortalId { get; init; }
     public string? RetMsg { get; init; }
-    public string Status { get; init; } = null!;
+    public required string Status { get; init; }
 }

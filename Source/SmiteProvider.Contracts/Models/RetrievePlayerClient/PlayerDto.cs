@@ -2,43 +2,43 @@
 
 public record class PlayerDto
 {
-    public int ActivePlayerId { get; init; }
-    public string AvatarUrl { get; init; } = null!;
-    public string CreatedDatetime { get; init; } = null!;
-    public int HoursPlayed { get; init; }
-    public int Id { get; init; }
-    public string LastLoginDatetime { get; init; } = null!;
-    public int Leaves { get; init; }
-    public int Level { get; init; }
-    public int Losses { get; init; }
-    public int MasteryLevel { get; init; }
-    public string MergedPlayers { get; init; } = null!;
-    public int MinutesPlayed { get; init; }
-    public string Name { get; init; } = null!;
-    public string PersonalStatusMessage { get; init; } = null!;
-    public string Platform { get; init; } = null!;
-    public float RankStatConquest { get; init; }
-    public float RankStatConquestController { get; init; }
-    public float RankStatDuel { get; init; }
-    public float RankStatDuelController { get; init; }
-    public float RankStatJoust { get; init; }
-    public float RankStatJoustController { get; init; }
-    public RankedDetailsDto RankedConquest { get; init; } = null!;
-    public RankedDetailsDto RankedConquestController { get; init; } = null!;
-    public RankedDetailsDto RankedDuel { get; init; } = null!;
-    public RankedDetailsDto RankedDuelController { get; init; } = null!;
-    public RankedDetailsDto RankedJoust { get; init; } = null!;
-    public RankedDetailsDto RankedJoustController { get; init; } = null!;
-    public string Region { get; init; } = null!;
-    public int TeamId { get; init; }
-    public string TeamName { get; init; } = null!;
-    public int TierConquest { get; init; }
-    public int TierDuel { get; init; }
-    public int TierJoust { get; init; }
-    public int TotalAchievements { get; init; }
-    public int TotalWorshippers { get; init; }
-    public int Wins { get; init; }
-    public string HzGamerTag { get; init; } = null!;
-    public string HzPlayerName { get; init; } = null!;
+    public required int ActivePlayerId { get; init; }
+    public required string AvatarUrl { get; init; }
+    public required string CreatedDatetime { get; init; }
+    public required int HoursPlayed { get; init; }
+    public required int Id { get; init; }
+    public required string LastLoginDatetime { get; init; }
+    public required int Leaves { get; init; }
+    public required int Level { get; init; }
+    public required int Losses { get; init; }
+    public required int MasteryLevel { get; init; }
+    public required string MergedPlayers { get; init; }
+    public required int MinutesPlayed { get; init; }
+    public required string Name { get; init; }
+    public required string PersonalStatusMessage { get; init; }
+    public required string Platform { get; init; }
+    public required float RankStatConquest { get; init; }
+    public required float RankStatConquestController { get; init; }
+    public required float RankStatDuel { get; init; }
+    public required float RankStatDuelController { get; init; }
+    public required float RankStatJoust { get; init; }
+    public required float RankStatJoustController { get; init; }
+    public required RankedDetailsDto RankedConquest { get; init; }
+    public required RankedDetailsDto RankedConquestController { get; init; }
+    public required RankedDetailsDto RankedDuel { get; init; }
+    public required RankedDetailsDto RankedDuelController { get; init; }
+    public required RankedDetailsDto RankedJoust { get; init; }
+    public required RankedDetailsDto RankedJoustController { get; init; }
+    public required string Region { get; init; }
+    public required int TeamId { get; init; }
+    public required string TeamName { get; init; }
+    public required int TierConquest { get; init; }
+    public required int TierDuel { get; init; }
+    public required int TierJoust { get; init; }
+    public required int TotalAchievements { get; init; }
+    public required int TotalWorshippers { get; init; }
+    public required int Wins { get; init; }
+    public required string HzGamerTag { get; init; }
+    public required string HzPlayerName { get; init; }
     public string? RetMsg { get; init; }
 }

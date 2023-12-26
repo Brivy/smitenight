@@ -2,6 +2,6 @@
 
 public record CreateAbilityRankDto
 {
-    public string Description { get; set; } = null!;
-    public string Value { get; set; } = null!;
+    public required string Description { get; init; }
+    public required string Value { get; init; }
 }

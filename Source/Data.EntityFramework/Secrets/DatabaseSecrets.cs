@@ -2,8 +2,8 @@
 
 namespace Smitenight.Persistence.Data.EntityFramework.Secrets;
 
-public record DatabaseSecrets
+internal record DatabaseSecrets
 {
     [Required]
-    public required string ConnectionString { get; set; }
+    public required string ConnectionString { get; init; }
 }

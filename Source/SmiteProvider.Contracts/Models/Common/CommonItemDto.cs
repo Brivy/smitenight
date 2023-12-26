@@ -2,6 +2,6 @@
 
 public record class CommonItemDto
 {
-    public string Description { get; init; } = null!;
-    public string Value { get; init; } = null!;
+    public required string Description { get; init; }
+    public required string Value { get; init; }
 }

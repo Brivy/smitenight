@@ -2,64 +2,64 @@
 
 public record class GodDto
 {
-    public string Ability1 { get; init; } = null!;
-    public string Ability2 { get; init; } = null!;
-    public string Ability3 { get; init; } = null!;
-    public string Ability4 { get; init; } = null!;
-    public string Ability5 { get; init; } = null!;
-    public int AbilityId1 { get; init; }
-    public int AbilityId2 { get; init; }
-    public int AbilityId3 { get; init; }
-    public int AbilityId4 { get; init; }
-    public int AbilityId5 { get; init; }
-    public AbilityDetailsDto AbilityDetails1 { get; init; } = null!;
-    public AbilityDetailsDto AbilityDetails2 { get; init; } = null!;
-    public AbilityDetailsDto AbilityDetails3 { get; init; } = null!;
-    public AbilityDetailsDto AbilityDetails4 { get; init; } = null!;
-    public AbilityDetailsDto AbilityDetails5 { get; init; } = null!;
-    public float AttackSpeed { get; init; }
-    public float AttackSpeedPerLevel { get; init; }
-    public string AutoBanned { get; init; } = null!;
-    public string Cons { get; init; } = null!;
-    public float Hp5PerLevel { get; init; }
-    public int Health { get; init; }
-    public int HealthPerFive { get; init; }
-    public int HealthPerLevel { get; init; }
-    public string Lore { get; init; } = null!;
-    public float Mp5PerLevel { get; init; }
-    public float MagicProtection { get; init; }
-    public float MagicProtectionPerLevel { get; init; }
-    public int MagicalPower { get; init; }
-    public float MagicalPowerPerLevel { get; init; }
-    public int Mana { get; init; }
-    public float ManaPerFive { get; init; }
-    public int ManaPerLevel { get; init; }
-    public string Name { get; init; } = null!;
-    public string OnFreeRotation { get; init; } = null!;
-    public string Pantheon { get; init; } = null!;
-    public int PhysicalPower { get; init; }
-    public float PhysicalPowerPerLevel { get; init; }
-    public float PhysicalProtection { get; init; }
-    public float PhysicalProtectionPerLevel { get; init; }
-    public string Pros { get; init; } = null!;
-    public string Roles { get; init; } = null!;
-    public int Speed { get; init; }
-    public string Title { get; init; } = null!;
-    public string Type { get; init; } = null!;
-    public AbilityDescriptionDto AbilityDescription1 { get; init; } = null!;
-    public AbilityDescriptionDto AbilityDescription2 { get; init; } = null!;
-    public AbilityDescriptionDto AbilityDescription3 { get; init; } = null!;
-    public AbilityDescriptionDto AbilityDescription4 { get; init; } = null!;
-    public AbilityDescriptionDto AbilityDescription5 { get; init; } = null!;
-    public GodBasicAttackDto GodBasicAttack { get; init; } = null!;
-    public string GodAbility1Url { get; init; } = null!;
-    public string GodAbility2Url { get; init; } = null!;
-    public string GodAbility3Url { get; init; } = null!;
-    public string GodAbility4Url { get; init; } = null!;
-    public string GodAbility5Url { get; init; } = null!;
-    public string GodCardUrl { get; init; } = null!;
-    public string GodIconUrl { get; init; } = null!;
-    public int Id { get; init; }
-    public string LatestGod { get; init; } = null!;
+    public required string Ability1 { get; init; }
+    public required string Ability2 { get; init; }
+    public required string Ability3 { get; init; }
+    public required string Ability4 { get; init; }
+    public required string Ability5 { get; init; }
+    public required int AbilityId1 { get; init; }
+    public required int AbilityId2 { get; init; }
+    public required int AbilityId3 { get; init; }
+    public required int AbilityId4 { get; init; }
+    public required int AbilityId5 { get; init; }
+    public required AbilityDetailsDto AbilityDetails1 { get; init; }
+    public required AbilityDetailsDto AbilityDetails2 { get; init; }
+    public required AbilityDetailsDto AbilityDetails3 { get; init; }
+    public required AbilityDetailsDto AbilityDetails4 { get; init; }
+    public required AbilityDetailsDto AbilityDetails5 { get; init; }
+    public required float AttackSpeed { get; init; }
+    public required float AttackSpeedPerLevel { get; init; }
+    public required string AutoBanned { get; init; }
+    public required string Cons { get; init; }
+    public required float Hp5PerLevel { get; init; }
+    public required int Health { get; init; }
+    public required int HealthPerFive { get; init; }
+    public required int HealthPerLevel { get; init; }
+    public required string Lore { get; init; }
+    public required float Mp5PerLevel { get; init; }
+    public required float MagicProtection { get; init; }
+    public required float MagicProtectionPerLevel { get; init; }
+    public required int MagicalPower { get; init; }
+    public required float MagicalPowerPerLevel { get; init; }
+    public required int Mana { get; init; }
+    public required float ManaPerFive { get; init; }
+    public required int ManaPerLevel { get; init; }
+    public required string Name { get; init; }
+    public required string OnFreeRotation { get; init; }
+    public required string Pantheon { get; init; }
+    public required int PhysicalPower { get; init; }
+    public required float PhysicalPowerPerLevel { get; init; }
+    public required float PhysicalProtection { get; init; }
+    public required float PhysicalProtectionPerLevel { get; init; }
+    public required string Pros { get; init; }
+    public required string Roles { get; init; }
+    public required int Speed { get; init; }
+    public required string Title { get; init; }
+    public required string Type { get; init; }
+    public required AbilityDescriptionDto AbilityDescription1 { get; init; }
+    public required AbilityDescriptionDto AbilityDescription2 { get; init; }
+    public required AbilityDescriptionDto AbilityDescription3 { get; init; }
+    public required AbilityDescriptionDto AbilityDescription4 { get; init; }
+    public required AbilityDescriptionDto AbilityDescription5 { get; init; }
+    public required GodBasicAttackDto GodBasicAttack { get; init; }
+    public required string GodAbility1Url { get; init; }
+    public required string GodAbility2Url { get; init; }
+    public required string GodAbility3Url { get; init; }
+    public required string GodAbility4Url { get; init; }
+    public required string GodAbility5Url { get; init; }
+    public required string GodCardUrl { get; init; }
+    public required string GodIconUrl { get; init; }
+    public required int Id { get; init; }
+    public required string LatestGod { get; init; }
     public string? RetMsg { get; init; }
 }
