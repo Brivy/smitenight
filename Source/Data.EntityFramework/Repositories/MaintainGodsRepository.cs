@@ -6,7 +6,7 @@ using Smitenight.Utilities.Mapper.Services;
 
 namespace Smitenight.Persistence.Data.EntityFramework.Repositories;
 
-public class MaintainGodsRepository(
+internal class MaintainGodsRepository(
     SmitenightDbContext smitenightDbContext,
     IMapperService mapperService) : IMaintainGodsRepository
 {

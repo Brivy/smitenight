@@ -4,7 +4,7 @@ using Smitenight.Persistence.Data.EntityFramework.Entities;
 
 namespace Smitenight.Persistence.Data.EntityFramework.Configurations;
 
-public class ActivePurchaseConfiguration : IEntityTypeConfiguration<ActivePurchase>
+internal class ActivePurchaseConfiguration : IEntityTypeConfiguration<ActivePurchase>
 {
     public void Configure(EntityTypeBuilder<ActivePurchase> builder)
     {

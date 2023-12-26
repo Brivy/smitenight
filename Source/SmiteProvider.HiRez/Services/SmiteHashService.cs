@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Smitenight.Providers.SmiteProvider.HiRez.Services;
 
-public class SmiteHashService(IOptions<SmiteClientSecrets> smiteClientSecrets) : ISmiteHashService
+internal class SmiteHashService(IOptions<SmiteClientSecrets> smiteClientSecrets) : ISmiteHashService
 {
     private readonly SmiteClientSecrets _smiteClientSecrets = smiteClientSecrets.Value;
 

@@ -5,7 +5,7 @@ using Smitenight.Utilities.Mapper.Models;
 
 namespace Smitenight.Persistence.Data.EntityFramework.Mappers;
 
-public class GodMapper(IMapper<CreateGodBasicAttackDto, GodBasicAttack> godBasicAttackMapper) : Mapper<CreateGodDto, God>
+internal class GodMapper(IMapper<CreateGodBasicAttackDto, GodBasicAttack> godBasicAttackMapper) : Mapper<CreateGodDto, God>
 {
     private readonly IMapper<CreateGodBasicAttackDto, GodBasicAttack> _godBasicAttackMapper = godBasicAttackMapper;
 

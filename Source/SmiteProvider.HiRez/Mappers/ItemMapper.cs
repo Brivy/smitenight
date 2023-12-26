@@ -5,7 +5,7 @@ using Smitenight.Utilities.Mapper.Models;
 
 namespace Smitenight.Providers.SmiteProvider.HiRez.Mappers;
 
-public class ItemMapper(IMapper<ItemDescription, ItemDescriptionDto> itemDescriptionMapper) : Mapper<Item, ItemDto>
+internal class ItemMapper(IMapper<ItemDescription, ItemDescriptionDto> itemDescriptionMapper) : Mapper<Item, ItemDto>
 {
     private readonly IMapper<ItemDescription, ItemDescriptionDto> _itemDescriptionMapper = itemDescriptionMapper;
 

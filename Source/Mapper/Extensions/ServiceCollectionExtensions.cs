@@ -19,7 +19,7 @@ public static class ServiceCollectionExtensions
         Type mapperType = typeof(IMapper);
 
         IEnumerable<Type> mapperTypes = assembly.GetTypes()
-            .Where(t => t.IsPublic && !t.IsAbstract && t.GetInterfaces().Any(i => i.IsGenericType && i.GetGenericTypeDefinition() == mapperGenericType));
+            .Where(t => !t.IsAbstract && t.GetInterfaces().Any(i => i.IsGenericType && i.GetGenericTypeDefinition() == mapperGenericType));
 
         foreach (Type? type in mapperTypes)
         {

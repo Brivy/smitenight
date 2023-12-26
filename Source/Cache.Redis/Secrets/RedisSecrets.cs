@@ -2,8 +2,8 @@
 
 namespace Smitenight.Utilities.Cache.Redis.Secrets;
 
-public record RedisSecrets
+internal record RedisSecrets
 {
     [Required]
-    public required string ConnectionString { get; set; }
+    public required string ConnectionString { get; init; }
 }

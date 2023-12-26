@@ -14,7 +14,7 @@ namespace Smitenight.Providers.SmiteProvider.HiRez.Extensions;
 
 public static class ServiceCollectionExtensions
 {
-    public static void ConfigureSmiteProviderServices(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection ConfigureSmiteProviderServices(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddMappers(typeof(ServiceCollectionExtensions).Assembly);
 
@@ -41,5 +41,7 @@ public static class ServiceCollectionExtensions
             .AddScoped<ISmiteSessionCacheService, SmiteSessionCacheService>()
             .AddScoped<ISmiteClientUrlService, SmiteClientUrlService>()
             .AddScoped<ISmiteHashService, SmiteHashService>();
+
+        return services;
     }
 }

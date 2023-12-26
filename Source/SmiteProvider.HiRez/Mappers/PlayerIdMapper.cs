@@ -4,7 +4,7 @@ using Smitenight.Utilities.Mapper.Models;
 
 namespace Smitenight.Providers.SmiteProvider.HiRez.Mappers;
 
-public class PlayerIdMapper : Mapper<PlayerId, PlayerIdDto>
+internal class PlayerIdMapper : Mapper<PlayerId, PlayerIdDto>
 {
     public override PlayerIdDto Map(PlayerId input)
     {

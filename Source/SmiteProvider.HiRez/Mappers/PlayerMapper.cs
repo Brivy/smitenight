@@ -5,7 +5,7 @@ using Smitenight.Utilities.Mapper.Models;
 
 namespace Smitenight.Providers.SmiteProvider.HiRez.Mappers;
 
-public class PlayerMapper(IMapper<RankedDetails, RankedDetailsDto> rankedDetailsMapper) : Mapper<Player, PlayerDto>
+internal class PlayerMapper(IMapper<RankedDetails, RankedDetailsDto> rankedDetailsMapper) : Mapper<Player, PlayerDto>
 {
     private readonly IMapper<RankedDetails, RankedDetailsDto> _rankedDetailsMapper = rankedDetailsMapper;
 

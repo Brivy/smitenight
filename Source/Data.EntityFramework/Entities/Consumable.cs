@@ -1,6 +1,6 @@
 ﻿namespace Smitenight.Persistence.Data.EntityFramework.Entities;
 
-public class Consumable
+internal class Consumable
 {
     public int Id { get; set; }
     public int SmiteId { get; set; }

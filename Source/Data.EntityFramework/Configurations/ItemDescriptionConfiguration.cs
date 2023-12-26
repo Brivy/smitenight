@@ -4,7 +4,7 @@ using Smitenight.Persistence.Data.EntityFramework.Entities;
 
 namespace Smitenight.Persistence.Data.EntityFramework.Configurations;
 
-public class ItemDescriptionConfiguration : IEntityTypeConfiguration<ItemDescription>
+internal class ItemDescriptionConfiguration : IEntityTypeConfiguration<ItemDescription>
 {
     public void Configure(EntityTypeBuilder<ItemDescription> builder)
     {

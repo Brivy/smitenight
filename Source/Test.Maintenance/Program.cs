@@ -3,10 +3,9 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
 using Smitenight.Application.Core.Business.Contracts.Services.Maintenance;
 using Smitenight.Application.Core.Business.Extensions;
-using Smitenight.Persistence.Data.EntityFramework.Secrets;
-using Smitenight.Providers.SmiteProvider.HiRez.Secrets;
+using Smitenight.Persistence.Data.EntityFramework.Extensions;
+using Smitenight.Providers.SmiteProvider.HiRez.Extensions;
 using Smitenight.Utilities.Cache.Redis.Extensions;
-using Smitenight.Utilities.Cache.Redis.Secrets;
 using Smitenight.Utilities.Mapper.Extensions;
 
 namespace Smitenight.Presentation.Test.Maintenance;
@@ -19,18 +18,21 @@ public static class Program
            .SetBasePath(Directory.GetCurrentDirectory())
            .AddJsonFile("appsettings.json", optional: false, reloadOnChange: true)
            .AddJsonFile("appsettings.Development.json", optional: true, reloadOnChange: true)
-           .AddUserSecrets<SmiteClientSecrets>()
-           .AddUserSecrets<DatabaseSecrets>()
-           .AddUserSecrets<RedisSecrets>()
+           .ConfigureCacheSecrets()
+           .ConfigureSmiteProviderSecrets()
+           .ConfigureDataSecrets()
            .Build();
 
         using IHost host = Host.CreateDefaultBuilder(args)
             .ConfigureServices((hostContext, services) =>
             {
-                services.AddSingleton(TimeProvider.System);
-                services.ConfigureCacheServices(configuration);
-                services.ConfigureMapperServices();
-                services.ConfigureBusinessServices(configuration);
+                services
+                    .AddSingleton(TimeProvider.System)
+                    .ConfigureBusinessServices()
+                    .ConfigureDataServices(configuration)
+                    .ConfigureSmiteProviderServices(configuration)
+                    .ConfigureMapperServices()
+                    .ConfigureCacheServices(configuration);
             })
             .Build();
 

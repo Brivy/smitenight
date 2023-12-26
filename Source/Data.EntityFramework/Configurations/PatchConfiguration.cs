@@ -4,7 +4,7 @@ using Smitenight.Persistence.Data.EntityFramework.Entities;
 
 namespace Smitenight.Persistence.Data.EntityFramework.Configurations;
 
-public class PatchConfiguration : IEntityTypeConfiguration<Patch>
+internal class PatchConfiguration : IEntityTypeConfiguration<Patch>
 {
     public void Configure(EntityTypeBuilder<Patch> builder)
     {

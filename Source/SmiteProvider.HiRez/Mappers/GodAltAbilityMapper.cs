@@ -4,7 +4,7 @@ using Smitenight.Utilities.Mapper.Models;
 
 namespace Smitenight.Providers.SmiteProvider.HiRez.Mappers;
 
-public class GodAltAbilityMapper : Mapper<GodAltAbility, GodAltAbilityDto>
+internal class GodAltAbilityMapper : Mapper<GodAltAbility, GodAltAbilityDto>
 {
     public override GodAltAbilityDto Map(GodAltAbility input)
     {

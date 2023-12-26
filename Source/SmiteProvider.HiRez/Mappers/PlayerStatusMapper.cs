@@ -4,7 +4,7 @@ using Smitenight.Utilities.Mapper.Models;
 
 namespace Smitenight.Providers.SmiteProvider.HiRez.Mappers;
 
-public class PlayerStatusMapper : Mapper<PlayerStatus, PlayerStatusDto>
+internal class PlayerStatusMapper : Mapper<PlayerStatus, PlayerStatusDto>
 {
     public override PlayerStatusDto Map(PlayerStatus input)
     {

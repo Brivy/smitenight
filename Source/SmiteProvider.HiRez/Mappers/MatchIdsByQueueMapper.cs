@@ -4,7 +4,7 @@ using Smitenight.Utilities.Mapper.Models;
 
 namespace Smitenight.Providers.SmiteProvider.HiRez.Mappers;
 
-public class MatchIdsByQueueMapper : Mapper<MatchIdsByQueue, MatchIdsByQueueDto>
+internal class MatchIdsByQueueMapper : Mapper<MatchIdsByQueue, MatchIdsByQueueDto>
 {
     public override MatchIdsByQueueDto Map(MatchIdsByQueue input)
     {

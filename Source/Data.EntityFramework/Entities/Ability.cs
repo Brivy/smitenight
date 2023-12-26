@@ -2,7 +2,7 @@
 
 namespace Smitenight.Persistence.Data.EntityFramework.Entities;
 
-public class Ability
+internal class Ability
 {
     public int Id { get; set; }
     public int GodId { get; set; }

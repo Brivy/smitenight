@@ -4,7 +4,7 @@ using Smitenight.Utilities.Mapper.Models;
 
 namespace Smitenight.Providers.SmiteProvider.HiRez.Mappers;
 
-public class GodRankMapper : Mapper<GodRank, GodRankDto>
+internal class GodRankMapper : Mapper<GodRank, GodRankDto>
 {
     public override GodRankDto Map(GodRank input)
     {

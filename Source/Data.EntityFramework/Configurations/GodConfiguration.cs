@@ -4,7 +4,7 @@ using Smitenight.Persistence.Data.EntityFramework.Entities;
 
 namespace Smitenight.Persistence.Data.EntityFramework.Configurations;
 
-public class GodConfiguration : IEntityTypeConfiguration<God>
+internal class GodConfiguration : IEntityTypeConfiguration<God>
 {
     public void Configure(EntityTypeBuilder<God> builder)
     {

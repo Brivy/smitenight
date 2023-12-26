@@ -2,7 +2,7 @@
 
 namespace Smitenight.Persistence.Data.EntityFramework.Entities;
 
-public class GodBan
+internal class GodBan
 {
     public int Id { get; set; }
     public int GodId { get; set; }

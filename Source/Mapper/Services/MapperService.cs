@@ -2,7 +2,7 @@
 
 namespace Smitenight.Utilities.Mapper.Services;
 
-public class MapperService(IEnumerable<IMapper> mappers) : IMapperService
+internal class MapperService(IEnumerable<IMapper> mappers) : IMapperService
 {
     private readonly Dictionary<(Type, Type), IMapper> _mappers = mappers.ToDictionary(m => (m.InputType, m.OutputType));
 

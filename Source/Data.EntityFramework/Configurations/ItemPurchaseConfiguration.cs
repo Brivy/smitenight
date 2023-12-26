@@ -4,7 +4,7 @@ using Smitenight.Persistence.Data.EntityFramework.Entities;
 
 namespace Smitenight.Persistence.Data.EntityFramework.Configurations;
 
-public class ItemPurchaseConfiguration : IEntityTypeConfiguration<ItemPurchase>
+internal class ItemPurchaseConfiguration : IEntityTypeConfiguration<ItemPurchase>
 {
     public void Configure(EntityTypeBuilder<ItemPurchase> builder)
     {

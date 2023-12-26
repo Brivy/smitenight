@@ -4,7 +4,7 @@ using Smitenight.Utilities.Mapper.Models;
 
 namespace Smitenight.Providers.SmiteProvider.HiRez.Mappers;
 
-public class MatchHistoryMapper : Mapper<MatchHistory, MatchHistoryDto>
+internal class MatchHistoryMapper : Mapper<MatchHistory, MatchHistoryDto>
 {
     public override MatchHistoryDto Map(MatchHistory input)
     {

@@ -6,7 +6,7 @@ using Smitenight.Utilities.Mapper.Models;
 
 namespace Smitenight.Application.Core.Business.Mappers;
 
-public class CreateConsumableMapper(IChecksumService checksumService) : Mapper<ItemDto, CreateConsumableDto>
+internal class CreateConsumableMapper(IChecksumService checksumService) : Mapper<ItemDto, CreateConsumableDto>
 {
     private readonly IChecksumService _checksumService = checksumService;
 

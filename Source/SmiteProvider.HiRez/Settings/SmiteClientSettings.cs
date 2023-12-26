@@ -2,8 +2,8 @@
 
 namespace Smitenight.Providers.SmiteProvider.HiRez.Settings;
 
-public record SmiteClientSettings
+internal record SmiteClientSettings
 {
     [Required]
-    public required string Url { get; set; }
+    public required string Url { get; init; }
 }

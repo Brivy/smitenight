@@ -1,6 +1,6 @@
 ﻿namespace Smitenight.Persistence.Data.EntityFramework.Entities;
 
-public class AbilityRank
+internal class AbilityRank
 {
     public int Id { get; set; }
     public int AbilityId { get; set; }

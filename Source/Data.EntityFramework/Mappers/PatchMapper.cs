@@ -4,7 +4,7 @@ using Smitenight.Utilities.Mapper.Models;
 
 namespace Smitenight.Persistence.Data.EntityFramework.Mappers;
 
-public class PatchMapper : Mapper<CreatePatchDto, Patch>
+internal class PatchMapper : Mapper<CreatePatchDto, Patch>
 {
     public override Patch Map(CreatePatchDto input)
     {

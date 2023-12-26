@@ -1,7 +1,7 @@
 ﻿namespace Smitenight.Providers.SmiteProvider.HiRez.Exceptions;
 
 [Serializable]
-public class SmiteClientInvalidResponseException : Exception
+internal class SmiteClientInvalidResponseException : Exception
 {
     public SmiteClientInvalidResponseException()
     {

@@ -4,7 +4,7 @@ using Smitenight.Utilities.Mapper.Models;
 
 namespace Smitenight.Providers.SmiteProvider.HiRez.Mappers;
 
-public class GodRecommendedItemMapper : Mapper<GodRecommendedItem, GodRecommendedItemDto>
+internal class GodRecommendedItemMapper : Mapper<GodRecommendedItem, GodRecommendedItemDto>
 {
     public override GodRecommendedItemDto Map(GodRecommendedItem input)
     {

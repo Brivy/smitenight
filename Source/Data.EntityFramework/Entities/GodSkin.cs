@@ -2,7 +2,7 @@
 
 namespace Smitenight.Persistence.Data.EntityFramework.Entities;
 
-public class GodSkin
+internal class GodSkin
 {
     public int Id { get; set; }
     public int GodId { get; set; }

@@ -4,7 +4,7 @@ using Smitenight.Persistence.Data.EntityFramework.Entities;
 
 namespace Smitenight.Persistence.Data.EntityFramework.Configurations;
 
-public class PlayerConfiguration : IEntityTypeConfiguration<Player>
+internal class PlayerConfiguration : IEntityTypeConfiguration<Player>
 {
     public void Configure(EntityTypeBuilder<Player> builder)
     {

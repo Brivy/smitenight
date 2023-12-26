@@ -1,6 +1,6 @@
 ﻿namespace Smitenight.Application.Core.Business.Constants
 {
-    public static class GodConstants
+    internal static class GodConstants
     {
         // API responses for GodRoleEnum
         public const string WarriorRole = "Warrior";

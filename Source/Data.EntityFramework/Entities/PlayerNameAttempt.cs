@@ -1,6 +1,6 @@
 ﻿namespace Smitenight.Persistence.Data.EntityFramework.Entities;
 
-public class PlayerNameAttempt
+internal class PlayerNameAttempt
 {
     public int Id { get; set; }
 

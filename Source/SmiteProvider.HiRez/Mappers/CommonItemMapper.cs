@@ -4,7 +4,7 @@ using Smitenight.Utilities.Mapper.Models;
 
 namespace Smitenight.Providers.SmiteProvider.HiRez.Mappers;
 
-public class CommonItemMapper : Mapper<CommonItem, CommonItemDto>
+internal class CommonItemMapper : Mapper<CommonItem, CommonItemDto>
 {
     public override CommonItemDto Map(CommonItem input)
     {

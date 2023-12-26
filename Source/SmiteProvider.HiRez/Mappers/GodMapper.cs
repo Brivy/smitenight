@@ -6,7 +6,7 @@ using Smitenight.Utilities.Mapper.Models;
 
 namespace Smitenight.Providers.SmiteProvider.HiRez.Mappers;
 
-public class GodMapper(
+internal class GodMapper(
     IMapper<AbilityDetails, AbilityDetailsDto> abilityDetailsMapper,
     IMapper<AbilityDescription, AbilityDescriptionDto> abilityDescriptionMapper,
     IMapper<GodBasicAttack, GodBasicAttackDto> basicAttackMapper) : Mapper<God, GodDto>

@@ -4,7 +4,7 @@ using Smitenight.Persistence.Data.EntityFramework.Entities;
 
 namespace Smitenight.Persistence.Data.EntityFramework.Configurations;
 
-public class GodSkinConfiguration : IEntityTypeConfiguration<GodSkin>
+internal class GodSkinConfiguration : IEntityTypeConfiguration<GodSkin>
 {
     public void Configure(EntityTypeBuilder<GodSkin> builder)
     {

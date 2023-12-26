@@ -13,7 +13,7 @@ namespace Smitenight.Utilities.Cache.Redis.Extensions;
 
 public static class ServiceCollectionExtensions
 {
-    public static void ConfigureCacheServices(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection ConfigureCacheServices(this IServiceCollection services, IConfiguration configuration)
     {
         services.Configure<RedisSettings>(configuration.GetSection(nameof(RedisSettings)));
         services.Configure<RedisSecrets>(configuration.GetSection(nameof(RedisSecrets)));
@@ -30,5 +30,7 @@ public static class ServiceCollectionExtensions
             options.Configuration = configuration[$"{nameof(RedisSecrets)}:{nameof(RedisSecrets.ConnectionString)}"];
             options.InstanceName = configuration[$"{nameof(RedisSettings)}:{nameof(RedisSettings.InstanceName)}"]; ;
         });
+
+        return services;
     }
 }

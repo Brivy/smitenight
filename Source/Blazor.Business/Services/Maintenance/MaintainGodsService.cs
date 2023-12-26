@@ -7,7 +7,7 @@ using Smitenight.Utilities.Mapper.Services;
 
 namespace Smitenight.Application.Core.Business.Services.Maintenance;
 
-public class MaintainGodsService(
+internal class MaintainGodsService(
     IMaintainGodsRepository maintainGodsRepository,
     IChecksumService checksumService,
     IMapperService mapperService) : IMaintainGodsService

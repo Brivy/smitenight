@@ -2,7 +2,7 @@
 
 namespace Smitenight.Persistence.Data.EntityFramework.Entities;
 
-public class Match
+internal class Match
 {
     public int Id { get; set; }
     public int SmiteId { get; set; }

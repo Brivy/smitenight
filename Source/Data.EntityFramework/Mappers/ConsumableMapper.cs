@@ -4,7 +4,7 @@ using Smitenight.Utilities.Mapper.Models;
 
 namespace Smitenight.Persistence.Data.EntityFramework.Mappers;
 
-public class ConsumableMapper : Mapper<CreateConsumableDto, Consumable>
+internal class ConsumableMapper : Mapper<CreateConsumableDto, Consumable>
 {
     public override Consumable Map(CreateConsumableDto input)
     {

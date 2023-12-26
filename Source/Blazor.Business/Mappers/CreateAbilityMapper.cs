@@ -8,7 +8,7 @@ using AbilityType = Smitenight.Persistence.Data.Contracts.Enums.AbilityType;
 
 namespace Smitenight.Application.Core.Business.Mappers;
 
-public class CreateAbilityMapper(
+internal class CreateAbilityMapper(
     IChecksumService checksumService,
     IMapper<CommonItemDto, CreateAbilityRankDto> abilityRankMapper,
     IMapper<CommonItemDto, CreateAbilityTagDto> abilityTagMapper) : Mapper<AbilityDetailsDto, CreateAbilityDto>

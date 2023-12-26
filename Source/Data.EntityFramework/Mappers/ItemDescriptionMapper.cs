@@ -4,7 +4,7 @@ using Smitenight.Utilities.Mapper.Models;
 
 namespace Smitenight.Persistence.Data.EntityFramework.Mappers;
 
-public class ItemDescriptionMapper : Mapper<CreateItemDescriptionDto, ItemDescription>
+internal class ItemDescriptionMapper : Mapper<CreateItemDescriptionDto, ItemDescription>
 {
     public override ItemDescription Map(CreateItemDescriptionDto input)
     {

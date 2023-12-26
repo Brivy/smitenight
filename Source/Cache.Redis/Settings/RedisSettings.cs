@@ -2,11 +2,11 @@
 
 namespace Smitenight.Utilities.Cache.Redis.Settings;
 
-public record RedisSettings
+internal record RedisSettings
 {
     [Required]
-    public required string EnvironmentPrefix { get; set; }
+    public required string EnvironmentPrefix { get; init; }
 
     [Required]
-    public required string InstanceName { get; set; }
+    public required string InstanceName { get; init; }
 }

@@ -7,7 +7,7 @@ using System.Text.Json;
 
 namespace Smitenight.Utilities.Cache.Redis.Providers;
 
-public class RedisCacheProvider(
+internal class RedisCacheProvider(
     IDistributedCache distributedCache,
     IOptions<RedisSettings> redisSettings,
     ILogger<RedisCacheProvider> logger) : IRedisCacheProvider

@@ -7,7 +7,7 @@ using Smitenight.Utilities.Mapper.Models;
 
 namespace Smitenight.Providers.SmiteProvider.HiRez.Mappers;
 
-public class ItemDescriptionMapper(IMapper<CommonItem, CommonItemDto> commonItemMapper) : Mapper<ItemDescription, ItemDescriptionDto>
+internal class ItemDescriptionMapper(IMapper<CommonItem, CommonItemDto> commonItemMapper) : Mapper<ItemDescription, ItemDescriptionDto>
 {
     private readonly IMapper<CommonItem, CommonItemDto> _commonItemMapper = commonItemMapper;
 

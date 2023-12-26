@@ -4,7 +4,7 @@ using Smitenight.Utilities.Mapper.Models;
 
 namespace Smitenight.Providers.SmiteProvider.HiRez.Mappers;
 
-public class GodSkinMapper : Mapper<GodSkin, GodSkinDto>
+internal class GodSkinMapper : Mapper<GodSkin, GodSkinDto>
 {
     public override GodSkinDto Map(GodSkin input)
     {

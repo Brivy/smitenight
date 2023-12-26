@@ -10,7 +10,7 @@ using Smitenight.Utilities.Mapper.Models;
 
 namespace Smitenight.Application.Core.Business.Mappers;
 
-public class CreateGodMapper(
+internal class CreateGodMapper(
     IChecksumService checksumService,
     IMapper<CommonItemDto, CreateGodBasicAttackDto> godBasicAttackMapper) : Mapper<GodDto, CreateGodDto>
 {

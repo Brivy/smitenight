@@ -4,7 +4,7 @@ using Smitenight.Utilities.Mapper.Models;
 
 namespace Smitenight.Application.Core.Business.Mappers;
 
-public class CreateAbilityRankMapper : Mapper<CommonItemDto, CreateAbilityRankDto>
+internal class CreateAbilityRankMapper : Mapper<CommonItemDto, CreateAbilityRankDto>
 {
     public override CreateAbilityRankDto Map(CommonItemDto rankItem)
     {
