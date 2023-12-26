@@ -4,7 +4,7 @@ using Smitenight.Persistence.Data.EntityFramework.Entities;
 
 namespace Smitenight.Persistence.Data.EntityFramework.Configurations;
 
-public class ConsumableConfiguration : IEntityTypeConfiguration<Consumable>
+internal class ConsumableConfiguration : IEntityTypeConfiguration<Consumable>
 {
     public void Configure(EntityTypeBuilder<Consumable> builder)
     {

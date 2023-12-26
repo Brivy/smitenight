@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace Smitenight.Persistence.Data.EntityFramework.Configurations;
 
-public class SmitenightConfiguration : IEntityTypeConfiguration<Entities.Smitenight>
+internal class SmitenightConfiguration : IEntityTypeConfiguration<Entities.Smitenight>
 {
     public void Configure(EntityTypeBuilder<Entities.Smitenight> builder)
     {

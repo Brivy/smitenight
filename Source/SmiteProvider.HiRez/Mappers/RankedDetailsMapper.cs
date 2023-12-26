@@ -4,7 +4,7 @@ using Smitenight.Utilities.Mapper.Models;
 
 namespace Smitenight.Providers.SmiteProvider.HiRez.Mappers;
 
-public class RankedDetailsMapper : Mapper<RankedDetails, RankedDetailsDto>
+internal class RankedDetailsMapper : Mapper<RankedDetails, RankedDetailsDto>
 {
     public override RankedDetailsDto Map(RankedDetails input)
     {

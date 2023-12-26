@@ -4,7 +4,7 @@ using Smitenight.Persistence.Data.EntityFramework.Entities;
 
 namespace Smitenight.Persistence.Data.EntityFramework.Configurations;
 
-public class GodBanConfiguration : IEntityTypeConfiguration<GodBan>
+internal class GodBanConfiguration : IEntityTypeConfiguration<GodBan>
 {
     public void Configure(EntityTypeBuilder<GodBan> builder)
     {

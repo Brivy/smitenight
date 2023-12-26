@@ -4,7 +4,7 @@ using Smitenight.Utilities.Mapper.Models;
 
 namespace Smitenight.Providers.SmiteProvider.HiRez.Mappers;
 
-public class TopMatchMapper : Mapper<TopMatch, TopMatchDto>
+internal class TopMatchMapper : Mapper<TopMatch, TopMatchDto>
 {
     public override TopMatchDto Map(TopMatch input)
     {

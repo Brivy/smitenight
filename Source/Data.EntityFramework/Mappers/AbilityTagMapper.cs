@@ -4,7 +4,7 @@ using Smitenight.Utilities.Mapper.Models;
 
 namespace Smitenight.Persistence.Data.EntityFramework.Mappers;
 
-public class AbilityTagMapper : Mapper<CreateAbilityTagDto, AbilityTag>
+internal class AbilityTagMapper : Mapper<CreateAbilityTagDto, AbilityTag>
 {
     public override AbilityTag Map(CreateAbilityTagDto input)
     {

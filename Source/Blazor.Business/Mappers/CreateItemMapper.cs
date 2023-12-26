@@ -9,7 +9,7 @@ using Smitenight.Utilities.Mapper.Models;
 
 namespace Smitenight.Application.Core.Business.Mappers;
 
-public class CreateItemMapper(
+internal class CreateItemMapper(
     IChecksumService checksumService,
     IMapper<CommonItemDto, CreateItemDescriptionDto> itemDescriptionMapper) : Mapper<ItemDto, CreateItemDto>
 {

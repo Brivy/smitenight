@@ -7,7 +7,7 @@ using Smitenight.Utilities.Mapper.Models;
 
 namespace Smitenight.Application.Core.Business.Mappers;
 
-public class CreateGodSkinMapper(IChecksumService checksumService) : Mapper<GodSkinDto, CreateGodSkinDto>
+internal class CreateGodSkinMapper(IChecksumService checksumService) : Mapper<GodSkinDto, CreateGodSkinDto>
 {
     private readonly IChecksumService _checksumService = checksumService;
 

@@ -4,7 +4,7 @@ using Smitenight.Utilities.Mapper.Models;
 
 namespace Smitenight.Persistence.Data.EntityFramework.Mappers;
 
-public class GodBasicAttackMapper : Mapper<CreateGodBasicAttackDto, GodBasicAttack>
+internal class GodBasicAttackMapper : Mapper<CreateGodBasicAttackDto, GodBasicAttack>
 {
     public override GodBasicAttack Map(CreateGodBasicAttackDto input)
     {

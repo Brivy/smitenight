@@ -4,7 +4,7 @@ using Smitenight.Persistence.Data.EntityFramework.Entities;
 
 namespace Smitenight.Persistence.Data.EntityFramework.Configurations;
 
-public class GodBasicAttackConfiguration : IEntityTypeConfiguration<GodBasicAttack>
+internal class GodBasicAttackConfiguration : IEntityTypeConfiguration<GodBasicAttack>
 {
     public void Configure(EntityTypeBuilder<GodBasicAttack> builder)
     {

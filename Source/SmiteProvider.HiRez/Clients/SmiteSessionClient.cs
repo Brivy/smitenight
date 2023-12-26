@@ -14,7 +14,7 @@ using System.Text.Json;
 
 namespace Smitenight.Providers.SmiteProvider.HiRez.Clients;
 
-public class SmiteSessionClient(
+internal class SmiteSessionClient(
     HttpClient httpClient,
     ISmiteHashService smiteHashService,
     IMapperService mapperService,
@@ -25,7 +25,6 @@ public class SmiteSessionClient(
     private readonly ISmiteHashService _smiteHashService = smiteHashService;
     private readonly IMapperService _mapperService = mapperService;
     private readonly TimeProvider _timeProvider = timeProvider;
-
     private readonly SmiteClientSecrets _smiteClientSecrets = smiteClientSecrets.Value;
 
     public async Task<CreateSmiteSessionDto> CreateSmiteSessionAsync(CancellationToken cancellationToken = default)

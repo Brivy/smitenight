@@ -4,7 +4,7 @@ using Smitenight.Utilities.Mapper.Models;
 
 namespace Smitenight.Providers.SmiteProvider.HiRez.Mappers;
 
-public class EsportProLeagueMapper : Mapper<EsportProLeague, EsportProLeagueDto>
+internal class EsportProLeagueMapper : Mapper<EsportProLeague, EsportProLeagueDto>
 {
     public override EsportProLeagueDto Map(EsportProLeague input)
     {

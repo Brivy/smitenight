@@ -4,7 +4,7 @@ using Smitenight.Utilities.Mapper.Models;
 
 namespace Smitenight.Providers.SmiteProvider.HiRez.Mappers;
 
-public class SearchPlayerMapper : Mapper<SearchPlayer, SearchPlayerDto>
+internal class SearchPlayerMapper : Mapper<SearchPlayer, SearchPlayerDto>
 {
     public override SearchPlayerDto Map(SearchPlayer input)
     {

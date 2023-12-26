@@ -4,7 +4,7 @@ using Smitenight.Utilities.Mapper.Models;
 
 namespace Smitenight.Providers.SmiteProvider.HiRez.Mappers;
 
-public class LeagueLeaderboardMapper : Mapper<LeagueLeaderboard, LeagueLeaderboardDto>
+internal class LeagueLeaderboardMapper : Mapper<LeagueLeaderboard, LeagueLeaderboardDto>
 {
     public override LeagueLeaderboardDto Map(LeagueLeaderboard input)
     {

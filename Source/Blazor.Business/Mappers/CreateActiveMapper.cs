@@ -7,7 +7,7 @@ using Smitenight.Utilities.Mapper.Models;
 
 namespace Smitenight.Application.Core.Business.Mappers;
 
-public class CreateActiveMapper(IChecksumService checksumService) : Mapper<ItemDto, CreateActiveDto>
+internal class CreateActiveMapper(IChecksumService checksumService) : Mapper<ItemDto, CreateActiveDto>
 {
     private readonly IChecksumService _checksumService = checksumService;
 

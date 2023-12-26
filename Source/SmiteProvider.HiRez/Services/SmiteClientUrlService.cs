@@ -7,7 +7,7 @@ using System.Text;
 
 namespace Smitenight.Providers.SmiteProvider.HiRez.Services;
 
-public class SmiteClientUrlService(
+internal class SmiteClientUrlService(
     ISmiteSessionCacheService smiteSessionCacheService,
     ISmiteHashService smiteHashService,
     IOptions<SmiteClientSecrets> smiteClientSecrets,

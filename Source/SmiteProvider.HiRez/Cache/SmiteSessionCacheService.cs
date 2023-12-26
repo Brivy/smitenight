@@ -6,7 +6,7 @@ using System.Collections.Concurrent;
 
 namespace Smitenight.Providers.SmiteProvider.HiRez.Cache;
 
-public class SmiteSessionCacheService(
+internal class SmiteSessionCacheService(
     ISmiteSessionClient smiteSessionClient,
     IRedisCacheProvider redisCacheProvider,
     TimeProvider timeProvider) : ISmiteSessionCacheService

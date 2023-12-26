@@ -7,7 +7,7 @@ using Smitenight.Utilities.Mapper.Models;
 
 namespace Smitenight.Providers.SmiteProvider.HiRez.Mappers;
 
-public class GodBasicAttackMapper(IMapper<CommonItem, CommonItemDto> commonItemMapper) : Mapper<GodBasicAttack, GodBasicAttackDto>
+internal class GodBasicAttackMapper(IMapper<CommonItem, CommonItemDto> commonItemMapper) : Mapper<GodBasicAttack, GodBasicAttackDto>
 {
     private readonly IMapper<CommonItem, CommonItemDto> _commonItemMapper = commonItemMapper;
 

@@ -4,7 +4,7 @@ using Smitenight.Utilities.Mapper.Models;
 
 namespace Smitenight.Providers.SmiteProvider.HiRez.Mappers;
 
-public class DataUsedMapper : Mapper<DataUsed, DataUsedDto>
+internal class DataUsedMapper : Mapper<DataUsed, DataUsedDto>
 {
     public override DataUsedDto Map(DataUsed input)
     {

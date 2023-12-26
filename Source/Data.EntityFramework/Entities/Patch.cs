@@ -1,6 +1,6 @@
 ﻿namespace Smitenight.Persistence.Data.EntityFramework.Entities;
 
-public class Patch
+internal class Patch
 {
     public int Id { get; set; }
 

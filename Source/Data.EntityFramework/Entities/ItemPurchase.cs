@@ -2,7 +2,7 @@
 
 namespace Smitenight.Persistence.Data.EntityFramework.Entities;
 
-public class ItemPurchase
+internal class ItemPurchase
 {
     public int Id { get; set; }
     public int ItemId { get; set; }

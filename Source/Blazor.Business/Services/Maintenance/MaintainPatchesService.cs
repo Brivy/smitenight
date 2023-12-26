@@ -4,7 +4,7 @@ using Smitenight.Persistence.Data.Contracts.Repositories;
 
 namespace Smitenight.Application.Core.Business.Services.Maintenance;
 
-public class MaintainPatchesService(IMaintainPatchesRepository maintainPatchesRepository, TimeProvider timeProvider) : IMaintainPatchesService
+internal class MaintainPatchesService(IMaintainPatchesRepository maintainPatchesRepository, TimeProvider timeProvider) : IMaintainPatchesService
 {
     private readonly IMaintainPatchesRepository _maintainPatchesRepository = maintainPatchesRepository;
     private readonly TimeProvider _timeProvider = timeProvider;

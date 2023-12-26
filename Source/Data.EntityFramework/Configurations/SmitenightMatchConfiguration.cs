@@ -4,7 +4,7 @@ using Smitenight.Persistence.Data.EntityFramework.Entities;
 
 namespace Smitenight.Persistence.Data.EntityFramework.Configurations;
 
-public class SmitenightMatchConfiguration : IEntityTypeConfiguration<SmitenightMatch>
+internal class SmitenightMatchConfiguration : IEntityTypeConfiguration<SmitenightMatch>
 {
     public void Configure(EntityTypeBuilder<SmitenightMatch> builder)
     {

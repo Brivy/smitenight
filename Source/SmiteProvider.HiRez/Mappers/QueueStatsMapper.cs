@@ -4,7 +4,7 @@ using Smitenight.Utilities.Mapper.Models;
 
 namespace Smitenight.Providers.SmiteProvider.HiRez.Mappers;
 
-public class QueueStatsMapper : Mapper<QueueStats, QueueStatsDto>
+internal class QueueStatsMapper : Mapper<QueueStats, QueueStatsDto>
 {
     public override QueueStatsDto Map(QueueStats input)
     {

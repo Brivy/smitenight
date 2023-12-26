@@ -4,7 +4,7 @@ using Smitenight.Persistence.Data.EntityFramework.Entities;
 
 namespace Smitenight.Persistence.Data.EntityFramework.Configurations;
 
-public class AbilityConfiguration : IEntityTypeConfiguration<Ability>
+internal class AbilityConfiguration : IEntityTypeConfiguration<Ability>
 {
     public void Configure(EntityTypeBuilder<Ability> builder)
     {

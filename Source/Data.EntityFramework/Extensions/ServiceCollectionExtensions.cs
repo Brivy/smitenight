@@ -12,7 +12,7 @@ namespace Smitenight.Persistence.Data.EntityFramework.Extensions;
 
 public static class ServiceCollectionExtensions
 {
-    public static void ConfigureDataServices(this IServiceCollection services, IConfiguration configuration)
+    public static IServiceCollection ConfigureDataServices(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddMappers(typeof(ServiceCollectionExtensions).Assembly);
 
@@ -30,5 +30,7 @@ public static class ServiceCollectionExtensions
             string? connectionString = configuration[$"{nameof(DatabaseSecrets)}:{nameof(DatabaseSecrets.ConnectionString)}"];
             x.UseSqlServer(connectionString);
         });
+
+        return services;
     }
 }

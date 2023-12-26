@@ -4,7 +4,7 @@ using Smitenight.Utilities.Mapper.Models;
 
 namespace Smitenight.Providers.SmiteProvider.HiRez.Mappers;
 
-public class FriendMapper : Mapper<Friend, FriendDto>
+internal class FriendMapper : Mapper<Friend, FriendDto>
 {
     public override FriendDto Map(Friend input)
     {

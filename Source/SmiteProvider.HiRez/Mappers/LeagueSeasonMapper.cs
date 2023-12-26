@@ -4,7 +4,7 @@ using Smitenight.Utilities.Mapper.Models;
 
 namespace Smitenight.Providers.SmiteProvider.HiRez.Mappers;
 
-public class LeagueSeasonMapper : Mapper<LeagueSeason, LeagueSeasonDto>
+internal class LeagueSeasonMapper : Mapper<LeagueSeason, LeagueSeasonDto>
 {
     public override LeagueSeasonDto Map(LeagueSeason input)
     {

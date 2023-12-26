@@ -4,7 +4,7 @@ using Smitenight.Utilities.Mapper.Models;
 
 namespace Smitenight.Providers.SmiteProvider.HiRez.Mappers;
 
-public class CreateSmiteSessionMapper : Mapper<CreateSmiteSession, CreateSmiteSessionDto>
+internal class CreateSmiteSessionMapper : Mapper<CreateSmiteSession, CreateSmiteSessionDto>
 {
     public override CreateSmiteSessionDto Map(CreateSmiteSession input)
     {

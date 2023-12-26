@@ -4,7 +4,7 @@ using Smitenight.Utilities.Mapper.Models;
 
 namespace Smitenight.Providers.SmiteProvider.HiRez.Mappers;
 
-public class GodLeaderboardMapper : Mapper<GodLeaderboard, GodLeaderboardDto>
+internal class GodLeaderboardMapper : Mapper<GodLeaderboard, GodLeaderboardDto>
 {
     public override GodLeaderboardDto Map(GodLeaderboard input)
     {

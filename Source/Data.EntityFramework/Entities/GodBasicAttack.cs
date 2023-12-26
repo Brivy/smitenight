@@ -1,6 +1,6 @@
 ﻿namespace Smitenight.Persistence.Data.EntityFramework.Entities;
 
-public class GodBasicAttack
+internal class GodBasicAttack
 {
     public int Id { get; set; }
     public int GodId { get; set; }

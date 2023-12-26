@@ -8,7 +8,7 @@ using Smitenight.Utilities.Mapper.Services;
 
 namespace Smitenight.Application.Core.Business.Services.Maintenance;
 
-public class MaintainItemsService(
+internal class MaintainItemsService(
     IMaintainItemsRepository maintainItemsRepository,
     IChecksumService checksumService,
     IMapperService mapperService) : IMaintainItemsService

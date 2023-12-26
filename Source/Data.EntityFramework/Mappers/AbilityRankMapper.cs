@@ -4,7 +4,7 @@ using Smitenight.Utilities.Mapper.Models;
 
 namespace Smitenight.Persistence.Data.EntityFramework.Mappers;
 
-public class AbilityRankMapper : Mapper<CreateAbilityRankDto, AbilityRank>
+internal class AbilityRankMapper : Mapper<CreateAbilityRankDto, AbilityRank>
 {
     public override AbilityRank Map(CreateAbilityRankDto input)
     {

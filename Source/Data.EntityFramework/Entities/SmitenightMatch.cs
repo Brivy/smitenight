@@ -1,6 +1,6 @@
 ﻿namespace Smitenight.Persistence.Data.EntityFramework.Entities;
 
-public class SmitenightMatch
+internal class SmitenightMatch
 {
     public int Id { get; set; }
     public int MatchId { get; set; }

@@ -4,7 +4,7 @@ using Smitenight.Utilities.Mapper.Models;
 
 namespace Smitenight.Persistence.Data.EntityFramework.Mappers;
 
-public class ActiveMapper : Mapper<CreateActiveDto, Active>
+internal class ActiveMapper : Mapper<CreateActiveDto, Active>
 {
     public override Active Map(CreateActiveDto input)
     {

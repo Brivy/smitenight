@@ -4,7 +4,7 @@ using Smitenight.Utilities.Mapper.Models;
 
 namespace Smitenight.Application.Core.Business.Mappers;
 
-public class CreateAbilityTagMapper : Mapper<CommonItemDto, CreateAbilityTagDto>
+internal class CreateAbilityTagMapper : Mapper<CommonItemDto, CreateAbilityTagDto>
 {
     public override CreateAbilityTagDto Map(CommonItemDto abilityTag)
     {

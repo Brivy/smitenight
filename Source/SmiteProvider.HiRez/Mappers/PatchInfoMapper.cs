@@ -4,7 +4,7 @@ using Smitenight.Utilities.Mapper.Models;
 
 namespace Smitenight.Providers.SmiteProvider.HiRez.Mappers;
 
-public class PatchInfoMapper : Mapper<PatchInfo, PatchInfoDto>
+internal class PatchInfoMapper : Mapper<PatchInfo, PatchInfoDto>
 {
     public override PatchInfoDto Map(PatchInfo input)
     {

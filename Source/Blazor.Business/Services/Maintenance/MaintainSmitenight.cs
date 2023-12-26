@@ -9,7 +9,7 @@ using Smitenight.Providers.SmiteProvider.Contracts.Models.SystemClient;
 
 namespace Smitenight.Application.Core.Business.Services.Maintenance;
 
-public class MaintainSmitenight(
+internal class MaintainSmitenight(
     IMaintainItemsService maintainItemsService,
     IMaintainGodsService maintainGodsService,
     IMaintainPatchesService maintainPatchesService,

@@ -5,7 +5,7 @@ using Smitenight.Utilities.Mapper.Models;
 
 namespace Smitenight.Persistence.Data.EntityFramework.Mappers;
 
-public class ItemMapper(IMapper<CreateItemDescriptionDto, ItemDescription> itemDescriptionMapper) : Mapper<CreateItemDto, Item>
+internal class ItemMapper(IMapper<CreateItemDescriptionDto, ItemDescription> itemDescriptionMapper) : Mapper<CreateItemDto, Item>
 {
     private readonly IMapper<CreateItemDescriptionDto, ItemDescription> _itemDescriptionMapper = itemDescriptionMapper;
 

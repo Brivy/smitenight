@@ -4,7 +4,7 @@ using Smitenight.Utilities.Mapper.Models;
 
 namespace Smitenight.Providers.SmiteProvider.HiRez.Mappers;
 
-public class HirezServerStatusMapper : Mapper<HirezServerStatus, HirezServerStatusDto>
+internal class HirezServerStatusMapper : Mapper<HirezServerStatus, HirezServerStatusDto>
 {
     public override HirezServerStatusDto Map(HirezServerStatus input)
     {

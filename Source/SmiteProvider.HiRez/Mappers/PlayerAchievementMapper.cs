@@ -4,7 +4,7 @@ using Smitenight.Utilities.Mapper.Models;
 
 namespace Smitenight.Providers.SmiteProvider.HiRez.Mappers;
 
-public class PlayerAchievementMapper : Mapper<PlayerAchievement, PlayerAchievementDto>
+internal class PlayerAchievementMapper : Mapper<PlayerAchievement, PlayerAchievementDto>
 {
     public override PlayerAchievementDto Map(PlayerAchievement input)
     {

@@ -4,7 +4,7 @@ using Smitenight.Utilities.Mapper.Models;
 
 namespace Smitenight.Application.Core.Business.Mappers;
 
-public class CreateItemDescriptionMapper : Mapper<CommonItemDto, CreateItemDescriptionDto>
+internal class CreateItemDescriptionMapper : Mapper<CommonItemDto, CreateItemDescriptionDto>
 {
     public override CreateItemDescriptionDto Map(CommonItemDto itemDescription)
     {

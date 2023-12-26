@@ -3,7 +3,7 @@ using Smitenight.Persistence.Data.EntityFramework.Entities;
 
 namespace Smitenight.Persistence.Data.EntityFramework;
 
-public class SmitenightDbContext : DbContext
+internal class SmitenightDbContext : DbContext
 {
     public SmitenightDbContext()
     {

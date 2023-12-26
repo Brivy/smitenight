@@ -5,7 +5,7 @@ using Smitenight.Utilities.Mapper.Models;
 
 namespace Smitenight.Persistence.Data.EntityFramework.Mappers;
 
-public class AbilityMapper(
+internal class AbilityMapper(
     IMapper<CreateAbilityRankDto, AbilityRank> abilityRankMapper,
     IMapper<CreateAbilityTagDto, AbilityTag> abilityTagMapper) : Mapper<CreateAbilityDto, Ability>
 {
