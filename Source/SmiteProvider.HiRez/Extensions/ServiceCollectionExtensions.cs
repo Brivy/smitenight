@@ -1,9 +1,11 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.Options;
 using Smitenight.Providers.SmiteProvider.Contracts.Clients;
 using Smitenight.Providers.SmiteProvider.HiRez.Cache;
 using Smitenight.Providers.SmiteProvider.HiRez.Clients;
 using Smitenight.Providers.SmiteProvider.HiRez.Secrets;
+using Smitenight.Providers.SmiteProvider.HiRez.Secrets.Validators;
 using Smitenight.Providers.SmiteProvider.HiRez.Services;
 using Smitenight.Providers.SmiteProvider.HiRez.Settings;
 using Smitenight.Providers.SmiteProvider.HiRez.Settings.Validators;
@@ -18,8 +20,17 @@ public static class ServiceCollectionExtensions
     {
         services.AddMappers(typeof(ServiceCollectionExtensions).Assembly);
 
-        services.Configure<SmiteClientSettings>(configuration.GetSection(nameof(SmiteClientSettings)));
-        services.Configure<SmiteClientSecrets>(configuration.GetSection(nameof(SmiteClientSecrets)));
+        services.AddOptions<SmiteClientSettings>().Bind(configuration.GetSection(nameof(SmiteClientSettings))).ValidateOnStart();
+        services.AddOptions<SmiteClientSecrets>().Bind(configuration.GetSection(nameof(SmiteClientSecrets))).ValidateOnStart();
+
+        services
+            .AddSingleton<IValidateOptions<SmiteClientSettings>, SmiteClientSettingsValidator>()
+            .AddSingleton<IValidateOptions<SmiteClientSecrets>, SmiteClientSecretsValidator>();
+
+        services
+            .AddScoped<ISmiteSessionCacheService, SmiteSessionCacheService>()
+            .AddScoped<ISmiteClientUrlService, SmiteClientUrlService>()
+            .AddScoped<ISmiteHashService, SmiteHashService>();
 
         services.AddHttpClient<ISmiteClient, SmiteClient>(client =>
         {
@@ -36,11 +47,6 @@ public static class ServiceCollectionExtensions
             string url = configuration[$"{nameof(SmiteClientSettings)}:{nameof(SmiteClientSettings.Url)}"] ?? throw new NullReferenceException();
             client.BaseAddress = new Uri(url);
         });
-
-        services
-            .AddScoped<ISmiteSessionCacheService, SmiteSessionCacheService>()
-            .AddScoped<ISmiteClientUrlService, SmiteClientUrlService>()
-            .AddScoped<ISmiteHashService, SmiteHashService>();
 
         return services;
     }
