@@ -7,6 +7,7 @@ using Smitenight.Persistence.Data.EntityFramework.Repositories;
 using Smitenight.Persistence.Data.EntityFramework.Secrets;
 using Smitenight.Persistence.Data.EntityFramework.Secrets.Validators;
 using Smitenight.Utilities.Mapper.Extensions;
+using Microsoft.Extensions.Options;
 
 namespace Smitenight.Persistence.Data.EntityFramework.Extensions;
 
@@ -16,7 +17,10 @@ public static class ServiceCollectionExtensions
     {
         services.AddMappers(typeof(ServiceCollectionExtensions).Assembly);
 
-        services.Configure<DatabaseSecrets>(configuration.GetSection(nameof(DatabaseSecrets)));
+        services.AddOptions<DatabaseSecrets>().Bind(configuration.GetSection(nameof(DatabaseSecrets))).ValidateOnStart();
+
+        services
+            .AddSingleton<IValidateOptions<DatabaseSecrets>, DatabaseSecretsValidator>();
 
         services
             .AddScoped<IMaintainGodsRepository, MaintainGodsRepository>()

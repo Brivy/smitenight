@@ -36,13 +36,20 @@ public static class Program
             })
             .Build();
 
-        using (IServiceScope serviceScope = host.Services.CreateScope())
+        try
         {
-            IServiceProvider serviceProvider = serviceScope.ServiceProvider;
-            IMaintainSmitenight maintainSmitenight = serviceProvider.GetRequiredService<IMaintainSmitenight>();
-            await maintainSmitenight.MaintainPatchesAsync();
-            await maintainSmitenight.MaintainGodsAsync();
-            await maintainSmitenight.MaintainItemsAsync();
+            using (IServiceScope serviceScope = host.Services.CreateScope())
+            {
+                IServiceProvider serviceProvider = serviceScope.ServiceProvider;
+                IMaintainSmitenight maintainSmitenight = serviceProvider.GetRequiredService<IMaintainSmitenight>();
+                await maintainSmitenight.MaintainPatchesAsync();
+                await maintainSmitenight.MaintainGodsAsync();
+                await maintainSmitenight.MaintainItemsAsync();
+            }
+        }
+        catch (Exception ex)
+        {
+            Console.WriteLine(ex);
         }
 
         Console.WriteLine("Press any key to exit...");

@@ -15,11 +15,12 @@ public static class ServiceCollectionExtensions
 {
     public static IServiceCollection ConfigureCacheServices(this IServiceCollection services, IConfiguration configuration)
     {
-        services.Configure<RedisSettings>(configuration.GetSection(nameof(RedisSettings)));
-        services.Configure<RedisSecrets>(configuration.GetSection(nameof(RedisSecrets)));
+        services.AddOptions<RedisSettings>().Bind(configuration.GetSection(nameof(RedisSettings))).ValidateOnStart();
+        services.AddOptions<RedisSecrets>().Bind(configuration.GetSection(nameof(RedisSecrets))).ValidateOnStart();
 
         services
             .AddSingleton<IValidateOptions<RedisSettings>, RedisSettingsValidator>()
+            .AddSingleton<IValidateOptions<RedisSecrets>, RedisSecretsValidator>()
             .AddSingleton<IRedisCacheProvider, RedisCacheProvider>();
 
         services.AddStackExchangeRedisCache(options =>

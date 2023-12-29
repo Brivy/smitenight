@@ -5,7 +5,25 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": ".NET Server Only Debug",
+            "name": ".NET API Debug",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build",
+            "program": "${workspaceFolder}/Source/Web.Api/bin/Debug/net8.0/Web.Api.dll",
+            "cwd": "${workspaceFolder}/Source/Web.Api",
+            "stopAtEntry": false,
+            "serverReadyAction": {
+                "action": "openExternally",
+                "pattern": "^\\s*Now listening on:\\s+(https?://\\S+)"
+            },
+            "env": {
+                "ASPNETCORE_ENVIRONMENT": "Development"
+            },
+            "console": "externalTerminal",
+            "internalConsoleOptions": "neverOpen"
+        },
+        {
+            "name": ".NET Maintenance Only Debug",
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build Maintenance",
@@ -13,10 +31,6 @@
             "args": ["--configuration", "Maintenance"],
             "cwd": "${workspaceFolder}/Source/Test.Maintenance",
             "stopAtEntry": false,
-            "serverReadyAction": {
-                "action": "openExternally",
-                "pattern": "^\\s*Now listening on:\\s+(https?://\\S+)"
-            },
             "env": {
                 "ASPNETCORE_ENVIRONMENT": "Development"
             },
