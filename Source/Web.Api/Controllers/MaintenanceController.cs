@@ -6,7 +6,7 @@ namespace Smitenight.Presentation.Web.Api.Controllers;
 [ApiController]
 [Route("api/[controller]")]
 [Produces("application/json")]
-internal class MaintenanceController(IMaintainSmitenight maintainSmitenight) : ControllerBase
+public class MaintenanceController(IMaintainSmitenight maintainSmitenight) : ControllerBase
 {
     private readonly IMaintainSmitenight _maintainSmitenight = maintainSmitenight;
 
