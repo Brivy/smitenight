@@ -7,9 +7,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Presentation", "Presentatio
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{7F2D8975-C5A5-47DE-84C8-DB3A7F634764}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Business", "Source\Blazor.Business\Core.Business.csproj", "{6BC07B7D-3138-4A1A-ACD4-63CC3C79589F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Business", "Source\Core.Business\Core.Business.csproj", "{6BC07B7D-3138-4A1A-ACD4-63CC3C79589F}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Business.Contracts", "Source\Blazor.Business.Contracts\Core.Business.Contracts.csproj", "{E51F3E9A-ED37-4E51-93BA-24EC097F8B37}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.Business.Contracts", "Source\Core.Business.Contracts\Core.Business.Contracts.csproj", "{E51F3E9A-ED37-4E51-93BA-24EC097F8B37}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Data.EntityFramework", "Source\Data.EntityFramework\Data.EntityFramework.csproj", "{FDE35ACD-FBBF-490D-B54E-1DDC0667967C}"
 EndProject
@@ -102,7 +102,7 @@ Global
 		{2F88E0AB-0EB3-4475-A5A4-82D1E5C46A42}.Maintenance|Any CPU.Build.0 = Debug|Any CPU
 		{2F88E0AB-0EB3-4475-A5A4-82D1E5C46A42}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{2F88E0AB-0EB3-4475-A5A4-82D1E5C46A42}.Release|Any CPU.Build.0 = Release|Any CPU
-        {34934C40-BB79-4FE7-A43D-B171C78D149B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+        {04BCB5D5-525D-4495-BBB7-53E0CBE1F982}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{04BCB5D5-525D-4495-BBB7-53E0CBE1F982}.Maintenance|Any CPU.ActiveCfg = Debug|Any CPU
 		{04BCB5D5-525D-4495-BBB7-53E0CBE1F982}.Maintenance|Any CPU.Build.0 = Debug|Any CPU
 		{04BCB5D5-525D-4495-BBB7-53E0CBE1F982}.Release|Any CPU.ActiveCfg = Release|Any CPU

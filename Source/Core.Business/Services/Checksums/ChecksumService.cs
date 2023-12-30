@@ -5,7 +5,7 @@ using System.Text.Json;
 
 namespace Smitenight.Application.Core.Business.Services.Checksums;
 
-public class ChecksumService : IChecksumService
+internal class ChecksumService : IChecksumService
 {
     public string CalculateChecksum<T>(T @object)
     {
