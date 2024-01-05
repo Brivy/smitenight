@@ -47,7 +47,7 @@ internal class MaintainGodsService(
         {
             if (_checksumService.IsChecksumDifferent(abilityChecksum.Key, abilityChecksum.Value))
             {
-                await CreateAbility(godId, abilityChecksum.Value, cancellationToken);
+                await CreateAbilityAsync(godId, abilityChecksum.Value, cancellationToken);
             }
             else if (godUpdated)
             {
@@ -83,7 +83,7 @@ internal class MaintainGodsService(
         return _maintainGodsRepository.CreateGodAsync(createGod, cancellationToken);
     }
 
-    public Task CreateAbility(int godId, AbilityDetailsDto ability, CancellationToken cancellationToken = default)
+    public Task CreateAbilityAsync(int godId, AbilityDetailsDto ability, CancellationToken cancellationToken = default)
     {
         CreateAbilityDto createdAbility = _mapperService.Map<AbilityDetailsDto, CreateAbilityDto>(ability);
         return _maintainGodsRepository.CreateAbilityAsync(godId, createdAbility, cancellationToken);
