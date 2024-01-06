@@ -83,11 +83,11 @@ internal class MaintainSmitenight(
     private async Task CreateNewGodAsync(GodDto god, CancellationToken cancellationToken = default)
     {
         int createdGodId = await _maintainGodsService.CreateGodAsync(god, cancellationToken);
-        await _maintainGodsService.CreateAbility(createdGodId, god.AbilityDetails1, cancellationToken);
-        await _maintainGodsService.CreateAbility(createdGodId, god.AbilityDetails2, cancellationToken);
-        await _maintainGodsService.CreateAbility(createdGodId, god.AbilityDetails3, cancellationToken);
-        await _maintainGodsService.CreateAbility(createdGodId, god.AbilityDetails4, cancellationToken);
-        await _maintainGodsService.CreateAbility(createdGodId, god.AbilityDetails5, cancellationToken);
+        await _maintainGodsService.CreateAbilityAsync(createdGodId, god.AbilityDetails1, cancellationToken);
+        await _maintainGodsService.CreateAbilityAsync(createdGodId, god.AbilityDetails2, cancellationToken);
+        await _maintainGodsService.CreateAbilityAsync(createdGodId, god.AbilityDetails3, cancellationToken);
+        await _maintainGodsService.CreateAbilityAsync(createdGodId, god.AbilityDetails4, cancellationToken);
+        await _maintainGodsService.CreateAbilityAsync(createdGodId, god.AbilityDetails5, cancellationToken);
 
         IEnumerable<GodSkinDto> godSkins = await _smiteClient.GetGodSkinsAsync(god.Id, LanguageCode.English, cancellationToken);
         foreach (GodSkinDto godSkin in godSkins)
