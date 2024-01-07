@@ -47,6 +47,14 @@ internal class MaintainSmitenight(
             }
         }
 
+        // Add and relink child/parent items that are directly influenced by the new/updated items
+        var filter = items.Where(x => !relinkNeededSmiteIds.Contains(x.ItemId) && (relinkNeededSmiteIds.Contains(x.RootItemId.GetValueOrDefault()) || relinkNeededSmiteIds.Contains(x.ChildItemId.GetValueOrDefault()))).ToList();
+        foreach (ItemDto item in filter)
+        {
+            await _maintainItemsService.CreateItemAsync(item, cancellationToken);
+            relinkNeededSmiteIds.Add(item.ItemId);
+        }
+
         var sortedItems = items.Where(x => x.Type == ItemConstants.ItemType).ToList();
         var sortedActives = items.Where(x => x.Type == ItemConstants.ActiveItemType).ToList();
         await _maintainItemsService.LinkItemsAsync(sortedItems, relinkNeededSmiteIds, cancellationToken);

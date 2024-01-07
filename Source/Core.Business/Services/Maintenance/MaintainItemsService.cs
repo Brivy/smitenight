@@ -47,6 +47,8 @@ internal class MaintainItemsService(
 
     public async Task LinkItemsAsync(IEnumerable<ItemDto> items, IEnumerable<int> relinkNeededSmiteIds, CancellationToken cancellationToken = default)
     {
+        if (!relinkNeededSmiteIds.Any()) return;
+
         var updatedLinkItems = new List<UpdateItemLinkDto>();
         IEnumerable<ItemLinkDto> linkItems = await _maintainItemsRepository.GetItemForRelinkingAsync(relinkNeededSmiteIds, cancellationToken);
         foreach (ItemLinkDto linkItem in linkItems)
@@ -75,6 +77,8 @@ internal class MaintainItemsService(
 
     public async Task LinkActivesAsync(IEnumerable<ItemDto> actives, IEnumerable<int> relinkNeededSmiteIds, CancellationToken cancellationToken = default)
     {
+        if (!relinkNeededSmiteIds.Any()) return;
+
         var updatedLinkActives = new List<UpdateActiveLinkDto>();
         IEnumerable<ActiveLinkDto> linkActives = await _maintainItemsRepository.GetActivesForRelinkingAsync(relinkNeededSmiteIds, cancellationToken);
         foreach (ActiveLinkDto linkActive in linkActives)

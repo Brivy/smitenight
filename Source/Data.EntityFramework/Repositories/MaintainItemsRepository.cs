@@ -96,6 +96,8 @@ internal class MaintainItemsRepository(
 
         List<ItemChecksumsDto> itemChecksums = await _dbContext.Items
             .Where(x => x.Latest)
+            .OrderByDescending(x => x.Id)
+            .Distinct()
             .Select(x => new ItemChecksumsDto
             {
                 ItemId = x.Id,
@@ -105,6 +107,8 @@ internal class MaintainItemsRepository(
 
         List<ItemChecksumsDto> activeChecksums = await _dbContext.Actives
             .Where(x => x.Latest)
+            .OrderByDescending(x => x.Id)
+            .Distinct()
             .Select(x => new ItemChecksumsDto
             {
                 ItemId = x.Id,
@@ -114,6 +118,8 @@ internal class MaintainItemsRepository(
 
         List<ItemChecksumsDto> consumableChecksums = await _dbContext.Consumables
             .Where(x => x.Latest)
+            .OrderByDescending(x => x.Id)
+            .Distinct()
             .Select(x => new ItemChecksumsDto
             {
                 ItemId = x.Id,
