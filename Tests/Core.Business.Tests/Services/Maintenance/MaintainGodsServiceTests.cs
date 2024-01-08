@@ -12,7 +12,7 @@ namespace Smitenight.Core.Business.Tests.Mainenance;
 public class MaintainGodsServiceTests
 {
     [Theory, AutoMoqData]
-    internal async Task WhenMaintainingGods_AndNewChecksumFound_ShouldReturnNewGodId(GodDto god, CreateGodDto createGod,
+    internal async Task WhenMaintainGodsAsync_AndNewChecksumFound_ShouldReturnNewGodId(GodDto god, CreateGodDto createGod,
         [Frozen] Mock<IMaintainGodsRepository> maintainGodsRepositoryMock,
         [Frozen] Mock<IChecksumService> checksumServiceMock,
         [Frozen] Mock<IMapperService> mapperServiceMock,
@@ -39,7 +39,7 @@ public class MaintainGodsServiceTests
     }
 
     [Theory, AutoMoqData]
-    internal async Task WhenMaintainingGods_AndSameChecksumFound_ShouldReturnNull(GodDto god,
+    internal async Task WhenMaintainGodsAsync_AndSameChecksumFound_ShouldReturnNull(GodDto god,
         [Frozen] Mock<IChecksumService> checksumServiceMock,
         MaintainGodsService sut)
     {
@@ -60,7 +60,7 @@ public class MaintainGodsServiceTests
     [Theory]
     [InlineAutoMoqData(false)]
     [InlineAutoMoqData(true)]
-    internal async Task WhenMaintainAbilities_AndNewChecksumFound_ShouldCreateAbility(bool godUpdated, AbilityDetailsDto abilityDetails, CreateAbilityDto createAbility,
+    internal async Task WhenMaintainAbilitiesAsync_AndNewChecksumFound_ShouldCreateAbility(bool godUpdated, AbilityDetailsDto abilityDetails, CreateAbilityDto createAbility,
         [Frozen] Mock<IMaintainGodsRepository> maintainGodsRepositoryMock,
         [Frozen] Mock<IChecksumService> checksumServiceMock,
         [Frozen] Mock<IMapperService> mapperServiceMock,
@@ -86,7 +86,7 @@ public class MaintainGodsServiceTests
     }
 
     [Theory, AutoMoqData]
-    internal async Task WhenMaintainAbilities_AndNoNewChecksumFoundButGodUpdated_ShouldUpdateAbilityRelation(AbilityDetailsDto abilityDetails,
+    internal async Task WhenMaintainAbilitiesAsync_AndNoNewChecksumFoundButGodUpdated_ShouldUpdateAbilityRelation(AbilityDetailsDto abilityDetails,
         [Frozen] Mock<IMaintainGodsRepository> maintainGodsRepositoryMock,
         [Frozen] Mock<IChecksumService> checksumServiceMock,
         [Frozen] Mock<IMapperService> mapperServiceMock,
@@ -113,7 +113,7 @@ public class MaintainGodsServiceTests
     }
 
     [Theory, AutoMoqData]
-    internal async Task WhenMaintainAbilities_AndNoNewChecksumFoundAndGodsFound_ShouldDoNothing(AbilityDetailsDto abilityDetails,
+    internal async Task WhenMaintainAbilitiesAsync_AndNoNewChecksumFoundAndGodsFound_ShouldDoNothing(AbilityDetailsDto abilityDetails,
         [Frozen] Mock<IMaintainGodsRepository> maintainGodsRepositoryMock,
         [Frozen] Mock<IChecksumService> checksumServiceMock,
         [Frozen] Mock<IMapperService> mapperServiceMock,
@@ -141,7 +141,7 @@ public class MaintainGodsServiceTests
     [Theory]
     [InlineAutoMoqDataList(2, false)]
     [InlineAutoMoqDataList(2, true)]
-    internal async Task WhenMaintainAbilities_AndMultipleNewChecksumsFound_ShouldCreateAbilities(bool godUpdated, Dictionary<string, AbilityDetailsDto> abilityChecksums, CreateAbilityDto createAbility,
+    internal async Task WhenMaintainAbilitiesAsync_AndMultipleNewChecksumsFound_ShouldCreateAbilities(bool godUpdated, Dictionary<string, AbilityDetailsDto> abilityChecksums, CreateAbilityDto createAbility,
         [Frozen] Mock<IMaintainGodsRepository> maintainGodsRepositoryMock,
         [Frozen] Mock<IChecksumService> checksumServiceMock,
         [Frozen] Mock<IMapperService> mapperServiceMock,
@@ -164,7 +164,7 @@ public class MaintainGodsServiceTests
     }
 
     [Theory, AutoMoqDataList(2)]
-    internal async Task WhenMaintainAbilities_AndNoNewChecksumsButGodUpdated_ShouldUpdateAbilityRelation(Dictionary<string, AbilityDetailsDto> abilityChecksums,
+    internal async Task WhenMaintainAbilitiesAsync_AndNoNewChecksumsButGodUpdated_ShouldUpdateAbilityRelation(Dictionary<string, AbilityDetailsDto> abilityChecksums,
         [Frozen] Mock<IMaintainGodsRepository> maintainGodsRepositoryMock,
         [Frozen] Mock<IChecksumService> checksumServiceMock,
         [Frozen] Mock<IMapperService> mapperServiceMock,
@@ -189,7 +189,7 @@ public class MaintainGodsServiceTests
     }
 
     [Theory, AutoMoqDataList(2)]
-    internal async Task WhenMaintainAbilities_AndNoNewChecksumsAndNoGodUpdated_ShouldDoNothing(Dictionary<string, AbilityDetailsDto> abilityChecksums,
+    internal async Task WhenMaintainAbilitiesAsync_AndNoNewChecksumsAndNoGodUpdated_ShouldDoNothing(Dictionary<string, AbilityDetailsDto> abilityChecksums,
         [Frozen] Mock<IMaintainGodsRepository> maintainGodsRepositoryMock,
         [Frozen] Mock<IChecksumService> checksumServiceMock,
         [Frozen] Mock<IMapperService> mapperServiceMock,
@@ -213,7 +213,7 @@ public class MaintainGodsServiceTests
     }
 
     [Theory, AutoMoqDataList(2)]
-    internal async Task WhenMaintainAbilities_AndNewChecksumAndAlsoGodUpdated_ShouldCreateAbilityAndRelinkOther(Dictionary<string, AbilityDetailsDto> abilityChecksums, CreateAbilityDto createAbility,
+    internal async Task WhenMaintainAbilitiesAsync_AndNewChecksumAndAlsoGodUpdated_ShouldCreateAbilityAndRelinkOther(Dictionary<string, AbilityDetailsDto> abilityChecksums, CreateAbilityDto createAbility,
         [Frozen] Mock<IMaintainGodsRepository> maintainGodsRepositoryMock,
         [Frozen] Mock<IChecksumService> checksumServiceMock,
         [Frozen] Mock<IMapperService> mapperServiceMock,
@@ -245,7 +245,7 @@ public class MaintainGodsServiceTests
     [Theory]
     [InlineAutoMoqData(false)]
     [InlineAutoMoqData(true)]
-    internal async Task WhenMaintainGodSkins_AndNewChecksumFound_ShouldCreateGodSkin(bool godUpdated, GodSkinDto godSkin, CreateGodSkinDto createGodSkin,
+    internal async Task WhenMaintainGodSkinsAsync_AndNewChecksumFound_ShouldCreateGodSkin(bool godUpdated, GodSkinDto godSkin, CreateGodSkinDto createGodSkin,
         [Frozen] Mock<IMaintainGodsRepository> maintainGodsRepositoryMock,
         [Frozen] Mock<IChecksumService> checksumServiceMock,
         [Frozen] Mock<IMapperService> mapperServiceMock,
@@ -275,7 +275,7 @@ public class MaintainGodsServiceTests
 
 
     [Theory, AutoMoqData]
-    internal async Task WhenMaintainGodSkins_AndNoNewChecksumFoundButGodUpdated_ShouldUpdateSkinRelation(GodSkinDto godSkin,
+    internal async Task WhenMaintainGodSkinsAsync_AndNoNewChecksumFoundButGodUpdated_ShouldUpdateSkinRelation(GodSkinDto godSkin,
         [Frozen] Mock<IMaintainGodsRepository> maintainGodsRepositoryMock,
         [Frozen] Mock<IChecksumService> checksumServiceMock,
         [Frozen] Mock<IMapperService> mapperServiceMock,
@@ -302,7 +302,7 @@ public class MaintainGodsServiceTests
     }
 
     [Theory, AutoMoqData]
-    internal async Task WhenMaintainGodSkins_AndNoNewChecksumFoundAndGodsFound_ShouldDoNothing(GodSkinDto godSkin,
+    internal async Task WhenMaintainGodSkinsAsync_AndNoNewChecksumFoundAndGodsFound_ShouldDoNothing(GodSkinDto godSkin,
         [Frozen] Mock<IMaintainGodsRepository> maintainGodsRepositoryMock,
         [Frozen] Mock<IChecksumService> checksumServiceMock,
         [Frozen] Mock<IMapperService> mapperServiceMock,
@@ -331,7 +331,7 @@ public class MaintainGodsServiceTests
     [Theory]
     [InlineAutoMoqDataList(2, false)]
     [InlineAutoMoqDataList(2, true)]
-    internal async Task WhenMaintainGodSkins_AndMultipleNewChecksumsFound_ShouldCreateGodSkins(bool godUpdated, IEnumerable<GodSkinDto> godSkins, CreateGodSkinDto createGodSkin,
+    internal async Task WhenMaintainGodSkinsAsync_AndMultipleNewChecksumsFound_ShouldCreateGodSkins(bool godUpdated, IEnumerable<GodSkinDto> godSkins, CreateGodSkinDto createGodSkin,
         [Frozen] Mock<IMaintainGodsRepository> maintainGodsRepositoryMock,
         [Frozen] Mock<IChecksumService> checksumServiceMock,
         [Frozen] Mock<IMapperService> mapperServiceMock,
@@ -359,7 +359,7 @@ public class MaintainGodsServiceTests
     }
 
     [Theory, AutoMoqDataList(2)]
-    internal async Task WhenMaintainGodSkins_AndNoNewChecksumsButGodUpdated_ShouldUpdateSkinRelation(IEnumerable<GodSkinDto> godSkins,
+    internal async Task WhenMaintainGodSkinsAsync_AndNoNewChecksumsButGodUpdated_ShouldUpdateSkinRelation(IEnumerable<GodSkinDto> godSkins,
         [Frozen] Mock<IMaintainGodsRepository> maintainGodsRepositoryMock,
         [Frozen] Mock<IChecksumService> checksumServiceMock,
         [Frozen] Mock<IMapperService> mapperServiceMock,
@@ -386,7 +386,7 @@ public class MaintainGodsServiceTests
     }
 
     [Theory, AutoMoqDataList(2)]
-    internal async Task WhenMaintainGodSkins_AndNewChecksumAndAlsoGodUpdated_ShouldCreateAbilityAndRelinkOther(IEnumerable<GodSkinDto> godSkins, CreateGodSkinDto createGodSkin,
+    internal async Task WhenMaintainGodSkinsAsync_AndNewChecksumAndAlsoGodUpdated_ShouldCreateAbilityAndRelinkOther(IEnumerable<GodSkinDto> godSkins, CreateGodSkinDto createGodSkin,
         [Frozen] Mock<IMaintainGodsRepository> maintainGodsRepositoryMock,
         [Frozen] Mock<IChecksumService> checksumServiceMock,
         [Frozen] Mock<IMapperService> mapperServiceMock,
@@ -418,7 +418,7 @@ public class MaintainGodsServiceTests
     }
 
     [Theory, AutoMoqDataList(2)]
-    internal async Task WhenMaintainGodSkins_AndNoNewChecksumsAndNoGodUpdated_ShouldDoNothing(IEnumerable<GodSkinDto> godSkins,
+    internal async Task WhenMaintainGodSkinsAsync_AndNoNewChecksumsAndNoGodUpdated_ShouldDoNothing(IEnumerable<GodSkinDto> godSkins,
         [Frozen] Mock<IMaintainGodsRepository> maintainGodsRepositoryMock,
         [Frozen] Mock<IChecksumService> checksumServiceMock,
         [Frozen] Mock<IMapperService> mapperServiceMock,
@@ -444,7 +444,7 @@ public class MaintainGodsServiceTests
     }
 
     [Theory, AutoMoqData]
-    internal async Task WhenGetGodChecksums_ShouldReturnGodChecksums(IEnumerable<GodChecksumsDto> godChecksums,
+    internal async Task WhenGetGodChecksumsAsync_ShouldReturnGodChecksums(IEnumerable<GodChecksumsDto> godChecksums,
         [Frozen] Mock<IMaintainGodsRepository> maintainGodsRepositoryMock,
         MaintainGodsService sut)
     {
@@ -461,7 +461,7 @@ public class MaintainGodsServiceTests
     }
 
     [Theory, AutoMoqData]
-    internal async Task WhenCreateGod_ShouldReturnGodId(GodDto god, CreateGodDto createGod,
+    internal async Task WhenCreateGodAsync_ShouldReturnGodId(GodDto god, CreateGodDto createGod,
         [Frozen] Mock<IMaintainGodsRepository> maintainGodsRepositoryMock,
         [Frozen] Mock<IMapperService> mapperServiceMock,
         MaintainGodsService sut)
@@ -483,7 +483,7 @@ public class MaintainGodsServiceTests
     }
 
     [Theory, AutoMoqData]
-    internal async Task WhenCreateAbility_ShouldReturnAbilityId(AbilityDetailsDto abilityDetails, CreateAbilityDto createAbility,
+    internal async Task WhenCreateAbilityAsync_ShouldReturnAbilityId(AbilityDetailsDto abilityDetails, CreateAbilityDto createAbility,
         [Frozen] Mock<IMaintainGodsRepository> maintainGodsRepositoryMock,
         [Frozen] Mock<IMapperService> mapperServiceMock,
         MaintainGodsService sut)
@@ -503,7 +503,7 @@ public class MaintainGodsServiceTests
     }
 
     [Theory, AutoMoqData]
-    internal async Task WhenCreateGodSkin_ShouldReturnGodSkinId(GodSkinDto godSkin, CreateGodSkinDto createGodSkin,
+    internal async Task WhenCreateGodSkinAsync_ShouldReturnGodSkinId(GodSkinDto godSkin, CreateGodSkinDto createGodSkin,
         [Frozen] Mock<IMaintainGodsRepository> maintainGodsRepositoryMock,
         [Frozen] Mock<IMapperService> mapperServiceMock,
         MaintainGodsService sut)
